@@ -18,3 +18,5 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 ## analyses
 
 <!-- LLM: add new analysis pages here after ingest or file-back -->
+
+- [このWikiの目的と研究課題](analyses/このWikiの目的と研究課題.md) — このWikiの目的・中心となる研究課題・現状のまとめ

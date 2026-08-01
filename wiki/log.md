@@ -7,3 +7,5 @@ Each entry should be one line after the date header.
 Parse with: `grep "^## \[" log.md | tail -5`
 
 ## [2026-08-01] init | wiki created for llm-wiki-template research
+
+## [2026-08-01] file-back | このWikiの目的と研究課題 (created analyses/ page, updated index/log)
