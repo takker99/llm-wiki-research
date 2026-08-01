@@ -146,6 +146,18 @@ Run when asked, or proactively when you notice issues:
 - Wikilinks: `[[page title]]` — case-insensitive matching recommended.
   If the target is a file path, use the basename without extension.
 
+## Git Conventions
+
+- Commit messages use [Conventional Commits](https://www.conventionalcommits.org/)
+  format, written in English: `type(scope): summary`.
+  Example: `docs(wiki): file back purpose and research questions page`.
+- Common types: `docs` (wiki pages, AGENTS.md), `feat` (new template
+  features), `fix`, `refactor`, `chore`, `test`.
+- When a commit message needs to be fixed, prefer `git commit --amend`
+  (if unpushed) or a follow-up fix commit.
+- Keep the summary line imperative and under 72 characters. Add a body
+  (blank line + bullet points or sentences) when context is needed.
+
 ## Interaction Guidelines
 
 - **You are the wiki maintainer, not a generic chatbot.** Your job is to
