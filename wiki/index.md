@@ -45,6 +45,8 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [日記とLLM Wikiの併用](concepts/日記とLLM Wikiの併用.md) — 時系列的グラフと概念グラフの両方運用
 - [AIによるスタンス解説生成](concepts/AIによるスタンス解説生成.md) — 複数人議論からAIが参加者ごとのスタンスページを自動生成
 - [LLM Wikiは要約の改良版ではない](concepts/LLM Wikiは要約の改良版ではない.md) — 圧縮せず注意の足場を作る。要約の5つの構造的問題
+- [繋げる力](concepts/繋げる力.md) — 複数ソース横断で概念ページが自動的に組み上がる価値。統合と対比の2タイプ
+- [理解のボトルネック](concepts/理解のボトルネック.md) — 人間が読んで理解することがボトルネック？nishioの回答: 内部ネットワークは手段にすぎない。手段の目的化の問い直し
 - [読まれなくてよい中間産物](concepts/読まれなくてよい中間産物.md) — 読む主体が人間からLLMに移る。read-optionalの最強バージョン
 - [注意の足場](concepts/注意の足場.md) — 情報量を減らさず認知負荷を下げるLLM Wikiの仕組み
 - [伸びるに任せてから剪定](concepts/伸びるに任せてから剪定.md) — 議論やWikiの成長を自然に任せ後から整理する思想
@@ -83,6 +85,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [2026-08-11 Karpathy LLM Wiki Gist](sources/2026-08-11 Karpathy LLM Wiki Gist.md) — LLM Wikiパターンの原典。RAG vs 永続Wiki、3層アーキテクチャ、Obsidian as IDE、Memex接続
 - [2026-08-11 AIを使った知識マネジメント (villagepump)](sources/2026-08-11%20AIを使った知識マネジメント%20(villagepump).md) — villagepumpでのLLM Wiki集合的議論。Vault分離、種→カオス→株分け、事前にやろうとしない哲学
 - [2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)](sources/2026-08-11%20KarpathyのLLM%20Wiki勉強会%20(nishio).md) — nishioの講義資料。20+ Wiki実運用データ、Wikis-as-personas、Coding Agent史
+- [2026-08-11 KarpathyのLLM Wikiを1ヶ月運用してわかった繋げる力 (tsurubee)](sources/2026-08-11%20KarpathyのLLM%20Wikiを1ヶ月運用してわかった繋げる力%20(tsurubee).md) — 1ヶ月運用報告。要約どまりだが「理解のボトルネック」でnishioと対立、ミニマム構成サンプルあり
 
 ## analyses
 

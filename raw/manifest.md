@@ -12,4 +12,4 @@
 
 ## エントリ
 
-（まだなし。初回の引用時アーカイブから追記開始）
+- zenn | Andrej Karpathy氏のLLM Wikiを1ヶ月運用してわかった、LLMの知識を『繋げる力』 | https://zenn.dev/tsurubee/articles/llm-wiki-connecting-knowledge | 2026-05-15 | sha256:77c34e700b23a261bdc6747d2557c4c2306005d73d452b1fae9e6bd0f495ae77 | raw/zenn-tsurubee-KarpathyのLLM_Wikiを1ヶ月運用してわかった繋げる力.md

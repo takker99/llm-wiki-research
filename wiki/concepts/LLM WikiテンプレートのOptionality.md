@@ -23,6 +23,36 @@ Karpathy gistのメタ設計原則。パターン（抽象的なアイデア）�
 | [[事前にやろうとしない運用哲学\|事前検証の省略]] | 監視レベルは個人のスタイル。Karpathyはstay involved派 |
 | [[株分け（kabuwake）\|株分け機構]] | 単一Wikiで完結するユースケースも多い |
 
+## 導入の3ステップ（tsurubeeの実践）
+
+tsurubeeはテンプレート配布スタイルを取らない立場を明確化した上で、個人導入の手順を提示:
+1. **gistをLLMに読ませて雛形を作らせる** — 完成形の配布ではなく、gist（抽象アイデア）→ schema + ディレクトリ構造の具体化をLLMとの協働で行う
+2. **5本ほどingestしてみる** — 「テンプレが完璧かどうか」ではなく「生成された概念ページが自分にとって読み返したい形か」を見る
+3. **テンプレを育てる** — schemaとスキルは静的な設定ではなく、運用を通じて使い方を学習する動的成果物
+
+配布する「完成形」を作るか、gistのような「種」を配るか——この2段階モデルは配布形式の研究課題への実証的な回答の1つ。
+
+## ミニマム構成の実例（tsurubeeのリポジトリ構成）
+
+```
+llm-wiki/
+├── CLAUDE.md                       # schema：ディレクトリ規約・ワークフロー定義
+├── .claude/skills/
+│   ├── ingest-paper/SKILL.md       # 論文PDFをingest
+│   ├── ingest-article/SKILL.md     # Web記事をingest
+│   ├── query/SKILL.md              # wikiに質問する
+│   └── lint/SKILL.md               # ヘルスチェック
+└── vault/                          # Obsidian Vaultとして開く
+    ├── raw/                        # （papers/ + articles/、不変）
+    └── wiki/
+        ├── index.md / log.md
+        ├── papers/ articles/ concepts/ queries/
+```
+
+- エージェント別対応（Claude Code → Codex）は`CLAUDE.md`→`AGENTS.md`、`.claude/skills/`→該当ディレクトリの読み替えで済む、という前提
+- SKILL.mdの最小例（ingest-paper全文）が記事内にあり、スキルは「この程度の簡素さで動く」と報告
+- スキルのセクション設計（横断的知見・未解決の問い）が概念ページの成長を方向付ける → [[Ingest]]
+
 ## nishio実践からの追加原則
 
 - **研究目的/プロジェクト目的の区別**（[[研究目的Wikiとプロジェクト目的Wiki]]）は必須ではないが、Wikiが育つと自然に分化する
@@ -46,3 +76,4 @@ Karpathy gistのメタ設計原則。パターン（抽象的なアイデア）�
 - [[Obsidian as IDE]] — optionalなツールチェーンの一例
 - [[株分け（kabuwake）]] — optionalだが有用な拡張パターン
 - [[このWikiの目的と研究課題]] — この原則をテンプレート設計にどう落とし込むか
+- [[繋げる力]] — 「読み返したい形に育てる」実践の概念化

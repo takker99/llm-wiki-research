@@ -3,7 +3,7 @@ status: hypothesis
 version: 1
 date: 2026-08-11
 source: "git 6c821c1:AGENTS.md"
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]", "[[2026-08-11 KarpathyのLLM Wikiを1ヶ月運用してわかった繋げる力 (tsurubee)]]"
 claims:
   - "AGENTS.mdが3層アーキテクチャ（`raw/`・`wiki/`・AGENTS.md）を定義する"
   - "ディレクトリは concepts/entities/sources/analyses の4分類が良い"
@@ -15,6 +15,7 @@ claims:
   - "wikilinkを本文中に書くべき（first-class）"
 evidence:
   - "2026-08-11 query: concepts/entitiesの境界はrawソース群に定義なし（Karpathy gistは用語使用のみ・nishioは運用語のみ・villagepump L253-259は簡潔さポリシー）。入リンク実測でentityもハブ化（Obsidian 9, qmd 7, Marp 6）し、4分類は実質 sources/analyses/それ以外 の3分類＋ナビゲーション用タクソノミ"
+  - "2026-08-11 ingest (tsurubee): claim#7（read-optional）への反証データ点。tsurubeeは人間が読んで理解することがボトルネックと主張し、概念ページを「自分が読み返したい形」に育てる。nishioの実践と正面対立（→ 理解のボトルネック）。未解決のopen questionとして研究課題に追加。一方、ミニマム構成サンプル（CLAUDE.md + 4スキル + vault/）はclaim#1（3層定義）の他実装例"
 superseded_by:
 ---
 
