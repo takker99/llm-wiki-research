@@ -33,3 +33,7 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-11] refactor | 編み込み修正: 既存11ページにCosense ingestのクロスリンクを追加
 
 ## [2026-08-11] file-back | ingestにおける編み込みの実際（2回のingest実績データ + nishioの定式 + 3層波及構造 + 教訓。index/log更新）
+
+## [2026-08-11] file-back | ingestステップの設計判断（3提案のsubagent検証 + 採用/却下の判断。index/log更新）
+
+## [2026-08-11] refactor(agents): ingestステップに既存照合+未カバー領域特定を追加、logフォーマットを内訳付きに拡張、Lintにingest空白指摘の集約を追記
