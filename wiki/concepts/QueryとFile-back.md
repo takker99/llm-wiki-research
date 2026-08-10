@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -21,6 +21,15 @@ Karpathyの重要な洞察: **良い回答はwikiページとして保存され�
 
 保存先は通常 `analyses/` または `concepts/`。
 
+nishioの実践ではfile-backの3パターンがある:
+1. 人間が「file backしといて」と指示
+2. AI側から「file backしましょうか？」と提案
+3. 人間が「このログにfile backすべき知見はある？」と聞く
+
+## 読まれなくてよい中間産物
+
+Query回答やWikiページは[[読まれなくてよい中間産物|読まれなくてよい]]。読む主体が人間からLLMに移り、Queryが代わりに読む。要約は読まれるために作るが、LLM Wikiはqueryされるために作る。
+
 ## 当wikiでの実装
 
 AGENTS.mdのQueryフロー:
@@ -35,3 +44,5 @@ AGENTS.mdのQueryフロー:
 - [[Ingest]] — ソースからの知識流入
 - [[Lint]] — 健全性チェック
 - [[IndexとLog]] — Query時のナビゲーション基盤
+- [[読まれなくてよい中間産物]] — read-optionalの理論的根拠
+- [[複数のLLM Wikiに共通のインプット]] — 複数Wikiへの並列Query

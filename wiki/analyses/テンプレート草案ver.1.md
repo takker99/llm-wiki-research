@@ -3,7 +3,7 @@ status: hypothesis
 version: 1
 date: 2026-08-11
 source: "git 6c821c1:AGENTS.md"
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 claims:
   - "AGENTS.mdが3層アーキテクチャ（`raw/`・`wiki/`・AGENTS.md）を定義する"
   - "ディレクトリは concepts/entities/sources/analyses の4分類が良い"
@@ -39,5 +39,7 @@ superseded_by:
 ## 関連
 
 - [[2026-08-11 Karpathy LLM Wiki Gist]] — テンプレート草案の原典となるLLM Wikiパターン定義
+- [[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]] — 20+ Wiki実運用データと運用知見
+- [[2026-08-11 AIを使った知識マネジメント (villagepump)]] — コミュニティ議論
 - [[このWikiの目的と研究課題]] — 研究課題とTODO
 - [[LLM Wikiの作文リスク]] — 複製を作らない理由

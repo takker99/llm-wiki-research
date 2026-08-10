@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -19,6 +19,15 @@ Karpathy gistのメタ設計原則。パターン（抽象的なアイデア）�
 | 検索エンジン（[[qmd]]） | 小規模wikiでは[[IndexとLog\|index.md]]で十分 |
 | スライドデッキ（[[Marp]]） | Markdownページだけで十分な場合がある |
 | 出力フォーマット全般 | ユーザーのニーズ次第で完全に異なるセットでもよい |
+| [[Vault分離と人間-AIの境界\|Vault分離]] | 単一Vaultでも運用可能。分離はKarpathyのpatternの一部ではなくコミュニティ発展 |
+| [[事前にやろうとしない運用哲学\|事前検証の省略]] | 監視レベルは個人のスタイル。Karpathyはstay involved派 |
+| [[株分け（kabuwake）\|株分け機構]] | 単一Wikiで完結するユースケースも多い |
+
+## nishio実践からの追加原則
+
+- **研究目的/プロジェクト目的の区別**（[[研究目的Wikiとプロジェクト目的Wiki]]）は必須ではないが、Wikiが育つと自然に分化する
+- **複数Wiki連携**（[[Wikis-as-personas]]）もoptionalだが、育った先で必要になる
+- [[LLM Wikiの実運用データ]]が示すように、多くのWikiは1日で凍結する。全機能が必要なわけではない
 
 ## テンプレート設計への含意
 
@@ -26,6 +35,7 @@ Karpathy gistのメタ設計原則。パターン（抽象的なアイデア）�
 - 汎用テンプレートとして**何を提供すべきか**（必須デフォルト）
 - **何をユーザー任せにするか**（optionalな拡張ポイント）
 - [[Schema（AGENTS.md）]]には**何を書くべきか、何を書かないべきか**
+- 複数Wiki時代のテンプレートは、単一Wikiの枠を越えるべきか
 
 当wikiの研究課題そのもの → [[このWikiの目的と研究課題]]
 
@@ -34,4 +44,5 @@ Karpathy gistのメタ設計原則。パターン（抽象的なアイデア）�
 - [[LLM Wiki]] — 全体パターン
 - [[Schema（AGENTS.md）]] — Optionalityを具体化する設定文書
 - [[Obsidian as IDE]] — optionalなツールチェーンの一例
+- [[株分け（kabuwake）]] — optionalだが有用な拡張パターン
 - [[このWikiの目的と研究課題]] — この原則をテンプレート設計にどう落とし込むか

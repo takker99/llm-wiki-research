@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -24,8 +24,14 @@ Karpathy gist自身が指摘するように、Schemaには2つのレベルがあ
 
 この分離がLLM Wikiテンプレート設計の核心課題の一つ → [[LLM WikiテンプレートのOptionality]]
 
+## SchemaとWikiタイプ
+
+nishioの観察（[[研究目的Wikiとプロジェクト目的Wiki]]）では、Schemaの目的文がWikiタイプを暗黙に規定する。[[株分け（kabuwake）]]時に新Schemaを書くことで、AIが当初の目的との関係が浅いものを無視する問題が解決する。
+
 ## 関連概念
 
 - [[3層アーキテクチャ]] — Schemaが属する構造
 - [[LLM Wiki]] — 全体パターン
 - [[LLM WikiテンプレートのOptionality]] — 何をテンプレート化し何をユーザー任せにするか
+- [[研究目的Wikiとプロジェクト目的Wiki]] — Schemaの目的文がWikiタイプを規定
+- [[株分け（kabuwake）]] — 株分け時に新Schemaを書く

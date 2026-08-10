@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -15,6 +15,10 @@ Karpathyが提唱するLLM Wikiの具体的なツールチェーン像。[[Obsid
 
 人間はObsidianを開いて、リンクを辿り、グラフビューを見て、更新されたページを読む。LLMは裏でファイルを編集している。
 
+## Vault分離
+
+KarpathyのObsidian setupへの反応として、AI用Vaultと人間用Vaultの分離が推奨されている（[[Vault分離と人間-AIの境界]]）。人間用Vaultをクリーンに保ち、エージェント用の乱雑なVaultを別に作成する。Cosenseコミュニティでは「Cosenseは人間の議論の場、ObsidianはAIの整理の場」という使い分けも提案された。
+
 ## 活用されるObsidianの機能
 
 - **[[Obsidian Web Clipper]]**: Web記事をMarkdownに変換しraw/に保存するブラウザ拡張
@@ -25,15 +29,13 @@ Karpathyが提唱するLLM Wikiの具体的なツールチェーン像。[[Obsid
 
 ## ツールチェーンのOptionality
 
-Karpathyはこれらすべてを「オプショナルでモジュラー」と位置づけている:
-- ソースがテキストのみなら画像処理は不要
-- wikiが小さければindexファイルだけで十分（検索エンジン不要）
-- スライドデッキが必要なければMarp不要
-- 完全に異なる出力フォーマットでもよい
+Karpathyはこれらすべてを「オプショナルでモジュラー」と位置づけている。Cosenseコミュニティでは、MarkdownよりCosense記法寄りの文法を求める試み（[[scbdown]]）もあるが、これもoptionalな拡張。
 
 → [[LLM WikiテンプレートのOptionality]]
 
 ## 関連概念
 
 - [[LLM Wiki]] — 全体パターン
+- [[Vault分離と人間-AIの境界]] — AI用/人間用Vaultの分離
 - [[LLM Wikiのスケーラビリティ]] — どの段階でどのツールが必要になるか
+- [[scbdown]] — Cosense寄りのMarkdown方言

@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -18,6 +18,10 @@ LLM Wikiのナビゲーションを支える2つの特殊ファイル。
 
 Karpathy: "This works surprisingly well at moderate scale"
 
+nishioの実測（[[LLM Wikiの実運用データ]]）:
+- 188ページでindexは約12K tokens = Opus 4.7の1.2%（問題ない）
+- Gemma 4等ローカルLLMでは超過。人間の可読性を捨てAI用に書き換えで1/8圧縮可能
+
 ## log.md
 
 時系列指向。追記専用の出来事記録。ingest、query、lintパスを記録する。
@@ -35,5 +39,6 @@ KarpathyのTip: 各エントリの先頭を一貫したプレフィックスに�
 ## 関連概念
 
 - [[LLM Wikiのスケーラビリティ]] — index.mdの有効範囲と限界
+- [[LLM Wikiの実運用データ]] — 実測値
 - [[qmd]] — indexベースを超えた後の検索ソリューション
 - [[Ingest]] / [[QueryとFile-back]] — 両方を更新する操作

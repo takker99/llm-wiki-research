@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 
 # RAG
@@ -21,8 +21,14 @@ Karpathy: "Nothing is built up."
 
 Karpathy gistでは両者は排他的ではない。LLM Wikiのindexベースナビゲーションが限界を迎えた後は、[[qmd]]のような検索（BM25+ベクトル+LLMリランキング）を追加することでRAG的アプローチを補完的に導入できる。ただし基本戦略は「事前コンパイル」であり、RAGはあくまで検索補助。
 
+nishioの[[ChatGPT ProとLLM Wikiの併用]]は別の併用パターン: ChatGPT ProのDeep Research（クラウド側RAG的処理）→ そのレポートをingest→参照先論文をClaude Codeが取得し再ingest。
+
+nishioは「ロングコンテキスト時代のベクトル検索型RAGの卒業」を提起している。[[LLM Wikiは要約の改良版ではない|LLM WikiはRAG/要約の改良版ではなく]]、別の知識管理パラダイム。
+
 ## 関連概念
 
 - [[永続Wikiと複利効果]] — 対比の詳細
+- [[LLM Wikiは要約の改良版ではない]] — RAGも要約も「使い捨て」という共通の限界
 - [[LLM Wikiのスケーラビリティ]] — どこでRAG的補完が必要になるか
+- [[ChatGPT ProとLLM Wikiの併用]] — 実践的な併用パターン
 - [[qmd]] — LLM Wikiのスケールアップ時の検索ソリューション

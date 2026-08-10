@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -18,6 +18,12 @@ LLM Wikiの3基本操作の1つ。wikiの健全性を定期的にチェックす
 
 Lintのもう一つの重要な役割: **新しい調査課題と探すべきソースを提案すること。** これは単なるエラー検出ではなく、wikiの成長を方向付ける機能。
 
+## nishioの実践知
+
+- AIが自動的にLintを呼び出すこともある
+- 「しばらくLintをやってないものを発見する仕組み」を作ろうとしたが、予想より自動的に整えられていることが多い
+- [[AIによるingest停止判断]]はLintの延長線上にある——AIがソースの質を評価し取捨選択を提案
+
 ## 当wikiでの実装
 
 AGENTS.mdでは機械チェックと意味チェックに分類:
@@ -33,3 +39,5 @@ AGENTS.mdでは機械チェックと意味チェックに分類:
 - [[Ingest]] — 新しい知識の流入（lintはその品質管理）
 - [[QueryとFile-back]] — 探索（lintはその網羅性チェック）
 - [[IndexとLog]] — lint結果を反映する基盤
+- [[AIによるingest停止判断]] — Lintの延長としての自己評価
+- [[LLM Wikiの実運用データ]] — Lintが検出すべきスケール問題
