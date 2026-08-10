@@ -15,7 +15,7 @@ for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/anal
   [ -f "$page" ] || continue
   basename="$(basename "$page" .md)"
   # Count how many other wiki pages link to this page
-  count=$(grep -rl "\[\[${basename}\]\]" "$WIKI_DIR" --include="*.md" 2>/dev/null | wc -l)
+  count=$(grep -rl "\[\[${basename}\]\]" "$WIKI_DIR" --include="*.md" 2>/dev/null | wc -l || true)
   if [ "$count" -eq 0 ]; then
     echo "  ORPHAN: $page"
   fi

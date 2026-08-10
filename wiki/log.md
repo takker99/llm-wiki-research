@@ -19,3 +19,5 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-11] ingest | LLM Wikiの作文リスク (concept page。きっかけ: overview.mdのソース一覧が実在1件のみと判明)
 
 ## [2026-08-11] repo-rename | llm-wiki-template → llm-wiki-research
+
+## [2026-08-11] file-back | Cosenseソースのingest方式（subagent相談結果をanalyses/に提案として保存。status: hypothesis、決定ではない。index/log更新）
