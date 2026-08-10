@@ -36,4 +36,5 @@
 - [[index]] — ページカタログ
 - [[テンプレート草案ver.1]] — テンプレート仮説（status: hypothesis）
 - [[Cosenseソースのingest方式]] — Cosenseソースの取り込み方式の提案（研究課題「情報信頼性」「配布形式」へのインプット）
+- [[rawディレクトリの取り扱い]] — raw/のgitignore・プライバシー・ライセンス・発見層の区別（open question）
 - [[LLM Wikiの作文リスク]] — 情報信頼性の概念

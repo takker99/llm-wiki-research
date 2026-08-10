@@ -21,3 +21,5 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-11] repo-rename | llm-wiki-template → llm-wiki-research
 
 ## [2026-08-11] file-back | Cosenseソースのingest方式（subagent相談結果をanalyses/に提案として保存。status: hypothesis、決定ではない。index/log更新）
+
+## [2026-08-11] file-back | rawディレクトリの取り扱い（gitignoreの動機・二面性・発見層とrawの分離・manifest.md。repo cloneはraw/外に置く方針。status: hypothesis, open question。index/log更新）
