@@ -1,15 +1,14 @@
 ---
-status: hypothesis
+status: tentatively-adopted
 date: 2026-08-11
 tags: [template-design, cosense, ingest]
 topic: Cosenseソース（nishio / villagepump）のingest方式
 ---
 
-# Cosenseソースのingest方式（案）
+# Cosenseソースのingest方式（仮採用）
 
 Cosense（nishio 26Kページ / villagepump 44Kページ）の情報をこのwikiにどう取り込むか。
-subagent相談（2026-08-11）の結果をまとめた**提案であり、決定ではない**。
-実運用（6ファイル再取得、初回ingest）を経て検証・改訂する。
+subagent相談2往復（2026-08-11）を経て**仮採用**（[[Cosenseソースのingest方式]]）。実運用（6ファイル再取得、初回ingest）を経て検証・改訂する。
 
 ## 検討した3案
 
@@ -42,11 +41,26 @@ subagent相談（2026-08-11）の結果をまとめた**提案であり、決定
 - 大規模ソース向けパターンは応用編に位置づけ、デフォルトAGENTS.mdには書かない（薄さの維持）
 - 引用時アーカイブ規則は現行の「sourcesページは必ずraw/へリンク」の自然な延長として1行でデフォルトに含められる
 
+## 仮採用セット（2026-08-11）
+
+subagent相談2往復（lint正規表現は実機検証済み）を経て仮採用。検証条件（10）を満たしたらvalidatedの候補、**2026-09-11のReviewで再評価**。
+
+1. **パイプライン**: 発見層（grasp DB・repo cloneはraw/外）→ 生読み → 引用時アーカイブ。cosense-cli/graspは前提にせず方針のみ
+2. **線引き**: 主張の根拠（引用・数値・要約の元）→ アーカイブ必須。存在確認・案内リンクのみ → URLのみ可。**迷ったらアーカイブ**
+3. **アーカイブ追加の例外**: アーカイブの新規追加と `raw/manifest.md` への追記のみ許可。既存ファイルの変更・削除は従来通り禁止（AGENTS.mdに反映済み）
+4. **アーカイブ配置・命名**: `raw/cosense/<project>/<title>-<YYYY-MM-DD>.md`。サブディレクトリ必須（同名ページ衝突回避）。タイトル内の`/`は`_`に置換。同一内容の再取得はmanifestのハッシュ照合で省略可
+5. **manifest.md**: `raw/manifest.md` をコミット対象化（.gitignoreに `!raw/manifest.md`）。エントリ: プロジェクト/タイトル/URL/取得日/sha256/パス。**追記のみ**。URL+タイトルはgit logに残るため、非公開にしたい出典は載せない
+6. **ハッシュ**: sha256で開始。pageId/commitIdは「URL改名で壊れた」「ページ同一性が争われた」事例が出たら拡張
+7. **sources frontmatter**: 全ページ任意 `sources:`（`raw/パス` リスト。空白入りはダブルクォート。rawへの参照は必ずパス形式）。sources/ページ必須 `raw:`（リスト・1以上）+ 任意 `source_url:` / `accessed:`（AGENTS.mdに反映済み）
+8. **lint**: (i) raw参照チェックの正規表現をサブディレクトリ・空白入りパス対応に (ii) sources/の `raw:` 必須チェック (iii) sources/を孤立チェックへ追加（index.md除外=未消化ソース判定）（lint.shに反映済み）
+9. **役割分担**: manifest.md（raw/側）= 取得の事実・損失防止の台帳。sources frontmatter（wiki/側）= ページの根拠宣言。同一パスを共有するため実質的な突合が可能
+10. **検証条件**: 初回Cosense再取得（6ファイル）+ 引用時アーカイブ数回の実運用で (a) lint通過 (b) manifest+アーカイブからの復元成功 を確認。再評価は2026-09-11のReview
+
 ## 未解決の論点
 
-- [ ] 「引用時アーカイブ」と「軽微参照はURLのみ」の線引き（仮説: 主張の根拠→アーカイブ必須、案内リンク→URLのみ可）
-- [ ] nishioはpartial acquireになるためbacklinks等が「取得済みsubset内」の結果になる。フルacquire vs 目的指向acquireの判断
+- [ ] nishioはpartial acquireになるためbacklinks等が「取得済みsubset内」の結果になる。フルacquire vs 目的指向acquireの判断（6ファイル再取得時に自然に判断材料が出る）
 - [ ] 6ファイルのタイトルは不明（ユーザー記憶喪失）。再ingest時に重要ページとして自然に再発見される見込み
+- [ ] タイトルのOSファイル名上限（255バイト）対処（起きたら対処。Grow first, split later）
 
 ## 関連
 

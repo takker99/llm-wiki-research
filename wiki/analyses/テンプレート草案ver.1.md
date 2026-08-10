@@ -4,7 +4,7 @@ version: 1
 date: 2026-08-11
 source: "git 6c821c1:AGENTS.md"
 claims:
-  - "AGENTS.mdが3層アーキテクチャ（raw/wiki/AGENTS.md）を定義する"
+  - "AGENTS.mdが3層アーキテクチャ（`raw/`・`wiki/`・AGENTS.md）を定義する"
   - "ディレクトリは concepts/entities/sources/analyses の4分類が良い"
   - "ファイル名は自然言語（日本語等）が良い"
   - "index.mdを先頭で読むカタログ方式が検索基盤なしでスケールする"

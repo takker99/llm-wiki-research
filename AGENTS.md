@@ -27,7 +27,7 @@ ingest時とfile-back時は、これらの問いに資する知見を優先し�
 ## アーキテクチャ（運用規則）
 
 ```
-raw/      — 不変。原文ドキュメント。LLMは読むだけで、絶対に変更しない。
+raw/      — 不変。原文ドキュメント。LLMは読むだけで、絶対に変更しない。唯一の例外: 引用時アーカイブの新規追加と raw/manifest.md への追記。
 wiki/     — LLMが管理する構造化Markdownページ（wikilink付き）。
 AGENTS.md — 本ファイル。このwikiの運用規則。人間とLLMで共進化する。
 ```
@@ -93,13 +93,14 @@ wiki/
 
 研究の進行状況をまとめ、次のアクションを提案する:
 
-- 仮説ページのfrontmatter status遷移（hypothesis → validated / falsified / extracted）を確認
+- 仮説ページのfrontmatter status遷移（hypothesis → tentatively-adopted → validated / falsified / extracted）を確認
 - 研究課題のTODO状況（`analyses/このWikiの目的と研究課題.md`）を確認
 - 研究の完了定義: **テンプレートがこのwikiから分離し、別のwikiがそれを運用し始めたとき**
 
 ## 執筆の機械要件
 
 - sourcesページは必ず raw/ へのリンクを含める。引用の流れ: raw → sourceページ → concept/entity
+- 出典はfrontmatterに書く: 全ページ任意 `sources:`（`raw/パス` または `[[wikilink]]`、空白を含むパスはダブルクォート）。sourcesページは `raw:` 必須（リスト・1以上）+ `source_url:` / `accessed:` 任意。`raw/`への参照は必ずパス形式で
 - `index.md` の各エントリは1行
 - frontmatterは任意だが、あれば有用（tags, dates, status等）
 

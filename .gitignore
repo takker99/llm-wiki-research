@@ -21,3 +21,6 @@ Thumbs.db
 *.bak
 
 raw/*
+
+# raw archive manifest (committed even though raw/* is ignored)
+!raw/manifest.md

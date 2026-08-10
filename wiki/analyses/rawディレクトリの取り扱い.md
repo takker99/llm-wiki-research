@@ -1,15 +1,15 @@
 ---
-status: hypothesis
+status: tentatively-adopted
 date: 2026-08-11
-tags: [template-design, raw, ingest, open-question]
+tags: [template-design, raw, ingest]
 topic: raw/の取り扱い（gitignore・プライバシー・ライセンス・発見層の区別）
 ---
 
-# rawディレクトリの取り扱い（open question）
+# rawディレクトリの取り扱い
 
 `raw/*` はgitignoreされており、`raw/` はgitの管理外にある（karpathyのgistすらuntracked）。
 この状態は意図的なものだが、トレードオフを整理し、テンプレートのデフォルトをどうするかを検討する。
-**提案であり、決定ではない。**
+一部は[[Cosenseソースのingest方式]]（2026-08-11）で仮採用済み（manifest.md・発見層の分離・lint対応）。
 
 ## gitignoreの動機（ユーザーによる意図、2026-08-11）
 
@@ -62,8 +62,7 @@ raw/全体の取り扱いに一般化できる仮説:
 - manifest.md にURL・commit hash・取得日・対象ファイル一覧
 - これで「repo丸ごとをraw/に」の否定と「無管理の引用」の両方を避ける
 
-lint上の注意: 参照チェックは `raw/` 直下の `.md` ファイルしか見ない（正規表現がスラッシュを含むパスに非対応）。
-サブディレクトリ参照はtypoしても黙殺される。対応は今後（lint修正 or 手動確認）。
+lint上の注意（2026-08-11解決）: 参照チェックは `raw/` 直下の `.md` しか見なかった（正規表現がスラッシュを含むパス・空白入りパスに非対応）が、[[Cosenseソースのingest方式]]8に従いlint.shを修正済み。
 
 ## テンプレート設計への含意（草案ver.2のclaims候補）
 
@@ -76,9 +75,12 @@ lint上の注意: 参照チェックは `raw/` 直下の `.md` ファイルし�
 
 - [ ] gitignoreのデフォルト（public / privateで変える？）
 - [ ] 著作権のある資料（論文PDF等）の扱い（要約のみ？ 引用の範囲？）
-- [ ] manifest.mdのコミット対象化を確定するか
-- [ ] 発見層の位置づけ（デフォルトに含めるか応用編か）
-- [ ] gitignore維持時のバックアップ手段
+- [ ] gitignore維持時のバックアップ手段（manifestは防衛線の一部。代替手段は未定）
+
+解決済み（[[Cosenseソースのingest方式]]）:
+- manifest.mdのコミット対象化 → 仮採用（項目5。.gitignoreに `!raw/manifest.md`）
+- 発見層の位置づけ → 仮採用（項目1。デフォルトのAGENTS.mdには書かず応用編のclaimsに留める）
+- lintのサブディレクトリ・空白対応 → 仮採用（項目8。lint.shに反映済み）
 
 ## 関連
 

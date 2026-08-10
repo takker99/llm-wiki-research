@@ -10,12 +10,17 @@ echo "=== LLM Wiki Lint ==="
 echo ""
 
 # Check for orphan pages (no inbound links from other wiki pages)
+# sources/ pages: index.md listing does not count (unlinked source = not digested)
 echo "--- Orphan pages (no inbound links) ---"
-for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/analyses/*.md; do
+for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/analyses/*.md "$WIKI_DIR"/sources/*.md; do
   [ -f "$page" ] || continue
   basename="$(basename "$page" .md)"
   # Count how many other wiki pages link to this page
-  count=$(grep -rl "\[\[${basename}\]\]" "$WIKI_DIR" --include="*.md" 2>/dev/null | wc -l || true)
+  if [[ "$page" == "$WIKI_DIR"/sources/* ]]; then
+    count=$(grep -rl "\[\[${basename}\]\]" "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources --include="*.md" 2>/dev/null | wc -l || true)
+  else
+    count=$(grep -rl "\[\[${basename}\]\]" "$WIKI_DIR" --include="*.md" 2>/dev/null | wc -l || true)
+  fi
   if [ "$count" -eq 0 ]; then
     echo "  ORPHAN: $page"
   fi
@@ -58,7 +63,7 @@ echo ""
 
 # Check that raw/ files referenced from wiki/ actually exist
 echo "--- Missing raw files referenced from wiki/ ---"
-grep -roE 'raw/[^/[:space:]]+\.md' "$WIKI_DIR" --include="*.md" \
+grep -roE 'raw/[^])"'"'"'`\[,<>。、「」]+\.md' "$WIKI_DIR" --include="*.md" \
   | sed 's/.*://' \
   | sort -u \
   | while read -r ref; do
@@ -66,6 +71,16 @@ grep -roE 'raw/[^/[:space:]]+\.md' "$WIKI_DIR" --include="*.md" \
       echo "  MISSING RAW: $ref"
     fi
   done
+echo ""
+
+# Check that sources/ pages declare their raw archive in frontmatter
+echo "--- Sources pages without raw: field ---"
+for page in "$WIKI_DIR"/sources/*.md; do
+  [ -f "$page" ] || continue
+  if ! grep -qE '^raw:' "$page"; then
+    echo "  NO RAW: $page"
+  fi
+done
 echo ""
 
 # Count wiki pages
