@@ -13,3 +13,7 @@
 ## エントリ
 
 - zenn | Andrej Karpathy氏のLLM Wikiを1ヶ月運用してわかった、LLMの知識を『繋げる力』 | https://zenn.dev/tsurubee/articles/llm-wiki-connecting-knowledge | 2026-05-15 | sha256:77c34e700b23a261bdc6747d2557c4c2306005d73d452b1fae9e6bd0f495ae77 | raw/zenn-tsurubee-KarpathyのLLM_Wikiを1ヶ月運用してわかった繋げる力.md
+- nishio | OKFとLLM Wiki | https://scrapbox.io/nishio/OKFとLLM_Wiki | 2026-08-11 | sha256:8448ca68809bf08ea872984d2eb47233545ece32cad42ed2b5c01f6cd6a5a993 | raw/cosense/nishio/OKFとLLM Wiki-2026-08-11.md
+- nishio | 一貫・網羅・頂点 | https://scrapbox.io/nishio/一貫・網羅・頂点 | 2026-08-11 | sha256:c60dcb0ee867959d5b06be0ca160851b6b9c9027181fa00a36efcf3ec4e37a77 | raw/cosense/nishio/一貫・網羅・頂点-2026-08-11.md
+- villagepump | 2026/06/13（日記） | https://scrapbox.io/villagepump/2026/06/13 | 2026-08-11 | sha256:72bcf8386680d86cb5f977a9ae18d62555e10be1e870ba5095349f6fcad77a28 | raw/cosense/villagepump/2026-06-13-2026-08-11.md
+- gist (stakiran) | OKFとMetadata as Codeをめぐる考察 | https://gist.github.com/stakiran/be335dc48f8b55538063871005382fa1 | 2026-08-11 | sha256:e60ded0c4a0887369cc1cb94154019e7ef39e16a80e3ca376b2ce11f15fa1132 | raw/cosense/villagepump/stakiran-OKFとMetadata_as_Code-2026-08-11.md

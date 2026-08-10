@@ -19,7 +19,9 @@
   - 2026-08-11時点の考察: concepts/entitiesの境界はrawソース群（Karpathy gist・nishio・villagepump）のどこにも定義がない。villagepumpの表（`villagepump-AIを使った知識マネジメント.md` L253-259）は「簡潔さの強さ」のポリシーであって分類定義ではない。入リンク実測でもentityがハブ化する（Obsidian 9, qmd 7, Marp 6）が、最上位ハブは概念が独占。4分類は実質「sources / analyses / それ以外」の3分類＋ナビゲーション用タクソノミと言える。→ [[テンプレート草案ver.1]] claim#2のevidenceに追記
 - [ ] 配布形式はどうするか？（別リポジトリ / `template/` ディレクトリ / GitHub Template Repository / `npx create-llm-wiki` / その他）
 - [ ] 既存の実装（Microsoft llmwiki、llm-wiki.app、各種CLIツール）との差別化は？
+  - 2026-08-11: [[OKF]]（Google、2026-06-12発表）を追加。OKFは成果物（format）層のみの標準化で操作（足場）層を標準化しない（nishioの考察1）——テンプレートは操作層（AGENTS.md）を提供する点で差別化可能。赤リンクはOKFが許容・本wikiがエラー扱いという設計分岐もある（[[Lint]]）。詳細は [[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]
 - [ ] Cosenseの設計原理をどう具体的なデフォルトに落とし込むか？
+  - 2026-08-11: OKF議論から「同一の赤リンクを共有するページ群を2-hop関連として提示する」Cosenseの仮想ページ挙動を、lintの改善（エラーと発見の分離）として輸入する余地（[[Lint]]）
 - [ ] `AGENTS.md`はどこまで薄くできるか？ — **このwiki自身の存続が最小スキーマの実証になる**
 - [ ] テンプレートは「人間が読む前提」の可読性設計（overview重視・辞書的消費への警鐘）か、read-optional設計か？ — [[理解のボトルネック]]（tsurubee）と[[読まれなくてよい中間産物]]（nishio）の対立。2026-08-11 ingestで顕在化。[[テンプレート草案ver.1]] claim#7の検証データ
 - [ ] 情報信頼性（[[LLM Wikiの作文リスク]]）にテンプレートはどう対処すべきか？

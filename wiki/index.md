@@ -51,6 +51,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [注意の足場](concepts/注意の足場.md) — 情報量を減らさず認知負荷を下げるLLM Wikiの仕組み
 - [伸びるに任せてから剪定](concepts/伸びるに任せてから剪定.md) — 議論やWikiの成長を自然に任せ後から整理する思想
 - [ChatGPT ProとLLM Wikiの併用](concepts/ChatGPT ProとLLM Wikiの併用.md) — クラウド側Deep ResearchとローカルLLM Wikiの使い分け
+- [一貫・網羅・頂点](concepts/一貫・網羅・頂点.md) — 安定性の3価値分解（min/union/max）。cross-run stability批判とAIランチエ分業
 - [複数のLLM Wikiに共通のインプット](concepts/複数のLLM Wikiに共通のインプット.md) — 同じ資料を複数Wikiに投入→異なる切り出し方が生まれる現象
 
 ## entities
@@ -78,6 +79,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [Devin](entities/Devin.md) — 初のAIソフトウェアエンジニア。Knowledge機能の先駆
 - [Agent Skills](entities/Agent Skills.md) — Anthropicの手続き的知識外部化。LLM Wikiの前段階
 - [Codex Mobile](entities/Codex Mobile.md) — OpenAIのモバイルコーディングエージェント
+- [OKF](entities/OKF.md) — GoogleのOpen Knowledge Format。markdown+frontmatterのオープン仕様。データカタログ由来でformat層のみ標準化
 - [赤リンクの数の議論のLLM Wiki](entities/赤リンクの数の議論のLLM Wiki.md) — 複数人議論からAIが整理したLLM Wiki
 
 ## sources
@@ -85,11 +87,13 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [2026-08-11 Karpathy LLM Wiki Gist](sources/2026-08-11 Karpathy LLM Wiki Gist.md) — LLM Wikiパターンの原典。RAG vs 永続Wiki、3層アーキテクチャ、Obsidian as IDE、Memex接続
 - [2026-08-11 AIを使った知識マネジメント (villagepump)](sources/2026-08-11%20AIを使った知識マネジメント%20(villagepump).md) — villagepumpでのLLM Wiki集合的議論。Vault分離、種→カオス→株分け、事前にやろうとしない哲学
 - [2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)](sources/2026-08-11%20KarpathyのLLM%20Wiki勉強会%20(nishio).md) — nishioの講義資料。20+ Wiki実運用データ、Wikis-as-personas、Coding Agent史
+- [2026-08-11 OKFとLLM Wiki (nishio+villagepump)](sources/2026-08-11%20OKFとLLM%20Wiki%20(nishio+villagepump).md) — OKFの正体・format層vs操作層・赤リンク論争・一貫・網羅・頂点
 - [2026-08-11 KarpathyのLLM Wikiを1ヶ月運用してわかった繋げる力 (tsurubee)](sources/2026-08-11%20KarpathyのLLM%20Wikiを1ヶ月運用してわかった繋げる力%20(tsurubee).md) — 1ヶ月運用報告。要約どまりだが「理解のボトルネック」でnishioと対立、ミニマム構成サンプルあり
 
 ## analyses
 
 - [このWikiの目的と研究課題](analyses/このWikiの目的と研究課題.md) — このWikiの目的・中心となる研究課題（TODO）・現状のまとめ
+- [nishioのOKF評価](analyses/nishioのOKF評価.md) — OKFはformat層のみ標準化・cross-run stabilityは創発を殺す・本質はドメイン違い
 - [テンプレート草案ver.1](analyses/テンプレート草案ver.1.md) — テンプレート仮説ver.1（claims一覧 + 原文へのポインタ `6c821c1:AGENTS.md`、status: hypothesis）
 - [Cosenseソースのingest方式](analyses/Cosenseソースのingest方式.md) — Cosense（nishio/villagepump）のingest方式3案と仮採用セット（status: tentatively-adopted）
 - [rawディレクトリの取り扱い](analyses/rawディレクトリの取り扱い.md) — gitignoreの動機と二面性・発見層とrawの分離・manifest.md（status: tentatively-adopted、一部open question）
