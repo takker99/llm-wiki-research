@@ -39,3 +39,5 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-11] refactor(agents): ingestステップに既存照合+未カバー領域特定を追加、logフォーマットを内訳付きに拡張、Lintにingest空白指摘の集約を追記
 
 ## [2026-08-11] file-back | ingestの監視頻度とソース数の2軸 (analyses/新規 + バッチIngest・事前にやろうとしない運用哲学にクロスリンク + index/log更新。きっかけ: nishioのチェック省略はバッチingestと同型という気づき)
+
+## [2026-08-11] query | concept/entity境界の検証: raw全ソースに定義なし、villagepumpの表は簡潔さポリシー、入リンク実測でentityもハブ化（Obsidian 9, qmd 7, Marp 6）。4分類は実質3分類＋ナビゲーション用タクソノミ。研究課題の追記 + テンプレート草案ver.1 evidenceに追記

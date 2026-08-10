@@ -16,6 +16,7 @@
 - [ ] 汎用テンプレートとして何を提供すべきか？ 何をユーザー任せにするか？
 - [ ] 汎用`AGENTS.md`には何を書くべきか？ 何を書かないべきか？（→ [[テンプレート草案ver.1]]）
 - [ ] ディレクトリ構成のベストプラクティスは？
+  - 2026-08-11時点の考察: concepts/entitiesの境界はrawソース群（Karpathy gist・nishio・villagepump）のどこにも定義がない。villagepumpの表（`villagepump-AIを使った知識マネジメント.md` L253-259）は「簡潔さの強さ」のポリシーであって分類定義ではない。入リンク実測でもentityがハブ化する（Obsidian 9, qmd 7, Marp 6）が、最上位ハブは概念が独占。4分類は実質「sources / analyses / それ以外」の3分類＋ナビゲーション用タクソノミと言える。→ [[テンプレート草案ver.1]] claim#2のevidenceに追記
 - [ ] 配布形式はどうするか？（別リポジトリ / `template/` ディレクトリ / GitHub Template Repository / `npx create-llm-wiki` / その他）
 - [ ] 既存の実装（Microsoft llmwiki、llm-wiki.app、各種CLIツール）との差別化は？
 - [ ] Cosenseの設計原理をどう具体的なデフォルトに落とし込むか？

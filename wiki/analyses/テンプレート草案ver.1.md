@@ -13,7 +13,8 @@ claims:
   - "1ソースで10-15ページに触れるのが期待される"
   - "人間はwiki/を読まなくてよい（read-optional）"
   - "wikilinkを本文中に書くべき（first-class）"
-evidence: []
+evidence:
+  - "2026-08-11 query: concepts/entitiesの境界はrawソース群に定義なし（Karpathy gistは用語使用のみ・nishioは運用語のみ・villagepump L253-259は簡潔さポリシー）。入リンク実測でentityもハブ化（Obsidian 9, qmd 7, Marp 6）し、4分類は実質 sources/analyses/それ以外 の3分類＋ナビゲーション用タクソノミ"
 superseded_by:
 ---
 
