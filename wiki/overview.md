@@ -27,5 +27,6 @@ villagepumpコミュニティの議論をingestし、以下の問いに答えて
 
 ## 次のステップ
 
+- [x] Karpathy gist のingest（→ [[2026-08-11 Karpathy LLM Wiki Gist]]、concepts/多数、entities/多数）
 - 誤削除されたソース（nishio 4件、villagepump 2件）の再取得
-- ingestを開始し、Wikiを育てながらテンプレートの形を模索する
+- テンプレート草案ver.1のclaims検証（AGENTS.mdとの運用乖離検出等）

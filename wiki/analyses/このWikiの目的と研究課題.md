@@ -28,7 +28,7 @@
   （nishio 4件・villagepump 2件はユーザー誤削除のため再取得予定）
 - `AGENTS.md` は運用規則のみに縮小済み（2026-08-11）。テンプレート設計の主張はすべて
   [[テンプレート草案ver.1]] に仮説として移管
-- `wiki/` のingestはこれから
+- 2026-08-11: Karpathy gist のingestを開始。sources/ + concepts/ 多数 + entities/ 多数を作成
 
 ## 関連
 

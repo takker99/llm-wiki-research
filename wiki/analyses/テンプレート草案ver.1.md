@@ -3,6 +3,7 @@ status: hypothesis
 version: 1
 date: 2026-08-11
 source: "git 6c821c1:AGENTS.md"
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 claims:
   - "AGENTS.mdが3層アーキテクチャ（`raw/`・`wiki/`・AGENTS.md）を定義する"
   - "ディレクトリは concepts/entities/sources/analyses の4分類が良い"
@@ -37,5 +38,6 @@ superseded_by:
 
 ## 関連
 
+- [[2026-08-11 Karpathy LLM Wiki Gist]] — テンプレート草案の原典となるLLM Wikiパターン定義
 - [[このWikiの目的と研究課題]] — 研究課題とTODO
 - [[LLM Wikiの作文リスク]] — 複製を作らない理由
