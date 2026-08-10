@@ -90,3 +90,4 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [テンプレート草案ver.1](analyses/テンプレート草案ver.1.md) — テンプレート仮説ver.1（claims一覧 + 原文へのポインタ `6c821c1:AGENTS.md`、status: hypothesis）
 - [Cosenseソースのingest方式](analyses/Cosenseソースのingest方式.md) — Cosense（nishio/villagepump）のingest方式3案と仮採用セット（status: tentatively-adopted）
 - [rawディレクトリの取り扱い](analyses/rawディレクトリの取り扱い.md) — gitignoreの動機と二面性・発見層とrawの分離・manifest.md（status: tentatively-adopted、一部open question）
+- [ingestにおける編み込みの実際](analyses/ingestにおける編み込みの実際.md) — 「1ソースが10〜15ページに触れる」の内実。新規作成と既存更新の両方が編み込みの構成要素

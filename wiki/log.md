@@ -26,6 +26,10 @@ Parse with: `grep "^## \[" log.md | tail -5`
 
 ## [2026-08-11] adopt | Cosenseソースのingest方式を仮採用（subagent相談2往復+lint正規表現実機検証。仮採用セット10項目。AGENTS.md・lint.sh・.gitignore・提案2ページ・index/log更新）
 
-## [2026-08-11] ingest | Karpathy LLM Wiki Gist (touched 27 pages: 1 source + 17 concepts + 9 entities; updated 4 existing pages)
+## [2026-08-11] ingest | Karpathy LLM Wiki Gist (touched 33 pages: 1 source + 17 concepts + 9 entities + 4 existing updated + 2 index/log; later +11 existing cross-link updates)
 
-## [2026-08-11] ingest | Cosense LLM Wiki議論 (villagepump AIを使った知識マネジメント + nishio KarpathyのLLM Wiki勉強会 + 2-hop先7ページ; touched 38 pages: 2 sources + 12 concepts + 12 entities; updated 6 existing pages)
+## [2026-08-11] ingest | Cosense LLM Wiki議論 (villagepump AIを使った知識マネジメント + nishio KarpathyのLLM Wiki勉強会 + 2-hop先7ページ; touched 53 pages: 2 sources + 23 concepts + 15 entities + 11 existing updated + 2 index/log)
+
+## [2026-08-11] refactor | 編み込み修正: 既存11ページにCosense ingestのクロスリンクを追加
+
+## [2026-08-11] file-back | ingestにおける編み込みの実際（2回のingest実績データ + nishioの定式 + 3層波及構造 + 教訓。index/log更新）
