@@ -22,9 +22,17 @@ for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/anal
 done
 echo ""
 
-# Check for broken wikilinks in wiki/
+# Check for broken wikilinks in wiki/ (skipping fenced code blocks)
 echo "--- Broken wikilinks ---"
-grep -roh '\[\[[^]]*\]\]' "$WIKI_DIR" --include="*.md" \
+find "$WIKI_DIR" -name "*.md" -print0 | xargs -0 awk '
+  /^```/ { inblock = !inblock; next }
+  !inblock {
+    while (match($0, /\[\[[^]]*\]\]/)) {
+      print substr($0, RSTART, RLENGTH)
+      $0 = substr($0, RSTART + RLENGTH)
+    }
+  }
+' \
   | sed 's/\[\[//;s/\]\]//' \
   | sort -u \
   | while read -r target; do
@@ -44,6 +52,18 @@ find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" \
     basename="$(basename "$page" .md)"
     if ! grep -q "$basename" "$WIKI_DIR/index.md"; then
       echo "  MISSING: $page is not in index.md"
+    fi
+  done
+echo ""
+
+# Check that raw/ files referenced from wiki/ actually exist
+echo "--- Missing raw files referenced from wiki/ ---"
+grep -roE 'raw/[^/[:space:]]+\.md' "$WIKI_DIR" --include="*.md" \
+  | sed 's/.*://' \
+  | sort -u \
+  | while read -r ref; do
+    if [ ! -f "$(dirname "$WIKI_DIR")/$ref" ]; then
+      echo "  MISSING RAW: $ref"
     fi
   done
 echo ""

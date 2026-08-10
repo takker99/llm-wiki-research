@@ -1,220 +1,133 @@
-# LLM Wiki Template Research — AGENTS.md
+# LLM Wiki Research — AGENTS.md
 
-This file is the schema and instruction set for any LLM agent (Claude Code,
-Codex, OpenCode, Cursor, etc.) working on this knowledge base. It is read at
-the start of every session. The LLM owns the wiki layer; the human curates
-sources, asks questions, and reviews.
+このリポジトリは、**汎用LLM Wikiテンプレートを研究するための研究wiki**です。
+本ファイルは研究wikiを動かすための最小限の運用規則であり、テンプレート設計の主張ではない。
 
-## This Wiki's Purpose
+## このWikiの目的（研究課題）
 
-This LLM Wiki exists to research and develop a **general-purpose LLM Wiki
-template** — one that is more concrete than Karpathy's abstract Gist but not
-tied to any specific domain. The final template will be distributed separately
-(repo, directory, CLI — form TBD through this wiki's research).
+KarpathyのLLM Wikiパターン、nishioの実践知、villagepumpの議論をingestし、以下の問いに答えていく:
 
-Key research questions to keep in mind during all operations:
-- What belongs in a generic AGENTS.md vs. what should be left to the user?
-- What directory structure works best for most use cases?
-- How should the template be distributed? (template repo / `template/` dir /
-  `npx create-llm-wiki` / other)
-- What do existing implementations get right/wrong?
-- How do Cosense design principles translate into concrete defaults?
+- 汎用テンプレートとして何を提供すべきか？ 何をユーザー任せにするか？
+- 汎用`AGENTS.md`には何を書くべきか？ 何を書かないべきか？
+- ディレクトリ構成のベストプラクティスは？
+- 配布形式はどうするか？（別repo / `template/` ディレクトリ / `npx create-llm-wiki` / 他）
+- 既存の実装（Microsoft llmwiki、llm-wiki.app、各種CLIツール）との差別化は？
+- Cosenseの設計原理をどう具体的なデフォルトに落とし込むか？
+- `AGENTS.md`はどこまで薄くできるか？（このwiki自身の存続が最小スキーマの実証になる）
 
-When ingesting sources and filing back query results, prioritize insights
-that inform these questions. Tag relevant pages with `#template-design`.
+ingest時とfile-back時は、これらの問いに資する知見を優先し、`#template-design`タグを付ける。
 
-## Architecture
+## このWikiは研究の実験台です
 
-Three layers, strictly separated:
+- 本ファイルの規則はこのwikiを動かすための最小限の運用規則であり、テンプレート設計の主張ではない。
+- テンプレートの設計主張はすべて `wiki/analyses/テンプレート草案*.md` の仮説ページにある。本ファイルは仮説を含まない。
+- **バイアスは除去ではなく顕在化を狙う。** 運用と仮説の乖離に気づいたら `wiki/log.md` に記録し、該当する仮説ページのfrontmatter（status, evidence）を更新する。
+- 疑問があれば常に `raw/` に戻って検証する。`wiki/`は派生物であり、`raw/`がソース・オブ・トゥルース。
+
+## アーキテクチャ（運用規則）
 
 ```
-raw/      — Immutable. Source documents (PDFs, Markdown, transcripts, etc.).
-            The LLM reads from here but NEVER modifies files in raw/.
-wiki/     — LLM-maintained. Structured Markdown pages with wikilinks.
-            The LLM creates, updates, and cross-references pages here.
-AGENTS.md — This file. The schema. Defines conventions and workflows.
-            Co-evolved by human + LLM over time.
+raw/      — 不変。原文ドキュメント。LLMは読むだけで、絶対に変更しない。
+wiki/     — LLMが管理する構造化Markdownページ（wikilink付き）。
+AGENTS.md — 本ファイル。このwikiの運用規則。人間とLLMで共進化する。
 ```
 
-`raw/` is the source of truth. `wiki/` is a derived, revisable layer built on
-top of it.  When a fact in wiki/ is contested, trace it back to raw/.
+`wiki/`の事実が争われたら `raw/` まで遡って検証する。
 
-## Directory Conventions
+## ディレクトリ構成（運用規則）
 
 ```
 wiki/
-  concepts/   — Abstract ideas, techniques, patterns, terminology.
-                Atomic. Concise. Act as link hubs between pages.
-                A concept page's main job is to list what it connects to.
-  entities/   — Concrete things: people, orgs, products, places, events.
-                Concise. Identification + minimal context.
-  sources/    — One summary page per raw source.
-                Title format: `YYYY-MM-DD source-name.md`
-                Contains: key points, what entities/concepts it touches,
-                link back to the raw file.
-  analyses/   — In-depth analysis, comparisons, synthesis, reasoning.
-                Can be long. The reasoning process itself has value here.
-                Created by Query -> file back, or by deep ingest processing.
+  concepts/   — 概念ページ
+  entities/   — 実体ページ（人・組織・製品・場所・イベント）
+  sources/    — ソース要約ページ。タイトル `YYYY-MM-DD 短い名前.md`。
+  analyses/   — 分析・比較・総合ページ。長くなってよい。
 
-  index.md    — Full catalog: every wiki page with a one-line summary,
-                grouped by category. The LLM reads this first on every Query.
-  log.md      — Append-only timeline. Each entry: `## [DATE] action | detail`.
-                Parseable with `grep "^## \[" log.md | tail -5`.
-  overview.md — Entry point. High-level map of what this wiki covers.
+  index.md    — 全ページのカタログ。各エントリ1行。Query時は最初に読む。
+  log.md      — 追記専用のタイムライン。各エントリ: `## [DATE] action | detail`
+  overview.md — エントリーポイント。このwikiの俯瞰図。
 ```
 
-The index is the primary navigation tool. Keep each entry to one line.
-At moderate scale (~100 sources, ~hundreds of pages) this works without
-needing vector search or embedding infrastructure.
-
-## Operations
+## オペレーション
 
 ### Ingest
 
-When the human says "ingest this" or drops a file into raw/:
+1. `raw/` の新ファイルを読む。
+2. 人間と3-5つの要点を議論する。何を重視するか聞く。
+3. ページを作成・更新:
+   - `sources/YYYY-MM-DD タイトル.md`（要約 + 関連concept/entityへのリンク）
+   - 影響を受ける concepts/ と entities/ のページを更新（リンク追加、記述更新）
+   - 既存の主張と矛盾する場合は明示する: 「⚠ Contradiction: [旧主張] vs [新ソース]」
+   - 新規の概念・実体があれば概念ページを作成
+4. `index.md` を更新（新ページ追加、変更された要約の更新）。
+5. `log.md` に追記: `## [DATE] ingest | source-name (touched N pages)`
 
-1. Read the new file from raw/.
-2. Discuss 3-5 key takeaways with the human. Ask what to emphasize.
-3. Create/update pages:
-   - A new `sources/YYYY-MM-DD title.md` with summary + key entity/concept links.
-   - Update affected concepts/ and entities/ pages — add links, update
-     descriptions if the source changes the picture.
-   - If the source contradicts a prior claim, flag it explicitly:
-     "⚠ Contradiction: [old claim] vs [new source]".
-   - Create new concept/entity pages if the source introduces something novel.
-4. Update `index.md`: add new pages, update changed summaries.
-5. Append to `log.md`: `## [DATE] ingest | source-name (touched N pages)`.
-6. A single source can touch 10-15 pages. This is expected — it's weaving
-   into the existing network, not creating isolated summaries.
-
-Never modify raw/ files. Never delete raw/ files unless the human explicitly
-requests it.
+`raw/` のファイルは絶対に変更・削除しない。人間が明示的に依頼した場合のみ削除してよい。
 
 ### Query
 
-When the human asks a question:
-
-1. Read `index.md` first to find relevant pages.
-2. Read the most promising pages, follow wikilinks as needed.
-3. Synthesize an answer with `[[wikilink]]` citations to wiki pages.
-4. After answering, offer: "Should I file this back as a new wiki page?"
-   Good answers are durable knowledge and should not disappear into chat history.
-5. If the human says yes, create the page (usually in analyses/ or concepts/)
-   and update index.md + log.md.
+1. まず `index.md` を読んで関連ページを探す。
+2. 有望なページを読み、必要に応じてwikilinkを辿る。
+3. `[[wikilink]]`引用付きで回答を総合する。
+4. 回答後、「これをwikiページとしてfile-backする？」と提案する。
+5. 承諾されたらページを作成（通常は analyses/ か concepts/）し、index.md と log.md を更新する。
 
 ### Lint
 
-Run when asked, or proactively when you notice issues:
+`bash scripts/lint.sh` を実行、または手動で確認:
 
-1. Mechanical checks:
-   - Orphan pages (no inbound links from other wiki pages)
-   - Broken `[[wikilinks]]` (target page does not exist)
-   - Pages not listed in index.md
-   - Sources in index.md with no corresponding file
-2. Semantic checks:
-   - Contradictions between pages (same topic, conflicting claims)
-   - Stale claims (newer sources may have superseded older ones)
-   - Important concepts mentioned in pages but lacking their own concept/ page
-   - Missing cross-references between clearly related pages
-3. Propose new questions to investigate and new sources to look for.
-4. Report findings grouped by severity. Offer to auto-fix mechanical issues.
+1. 機械チェック:
+   - 孤立ページ（他のwikiページからの入リンクがない）
+   - 壊れた`[[wikilink]]`（対象ページが存在しない）
+   - index.md に載っていないページ
+   - 実在しない raw/ ファイルを参照しているページ
+2. 意味チェック:
+   - ページ間の矛盾（同一トピックで衝突する主張）
+   - 古い主張（新しいソースに取って代わられたもの）
+   - ページに言及されているのに概念ページが存在しない概念
+   - 明らかに関連するページ間のクロスリファレンス不足
+3. 新しい調査課題と探すべきソースを提案する。
+4. 重大度別に報告し、機械的な問題の自動修正を申し出る。
 
-## Page Writing Guidelines
+### Review（研究の進行管理）
 
-- **Wikilinks are first-class.** Use `[[wikilink]]` inline in prose, not
-  relegated to a "See also" section at the bottom. Links are meaning.
-- **Concepts are atomic and concise.** A concept page should be a link hub
-  that says "what this is about" and "what it connects to" in a few lines.
-  If it grows long, that content belongs in analyses/.
-- **Entities are identification.** Who/what, not deep description. The
-  detailed analysis goes in analyses/. Link to sources that mention them.
-- **Sources link back to raw/.** Every source page must include a link to
-  its raw file. Citations flow: raw → source page → concept/entity.
-- **File names are descriptive sentences in the human's preferred language.**
-  Not `kebab-case` identifiers, not forced English. If the human writes in
-  Japanese, use Japanese titles. The wiki is for them (via you).
-- **frontmatter is optional but useful.** If you add YAML frontmatter
-  (tags, dates, source counts), it enables structure-aware tooling later.
+研究の進行状況をまとめ、次のアクションを提案する:
 
-## Naming Conventions
+- 仮説ページのfrontmatter status遷移（hypothesis → validated / falsified / extracted）を確認
+- 研究課題のTODO状況（`analyses/このWikiの目的と研究課題.md`）を確認
+- 研究の完了定義: **テンプレートがこのwikiから分離し、別のwikiがそれを運用し始めたとき**
 
-- Files in wiki/: `Descriptive title in natural language.md`
-  (not `kebab-case-slug.md`, not `enforced_english.md`).
-- Files in sources/: `YYYY-MM-DD short-descriptive-name.md`
-- Files in raw/: preserve original filenames. If ambiguous, the human
-  may ask you to rename (NEVER rename raw/ files on your own initiative).
-- Wikilinks: `[[page title]]` — case-insensitive matching recommended.
-  If the target is a file path, use the basename without extension.
+## 執筆の機械要件
 
-## Git Conventions
+- sourcesページは必ず raw/ へのリンクを含める。引用の流れ: raw → sourceページ → concept/entity
+- `index.md` の各エントリは1行
+- frontmatterは任意だが、あれば有用（tags, dates, status等）
 
-- Commit messages use [Conventional Commits](https://www.conventionalcommits.org/)
-  format, written in English: `type(scope): summary`.
-  Example: `docs(wiki): file back purpose and research questions page`.
-- Common types: `docs` (wiki pages, AGENTS.md), `feat` (new template
-  features), `fix`, `refactor`, `chore`, `test`.
-- When a commit message needs to be fixed, prefer `git commit --amend`
-  (if unpushed) or a follow-up fix commit.
-- Keep the summary line imperative and under 72 characters. Add a body
-  (blank line + bullet points or sentences) when context is needed.
+## ファイル命名（このwikiの規則）
 
-## Interaction Guidelines
+- `wiki/` 内: 人間の使用言語（日本語）による説明的な自然言語名。`kebab-case` や強制英語にはしない
+- `sources/`: `YYYY-MM-DD 短い説明的な名前.md`
+- `raw/`: 元のファイル名を保存。曖昧な場合は人間に相談（勝手にrenameしない）
+- wikilink: `[[ページタイトル]]` — 大文字小文字は区別しない。ファイルパスの場合は拡張子なしのbasename
 
-- **You are the wiki maintainer, not a generic chatbot.** Your job is to
-  build and maintain this durable knowledge structure. Every conversation
-  is an opportunity to improve the wiki.
-- **Propose, don't assume.** When you think a page should be created or
-  updated, tell the human what you propose and get confirmation before
-  writing (for ingest, the initial "ingest this" is the confirmation).
-- **Good answers are filed back.** After a substantive query response, offer
-  to save it as a wiki page. The human can say no — but the default should
-  be to preserve knowledge, not let it evaporate.
-- **The human reads wiki/ optionally.** The primary reader is you.
-  Pages do not need to be polished prose for human reading — they need to
-  be structurally sound, well-linked, and accurate. The human experiences
-  the wiki through your Query responses.
-- **Grow first, split later.** Do not pre-optimize the directory structure.
-  If the wiki grows large in one area, propose a split (kabuwake) to the
-  human. A split means copying relevant raw/ and wiki/ pages to a new wiki
-  directory, not moving them.
-- **Wiki is a workshop, not a publication.** It is a processing space.
-  Content can be rough, experimental, contradictory. The lint pass will
-  catch issues over time. No need for perfection on first write.
+## Git規約
 
-## Common Patterns
+- Commit messageは [Conventional Commits](https://www.conventionalcommits.org/) 形式（英語）: `type(scope): summary`
+  例: `docs(wiki): file back purpose and research questions page`
+- 主なtype: `docs`（wikiページ、AGENTS.md）、`feat`、`fix`、`refactor`、`chore`、`test`
+- commit messageを直す場合は `git commit --amend`（未push時）か後続のfix commitを使う
+- summary行は命令形・72文字以内。文脈が必要なら本文（空行 + 箇条書き）を書く
 
-- **"ingest this PDF"** → read the PDF, discuss takeaways, create
-  sources/ page, update concepts/entities/index/log.
-- **"what do we know about X?"** → read index.md → find relevant pages →
-  synthesize answer → offer to file back.
-- **"lint the wiki"** → run mechanical + semantic checks, report findings.
-- **"what should I read next?"** → check index.md for thin pages, orphan
-  concepts without source links, questions raised but not yet answered.
-- **"ingest this URL"** → use web search/fetch to get the content, save
-  a clean Markdown version to raw/, then proceed as normal ingest.
+## 対話ガイドライン
 
-## Cosense-Inspired Principles
+- **提案主義**: ページ作成・更新を提案し、人間の確認を得てから書く（ingestは「ingestして」自体が確認）。
+- **file-back**: 実質的なQuery回答の後は、wikiページとして保存するか提案する。消えていく知識をデフォルトで保存する方向にする。
+- **Grow first, split later**: ディレクトリ構成を先取り最適化しない。一領域が大きくなったら、分割（kabuwake）を人間に提案する。分割は移動ではなくコピー。
 
-(From the Scrapbox/Cosense knowledge community's accumulated wisdom)
+## よくあるパターン
 
-1. **Links create value.** A page's value is proportional to how well it is
-   linked into the network. Write links inline, make them bidirectional.
-   The wiki graph is the knowledge, not the individual pages.
-2. **Read-optional.** The wiki does not need to be read by humans. It is an
-   intermediate artifact for the LLM to navigate on the human's behalf.
-   Polished prose is not required; good structure and accurate links are.
-3. **Flat, not hierarchical.** Avoid deep folder nesting. The directory
-   structure (concepts/entities/sources/analyses) is the only hierarchy.
-   Page titles and wikilinks carry the rest of the organization.
-4. **Grow then split (kabuwake).** Let the wiki grow organically around a
-   theme. When a sub-theme grows large enough to have its own clear purpose,
-   split it into a separate wiki. This is a copy operation, not a move —
-   the original wiki stays intact.
-5. **Copy, don't move.** When splitting a wiki or transplanting knowledge,
-   copy the relevant raw/ files to the new wiki and re-ingest them there.
-   Never destroy the original. The same raw source will produce different
-   insights under different wiki contexts — and that's the point.
-6. **The wiki is a compounding artifact.** Every ingest and every filed-back
-   answer makes the wiki richer. The 100th source connects to the 99 pages
-   already there. This is where the value comes from — not from any single
-   perfect summary.
+- **「ingest this PDF」** → PDFを読み、要点を議論し、sources/ページを作成、concepts/entities/index/logを更新
+- **「what do we know about X?」** → index.mdを読む → 関連ページ → 回答を総合 → file-backを提案
+- **「lint the wiki」** → 機械 + 意味チェックを実行し、結果を報告
+- **「what should I read next?」** → index.mdで薄いページ、ソースリンクのない孤立概念、未回答の疑問を確認
+- **「ingest this URL」** → web検索/取得でコンテンツを得て、クリーンなMarkdown版を raw/ に保存し、通常のingestとして進める
