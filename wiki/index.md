@@ -52,6 +52,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [伸びるに任せてから剪定](concepts/伸びるに任せてから剪定.md) — 議論やWikiの成長を自然に任せ後から整理する思想
 - [ChatGPT ProとLLM Wikiの併用](concepts/ChatGPT ProとLLM Wikiの併用.md) — クラウド側Deep ResearchとローカルLLM Wikiの使い分け
 - [一貫・網羅・頂点](concepts/一貫・網羅・頂点.md) — 安定性の3価値分解（min/union/max）。cross-run stability批判とAIランチエ分業
+- [AIランチエ](concepts/AIランチエ.md) — スペキュラトゥールが内部に持てる退屈な保守仕事をこなすAI。接地の衛生は渡せても境界監督と創発は渡せない
 - [複数のLLM Wikiに共通のインプット](concepts/複数のLLM Wikiに共通のインプット.md) — 同じ資料を複数Wikiに投入→異なる切り出し方が生まれる現象
 
 ## entities

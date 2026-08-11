@@ -49,3 +49,5 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-11] ingest | OKF (Open Knowledge Format) (raw/に4アーカイブ: nishio OKFとLLM Wiki + 一貫・網羅・頂点 + villagepump 2026/06/13 + stakiran gist。manifest追記。touched 8 pages: 1 source + 1 entity new (OKF) + 1 concept new (一貫・網羅・頂点) + Lint・研究課題更新 + index/log)
 
 ## [2026-08-11] file-back | nishioのOKF評価（query回答をanalyses/に保存: format層のみ標準化 + cross-run stability批判 + 撤回の内実はドメイン違い。index/log更新）
+
+## [2026-08-12] file-back | AIランチエ（query回答をconcepts/に保存: パレートのランチエ/スペキュラトゥール由来、接地の衛生の委譲と境界監督の落とし穴。index/log更新）
