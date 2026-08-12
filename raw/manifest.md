@@ -26,3 +26,5 @@
 - nishio/llm-wiki-about-nishio | 2026-08-12 | e6117d05432667968bd12947e059f36dfa8b75a8 | None | 個人成熟型LLM Wiki。自己紹介ページ更新が第一目的 | ~/git/llm-wiki-samples/llm-wiki-about-nishio
 - nishio/grasp | 2026-08-12 | a7ff7d339a610db02d7d5ee9651bbe9b89092ea3 | MIT | Code+Wikiハイブリッド。Cosenseデータ処理CLI + LLM Wiki | ~/git/llm-wiki-samples/grasp
 - takker99/AMME-2026S-report | 2026-08-12 | d3f10b83d9da1e24dd733e7aea88a2d0e1d237e1 | (private) | 研究レポートLLM Wiki。最薄AGENTS.md (1.9KB) | ~/git/AMME-2026S-report
+- takker99/BDL-2026S | 2026-08-12 | 42826ad5c20762ba27e1090269d91a945e2ec879 | (private) | 講義用LLM Wiki。330p/62K行の最大規模 | ~/git/BDL-2026S
+- nishio/llm-wiki-about-delite | 2026-08-12 | 4181dd42ff78d72a5e5a05512a59dc37d7ef97a2 | None | CLAUDE.mdのみ。43時間で停止。Quartz公開 | ~/git/llm-wiki-samples/llm-wiki-about-delite

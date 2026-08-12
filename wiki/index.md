@@ -106,4 +106,6 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [リポジトリ分析 llm-wiki-about-nishio](analyses/リポジトリ分析 llm-wiki-about-nishio.md) — パイロット1: 個人成熟型。目的駆動+purpose-hoist、徒歩レビュー、キーワード駆動ingest（6.4KB AGENTS.md, 48pages）
 - [リポジトリ分析 grasp](analyses/リポジトリ分析 grasp.md) — パイロット2: Code+Wikiハイブリッド型。SQLite-authority、マルチエージェント構成(.agents/+.claude/+skills/)、自動ship loop（12.5KB AGENTS.md, 49pages）
 - [リポジトリ分析 AMME-2026S-report](analyses/リポジトリ分析 AMME-2026S-report.md) — パイロット3: 研究レポート型・最薄AGENTS.md。AGENTS.md+SKILL.md二層設計、wikilink 0/frontmatter不使用で100ページ運用（1.9KB AGENTS.md, 100pages）
-- [パイロット分析 横断所見](analyses/パイロット分析 横断所見.md) — 3件の横断比較。AGENTS.mdサイズ決定要因、index/log配置2派、CLA.md管理3パターン、テンプレ草案claims検証
+- [パイロット分析 横断所見](analyses/パイロット分析 横断所見.md) — 5件の横断比較。AGENTS.mdサイズ決定要因、index/log配置2派、CLA.md管理4パターン、停止の2類型、テンプレ草案claims検証
+- [リポジトリ分析 BDL-2026S](analyses/リポジトリ分析 BDL-2026S.md) — パイロット4: 講義型・最大規模。330p/62K行、SSOT分配設計、concept-rename-mapping（15.8KB AGENTS.md, 330pages）
+- [リポジトリ分析 llm-wiki-about-delite](analyses/リポジトリ分析 llm-wiki-about-delite.md) — パイロット5: 逸脱・停止型。CLAUDE.mdのみ、43時間で完了、Quartz公開、init.txt+先行概念マッピング（7.5KB CLAUDE.md, 100+pages）
