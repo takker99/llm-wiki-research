@@ -101,3 +101,5 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [ingestにおける編み込みの実際](analyses/ingestにおける編み込みの実際.md) — 「1ソースが10〜15ページに触れる」の内実。新規作成と既存更新の両方が編み込みの構成要素
 - [ingestの監視頻度とソース数の2軸](analyses/ingestの監視頻度とソース数の2軸.md) — バッチIngestとnishio流の共通点は監視頻度軸。ソース数とは直交
 - [ingestステップの設計判断](analyses/ingestステップの設計判断.md) — AGENTS.md ingestステップの3改善提案の検証結果（subagent評価 + 判断）
+- [GitHubリポジトリ分析の方法論](analyses/GitHubリポジトリ分析の方法論.md) — 外部LLM Wiki repoの収集・分析方法論。発見層＋選択的アーカイブ、Template Analysis、設計空間マップ（status: tentatively-adopted）
+- [外部リポジトリ分析のリスクと罠](analyses/外部リポジトリ分析のリスクと罠.md) — 上記から分離。6+3類型の分析罠＋ライセンス倫理＋プロジェクト管理リスク＋リスクマトリクス（status: tentatively-adopted）

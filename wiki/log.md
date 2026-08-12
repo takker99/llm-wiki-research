@@ -51,3 +51,7 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-11] file-back | nishioのOKF評価（query回答をanalyses/に保存: format層のみ標準化 + cross-run stability批判 + 撤回の内実はドメイン違い。index/log更新）
 
 ## [2026-08-12] file-back | AIランチエ（query回答をconcepts/に保存: パレートのランチエ/スペキュラトゥール由来、接地の衛生の委譲と境界監督の落とし穴。index/log更新）
+
+## [2026-08-12] file-back | GitHubリポジトリ分析の方法論（subagent 3体との相談結果をanalyses/に保存。発見層+選択的アーカイブ、Template Analysis、設計空間マップ、リスク一覧。index/log更新）
+
+## [2026-08-12] split | 外部リポジトリ分析のリスクと罠（GitHubリポジトリ分析の方法論からリスク編を分離・拡充。6+3類型の分析罠、リスクマトリクス追加。親ページ・index/log更新）
