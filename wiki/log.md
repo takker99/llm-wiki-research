@@ -55,3 +55,5 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-12] file-back | GitHubリポジトリ分析の方法論（subagent 3体との相談結果をanalyses/に保存。発見層+選択的アーカイブ、Template Analysis、設計空間マップ、リスク一覧。index/log更新）
 
 ## [2026-08-12] split | 外部リポジトリ分析のリスクと罠（GitHubリポジトリ分析の方法論からリスク編を分離・拡充。6+3類型の分析罠、リスクマトリクス追加。親ページ・index/log更新）
+
+## [2026-08-12] file-back | パイロット分析4ページ（subagentによる3 repo並行分析 → 個別3ページ + 横断所見1ページ。nishio/llm-wiki-about-nishio + grasp + takker99/AMME-2026S-report。index/log更新）

@@ -17,3 +17,12 @@
 - nishio | 一貫・網羅・頂点 | https://scrapbox.io/nishio/一貫・網羅・頂点 | 2026-08-11 | sha256:c60dcb0ee867959d5b06be0ca160851b6b9c9027181fa00a36efcf3ec4e37a77 | raw/cosense/nishio/一貫・網羅・頂点-2026-08-11.md
 - villagepump | 2026/06/13（日記） | https://scrapbox.io/villagepump/2026/06/13 | 2026-08-11 | sha256:72bcf8386680d86cb5f977a9ae18d62555e10be1e870ba5095349f6fcad77a28 | raw/cosense/villagepump/2026-06-13-2026-08-11.md
 - gist (stakiran) | OKFとMetadata as Codeをめぐる考察 | https://gist.github.com/stakiran/be335dc48f8b55538063871005382fa1 | 2026-08-11 | sha256:e60ded0c4a0887369cc1cb94154019e7ef39e16a80e3ca376b2ce11f15fa1132 | raw/cosense/villagepump/stakiran-OKFとMetadata_as_Code-2026-08-11.md
+
+## GitHub repos（発見層）
+
+分析対象のLLM Wikiリポジトリ。cloneは `~/git/llm-wiki-samples/`（発見層）にあり、raw/にはコピーしていない。
+形式: `- <owner/repo> | <clone_date> | <commit_hash> | <license> | <description> | <local_path>`
+
+- nishio/llm-wiki-about-nishio | 2026-08-12 | e6117d05432667968bd12947e059f36dfa8b75a8 | None | 個人成熟型LLM Wiki。自己紹介ページ更新が第一目的 | ~/git/llm-wiki-samples/llm-wiki-about-nishio
+- nishio/grasp | 2026-08-12 | a7ff7d339a610db02d7d5ee9651bbe9b89092ea3 | MIT | Code+Wikiハイブリッド。Cosenseデータ処理CLI + LLM Wiki | ~/git/llm-wiki-samples/grasp
+- takker99/AMME-2026S-report | 2026-08-12 | d3f10b83d9da1e24dd733e7aea88a2d0e1d237e1 | (private) | 研究レポートLLM Wiki。最薄AGENTS.md (1.9KB) | ~/git/AMME-2026S-report

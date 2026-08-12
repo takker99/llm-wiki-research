@@ -103,3 +103,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [ingestステップの設計判断](analyses/ingestステップの設計判断.md) — AGENTS.md ingestステップの3改善提案の検証結果（subagent評価 + 判断）
 - [GitHubリポジトリ分析の方法論](analyses/GitHubリポジトリ分析の方法論.md) — 外部LLM Wiki repoの収集・分析方法論。発見層＋選択的アーカイブ、Template Analysis、設計空間マップ（status: tentatively-adopted）
 - [外部リポジトリ分析のリスクと罠](analyses/外部リポジトリ分析のリスクと罠.md) — 上記から分離。6+3類型の分析罠＋ライセンス倫理＋プロジェクト管理リスク＋リスクマトリクス（status: tentatively-adopted）
+- [リポジトリ分析 llm-wiki-about-nishio](analyses/リポジトリ分析 llm-wiki-about-nishio.md) — パイロット1: 個人成熟型。目的駆動+purpose-hoist、徒歩レビュー、キーワード駆動ingest（6.4KB AGENTS.md, 48pages）
+- [リポジトリ分析 grasp](analyses/リポジトリ分析 grasp.md) — パイロット2: Code+Wikiハイブリッド型。SQLite-authority、マルチエージェント構成(.agents/+.claude/+skills/)、自動ship loop（12.5KB AGENTS.md, 49pages）
+- [リポジトリ分析 AMME-2026S-report](analyses/リポジトリ分析 AMME-2026S-report.md) — パイロット3: 研究レポート型・最薄AGENTS.md。AGENTS.md+SKILL.md二層設計、wikilink 0/frontmatter不使用で100ページ運用（1.9KB AGENTS.md, 100pages）
+- [パイロット分析 横断所見](analyses/パイロット分析 横断所見.md) — 3件の横断比較。AGENTS.mdサイズ決定要因、index/log配置2派、CLA.md管理3パターン、テンプレ草案claims検証
