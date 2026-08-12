@@ -59,3 +59,5 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-12] file-back | パイロット分析4ページ（subagentによる3 repo並行分析 → 個別3ページ + 横断所見1ページ。nishio/llm-wiki-about-nishio + grasp + takker99/AMME-2026S-report。index/log更新）
 
 ## [2026-08-12] file-back | パイロット分析追加2件 + 横断所見更新（BDL-2026S: 最大規模330p + llm-wiki-about-delite: 43時間停止/CLAUDE.mdのみ/Quartz。横断所見を5件に拡張、停止の2類型・init.txtパターン・命名規則2派・grasp名目利用の乖離を追加。index/log/manifest更新）
+
+## [2026-08-12] file-back | パイロット発見のconcept化（5新規: purpose-hoist, 二層設計, 徒歩レビュー, 統合解説層, CLA.md管理 + 4更新: Schema, IndexとLog, スケーラビリティ, Post-ingestレビューにパイロット知見反映。index/log更新）

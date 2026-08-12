@@ -54,6 +54,11 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [一貫・網羅・頂点](concepts/一貫・網羅・頂点.md) — 安定性の3価値分解（min/union/max）。cross-run stability批判とAIランチエ分業
 - [AIランチエ](concepts/AIランチエ.md) — スペキュラトゥールが内部に持てる退屈な保守仕事をこなすAI。接地の衛生は渡せても境界監督と創発は渡せない
 - [複数のLLM Wikiに共通のインプット](concepts/複数のLLM Wikiに共通のインプット.md) — 同じ資料を複数Wikiに投入→異なる切り出し方が生まれる現象
+- [目的明示（purpose-hoist）](concepts/目的明示（purpose-hoist）.md) — AGENTS.md冒頭に第一目的を明示し迷走を防ぐ。about-nishioで発見
+- [AGENTS.md+SKILL.md二層設計](concepts/AGENTS.md+SKILL.md二層設計.md) — 操作手順をskillに委譲しAGENTS.mdを薄く保つ。AMMEで実証
+- [徒歩レビュー](concepts/徒歩レビュー.md) — 人間のレビュー負荷を最小化。AIがフィルタ→人間は違和感のみ。about-nishioで発見
+- [統合解説層（synthesis）](concepts/統合解説層（synthesis）.md) — 概念辞書の上のメタ層。素人向け入口。deliteが発明
+- [AGENTS.md=CLAUDE.md管理パターン](concepts/AGENTS.md=CLAUDE.md管理パターン.md) — コピー・分離・片方のみの4パターンと推奨
 
 ## entities
 
