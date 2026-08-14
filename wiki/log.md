@@ -176,3 +176,14 @@ ingestしたリンク概念をこのwikiの運用に取り込んだ。
 - 残存: `[[Low-background steel]]`、`[[LLMと盆栽]]` は意図的赤リンクとして放置（LLMと盆栽はrawソースあり、ingest候補）
 
 (touched 5 wiki pages: 1 new [fact-wiki-separation] + 4 existing updated [QueryとFile-back, リポジトリ分析 SMS-2026S-report, Wikiはワークショップ, Lint] + index/log、非wiki 2 files [lint.sh, AGENTS.md] )
+
+## [2026-08-14] adopt | MCP不採用・AGENTS.md+SKILL.md二層採用
+
+query: 「MicrosoftはMCP多用のガチガチ構成。本repoのテンプレートではMCPを採用せず、中間的立ち位置のAGENTS.md+SKILL.mdを採用したい。なぜなのか自分にめっちゃ質問を繰り返したうえでsubagentと相談検討して」の依頼で実施。自己質問8問（context圧迫の実体と定量・デメリット網羅・利点の代償・中間の正しさ・単層との差・固有リスク・表現の正確性・実験台の自己整合性）の後、subagent相談2往復。
+
+1往復目: microsoft/llmwikiのMCP 14ツール定義を実測 — 6.3KB≈1.6-2.0Kトークン/ターン常駐で**単独では軽微**（実害は集約環境・注意容量・キャッシュ無効化）。SKILL.mdもfrontmatter ~100トークン/skillが常駐（ゼロコストではない）。Agent Skillsは2025-12オープン標準化・40+プラットフォームで形式互換（発見パスのみ非標準、`.agents/`へ集約進行・Claude Codeのみ例外）。自己不整合ではないが「薄さはAMME由来の外部実証・自己適用は厚さ側のデータ点」と明文化が必要。1.9KBはスコープ限定で売りにしない。
+
+2往復目: 推奨構成 = 3層同梱（AGENTS.md 4-6KB自己完結 + `.agents/skills/llm-wiki/SKILL.md` + root `scripts/lint.sh`、GitHub Template Repository配布）。lint.shはskill内に移さない（skill非ロード環境から到達不能）。明示パス参照が主契約・auto-discoveryはボーナス。OpenAIがAGENTS.md+`.agents/skills/`+scripts構成を公式OSS運用に採用（文書+skill構成の実証）。
+
+決定: **MCPはデフォルト不採用・オプション追加可**。理由の複合化（context圧迫は単独軽微のため主理由から降格 → 集約環境での加算+セットアップ障壁+環境非依存維持+透明性+scripts/SKILL.mdでの代替可能性が主）。analyses/新規 + テンプレート草案ver.1にclaim#9+evidence追記 + 研究課題に自己適用実験TODO追加。index/log更新
+(touched 5 wiki pages: 1 new [MCP不採用とAGENTS.md+SKILL.md二層採用の根拠] + 3 existing updated [テンプレート草案ver.1, このWikiの目的と研究課題, index] + log)

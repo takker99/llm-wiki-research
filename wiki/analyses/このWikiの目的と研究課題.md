@@ -20,9 +20,11 @@
 - [ ] 配布形式はどうするか？（別リポジトリ / `template/` ディレクトリ / GitHub Template Repository / `npx create-llm-wiki` / その他）
   - 2026-08-14: 要件候補を追加 — テンプレートrepoは同一repo型の見本（dogfooding）でありながら、**wiki/部分が単独で取り出せる**ことを保証すべき（研究目的wikiはコード不要）。別repo参照型を選ぶユーザー向けにwork/の運用規定（[[Wikiとコードリポジトリの関係]]）も配布物に含めるか要検討
   - 2026-08-14: 先行実装の配布形式データ点 — [[Microsoft llmwiki]] は `.vsix`（拡張機能）+ npm（`@llmwiki/core`）+ MCP（`npx -y -p @llmwiki/core llmwiki-mcp`）の3経路で配布。操作層をソフトウェアとして同梱する方向 → [[リポジトリ分析 microsoft-llmwiki]]
+  - 2026-08-14: 操作層の配布構成の候補 — GitHub Template Repository + `.agents/skills/` 同梱（コピーだけで動く・Claude Codeのみ1コマンド）+ root `scripts/lint.sh` + `examples/demo-vault/`（完成サンプル）。→ [[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]
 - [ ] 既存の実装（Microsoft llmwiki、llm-wiki.app、各種CLIツール）との差別化は？
   - 2026-08-11: [[OKF]]（Google、2026-06-12発表）を追加。OKFは成果物（format）層のみの標準化で操作（足場）層を標準化しない（nishioの考察1）——テンプレートは操作層（AGENTS.md）を提供する点で差別化可能。赤リンクはOKFが許容・本wikiがエラー扱いという設計分岐もある（[[Lint]]）。詳細は [[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]
   - 2026-08-14: [[Microsoft llmwiki]] を分析（ingest完了）。3層構造は当wikiと同一（構造は普遍）で、差別化の軸は**操作層の実現手段**: Microsoftはツール（MCP 14ツール・`@wiki`・lint/status自動化）で自動化する方向、本テンプレートは文書（AGENTS.md指示）でツール非依存・選択自由を保つ方向。MicrosoftはGitHub Copilot必須（モデル依存）・UIがVS Code固定。→ [[操作層]]、[[リポジトリ分析 microsoft-llmwiki]]
+  - 2026-08-14: 操作層の実現手段を仮採用決定 — **MCPはデフォルト不採用・オプション追加可、AGENTS.md+SKILL.md+scripts/の文書構成で提供**。subagent相談2往復の検証（MCP 14ツール定義は実測1.6-2Kトークン/ターン常駐で単独軽微・集約環境で実害、Agent Skillsは2025-12オープン標準化、OpenAIが文書+skill構成を公式OSS採用）。→ [[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]
   - ⚠ 残TODO: llm-wiki.app・各種CLIツールの分析が未着手
 - [ ] Cosenseの設計原理をどう具体的なデフォルトに落とし込むか？
   - 2026-08-11: OKF議論から「同一の赤リンクを共有するページ群を2-hop関連として提示する」Cosenseの仮想ページ挙動を、lintの改善（エラーと発見の分離）として輸入する余地（[[Lint]]）
@@ -32,6 +34,7 @@
     - [[リポジトリ分析 grasp]]: リンクの4仕事（recall/attention/navigation/読者ケア）の層分離理論。come-from（用語-大域の1宣言で全出現をgather）でAI作ページの裸言及問題（AI default 裸）に対処
   - 追記すべき論点: 本wikiの[[Lint]]は現在broken-wikilink=エラー扱いだが、参照数分類（2+頁参照はinfo）に変更する余地。LLMが生成するページは元々リンク疎（AI default 裸）なので、wikilink強制より赤リンク許容＋come-from的gatherが向く可能性（要検証）
 - [ ] `AGENTS.md`はどこまで薄くできるか？ — **このwiki自身の存続が最小スキーマの実証になる**
+  - 2026-08-14: 明文化（subagent検証、[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]） — 本wikiの厚さ（AGENTS.md 8.7KB）は研究ルール=ドメイン知識が主成分で、操作手順のskill化だけでは薄まらない（BDL型）。薄さの実証はAMME（1.9KB）由来の**外部データ点**、自己適用は厚さ側のデータ点。TODO: 操作手順のみをskill化する自己適用実験で差分を計測
 - [ ] テンプレートは「人間が読む前提」の可読性設計（overview重視・辞書的消費への警鐘）か、read-optional設計か？ — [[理解のボトルネック]]（tsurubee）と[[読まれなくてよい中間産物]]（nishio）の対立。2026-08-11 ingestで顕在化。[[テンプレート草案ver.1]] claim#7の検証データ
 - [ ] 情報信頼性（[[LLM Wikiの作文リスク]]）にテンプレートはどう対処すべきか？
 
