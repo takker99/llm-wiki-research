@@ -126,4 +126,5 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [リポジトリ分析 microsoft-llmwiki](analyses/リポジトリ分析 microsoft-llmwiki.md) — 実装repo（ツール型）: VS Code拡張+MCP。3層の独立収束、7セクションAGENTS.mdテンプレート、lint 6分類、操作層のソフトウェア実装（status: tentatively-adopted）
 - [MCP不採用とAGENTS.md+SKILL.md二層採用の根拠](analyses/MCP不採用とAGENTS.md+SKILL.md二層採用の根拠.md) — MCPはデフォルト不採用・オプション追加可。実測（14ツール6.3KB≈1.6-2Kトークン常駐）+Agent Skills標準化+推奨構成（status: tentatively-adopted）
 - [リポジトリ分析 SMS-2026S-report](analyses/リポジトリ分析%20SMS-2026S-report.md) — パイロット6: 研究レポート型・grasp-backed。参照数分割lint（1頁=low-frequency / 2+頁=2-hop hubの種）、SQLite投影（182行 AGENTS.md, 128pages）
+- [配布形式の決定とテンプレートの動機](analyses/配布形式の決定とテンプレートの動機.md) — テンプレートの動機（お決まり経路の再発明防止・品質の揺れ対策）と配布形式の決定（template/コピペ・お膳立てがメイン）＋subagent相談の妥当性検証（status: tentatively-adopted）
 - [log.mdとgit logの分工](analyses/log.mdとgit logの分工.md) — 「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）

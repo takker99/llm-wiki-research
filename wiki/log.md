@@ -187,3 +187,14 @@ query: 「MicrosoftはMCP多用のガチガチ構成。本repoのテンプレー
 
 決定: **MCPはデフォルト不採用・オプション追加可**。理由の複合化（context圧迫は単独軽微のため主理由から降格 → 集約環境での加算+セットアップ障壁+環境非依存維持+透明性+scripts/SKILL.mdでの代替可能性が主）。analyses/新規 + テンプレート草案ver.1にclaim#9+evidence追記 + 研究課題に自己適用実験TODO追加。index/log更新
 (touched 5 wiki pages: 1 new [MCP不採用とAGENTS.md+SKILL.md二層採用の根拠] + 3 existing updated [テンプレート草案ver.1, このWikiの目的と研究課題, index] + log)
+
+## [2026-08-14] file-back | 配布形式の決定とテンプレートの動機
+
+ユーザーが動機（お決まり経路の再発明防止・llm-wiki.mdからの立ち上げ品質の揺れ対策）と配布形式（`template/`ディレクトリを新規wiki rootに手動コピペ・お膳立てがメイン）を提示。subagent相談2往復で妥当性検証し合意内容をanalyses/に保存。
+
+1往復目: コピペ方式は妥当だが「最終状態ファイルのコピー」であり「init指示のコピー」ではないことが条件（delite init.txt失敗例）。ドリフトは同期機構なしで許容+バージョン記載。研究repoの文言は絶対コピー禁止。形式例はインラインコードブロックのみ。npx create-llm-wiki却下。
+
+2往復目（反論4点: claim#7の2軸性・検証済みonlyの薄さ・複数LLM検証のコスト・customization pointsの矛盾）: ①claims対応表を「記述的検証×規範的決定」の2軸に（未決のままデフォルトは決められる）②「検証済みのみ焼き込み」は撤回・文種4分類（実証済み知見/お決まり経路/多数派デフォルト/研究repo固有）③v0.1検証は1モデル×2回+lint+構造diff（2 LLM×2目的はM2へ繰り下げ）④customization points撤回・設定事項0/記入事項1（purposeのみ）、variant guideへ移行。
+
+template/ v0.1の構成スケッチ（AGENTS.md 9セクション+README+lint.sh+raw/manifest.md+wiki空骨格）とbootstrap成功基準（Stage 0/1/2）も同ページに記録。研究課題の配布形式TODOに暫定採用+クローズ条件（M1/M2/M3）を追記。
+(touched 3 pages: 1 new [配布形式の決定とテンプレートの動機] + 1 existing updated [このWikiの目的と研究課題] + index/log)
