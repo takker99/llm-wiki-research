@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[パイロット分析 横断所見]]"
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 microsoft-llmwiki]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -35,6 +35,10 @@ Karpathy: "This works surprisingly well at moderate scale"
 | 説明付きテーブル | grasp (各エントリにdescription付き) |
 | HTMLテーブル | AMME (wikilinkバックリンクを代替) |
 | カテゴリ別大規模リスト | BDL (266概念を11カテゴリに分割、409行) |
+
+[[Microsoft llmwiki]] もH2カテゴリ（## Entities / ## Concepts / ## Sources）+ `- [Title](path) — summary #tag` の
+同一形式を独立実装（Karpathy/nishio系統と独立の収束）。log.mdも `## [YYYY-MM-DD] verb | subject` で当wikiと同一。
+→ [[リポジトリ分析 microsoft-llmwiki]]
 
 nishioの実測（[[LLM Wikiの実運用データ]]）:
 - 188ページでindexは約12K tokens = Opus 4.7の1.2%（問題ない）

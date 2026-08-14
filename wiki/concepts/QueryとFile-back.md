@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[リポジトリ分析 microsoft-llmwiki]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -35,6 +35,16 @@ tsurubeeの観察: LLM Wikiへのqueryは**自分がingestしたソースセッ�
 ## 読まれなくてよい中間産物
 
 Query回答やWikiページは[[読まれなくてよい中間産物|読まれなくてよい]]。読む主体が人間からLLMに移り、Queryが代わりに読む。要約は読まれるために作るが、LLM Wikiはqueryされるために作る。
+
+## 検索の実装例とfile-backの制度化（Microsoft llmwiki）
+
+[[Microsoft llmwiki]] はqueryを**weighted全文検索**（indexエントリの title 3x / summary 2x、本文 1x）として実装。
+「index.mdが個人規模で十分機能する」の実装版で、規模超過時はローカル検索ツールを足すupgrade pathを明言
+（[[IndexとLog]]、[[LLM Wikiのスケーラビリティ]]）。
+
+file-backはコマンド化・ページ種別化されている: `@wiki /save` チャットコマンド + `queries/` ディレクトリ +
+`type: query` ページ（original query・results_countをfrontmatterに保持）。
+→ file-backを「追加運用」でなく組み込み操作として設計する実例。[[操作層]]、[[リポジトリ分析 microsoft-llmwiki]]
 
 ## 当wikiでの実装
 

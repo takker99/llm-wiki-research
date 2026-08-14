@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[パイロット分析 横断所見]]"
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 microsoft-llmwiki]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -29,6 +29,16 @@ Karpathyの定義: 「LLMをしつけられたwiki保守者にするための鍵
 
 下限は約1.5KB。これ以下ではLLMが自力で構造を発明しなければならず一貫性が失われる。
 薄さの鍵は [[AGENTS.md+SKILL.md二層設計]] — 操作手順をskillに委譲し、AGENTS.mdをスキーマ定義書に純化する。
+
+### ガチガチ側の極: スターターテンプレート（Microsoft llmwiki）
+
+[[Microsoft llmwiki]] のinitコマンドは **7セクションのAGENTS.mdを自動生成**する
+（Page Types 5種 / Directory Structure / Frontmatter Schema（type+title必須）/ Naming Conventions /
+Ingest Workflow / Lint Rules / Cross-Referencing Guidelines、`packages/core/src/init.ts`）。
+prescriptiveな「スターターとして配られるschema」の実例。ただし「Starts minimal. Grows with use」と
+共進化前提である点はKarpathy/nishioと同じ。
+file-backを `queries/` ディレクトリ + `type: query` ページとしてページ種別に制度化している。
+→ [[リポジトリ分析 microsoft-llmwiki]]
 
 ## 目的明示
 

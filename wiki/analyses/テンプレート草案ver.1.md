@@ -16,6 +16,8 @@ claims:
 evidence:
   - "2026-08-11 query: concepts/entitiesの境界はrawソース群に定義なし（Karpathy gistは用語使用のみ・nishioは運用語のみ・villagepump L253-259は簡潔さポリシー）。入リンク実測でentityもハブ化（Obsidian 9, qmd 7, Marp 6）し、4分類は実質 sources/analyses/それ以外 の3分類＋ナビゲーション用タクソノミ"
   - "2026-08-11 ingest (tsurubee): claim#7（read-optional）への反証データ点。tsurubeeは人間が読んで理解することがボトルネックと主張し、概念ページを「自分が読み返したい形」に育てる。nishioの実践と正面対立（→ 理解のボトルネック）。未解決のopen questionとして研究課題に追加。一方、ミニマム構成サンプル（CLAUDE.md + 4スキル + vault/）はclaim#1（3層定義）の他実装例"
+  - "2026-08-14 microsoft-llmwiki照合（claim#2）: [[Microsoft llmwiki]]もEntities/Concepts/Sources/Queriesの4分類をinitで固定する初期固定型の実装例。indexの空カテゴリスケルトンを生成して分類を最初に固定する。本wikiの「実質3分類」観察（2026-08-11）と併せると、設計空間は「初期固定（Microsoft, Karpathy）vs 伸びてから剪定（nishio系）」の分岐として整理できる。→ [[リポジトリ分析 microsoft-llmwiki]]"
+  - "2026-08-14 microsoft-llmwiki照合（claim#4）: indexカタログ方式がKarpathy/nishio系と独立にソフトウェア実装された（weighted query: title 3x/summary 2x/body 1x、upgrade pathとしてローカル検索ツール追加を明言）。保守コスト対策としてlintにstale-entries（indexエントリの陳腐化=error）とindex-completeness（掲載漏れ=warning）を分離。→ [[リポジトリ分析 microsoft-llmwiki]]"
 superseded_by:
 ---
 

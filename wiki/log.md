@@ -142,3 +142,12 @@ query: 「git管理下ならcommit messageで操作履歴を賄えlog.md不要�
 ## [2026-08-14] refactor | log.mdエントリ形式の変更
 
 見出しを `## [DATE] action | 短い題名` に短縮し、詳細は本文（body）に移動。rendering時の見づらさ解消。既存エントリは情報を保持したまま再整形（追記専用の例外として明示的に実施）。`grep "^## \["` によるパースは引き続き可能。AGENTS.mdのフォーマット仕様2箇所・analyses/log.mdとgit logの分工の推奨文案を更新
+
+## [2026-08-14] ingest | microsoft-llmwiki
+
+「Microsoft製のLLM Wiki製品repoをingestしてほしい」の依頼で実施。運用repo5件とは異なる**実装repo（ツール型）**として分析。cloneは発見層 ~/git/llm-wiki-samples/microsoft-llmwiki@b44df6ae（raw/コピーなし・ユーザー選択）。抽出した知見: 3層アーキテクチャの独立収束（index/log形式も当wikiとほぼ同一）、init生成の7セクションAGENTS.mdテンプレート（ガチガチ側の極）、lint 6分類（stale-entries/index-completeness）、weighted query（title 3x/summary 2x/body 1x）、操作層の完全ソフトウェア実装（MCP 14ツール・@wiki /save）、Copilot依存。研究課題「既存の実装との差別化」「配布形式」のTODOにデータ点を追加。
+(touched 9 pages: 3 new [リポジトリ分析 microsoft-llmwiki / 操作層 / Microsoft llmwiki] + 6 existing updated [3層アーキテクチャ, Schema, Lint, QueryとFile-back, IndexとLog, バッチIngest, 横断所見, 研究課題] + index/log)
+
+## [2026-08-14] file-back | microsoft-llmwikiの草案への落とし込み候補
+
+query「microsoft/llmwikiからテンプレート草案づくりに有用な手法は？」の回答をfile-back。有用5点: lintのstale-entries/index-completeness分離、weighted query（title 3x/summary 2x/body 1x）、init scaffold最小セット、queries/+type:queryのfile-back制度化、MCP write系安全検証の執筆規約への翻訳。不採用: 7セクション全量・slugify・.wiki/埋め込み・Copilot依存。テンプレート草案ver.1のclaims#2/#4にevidence追記（Microsoftもinitで4分類固定＝初期固定型の分岐、index方式の独立実装+保守コスト対策）。リポジトリ分析ページに落とし込み候補セクション追加。index/log更新

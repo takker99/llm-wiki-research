@@ -57,6 +57,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [複数のLLM Wikiに共通のインプット](concepts/複数のLLM Wikiに共通のインプット.md) — 同じ資料を複数Wikiに投入→異なる切り出し方が生まれる現象
 - [目的明示（purpose-hoist）](concepts/目的明示（purpose-hoist）.md) — AGENTS.md冒頭に第一目的を明示し迷走を防ぐ。about-nishioで発見
 - [AGENTS.md+SKILL.md二層設計](concepts/AGENTS.md+SKILL.md二層設計.md) — 操作手順をskillに委譲しAGENTS.mdを薄く保つ。AMMEで実証
+- [操作層](concepts/操作層.md) — wikiへの操作を定義・実現する層。文書型（AGENTS.md指示）vs ツール型（MCP/拡張）。OKFが標準化しない層
 - [徒歩レビュー](concepts/徒歩レビュー.md) — 人間のレビュー負荷を最小化。AIがフィルタ→人間は違和感のみ。about-nishioで発見
 - [統合解説層（synthesis）](concepts/統合解説層（synthesis）.md) — 概念辞書の上のメタ層。素人向け入口。deliteが発明
 - [AGENTS.md=CLAUDE.md管理パターン](concepts/AGENTS.md=CLAUDE.md管理パターン.md) — コピー・分離・片方のみの4パターンと推奨
@@ -88,6 +89,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [Codex Mobile](entities/Codex Mobile.md) — OpenAIのモバイルコーディングエージェント
 - [OKF](entities/OKF.md) — GoogleのOpen Knowledge Format。markdown+frontmatterのオープン仕様。データカタログ由来でformat層のみ標準化
 - [赤リンクの数の議論のLLM Wiki](entities/赤リンクの数の議論のLLM Wiki.md) — 複数人議論からAIが整理したLLM Wiki
+- [Microsoft llmwiki](entities/Microsoft%20llmwiki.md) — Microsoft製のLLM Wiki製品。VS Code拡張+MCPサーバ。操作層のツール型実装の先鋭例
 
 ## sources
 
@@ -116,4 +118,5 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [パイロット分析 横断所見](analyses/パイロット分析 横断所見.md) — 5件の横断比較。AGENTS.mdサイズ決定要因、index/log配置2派、CLA.md管理4パターン、停止の2類型、テンプレ草案claims検証
 - [リポジトリ分析 BDL-2026S](analyses/リポジトリ分析 BDL-2026S.md) — パイロット4: 講義型・最大規模。330p/62K行、SSOT分配設計、concept-rename-mapping（15.8KB AGENTS.md, 330pages）
 - [リポジトリ分析 llm-wiki-about-delite](analyses/リポジトリ分析 llm-wiki-about-delite.md) — パイロット5: 逸脱・停止型。CLAUDE.mdのみ、43時間で完了、Quartz公開、init.txt+先行概念マッピング（7.5KB CLAUDE.md, 100+pages）
+- [リポジトリ分析 microsoft-llmwiki](analyses/リポジトリ分析 microsoft-llmwiki.md) — 実装repo（ツール型）: VS Code拡張+MCP。3層の独立収束、7セクションAGENTS.mdテンプレート、lint 6分類、操作層のソフトウェア実装（status: tentatively-adopted）
 - [log.mdとgit logの分工](analyses/log.mdとgit logの分工.md) — 「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）

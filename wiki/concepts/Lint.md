@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[リポジトリ分析 microsoft-llmwiki]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -37,6 +37,16 @@ AGENTS.mdでは機械チェックと意味チェックに分類:
 4. 重大度別報告 + 機械的問題の自動修正提案
 
 スクリプト: `bash scripts/lint.sh`
+
+## 機械lintの実装例（Microsoft llmwiki）
+
+[[Microsoft llmwiki]] の `lintWiki` は6カテゴリをソフトウェア実装:
+broken-links（error）/ **stale-entries**（error: indexエントリ→削除ファイル）/
+orphan-pages（warning）/ **index-completeness**（warning: index未掲載）/
+missing-pages（info: 参照のみで未作成）/ frontmatter-validation。
+当wikiの機械チェックにない分類は **stale-entries**（indexエントリの陳腐化検出）と
+**index-completeness**（index掲載漏れの分離）で、機械チェック拡張の参考になる。
+→ [[リポジトリ分析 microsoft-llmwiki]]
 
 ## 赤リンク論争（OKF §9との対比）
 
