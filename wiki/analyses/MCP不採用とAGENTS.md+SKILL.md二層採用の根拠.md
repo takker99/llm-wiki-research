@@ -9,7 +9,7 @@ sources: "[[リポジトリ分析 microsoft-llmwiki]]", "[[AGENTS.md+SKILL.md二
 
 ## 決定の要旨
 
-本テンプレートの[[操作層]]は、MCPサーバ等のツールではなく **AGENTS.md + SKILL.md + scripts/ の文書構成**で提供する。
+本テンプレートの[[操作層]]は、MCPサーバ等のツールではなく **AGENTS.md + skill（SKILL.md + 同梱スクリプト）の文書構成**で提供する。
 MCPは**デフォルト不採用・オプション追加可**（[[LLM WikiテンプレートのOptionality]]哲学に整合。絶対に使わない、ではない）。
 
 - 参照点: [[リポジトリ分析 microsoft-llmwiki]]（MCP 14ツール+VS Code拡張のガチガチ構成）
@@ -45,8 +45,8 @@ microsoft/llmwikiはMCPサーバ14ツール + VS Code拡張 + npmパッケージ
 
 ### 2往復目（配布の具体化）
 
-- **推奨構成（3層同梱）**: AGENTS.md（4-6KB自己完結・常時行動内蔵 ※Quick Operations内蔵は2026-08-14に見直し、[[AGENTS.md+SKILL.md二層設計]]参照）+ `.agents/skills/llm-wiki/SKILL.md`（完全手順）+ root `scripts/lint.sh`（決定的実行）。GitHub Template Repositoryとして配布し、クローンだけでopencode/Codex/Cursor/Geminiでskill有効（Claude Codeのみ1コマンド）
-- **lint.shはskill内に移さない**: root直下+自己相対パス方式を継承（skill非ロード環境から到達不能になるため）。grasp（root `scripts/` + skill）が実証前例
+- **推奨構成**: AGENTS.md（4-6KB自己完結・常時行動内蔵 ※Quick Operations内蔵は2026-08-14に見直し、[[AGENTS.md+SKILL.md二層設計]]参照）+ `.agents/skills/llm-wiki/SKILL.md`（完全手順）+ skill同梱の決定スクリプト（`.agents/skills/llm-wiki-lint/scripts/lint.sh`）。GitHub Template Repositoryとして配布し、クローンだけでopencode/Codex/Cursor/Geminiでskill有効（Claude Codeのみ1コマンド）
+- **lint.shは対応するskillのディレクトリ内に同梱**（2026-08-14改訂。下記「改訂: スクリプトの配置」参照）。手順（SKILL.md）と決定スクリプトの凝集性が高まり、汎用root `scripts/`名前空間の衝突（既存コードrepoへの埋め込み時のdev用スクリプトとの混在・`scripts/lint.sh`の曖昧さ）を避ける。grasp（root `scripts/` + skill）は実証前例のままだが、配置の規範ではない
 - **明示パス参照が主契約**: AGENTS.mdに「`.agents/skills/llm-wiki/SKILL.md` を読め。ロードできない場合はファイルを直接読め」と書く。auto-discoveryはボーナス、トリガー構文（`$skill`等）はクライアント方言なのでオプション
 - **1.9KBは売りにしない**: AMMEの1.9KBはドメイン薄型（数学レポート・raw 5ファイル）の特殊条件。二層の価値は**メンテナンス性**（手順編集が基幹スキーマを汚さない・人間がAGENTS.mdをスキーマとしてレビュー可能・形式は標準化済み）で主張し、context削減はボーナス表記にとどめる
 - **決定打**: OpenAI自身がAGENTS.md+`.agents/skills/`+scripts構成を公式OSS運用（openai-agents-python/js）に採用。文書+skill構成が世界最大級で検証済み
@@ -72,7 +72,7 @@ llm-wiki-template/                # GitHub Template Repository
 ├── .agents/skills/llm-wiki/      # 第2層: 完全手順（Ingest/Query/Lint/File-back）
 │   ├── SKILL.md
 │   └── references/
-├── scripts/lint.sh               # 決定的実行（root直下・自己相対パス方式）
+├── .agents/skills/llm-wiki-lint/scripts/lint.sh  # 決定的実行（skill同梱・自己相対パス方式）
 ├── wiki/                         # 空カテゴリスケルトン + index/log/overview
 ├── raw/.gitkeep
 ├── examples/demo-vault/          # 完成サンプル（10-15ページ）
@@ -80,13 +80,13 @@ llm-wiki-template/                # GitHub Template Repository
 ```
 
 3層ともrepoに同梱・コミット済み（配布物の単一性）。AGENTS.md単体でも完全運用可能（フォールバック）。
-lint.shはskillの有無と無関係に動作。
+lint.shは明示パス参照によりskillロードの有無と無関係に実行可能。
 
 ※2026-08-14見直し: 「AGENTS.md単体でも完全運用可能」の保険（Quick Operationsサマリ）は不要と判断（Agent Skillsのオープン標準化でskill非対応環境が消滅。[[2026-08-14 opencode Agent Skills仕様]]）。AGENTS.mdの役割は「常時行動 + スキーマ + 明示パス参照1行」に純化。分担基準は [[AGENTS.md+SKILL.md二層設計]] 参照。
 
 ## 残課題
 
-- [ ] 自己適用実験: 本wikiの操作手順のみをskill化し差分を計測（[[このWikiの目的と研究課題]]にTODO化）
+- [ ] 自己適用実験: 本wikiの操作手順のみをskill化し差分を計測（[[このWikiの目的と研究課題]]にTODO化。※lintは2026-08-14に実施済み: 手順を`.agents/skills/llm-wiki-lint/SKILL.md`へ・スクリプトを同ディレクトリへ移動。ingest等の他操作は未実施）
 - [ ] MCP版設計指針（どの検証を機械化するか）は需要が生じたらdocs/DESIGN.mdへ
 - [ ] llm-wiki.app・各種CLIツールの分析（既存TODO）— SKILL併用6事例のサーベイでlucasastorian/llmwiki（808★・MCP-native）とPratiyush/llm-wiki（229★・16 lint規則のコード化）が候補として判明（[[リポジトリ分析 SKILL併用6事例]]）
 
@@ -97,7 +97,16 @@ lint.shはskillの有無と無関係に動作。
 - **SKILLの起動トリガーをhookに移すD型（toolboxmd）**はプラットフォーム固定を許容する実装に限られ、汎用テンプレートの「文書（description frontmatter）+ 明示パス参照」方針（2往復目で決定）と整合
 - **Astro-Han（1.9k★）が「MCP servers, UIs, output subsystems — outside the boundary of a tool-agnostic skill」「hooks belong to the agent harness」をDesign Boundariesで明言**。本決定と同一の線引きを独立収束で採用
 - **ivankuznetsovはskillがQMDのMCPツールを呼ぶ併用で実運用成功**。「デフォルト不採用・オプション追加可」の拡張パスが具体例として確認できた。docs/DESIGN.mdに一節書く際の実例に
-- **全6実装が「検証・決定的実行はコード（scripts/CLI）、手順はskill」**を共通採用。本推奨構成（lint.shをroot直下に置きskillから独立）の独立収束
+- **全6実装が「検証・決定的実行はコード（scripts/CLI）、手順はskill」**を共通採用。本推奨構成（決定スクリプトを保持）の独立収束。配置は6事例がroot `scripts/`で本wikiはskill内同梱に改訂（2026-08-14）——分担原則は配置を規定しない
+
+## 2026-08-14改訂: lint.shの配置をskill内同梱に変更
+
+初期決定（2往復目）の「lint.shはskill内に移さない」を撤回し、`.agents/skills/llm-wiki-lint/scripts/lint.sh`へ移動した（本wiki + template 両方に自己適用）。
+
+- **撤回の根拠**: 初期決定は「skill非ロード環境から到達不能」を理由に挙げたが、これはauto-discoveryとfile-reachabilityの混同だった。同一決定内で「明示パス参照が主契約」と宣言しており、AGENTS.mdがパスを明示すればスクリプトはskillロードの有無と無関係にファイルとして実行可能（`bash .agents/skills/llm-wiki-lint/scripts/lint.sh`）
+- **新配置の利点**: ①手順（SKILL.md）と決定スクリプトの凝集性（lint.shの出力解釈はSKILL.mdに定義） ②root `scripts/`名前空間の解放——既存コードrepoに埋め込む場合のdev用スクリプトとの衝突・`scripts/lint.sh`の曖昧さを回避 ③skill単位の移植性
+- **6事例との関係**: 「検証・決定的実行はコード」の分担原則は維持（配置を規定しない）。6事例のroot `scripts/`配置は記述的な観察であり規範ではない
+- 初期決定の文言は「撤回」としてこの節に記録（バイアス顕在化）。log.md 2026-08-14エントリも参照
 
 ## 関連
 

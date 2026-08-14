@@ -53,7 +53,7 @@ status: hypothesis
 
 index.md必須維持。ただし地位を「手書きの登録簿」から「キャッシュ可能な導出ビュー」へ移行させる:
 
-1. **lintにstale-entries追加**（✅ 実装済み: `scripts/lint.sh`・`template/scripts/lint.sh`）: 「indexエントリが指すファイルが存在しない」を検出（%20等のURLエンコードをデコードして判定）。現行の「indexに載っていないページ」（index-completeness）と合わせて両方向をカバー。Microsoftがerror/warningで実装済み（[[リポジトリ分析 microsoft-llmwiki]]）。これで登録作業の失敗は静かに起きず、検出可能なエラーになる（[[事前にやろうとしない運用哲学]]に整合）
+1. **lintにstale-entries追加**（✅ 実装済み: `.agents/skills/llm-wiki-lint/scripts/lint.sh`・`template/.agents/skills/llm-wiki-lint/scripts/lint.sh`。2026-08-14にroot `scripts/`から移動）: 「indexエントリが指すファイルが存在しない」を検出（%20等のURLエンコードをデコードして判定）。現行の「indexに載っていないページ」（index-completeness）と合わせて両方向をカバー。Microsoftがerror/warningで実装済み（[[リポジトリ分析 microsoft-llmwiki]]）。これで登録作業の失敗は静かに起きず、検出可能なエラーになる（[[事前にやろうとしない運用哲学]]に整合）
 2. **「indexはキャッシュ」宣言**（✅ 実装済み: `template/AGENTS.md`執筆の機械要件 + 本wiki `AGENTS.md`）: 「index.mdはページから導出可能なビューのキャッシュ。陳腐化・欠損時はLLMがページ冒頭を読んで再生成してよい（lintが検証）」。スクリプト不要（ビルド依存を作らない＝文書構成主義 claim#9 に整合）、決定性維持（Query時はまずindexを読む）。Cosenseの「登録不要で自動」をツールなしでLLMの能力で実現する形
 3. **生成型indexのvariant guide提示**（❌ 撤回・不採用 2026-08-14）: 一旦 `template/VARIANTS.md`（frontmatter要約+生成スクリプト方式とトレードオフの改変事例集）として作成したが、人間の判断で削除。「改変は自由（starter kit）」宣言がある以上、**改変の仕方は各wikiのagentが自分で考えればよく、改変事例集は不要**。生成型indexのトレードオフ分析自体は本ページの検証メモに残る。デフォルト化の反証（frontmatter必須化が「任意」原則と衝突、AMME反証、ビルド実行忘れという新種の陳腐化、要約のエディトリアル性喪失、日本語パスエンコーディング罠）は有効なまま
 

@@ -85,7 +85,7 @@ Quick Operations Summaryを保険として残すことで、skillがない環境
    - 例: ingest
    - 理由: 「ingestして」のような明示トリガーのある操作は発動が確実にマッチする。手順を毎ターン常駐させるコストを払う価値がない
 3. **交差点 → AGENTS.mdに1行のポリシー**（例: lintの「いつ実行するか」はAGENTS.md、実行手順はSKILL.md）
-4. **機械チェック → scripts/lint.sh**。[[リポジトリ分析 SKILL併用6事例]]の全6実装が「検証・決定的実行はコード」で一致
+4. **機械チェック → skill同梱の決定スクリプト**（本wiki: `.agents/skills/llm-wiki-lint/scripts/lint.sh`）。[[リポジトリ分析 SKILL併用6事例]]の全6実装が「検証・決定的実行はコード」で一致（配置は6事例がroot `scripts/`、本wikiは2026-08-14からskill内に改訂: 手順と一体の凝集性・汎用`scripts/`名前空間の衝突回避。[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]参照）
 
 ### skillロードの仕様（[[2026-08-14 opencode Agent Skills仕様]]）
 

@@ -327,3 +327,15 @@ query: 「index.mdは本当に必要か？Cosenseの思想ではindexは筋悪�
 
 前エントリで作成した `template/VARIANTS.md`（生成型indexの改変事例集）を削除し、READMEの言及もrevert。理由（人間の判断）: 「改変は自由（starter kit）」宣言がある以上、**改変の仕方は各wikiのagentが自分で考えればよく、改変事例集を配布する必要はない**。生成型indexのトレードオフ分析は[[index.md存廃の設計判断]]の検証メモに残存。1・2（stale-entries・「indexはキャッシュ」宣言）は有効のまま
 (touched 2 pages: 1 existing updated [index.md存廃の設計判断] + template/VARIANTS.md削除 + README.md revert + log)
+
+## [2026-08-14] refactor | lint.shをskillディレクトリ内へ移動（記録済み決定の撤回）
+
+query: 「templateにscripts/lint.shがあるけど、.agents/skills/llm-wiki-lint/に移していいのでは？rootに置く意味が薄い」→ 記録済み決定（2026-08-14 adopt: 「lint.shはskill内に移さない」）の撤回議論を経て、**本wiki + template 両方に自己適用**（人間が「template + root自己適用」を選択）。
+
+- **撤回の根拠**: 旧決定の理由「skill非ロード環境から到達不能」はauto-discoveryとfile-reachabilityの混同。同一決定内の「明示パス参照が主契約」と矛盾——AGENTS.mdがパスを明示すれば、スクリプトはskillロードの有無と無関係にファイルとして実行可能
+- **新配置の利点**: ①手順（SKILL.md）と決定スクリプトの凝集性（lint.shの出力解釈はSKILL.mdに定義されている） ②root `scripts/`名前空間の解放（既存コードrepoに埋め込む場合のdev用スクリプトとの衝突・`scripts/lint.sh`の曖昧さを回避） ③skill単位の移植性
+- **6事例との関係**: 「検証・決定的実行はコード」の分担原則は維持（配置は規定しない）。6事例のroot `scripts/`配置は記述的な観察であり規範ではない
+- 実装: 本wiki + template のlint.shを `.agents/skills/llm-wiki-lint/scripts/` へ移動（自己相対パスを `../../../wiki` に修正）、本wiki AGENTS.mdのLintセクションをスキル委譲に書き換え（手順は `.agents/skills/llm-wiki-lint/SKILL.md` 新規に移管。root初のskill）、template lint SKILL.mdのパス参照を更新
+- 自己適用実験の部分着手: lint操作のskill化（[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]残課題TODOに記録。ingest等の他操作は未実施）
+
+(touched 8 pages: 7 existing updated [MCP不採用とAGENTS.md+SKILL.md二層採用の根拠, 配布形式の決定とテンプレートの動機, このWikiの目的と研究課題, Lint, AGENTS.md+SKILL.md二層設計, リポジトリ分析 SKILL併用6事例, index.md存廃の設計判断] + log + 非wiki [本wiki AGENTS.md, .agents/skills/llm-wiki-lint/SKILL.md 新規, lint.sh×2移動, template lint SKILL.md])

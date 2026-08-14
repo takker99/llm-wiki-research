@@ -76,7 +76,7 @@ ivankuznetsov: CLAUDE.mdで重要なのは **「Always check wiki/ before answer
 
 - **scripts/（コード）に外出し**: Astro-Han（`check_evidence.py`でGrounding Invariant検証）、toolboxmd（`bin/wiki` + validator）、jackwener（CLI検索・グラフ）
 - **skill手順内のみ**: vanillaflava・micuintus（lintは手順として書く）
-- 観察: **検証・決定的実行はコード、手順・判断基準はskill**という分担が規模の大きい実装で共通。本wikiの「scripts/lint.sh + skill手順」構成と一致（[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]の推奨構成の独立収束）。
+- 観察: **検証・決定的実行はコード、手順・判断基準はskill**という分担が規模の大きい実装で共通。分担は本wikiと一致（[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]）。ただし**配置は分岐**: 6事例はroot `scripts/`、本wikiは2026-08-14からskill内同梱（`.agents/skills/llm-wiki-lint/scripts/lint.sh`）に改訂——手順との凝集性・汎用`scripts/`名前空間の衝突回避が理由で、分担原則は維持したままの配置変更
 
 ## 比較軸4: 自動化（hooks）の位置づけ
 

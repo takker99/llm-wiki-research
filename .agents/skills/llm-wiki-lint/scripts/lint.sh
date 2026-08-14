@@ -1,10 +1,10 @@
 #!/bin/bash
 # Simple lint script for LLM Wiki.
 # Checks for orphan pages, broken wikilinks, and index consistency.
-# Run with: bash scripts/lint.sh
+# Run with: bash .agents/skills/llm-wiki-lint/scripts/lint.sh
 
 set -euo pipefail
-WIKI_DIR="$(dirname "$0")/../wiki"
+WIKI_DIR="$(dirname "$0")/../../../../wiki"
 
 echo "=== LLM Wiki Lint ==="
 echo ""

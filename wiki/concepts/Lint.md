@@ -36,7 +36,7 @@ AGENTS.mdでは機械チェックと意味チェックに分類:
 3. 新しい調査課題とソースの提案
 4. 重大度別報告 + 機械的問題の自動修正提案
 
-スクリプト: `bash scripts/lint.sh`
+スクリプト: `bash .agents/skills/llm-wiki-lint/scripts/lint.sh`（[[AGENTS.md+SKILL.md二層設計]]のskill同梱構成。参考: [[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]）
 
 ## 機械lintの実装例（Microsoft llmwiki）
 
@@ -67,7 +67,7 @@ missing-pages（info: 参照のみで未作成）/ frontmatter-validation。
 
 BDL-2026Sの明文化（AGENTS.md）: 「Do not treat unresolved wikilink references as a TODO list. In Scrapbox/Cosense style, red links are a feature... Do not create a page for a 1-page reference.」。SMS-2026S-reportは「unresolvedはbrokenではない、全て実参照」「2+頁参照=2-hop hubの種」とlintコメントに明記。
 
-**当wikiでの実装（2026-08-14）**: `scripts/lint.sh` に参照数分類を導入（1頁= B R O K E N / 2+頁= ASPECT_HANDLE、エイリアス解決、インラインコード除外）。AGENTS.mdのLintセクション・執筆要件にも「赤リンクは許容」を明文化。lint結果の`[[fact-wiki-separation]]`（3頁参照=ASPECT_HANDLE）が概念ページ化された最初の事例。
+**当wikiでの実装（2026-08-14）**: 参照数分類を導入（1頁= B R O K E N / 2+頁= ASPECT_HANDLE、エイリアス解決、インラインコード除外）。スクリプトはroot `scripts/lint.sh`から`.agents/skills/llm-wiki-lint/scripts/lint.sh`へ同日移動（llm-wiki-lint skill同梱。[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]の改訂）。AGENTS.mdのLintセクション・執筆要件にも「赤リンクは許容」を明文化。lint結果の`[[fact-wiki-separation]]`（3頁参照=ASPECT_HANDLE）が概念ページ化された最初の事例。
 
 graspの理論的裏付け（[[リポジトリ分析 grasp]]）: リンクにはrecall / attention / navigation / 読者ケアの4仕事があり、Cosenseはsubstrate制約で全部を1つのlinkに束ねている。recallをlinkの外へ出せば、linkは必須（infrastructure）から任意（editorial）に変わる。**書き手がAI化するほど裸言及が増える**（AI default 裸）ので、wikilink強制より赤リンク許容＋come-from（用語-大域の1宣言で全出現をgather）が向く可能性がある。
 
