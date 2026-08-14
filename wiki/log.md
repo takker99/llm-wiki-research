@@ -221,3 +221,15 @@ template/ v0.1の構成スケッチ（AGENTS.md 9セクション+README+lint.sh+
 ## [2026-08-14] file-back | AGENTS.mdとSKILL.mdの分担基準
 
 人間との設計議論をfile-back。常時行動（queryの作法・file-back提案・lint発動ポリシー）はAGENTS.md、トリガー操作（ingest）はSKILL.md、機械チェックはscripts/の3分解。opencode仕様（[[2026-08-14 opencode Agent Skills仕様]]、raw/にアーカイブ+manifest追記）からskillロードはagentの自律判断＝LLMの想起依存と判明し、常時行動をskillに置くと信頼性が落ちる根拠に。トリガー表・保険サマリは不要（2025-12-18オープン標準化で非対応環境消滅）、明示パス参照1行のみ残す。 (touched 6 pages: 1 new source + 3 existing updated + index/log)
+
+## [2026-08-14] adopt | v0.1スコープ決定（二層構成・対象範囲・規範のみ原則）
+
+「そろそろtemplateを作れるだけの議論が整ったか」のsubagent相談2往復（外部コンサル2往復）の結果を決定として記録。結論: 議論はv0.1作成水準に達している。事前決定3点:
+
+1. **v0.1は二層構成（skill同梱）で作る。単層自己完結案は撤回** — 単層の根拠だった「配布管理コスト」はGitHub Template Repository（別repo前提）時代の論点で、コピペ方式では消滅。分担基準（skill必須同梱・保険サマリ不要）は配布スケッチより後発決定（log.md順で確認）。二層は最もエビデンスの強い構成要素（AMME実証・jackwener独立収束・6事例全件）で、M2検証の一回性から後回しにできない
+2. **claims対応表の骨組み作成**（[[claims対応表]]）— 9 claims × 2軸（記述的検証×規範的决定）の追跡器。確信度タグとしてv0.1執筆の迷いを消す
+3. **対象範囲: ビジネス/チーム系以外** — 個人・研究・読書・プロジェクト（開発）系が実証経路（パイロット6件中5件+grasp）。プロジェクト系固有要素（コードrepo・attribution・Qバックログ）は構造の外の追加物で留保不要。ビジネス/チーム系のみvariant guide（実証なし）。スコープ限定はREADMEに明示（暗黙の限定はサイレント離脱を生む）
+
+**執筆原則: templateは規範のみ** — 「こうする」という指示だけを書き、検証状態・エビデンス・根拠・動機は一切書かない（「動機不記載」の一般化）。実証されているかは研究wikiの領分であり、templateを使う側のwikiにとってはどうでもいい。
+
+(touched 5 pages: 1 new [claims対応表] + 2 existing updated [配布形式の決定とテンプレートの動機, このWikiの目的と研究課題] + index/log)
