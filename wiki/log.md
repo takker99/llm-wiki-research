@@ -302,3 +302,8 @@ query: 「conceptsはatomicに保ち、追記ではなくページそのもの�
 
 整合のため設計思想リストを3箇所同時更新: root README.md（設計思想セクションに2項目追加）+ claims対応表starter kit原則 + 配布形式の決定とテンプレートの動機
 (touched 3 pages: 2 existing updated [claims対応表, 配布形式の決定とテンプレートの動機] + README.md + template/ 2ファイル修正 + log)
+
+## [2026-08-14] file-back | 書き換え原則の適用外
+
+query: 「統合した書き換えではなく追記が適しているパターンは？」→ 判別軸は状態vs出来事。概念（状態）は書き換え、時系列の蓄積（出来事）は追記。具体例: log.md・日記（[[IndexとLog]]・[[日記とLLM Wikiの併用]]）、履歴が価値のページ（nishio実Wikiの## Updates追記、[[リポジトリ分析 llm-wiki-about-nishio]]）、人間の手が入った領域。注釈: 追記も永続せず蓄積の後に整理（書き換え）が来る（villagepump L226の1日単位の切り取り）。[[fact-wiki-separation]]に「書き換え原則の適用外」節として追記
+(touched 2 pages: 1 existing updated [fact-wiki-separation] + index/log)

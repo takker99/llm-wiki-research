@@ -13,7 +13,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [永続Wikiと複利効果](concepts/永続Wikiと複利効果.md) — RAGとの対比。知識が蓄積し複利で効く「compounding artifact」
 - [3層アーキテクチャ](concepts/3層アーキテクチャ.md) — raw/（入場時凍結）→ wiki/（LLM管理）→ Schema（AGENTS.md）の基本構造。不変性は入場時の誓約へ再解釈
 - [Schema（AGENTS.md）](concepts/Schema（AGENTS.md）.md) — 3層目の設定ドキュメント。LLMをwiki保守者に仕立てる鍵
-- [fact-wiki-separation](concepts/fact-wiki-separation.md) — Wikiをsource of truthにしない。書き換え自由の担保と簡潔さの維持
+- [fact-wiki-separation](concepts/fact-wiki-separation.md) — Wikiをsource of truthにしない。書き換え自由の担保と簡潔さの維持。書き換え原則の適用外（時系列・履歴・人間の記録は追記）
 - [Ingest](concepts/Ingest.md) — 3基本操作の1つ。raw/ソースを読みwikiに統合するプロセス
 - [QueryとFile-back](concepts/QueryとFile-back.md) — 質問応答＋回答のwiki化。探索の蓄積が複利効果を生む
 - [Lint](concepts/Lint.md) — wikiの健全性チェック。矛盾検出＋新調査課題の提案
