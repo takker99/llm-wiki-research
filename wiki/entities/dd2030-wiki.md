@@ -1,5 +1,7 @@
 ---
-sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
+sources:
+  - "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
+  - "[[2026-08-14 Wikiとコードリポジトリの関係 (nishio)]]"
 ---
 
 # dd2030-wiki
@@ -10,7 +12,7 @@ sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 
 - SlackログとGitHubの両方を読めるLLM Wiki
 - 過去の経緯をAIがAgentic Retrievalで再構成（半年後の「このページなんだっけ？」に回答）
-- リポジトリをrawの中にcloneして分析（[[Wiki駆動開発]]の先駆例）
+- リポジトリをrawの中にcloneして分析（[[Wikiとコードリポジトリの関係]]の別repo参照型の先駆例で、[[Wiki駆動開発]]に発展した起点）
 
 ## 経緯再構成の事例
 
@@ -18,6 +20,7 @@ sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 
 ## 関連概念
 
+- [[Wikiとコードリポジトリの関係]] — 別repo参照型の起源
 - [[Wiki駆動開発]]
 - [[研究目的Wikiとプロジェクト目的Wiki]] — プロジェクト目的の典型
 - [[コンテキスト外部化の歴史]]

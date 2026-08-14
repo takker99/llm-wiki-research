@@ -18,6 +18,7 @@
 - [ ] ディレクトリ構成のベストプラクティスは？
   - 2026-08-11時点の考察: concepts/entitiesの境界はrawソース群（Karpathy gist・nishio・villagepump）のどこにも定義がない。villagepumpの表（`villagepump-AIを使った知識マネジメント.md` L253-259）は「簡潔さの強さ」のポリシーであって分類定義ではない。入リンク実測でもentityがハブ化する（Obsidian 9, qmd 7, Marp 6）が、最上位ハブは概念が独占。4分類は実質「sources / analyses / それ以外」の3分類＋ナビゲーション用タクソノミと言える。→ [[テンプレート草案ver.1]] claim#2のevidenceに追記
 - [ ] 配布形式はどうするか？（別リポジトリ / `template/` ディレクトリ / GitHub Template Repository / `npx create-llm-wiki` / その他）
+  - 2026-08-14: 要件候補を追加 — テンプレートrepoは同一repo型の見本（dogfooding）でありながら、**wiki/部分が単独で取り出せる**ことを保証すべき（研究目的wikiはコード不要）。別repo参照型を選ぶユーザー向けにwork/の運用規定（[[Wikiとコードリポジトリの関係]]）も配布物に含めるか要検討
 - [ ] 既存の実装（Microsoft llmwiki、llm-wiki.app、各種CLIツール）との差別化は？
   - 2026-08-11: [[OKF]]（Google、2026-06-12発表）を追加。OKFは成果物（format）層のみの標準化で操作（足場）層を標準化しない（nishioの考察1）——テンプレートは操作層（AGENTS.md）を提供する点で差別化可能。赤リンクはOKFが許容・本wikiがエラー扱いという設計分岐もある（[[Lint]]）。詳細は [[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]
 - [ ] Cosenseの設計原理をどう具体的なデフォルトに落とし込むか？

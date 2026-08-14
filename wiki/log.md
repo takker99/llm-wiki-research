@@ -61,3 +61,9 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-12] file-back | パイロット分析追加2件 + 横断所見更新（BDL-2026S: 最大規模330p + llm-wiki-about-delite: 43時間停止/CLAUDE.mdのみ/Quartz。横断所見を5件に拡張、停止の2類型・init.txtパターン・命名規則2派・grasp名目利用の乖離を追加。index/log/manifest更新）
 
 ## [2026-08-12] file-back | パイロット発見のconcept化（5新規: purpose-hoist, 二層設計, 徒歩レビュー, 統合解説層, CLA.md管理 + 4更新: Schema, IndexとLog, スケーラビリティ, Post-ingestレビューにパイロット知見反映。index/log更新）
+
+## [2026-08-14] ingest | Wikiとコードリポジトリの関係（nishio cosense: 勉強会「中にコードリポジトリを持つパターン」+ kouchou-ai-developer-wikiページ。raw/に1アーカイブ追加 + manifest追記。touched 6 pages: 1 source new + 1 concept new (Wikiとコードリポジトリの関係) + 3 existing updated (Wiki駆動開発, dd2030-wiki, 研究目的Wikiとプロジェクト目的Wiki) + index/log）。内容: 同一repo型vs別repo参照型の対比、SSOTの所在、raw 1ページあたりwiki<1の量的観察、「AIが読む想定」、記憶の外部化が目的
+
+## [2026-08-14] review | 目的↔repo型の対応を検証（subagent相談2往復で「知識の蓄積→別repo参照型・成果物管理→同一repo型」の対応を検証 → 不成立と判定。反証例: grasp/BDL-2026S=知識蓄積+同一repo、dd2030-wiki=成果物管理+別repo。代替基準: コードの有無→生まれ方→知識の向き（wiki=SSOTか）→公開性。新規立ち上げは同一repoがデフォルト。concepts/Wikiとコードリポジトリの関係.md を改訂: 比較表更新 + 含意節の4段階選択 + work/運用規定追加（stalenessは防ぐのではなく記録する）。index/log更新）
+
+## [2026-08-14] file-back | repo型の知見を4ページに分散（1: 概念ページに「読む主体はrepo型を決めない」「目的軸とrepo型軸は直交」を追記。2: リポジトリ分析BDL-2026Sに分類ラベル補正（主目的=知識蓄積の同一repo型反証例）。3: 研究課題に配布形式の要件「wiki/単独で取り出せる」を追記。4: 横断所見に#12「分類ラベルは目的ラベルでありrepo型ラベルではない」を追加。index/log更新）

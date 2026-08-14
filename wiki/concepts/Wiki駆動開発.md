@@ -5,7 +5,7 @@ tags: [template-design, llm-wiki-pattern]
 
 # Wiki駆動開発
 
-LLM Wikiの内部にソースコードリポジトリを持ち、Wikiを開発知識の外部記憶として活用するパターン。nishioが複数のWikiで実践。
+LLM Wikiの内部にソースコードリポジトリを持ち、Wikiを開発知識の外部記憶として活用するパターン。nishioが複数のWikiで実践。コード本体は別repoのまま保持され、wiki repoはwork/にcloneして参照する（別repo参照型。同一repo型との対比は[[Wikiとコードリポジトリの関係]]）。
 
 ## 構造
 
@@ -28,6 +28,7 @@ wiki/     — 両方から抽出されたwhy/whatの知識
 
 ## 関連概念
 
+- [[Wikiとコードリポジトリの関係]] — 同一repo型vs別repo参照型の対比とSSOT
 - [[Coding Agentの歴史とLLM Wikiの位置づけ]] — このパターンが位置する歴史段階
 - [[研究目的Wikiとプロジェクト目的Wiki]] — プロジェクト目的Wikiの典型
 - [[コンテキスト外部化の歴史]] — 知識の外部化の流れ

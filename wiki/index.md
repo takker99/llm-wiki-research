@@ -36,6 +36,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [LLM Wikiの実運用データ](concepts/LLM Wikiの実運用データ.md) — 25 Wiki/1647ページの定量データ。個人系が最も育つ
 - [Coding Agentの歴史とLLM Wikiの位置づけ](concepts/Coding Agentの歴史とLLM Wikiの位置づけ.md) — 6段階の進化史。Agent Skillsの一般化としてのLLM Wiki
 - [Wiki駆動開発](concepts/Wiki駆動開発.md) — Wiki内にコードリポジトリを持ち開発知識を外部化するパターン
+- [Wikiとコードリポジトリの関係](concepts/Wikiとコードリポジトリの関係.md) — 同一repo型vs別repo参照型。SSOTの所在と「AIが読む想定」のwiki
 - [コンテキスト外部化の歴史](concepts/コンテキスト外部化の歴史.md) — PLAN.md→Devin Knowledge→Agent Skills→LLM Wikiの系譜
 - [LLM Wikiの本質定義](concepts/LLM Wikiの本質定義.md) — 文脈情報をファイル化しindexで分割、AI自身がメンテナンスする仕組み
 - [適切な切り出し方はニーズが明らかになった後に決まる](concepts/適切な切り出し方はニーズが明らかになった後に決まる.md) — コピーだからオリジナル破壊なし。後から最適な整理が可能
@@ -95,6 +96,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)](sources/2026-08-11%20KarpathyのLLM%20Wiki勉強会%20(nishio).md) — nishioの講義資料。20+ Wiki実運用データ、Wikis-as-personas、Coding Agent史
 - [2026-08-11 OKFとLLM Wiki (nishio+villagepump)](sources/2026-08-11%20OKFとLLM%20Wiki%20(nishio+villagepump).md) — OKFの正体・format層vs操作層・赤リンク論争・一貫・網羅・頂点
 - [2026-08-11 KarpathyのLLM Wikiを1ヶ月運用してわかった繋げる力 (tsurubee)](sources/2026-08-11%20KarpathyのLLM%20Wikiを1ヶ月運用してわかった繋げる力%20(tsurubee).md) — 1ヶ月運用報告。要約どまりだが「理解のボトルネック」でnishioと対立、ミニマム構成サンプルあり
+- [2026-08-14 Wikiとコードリポジトリの関係 (nishio)](sources/2026-08-14%20Wikiとコードリポジトリの関係%20(nishio).md) — 別repoのコードをwiki repoから参照してingestする方式（wiki-driven workflow）
 
 ## analyses
 
