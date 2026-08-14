@@ -286,3 +286,8 @@ query: 「ingestとfile-backはrawから抽出かログから抽出かの違い�
 5. **AGENTS.md肥大化は既存知見で解決済みと確認** — BDL 15.8KBの原因はドメイン知識（skillで吸収不可）、解決はvanillaflava Cパターン（外部スキーマファイル分離、ver.2採用検討）。v0.1はvariant guide候補に維持
 
 (touched 3 pages: 2 existing updated [配布形式の決定とテンプレートの動機, README.md] + template/ 4ファイル修正 + log)
+
+## [2026-08-14] file-back | overviewの役割
+
+query: 「overview.mdの役割は？Karpathyの原型にはなかったのでは」→ 検証結果: 原型（gist）の特殊ファイルはindex/logのみで、overviewは本wikiの初期コミットでの独自発明。ただし機能（人間向けの入門の1枚）はnishio実測12.6%・vanillaflava Home/Overviewに元ネタあり。人間向けの入口ページとして位置づけ、concepts/新規作成。index/log更新のほか、理解のボトルネック・このWikiの目的と研究課題にリンク追加
+(touched 3 pages: 1 new [overviewの役割] + 2 existing updated [理解のボトルネック, このWikiの目的と研究課題] + index/log)
