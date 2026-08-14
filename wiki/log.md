@@ -233,3 +233,8 @@ template/ v0.1の構成スケッチ（AGENTS.md 9セクション+README+lint.sh+
 **執筆原則: templateは規範のみ** — 「こうする」という指示だけを書き、検証状態・エビデンス・根拠・動機は一切書かない（「動機不記載」の一般化）。実証されているかは研究wikiの領分であり、templateを使う側のwikiにとってはどうでもいい。
 
 (touched 5 pages: 1 new [claims対応表] + 2 existing updated [配布形式の決定とテンプレートの動機, このWikiの目的と研究課題] + index/log)
+
+## [2026-08-14] adopt | 検証方針改訂 — determinism撤回・育成評価へ
+
+人間の指摘でQAゲートを改訂。「Stage 1: 同一モデル×2回の決定性」は撤回（再現性は目的ではない。揺れ対策の狙いは「いまいちな方向に進まない」方向付けであり、効果はbootstrap時点で測れず育ったwikiでしか評価できない）。新方針: 立ち上げスモークはM2 wikiが兼ねる（バグは立ち上げ時に自明）、主たる検証は「templateで外部wikiを立ち上げ育て、ある程度大きくなったらこのrepoが読んで評価」— 既存のGitHubリポジトリ分析方法論を適用し、結果をv0.2へフィードバック。confoundは外部リポジトリ分析のリスクと罠のフレームで扱う。旧Stage 0/1/2・構造diff・log形式一致は廃止。
+(touched 2 pages: 2 existing updated [配布形式の決定とテンプレートの動機, このWikiの目的と研究課題] + log)

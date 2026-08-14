@@ -20,7 +20,7 @@
 - [ ] 配布形式はどうするか？（別リポジトリ / `template/` ディレクトリ / GitHub Template Repository / `npx create-llm-wiki` / その他）
   - 2026-08-14: 要件候補を追加 — テンプレートrepoは同一repo型の見本（dogfooding）でありながら、**wiki/部分が単独で取り出せる**ことを保証すべき（研究目的wikiはコード不要）。別repo参照型を選ぶユーザー向けにwork/の運用規定（[[Wikiとコードリポジトリの関係]]）も配布物に含めるか要検討
   - 2026-08-14: 先行実装の配布形式データ点 — [[Microsoft llmwiki]] は `.vsix`（拡張機能）+ npm（`@llmwiki/core`）+ MCP（`npx -y -p @llmwiki/core llmwiki-mcp`）の3経路で配布。操作層をソフトウェアとして同梱する方向 → [[リポジトリ分析 microsoft-llmwiki]]
-  - 2026-08-14: **暫定採用: `template/` ディレクトリ（手動コピペ）** — 動機（お決まり経路の再発明防止 + 立ち上げ品質の揺れ対策）と妥当性検証は [[配布形式の決定とテンプレートの動機]]。クローズ条件: M1 template/ v0.1作成 → M2 外部fresh wikiでのboot成功 → M3 別repo切り出し。`npx create-llm-wiki`は操作層のツール化（Microsoft方向）と反するため、外部利用者の実績が出るまで却下維持
+  - 2026-08-14: **暫定採用: `template/` ディレクトリ（手動コピペ）** — 動機（お決まり経路の再発明防止 + 立ち上げ品質の揺れ対策）と妥当性検証は [[配布形式の決定とテンプレートの動機]]。クローズ条件: M1 template/ v0.1作成 → M2 外部wikiをtemplateで立ち上げ**育て**、このrepoが読んで評価（[[GitHubリポジトリ分析の方法論]]適用。bootstrapの決定性は検証目的ではない）→ M3 別repo切り出し。`npx create-llm-wiki`は操作層のツール化（Microsoft方向）と反するため、外部利用者の実績が出るまで却下維持
   - 2026-08-14: 操作層の配布構成 — **v0.1は二層構成（AGENTS.md + `.agents/skills/` 同梱 + root `scripts/lint.sh`）**（コピーだけで動く・Claude Codeのみパス参照1行）。GitHub Template RepositoryはM3（別repo切り出し）の候補に繰り下げ。v0.1スコープ決定（二層・対象範囲・規範のみ原則）は [[claims対応表]] と [[配布形式の決定とテンプレートの動機]]
 - [ ] 既存の実装（Microsoft llmwiki、llm-wiki.app、各種CLIツール）との差別化は？
   - 2026-08-11: [[OKF]]（Google、2026-06-12発表）を追加。OKFは成果物（format）層のみの標準化で操作（足場）層を標準化しない（nishioの考察1）——テンプレートは操作層（AGENTS.md）を提供する点で差別化可能。赤リンクはOKFが許容・本wikiがエラー扱いという設計分岐もある（[[Lint]]）。詳細は [[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]
