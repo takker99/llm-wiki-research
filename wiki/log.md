@@ -254,6 +254,16 @@ M1達成。事前決定（v0.1スコープ決定）を実装に落とした。
 
 (touched 3 pages: 2 existing updated [配布形式の決定とテンプレートの動機, claims対応表] + template/ 15ファイル新規 + log)
 
+## [2026-08-14] file-back | ingestとfile-backの反映方法の同型性
+
+query: 「ingestとfile-backはrawから抽出かログから抽出かの違いで、反映方法は同じでは？」の検証をsubagent相談2往復で実施。結論: 設計思想レベルで正しい（gist L13/L39: 複利は同型、nishio L240定義+L222実践=新規+既存更新の複数ページ編み込み）。本当の違いはソースの性質・義務性・grounding契約・動機の4点のみ。頻度制御=非対称維持・実行深さ=軽同型の2軸分解を採用。template/AGENTS.mdのFile-back節に実行契約の欠損を実地確認（研究wikiのstep5よりさらに欠損）。analyses/新規 + concepts/QueryとFile-back.mdに注記（「このログ」=会話ログ）+ 当wiki実装の更新 + index/log更新
+(touched 3 pages: 1 new [ingestとfile-backの反映方法の同型性] + 1 existing updated [QueryとFile-back] + index/log)
+
+## [2026-08-14] refactor(agents) | file-backに実行契約を追加
+
+研究wiki AGENTS.md Query step5とtemplate/AGENTS.md File-back節に「既存ページへのwikilink・明らかに影響を受けるページの更新・矛盾の明示・index/log更新」を追加（ingestの実行契約の軽量版。頻度制御の非対称は維持。フィルタ規則は追加せず人間ゲートに委任）
+(touched 2 files: AGENTS.md + template/AGENTS.md + log)
+
 ## [2026-08-14] refactor | template v0.1レビュー反映（README移動・メタ文言削除・frontmatter委譲）
 
 人間のtemplateレビュー指摘4点を反映:

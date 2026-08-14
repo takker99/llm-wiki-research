@@ -137,3 +137,4 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [配布形式の決定とテンプレートの動機](analyses/配布形式の決定とテンプレートの動機.md) — テンプレートの動機（お決まり経路の再発明防止・品質の揺れ対策）と配布形式の決定（template/コピペ・お膳立てがメイン）＋subagent相談の妥当性検証（status: tentatively-adopted）
 - [claims対応表](analyses/claims対応表.md) — 草案ver.1の9 claims × 2軸（記述的検証×規範的决定）の追跡器。v0.1スコープ決定（二層構成・対象範囲・規範のみ原則）
 - [log.mdとgit logの分工](analyses/log.mdとgit logの分工.md) — 「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）
+- [ingestとfile-backの反映方法の同型性](analyses/ingestとfile-backの反映方法の同型性.md) — 両者は同じ編み込み操作。差はソースの性質と頻度制御のみ。実行は軽同型、templateのFile-back実行契約欠損を是正（status: tentatively-adopted）

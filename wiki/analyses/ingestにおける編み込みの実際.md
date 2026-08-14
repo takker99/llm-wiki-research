@@ -69,3 +69,4 @@ nishioの `複数のLLM Wikiに共通のインプット` にあるMindTrellis論
 - [[2026-08-11 Karpathy LLM Wiki Gist]] — 「10〜15ページ」の原典
 - [[事前にやろうとしない運用哲学]] — 検証省略の哲学
 - [[LLM Wikiは要約の改良版ではない]] — 編み込みの対極（単発要約）
+- [[ingestとfile-backの反映方法の同型性]] — file-backにも同型の編み込みが起きる（3層波及構造の適用）

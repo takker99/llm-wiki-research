@@ -26,6 +26,8 @@ nishioの実践ではfile-backの3パターンがある:
 2. AI側から「file backしましょうか？」と提案
 3. 人間が「このログにfile backすべき知見はある？」と聞く
 
+※ nishioの「このログ」とは会話ログ（チャット履歴）のこと。wikiの `log.md`（追記専用の操作タイムライン）とは別物。
+
 ## スコープ閉鎖性（tsurubeeの実践）
 
 tsurubeeの観察: LLM Wikiへのqueryは**自分がingestしたソースセットだけ**を根拠に答える。汎用LLMの「世の中の研究一般」を題材にした浅く広い回答と違い、自分のキュレーションにスコープが閉じることで「狭いぶん深く、自分の問題意識に密着した」回答になる。回答は`wiki/queries/`に残り、次のqueryやingestが参照できる（チャット履歴に消えていた合成結果の資産化）。
@@ -53,7 +55,7 @@ AGENTS.mdのQueryフロー:
 2. 有望なページを読み、wikilinkを辿る
 3. `[[wikilink]]`引用付きで回答
 4. 回答後「これをwikiページとしてfile-backする？」と提案
-5. 承諾されたら analyses/ か concepts/ に作成、index/logを更新
+5. 承諾されたら analyses/ か concepts/ に作成し、関連する既存ページへのwikilinkを張る。明らかに影響を受ける既存ページがあればリンク・記述を更新し、矛盾があれば明示。index/logも更新
 
 ## 関連操作
 
@@ -63,3 +65,4 @@ AGENTS.mdのQueryフロー:
 - [[読まれなくてよい中間産物]] — read-optionalの理論的根拠
 - [[複数のLLM Wikiに共通のインプット]] — 複数Wikiへの並列Query
 - [[繋げる力]] — query結果がwikiに残ることで生まれる横断的価値
+- [[ingestとfile-backの反映方法の同型性]] — file-backもingest同様の編み込み操作であることの検証
