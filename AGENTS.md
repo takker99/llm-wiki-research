@@ -44,7 +44,7 @@ wiki/
   analyses/   — 分析・比較・総合ページ。長くなってよい。
 
   index.md    — 全ページのカタログ。各エントリ1行。Query時は最初に読む。
-  log.md      — 追記専用のタイムライン。各エントリ: `## [DATE] action | detail`
+  log.md      — 追記専用のタイムライン。各エントリ: 見出し `## [DATE] action | 短い題名` + 詳細は本文。
   overview.md — エントリーポイント。このwikiの俯瞰図。
 ```
 
@@ -61,7 +61,7 @@ wiki/
    - 既存の主張と矛盾する場合は明示する: 「⚠ Contradiction: [旧主張] vs [新ソース]」
    - 新規の概念・実体があれば概念ページを作成
 5. `index.md` を更新（新ページ追加、変更された要約の更新）。
-6. `log.md` に追記: `## [DATE] ingest | source-name (touched N pages: M new + K existing updated + index/log)`
+6. `log.md` に追記: 見出し `## [DATE] ingest | source-name` + 本文に `(touched N pages: M new + K existing updated + index/log)`
 
 `raw/` のファイルは絶対に変更・削除しない。人間が明示的に依頼した場合のみ削除してよい。
 
