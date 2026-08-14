@@ -43,7 +43,7 @@ template/ v0.1執筆時の確信度タグ（この記述はエビデンスで裏
 
 ## v0.1スコープ（対象範囲）
 
-- **templateはstarter kit**（2026-08-14決定）: 継承すべきは設計思想（3層・raw/不変・indexカタログ・file-back習慣）だけ。ディレクトリ構成・形式・手順・文言はプロジェクトに応じて**自由に改変すべきもの**。改変はdriftではなく適応。templateにversion番号等の自己言及メタ文言は置かない。この宣言は配布側root README + template/AGENTS.mdの冒頭で明示
+- **templateはstarter kit**（2026-08-14決定）: 継承すべきは設計思想（3層・raw/不変・追記ではなく書き換える・conceptsはatomic・indexカタログ・file-back習慣）だけ。ディレクトリ構成・形式・手順・文言はプロジェクトに応じて**自由に改変すべきもの**。改変はdriftではなく適応。templateにversion番号等の自己言及メタ文言は置かない。この宣言は配布側root README + template/AGENTS.mdの冒頭で明示
 - **実証経路: 個人・研究・読書・プロジェクト（開発）系** — パイロット6件中5件が研究・講義・個人系、graspがプロジェクト系（code+wikiハイブリッド）の実証。プロジェクト系固有要素（コードrepo接続・attribution・Qバックログ）はtemplateに含めずユーザー側 or variant guide（wiki駆動開発の留保は不要: 追加要素は構造の外にあり3層を壊さない）
 - **ビジネス/チーム系はvariant guide** — 複数人・承認フロー・レビューループの実証なし。構造的差異が大きい
 - 汎用性は構造側で担保（Optionality・purpose-hoist・禁止事項の不在）。**スコープ限定は配布側root READMEに明示**（暗黙の限定はサイレント離脱を生む）

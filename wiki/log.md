@@ -291,3 +291,14 @@ query: 「ingestとfile-backはrawから抽出かログから抽出かの違い�
 
 query: 「overview.mdの役割は？Karpathyの原型にはなかったのでは」→ 検証結果: 原型（gist）の特殊ファイルはindex/logのみで、overviewは本wikiの初期コミットでの独自発明。ただし機能（人間向けの入門の1枚）はnishio実測12.6%・vanillaflava Home/Overviewに元ネタあり。人間向けの入口ページとして位置づけ、concepts/新規作成。index/log更新のほか、理解のボトルネック・このWikiの目的と研究課題にリンク追加
 (touched 3 pages: 1 new [overviewの役割] + 2 existing updated [理解のボトルネック, このWikiの目的と研究課題] + index/log)
+
+## [2026-08-14] file-back | templateに書き換え原則とconcepts atomicを反映
+
+query: 「conceptsはatomicに保ち、追記ではなくページそのものを書き換える」話の所在確認 → raw源を検証し2話の隣接を特定（villagepump L253-260: concepts/強く簡潔（atomic）/リンクハブの簡潔さポリシー + L244: nishio「source of truthがあると追記追記になってしまう」）。[[Wikiはワークショップ]]・[[fact-wiki-separation]]にfile-back済みだったため新規ページなし。これをtemplate v0.1に反映（人間の承認済み・A+B+C全部）:
+
+1. **A: template/AGENTS.md冒頭** — 設計思想リストに「追記ではなく書き換える・conceptsはatomic」を追加
+2. **B: template/AGENTS.md執筆の機械要件** — 「wiki/のページは追記ではなく書き換えで更新（raw/がsource of truthなので書き換え・削除は自由）」「concepts/はatomicに保つ（肥大化したら株分け提案）」「ページタイプ別簡潔さの目安（concepts強く簡潔/entities簡潔/sources中程度/analyses長め可）」の3行
+3. **C: ingest SKILL.md手順4** — 「追記ではなく既存記述と新ソースを統合して書き直す」を明示
+
+整合のため設計思想リストを3箇所同時更新: root README.md（設計思想セクションに2項目追加）+ claims対応表starter kit原則 + 配布形式の決定とテンプレートの動機
+(touched 3 pages: 2 existing updated [claims対応表, 配布形式の決定とテンプレートの動機] + README.md + template/ 2ファイル修正 + log)

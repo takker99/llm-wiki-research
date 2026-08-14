@@ -19,7 +19,7 @@ description: ソースをwikiに統合する。ユーザーが「このPDF/URL/�
 3. 人間と3-5つの要点を議論する。何を重視するか聞く
 4. ページを作成・更新:
    - `wiki/sources/YYYY-MM-DD タイトル.md` を作成（要約 + 関連concept/entityへのリンク + `raw/` へのリンク。frontmatter形式は下記）
-   - 影響を受ける concepts/ と entities/ のページを更新（リンク追加、記述更新）
+   - 影響を受ける concepts/ と entities/ のページを更新（リンク追加、記述更新）。**追記ではなく書き換え**で: 既存の記述を残したまま足すのではなく、既存記述と新ソースを統合して書き直す。concepts/はatomicに保つ
    - 既存の主張と矛盾する場合は明示する: 「⚠ Contradiction: [旧主張] vs [新ソース]」
    - 新規の概念・実体があれば概念ページを作成
 5. `wiki/index.md` を更新（新ページ追加、変更された要約の更新）
