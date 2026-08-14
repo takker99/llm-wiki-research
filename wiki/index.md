@@ -11,7 +11,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 
 - [LLM Wiki](concepts/LLM Wiki.md) — LLMが永続的なMarkdown wikiを段階的に構築・保守するパターン全体
 - [永続Wikiと複利効果](concepts/永続Wikiと複利効果.md) — RAGとの対比。知識が蓄積し複利で効く「compounding artifact」
-- [3層アーキテクチャ](concepts/3層アーキテクチャ.md) — raw/（不変）→ wiki/（LLM管理）→ Schema（AGENTS.md）の基本構造
+- [3層アーキテクチャ](concepts/3層アーキテクチャ.md) — raw/（入場時凍結）→ wiki/（LLM管理）→ Schema（AGENTS.md）の基本構造。不変性は入場時の誓約へ再解釈
 - [Schema（AGENTS.md）](concepts/Schema（AGENTS.md）.md) — 3層目の設定ドキュメント。LLMをwiki保守者に仕立てる鍵
 - [Ingest](concepts/Ingest.md) — 3基本操作の1つ。raw/ソースを読みwikiに統合するプロセス
 - [QueryとFile-back](concepts/QueryとFile-back.md) — 質問応答＋回答のwiki化。探索の蓄積が複利効果を生む
@@ -104,7 +104,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [nishioのOKF評価](analyses/nishioのOKF評価.md) — OKFはformat層のみ標準化・cross-run stabilityは創発を殺す・本質はドメイン違い
 - [テンプレート草案ver.1](analyses/テンプレート草案ver.1.md) — テンプレート仮説ver.1（claims一覧 + 原文へのポインタ `6c821c1:AGENTS.md`、status: hypothesis）
 - [Cosenseソースのingest方式](analyses/Cosenseソースのingest方式.md) — Cosense（nishio/villagepump）のingest方式3案と仮採用セット（status: tentatively-adopted）
-- [rawディレクトリの取り扱い](analyses/rawディレクトリの取り扱い.md) — gitignoreの動機と二面性・発見層とrawの分離・manifest.md（status: tentatively-adopted、一部open question）
+- [rawディレクトリの取り扱い](analyses/rawディレクトリの取り扱い.md) — gitignoreの動機と二面性・発見層とrawの分離・manifest.md・不変性の3機能と入場時の誓約・コーパスモード（status: tentatively-adopted、一部open question）
 - [ingestにおける編み込みの実際](analyses/ingestにおける編み込みの実際.md) — 「1ソースが10〜15ページに触れる」の内実。新規作成と既存更新の両方が編み込みの構成要素
 - [ingestの監視頻度とソース数の2軸](analyses/ingestの監視頻度とソース数の2軸.md) — バッチIngestとnishio流の共通点は監視頻度軸。ソース数とは直交
 - [ingestステップの設計判断](analyses/ingestステップの設計判断.md) — AGENTS.md ingestステップの3改善提案の検証結果（subagent評価 + 判断）

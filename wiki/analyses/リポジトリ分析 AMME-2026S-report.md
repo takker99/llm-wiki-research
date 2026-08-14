@@ -50,7 +50,7 @@ AGENTS.mdが1.9KBと極限的に薄いが、wiki/に100ページ・785リンク�
 
 | セクション | 行数 | 内容 |
 |---|---|---|
-| 三層アーキテクチャ | 6行 | raw/・wiki/・AGENTS.md 定義 |
+| 三層アーキテクチャ | 6行 | `raw/`と`wiki/`と`AGENTS.md`の定義 |
 | ディレクトリ構造 | 2行 | 一覧 |
 | ページ規約 | 3行 | kebab-case英語、日本語見出し、`source:`行 |
 | コミット規約 | 2行 | Conventional Commits |

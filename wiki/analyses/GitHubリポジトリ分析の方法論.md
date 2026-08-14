@@ -38,7 +38,7 @@ subagent 3体との相談（2026-08-12）に基づく。
 - `description`（なぜ分析対象にしたか）
 - `copied_files`（raw/にコピーしたファイルリスト、または「発見層のみ」の注記）
 
-manifest.mdが肥大化する場合はセクション分割または `raw/manifest-repos.md` に分離。
+manifest.mdが肥大化する場合はセクション分割または manifest-repos.md（raw/直下）に分離。
 
 ### 引用形式
 

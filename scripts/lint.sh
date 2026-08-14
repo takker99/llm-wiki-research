@@ -63,7 +63,7 @@ echo ""
 
 # Check that raw/ files referenced from wiki/ actually exist
 echo "--- Missing raw files referenced from wiki/ ---"
-grep -roE 'raw/[^])"'"'"'`\[,<>。、「」]+\.md' "$WIKI_DIR" --include="*.md" \
+grep -roE 'raw/[^])"'"'"'`\[,<>。、「」（）、→]+\.md' "$WIKI_DIR" --include="*.md" \
   | sed 's/.*://' \
   | sort -u \
   | while read -r ref; do
