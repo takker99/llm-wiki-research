@@ -71,3 +71,5 @@ Parse with: `grep "^## \[" log.md | tail -5`
 ## [2026-08-14] file-back | raw/不変性の設計思想（query: Karpathyの不変 vs nishioの実運用とgitignore repoでは不変でない。subagent相談2往復: 観察は部分正しく2類型の混在、不変性の3機能（検証/書き換え自由の担保/LLM範囲境界）、入場時の誓約（性質文→時間規則で例外条項消滅）、コーパスモードの条件付き正当化、「git=不変性担保」撤回と新軸「可視性×転載可能性」。analyses/rawディレクトリの取り扱いを更新（claims候補・未解決論点改訂）+ concepts/3層アーキテクチャの乖離修正（概念文言とAGENTS.md運用の矛盾を解消）+ index/log更新）
 
 ## [2026-08-14] fix | lint.shのraw参照チェックの偽陽性を解消（正規表現の除外文字に全角括弧（）と→を追加。`・`は実在ファイル「一貫・網羅・頂点-2026-08-11.md」を壊すため追加せず、AMME分析の三層定義セルと方法論のmanifest分離記述は文言を意味保持のまま微修正。MISSING RAW 0件に。index/log更新）
+
+## [2026-08-14] file-back | log.mdとgit logの分工（query: 「git管理下ならcommit messageで操作履歴を賄えlog.md不要では？」をsubagent相談2往復で検証。結論: 部分的正しく全体としては誤り。操作時刻vsコミット時刻のズレ、git履歴の書き換え可能性、log.mdにしか書けない7種の情報、粒度のトリレンマ、既存議論はDiors.techのGit+log.md分工とCHANGELOG論争のみ。テンプレート示唆: log.md維持+1行規約・ローテーション・lintサイズチェックの軽量化デフォルト化。analyses/新規 + index/log更新）

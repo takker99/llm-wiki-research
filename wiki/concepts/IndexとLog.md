@@ -59,6 +59,10 @@ KarpathyのTip: 各エントリの先頭を一貫したプレフィックスに�
 
 テンプレートにはlog肥大化抑制ルール（例: 1回のfile-backで最大N行まで）が必要。
 
+### log.md vs git logの分工
+
+「git管理下ならcommit messageで賄えるのでlog.md不要では？」という論点は、[[log.mdとgit logの分工]]で検証済み。結論は「log.mdは維持しつつ軽量化」。要点: gitはコミット時刻しか測れず操作時刻は記録できない、gitの時系列は書き換え可能だがlog.mdは追記専用で不変、git diffから復元できない情報（動機・未解決事項・破棄した案・操作単位のまとまり）がlog.mdにはある。
+
 ## 当wikiでの実装
 
 両方とも当wikiに採用されている。`index.md`の各エントリは1行ルール。`log.md`のフォーマットは `## [DATE] action | detail`。

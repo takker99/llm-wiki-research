@@ -116,3 +116,4 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [パイロット分析 横断所見](analyses/パイロット分析 横断所見.md) — 5件の横断比較。AGENTS.mdサイズ決定要因、index/log配置2派、CLA.md管理4パターン、停止の2類型、テンプレ草案claims検証
 - [リポジトリ分析 BDL-2026S](analyses/リポジトリ分析 BDL-2026S.md) — パイロット4: 講義型・最大規模。330p/62K行、SSOT分配設計、concept-rename-mapping（15.8KB AGENTS.md, 330pages）
 - [リポジトリ分析 llm-wiki-about-delite](analyses/リポジトリ分析 llm-wiki-about-delite.md) — パイロット5: 逸脱・停止型。CLAUDE.mdのみ、43時間で完了、Quartz公開、init.txt+先行概念マッピング（7.5KB CLAUDE.md, 100+pages）
+- [log.mdとgit logの分工](analyses/log.mdとgit logの分工.md) — 「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）
