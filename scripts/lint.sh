@@ -27,25 +27,38 @@ for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/anal
 done
 echo ""
 
-# Check for broken wikilinks in wiki/ (skipping fenced code blocks)
-echo "--- Broken wikilinks ---"
+# Check for broken wikilinks in wiki/ (skipping fenced code blocks and inline code)
+# Classification by reference count (pages that link to the target):
+#   1 page   = BROKEN       (likely typo / private jargon, or intentional red link)
+#   2+ pages = ASPECT_HANDLE (concept hub seed; candidate for page creation)
+echo "--- Broken wikilinks (classified by ref count) ---"
 find "$WIKI_DIR" -name "*.md" -print0 | xargs -0 awk '
   /^```/ { inblock = !inblock; next }
   !inblock {
-    while (match($0, /\[\[[^]]*\]\]/)) {
-      print substr($0, RSTART, RLENGTH)
-      $0 = substr($0, RSTART + RLENGTH)
+    line = $0
+    gsub(/`[^`]*`/, "", line)
+    while (match(line, /\[\[[^]]*\]\]/)) {
+      print FILENAME "\t" substr(line, RSTART, RLENGTH)
+      line = substr(line, RSTART + RLENGTH)
     }
   }
 ' \
   | sed 's/\[\[//;s/\]\]//' \
+  | awk -F'\t' '{ split($2, a, "|"); print $1 "\t" a[1] }' \
   | sort -u \
-  | while read -r target; do
-    # Skip non-file targets (URLs, external refs)
+  | awk -F'\t' '{ count[$2]++ } END { for (t in count) print count[t] "\t" t }' \
+  | sort -rn \
+  | while read -r count target; do
+    # Skip non-file targets (URLs, external refs, empty)
     [[ "$target" == http* ]] && continue
+    [ -z "$target" ] && continue
     found=$(find "$WIKI_DIR" -name "${target}.md" 2>/dev/null | head -1)
     if [ -z "$found" ]; then
-      echo "  BROKEN: [[${target}]]"
+      if [ "$count" -ge 2 ]; then
+        echo "  ASPECT_HANDLE ($count pages): [[${target}]] — page creation candidate"
+      else
+        echo "  BROKEN (1 page): [[${target}]] — typo or intentional red link"
+      fi
     fi
   done
 echo ""

@@ -164,3 +164,15 @@ query「microsoft/llmwikiからテンプレート草案づくりに有用な手�
 抽出した知見: ①Cosenseの2 hop linkは「具体→抽象→別の具体」で思考ジャンプを生むshokai由来の概念。②赤リンク=情報の不在の表現で、LLM WikiのOpen Questionと同型（nishio）。③AIによる赤リンクの延伸（赤リンクをベクトル検索の入力にしてページを生成）。④リンクの4仕事（recall/attention/navigation/読者ケア）を1つの`[X]`に束ねるCosenseの設計と、recallを剥がすgrasp最適設計。⑤come-from（用語-大域の1宣言で全出現をgather）がAI default 裸（AI生成ページのリンク疎）問題の解。⑥参照数分割lint（1頁=broken/error、2+頁=aspect_handle/info）が赤リンク論争への第3の選択肢。
 
 (touched 12 pages: 5 new [Cosenseのリンク概念, 赤リンクとLLM Wiki, リポジトリ分析 SMS-2026S-report, sources×2] + 7 existing updated [リポジトリ分析 BDL-2026S, リポジトリ分析 grasp, このWikiの目的と研究課題, Lint, 赤リンクの数の議論のLLM Wiki, index, log] )
+
+## [2026-08-14] refactor | lintに参照数分類を実装、AGENTS.mdに赤リンク許容を明文化
+
+ingestしたリンク概念をこのwikiの運用に取り込んだ。
+
+- `scripts/lint.sh`: 壊れたwikilinkを参照数で分類（1頁参照=BROKEN=typo or 意図的赤リンク、2+頁=ASPECT_HANDLE=ページ作成候補）。併せてエイリアス解決（`[[X|表示名]]`）とインラインコード内wikilinkの除外
+- AGENTS.md: Lintセクションに参照数分類を追記、執筆の機械要件に「赤リンクは許容」を追加
+- 既存リンク整理: `[[リポジトリ分析 横断所見]]`→`[[パイロット分析 横断所見]]`（typo修正）、`[[vault-separation]]`→`[[Vault分離と人間-AIの境界|vault-separation]]`（リンク解決）、`[[File-back]]`→テキスト化
+- `[[fact-wiki-separation]]`（3頁参照=ASPECT_HANDLE）を概念ページ化 — 参照数分類lintの最初の実地適用事例
+- 残存: `[[Low-background steel]]`、`[[LLMと盆栽]]` は意図的赤リンクとして放置（LLMと盆栽はrawソースあり、ingest候補）
+
+(touched 5 wiki pages: 1 new [fact-wiki-separation] + 4 existing updated [QueryとFile-back, リポジトリ分析 SMS-2026S-report, Wikiはワークショップ, Lint] + index/log、非wiki 2 files [lint.sh, AGENTS.md] )

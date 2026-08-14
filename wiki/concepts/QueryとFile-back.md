@@ -5,7 +5,7 @@ tags: [template-design, llm-wiki-pattern]
 
 # QueryとFile-back
 
-LLM Wikiの3基本操作の1つ。wikiに対して質問し、回答を得るプロセス。回答をwikiページとして保存する[[File-back]]パターンを含む。
+LLM Wikiの3基本操作の1つ。wikiに対して質問し、回答を得るプロセス。回答をwikiページとして保存するFile-backパターンを含む。
 
 ## Queryフロー（Karpathy）
 

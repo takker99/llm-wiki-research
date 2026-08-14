@@ -28,7 +28,7 @@ LLM Wikiは「主宅地」（main repository）ではなく「ワークショッ
 
 > 「『Wikiをsource of truthにしない』というポリシー、いい切り口。source of truthは勝手に書き換えてはいけない、Wikiにsource of truthがあるとWikiを書き換えていいのかどうかわからず、追記追記になってしまう」
 
-これは[[vault-separation]]（人間vaultとAI vaultの分離）の延長線上にあり、[[fact-wiki-separation]]（Wikiをsource of truthにしない）とも整合的。
+これは[[Vault分離と人間-AIの境界|vault-separation]]（人間vaultとAI vaultの分離）の延長線上にあり、[[fact-wiki-separation]]（Wikiをsource of truthにしない）とも整合的。
 
 ## 関連概念
 
