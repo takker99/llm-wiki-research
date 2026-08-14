@@ -103,6 +103,19 @@ LLM Wikiテンプレートの具体例として再利用価値が高い。
 - log.md爆発（file-back自動化で334KB。肥大化抑制ルールが必要）
 - Markdown投影の遅延（高密度グラフで25秒timeout）
 
+## リンク概念の実装（2026-08-14追記）
+
+[[赤リンクとLLM Wiki]]の理論的源泉。graspのwiki（`wiki/concepts/come-from-declared-gather.md`）には**リンクの4仕事**（recall / attention / navigation / 読者ケア）の分析があり、これが「recallをlinkから剥がす」grasp最適設計の根拠になっている（nishio Cosense: 多すぎるリンク / 公開PKMが読者ケアのせいでover-linkを産む）。
+
+graspがCosenseのリンク概念を実装した形:
+
+- **`read`=近傍同梱**: 本文＋行レベル逆リンク＋related（2-hop）＋未解決targetを1コールで返す — Cosenseの関連ページリストの強化版
+- **`backlinks`**: 行レベル逆リンク。**ページが存在しないtargetでも**、それを参照するsource pagesを返す
+- **`related`**: 2-hopページ / pageなしtargetのsource pages
+- **`unresolved`**: 未解決targetのrank view。**「書くべきTODOリストではない」**と明記 — 多参照の未解決targetは本文がなくても他ページの文脈で既に意味を持つ概念ノード（[[赤リンクとLLM Wiki]]の「赤リンクは情報の不在の表現」の実装）
+- **`mentions` / `co-links` / `gather`**: 裸言及の監査。hubの膨張（KJ法 144 exact vs 490 bare mention）への対処として、bulk link化ではなく「come-from昇格候補」（高頻度・uncommon・一意の裸語）の抽出を設計
+- **come-from概念**: リンクの局所判断と大域的帰結（backlink hub）のレベルミスマッチを「用語-大域の1宣言」で揃える。AI作ページの裸言及（AI default 裸）が支配的になる問題の解として位置づけ
+
 ## 関連
 
 - [[リポジトリ分析 llm-wiki-about-nishio]] — 同nishio系、個人成熟型
@@ -110,3 +123,5 @@ LLM Wikiテンプレートの具体例として再利用価値が高い。
 - [[パイロット分析 横断所見]] — 3件の横断比較
 - [[Wiki駆動開発]] — Code+Wiki同居パターンの概念ページ
 - [[GitHubリポジトリ分析の方法論]]
+- [[リポジトリ分析 SMS-2026S-report]] — grasp-backedの研究レポート型
+- [[赤リンクとLLM Wiki]] — リンク4仕事・come-fromの概念ページ

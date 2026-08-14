@@ -60,6 +60,8 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [操作層](concepts/操作層.md) — wikiへの操作を定義・実現する層。文書型（AGENTS.md指示）vs ツール型（MCP/拡張）。OKFが標準化しない層
 - [徒歩レビュー](concepts/徒歩レビュー.md) — 人間のレビュー負荷を最小化。AIがフィルタ→人間は違和感のみ。about-nishioで発見
 - [統合解説層（synthesis）](concepts/統合解説層（synthesis）.md) — 概念辞書の上のメタ層。素人向け入口。deliteが発明
+- [Cosenseのリンク概念](concepts/Cosenseのリンク概念.md) — 2 hop link・赤リンク（空リンク）・大きなリンク・関連ページリスト・リンクサジェスト等の用語体系。リンクで思考をジャンプさせる運用思想
+- [赤リンクとLLM Wiki](concepts/赤リンクとLLM Wiki.md) — 赤リンク=情報の不在表現のLLM Wikiへの輸入。Open Questionとの同型性、リンクの4仕事、come-from、参照数分割lint
 - [AGENTS.md=CLAUDE.md管理パターン](concepts/AGENTS.md=CLAUDE.md管理パターン.md) — コピー・分離・片方のみの4パターンと推奨
 
 ## entities
@@ -99,6 +101,8 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [2026-08-11 OKFとLLM Wiki (nishio+villagepump)](sources/2026-08-11%20OKFとLLM%20Wiki%20(nishio+villagepump).md) — OKFの正体・format層vs操作層・赤リンク論争・一貫・網羅・頂点
 - [2026-08-11 KarpathyのLLM Wikiを1ヶ月運用してわかった繋げる力 (tsurubee)](sources/2026-08-11%20KarpathyのLLM%20Wikiを1ヶ月運用してわかった繋げる力%20(tsurubee).md) — 1ヶ月運用報告。要約どまりだが「理解のボトルネック」でnishioと対立、ミニマム構成サンプルあり
 - [2026-08-14 Wikiとコードリポジトリの関係 (nishio)](sources/2026-08-14%20Wikiとコードリポジトリの関係%20(nishio).md) — 別repoのコードをwiki repoから参照してingestする方式（wiki-driven workflow）
+- [2026-08-14 Cosenseのリンク概念 (villagepump+nishio)](sources/2026-08-14%20Cosenseのリンク概念%20(villagepump+nishio).md) — 2 hop link・赤リンク・大きなリンク・関連ページリスト・リンクサジェスト・come-fromの基本概念
+- [2026-08-14 赤リンクとLLM Wiki (nishio+villagepump)](sources/2026-08-14%20赤リンクとLLM%20Wiki%20(nishio+villagepump).md) — 赤リンク延伸・Open Questionとの同型性・リンクの4仕事・come-from理論・実践例（grasp/BDL/SMS）
 
 ## analyses
 
@@ -119,4 +123,5 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [リポジトリ分析 BDL-2026S](analyses/リポジトリ分析 BDL-2026S.md) — パイロット4: 講義型・最大規模。330p/62K行、SSOT分配設計、concept-rename-mapping（15.8KB AGENTS.md, 330pages）
 - [リポジトリ分析 llm-wiki-about-delite](analyses/リポジトリ分析 llm-wiki-about-delite.md) — パイロット5: 逸脱・停止型。CLAUDE.mdのみ、43時間で完了、Quartz公開、init.txt+先行概念マッピング（7.5KB CLAUDE.md, 100+pages）
 - [リポジトリ分析 microsoft-llmwiki](analyses/リポジトリ分析 microsoft-llmwiki.md) — 実装repo（ツール型）: VS Code拡張+MCP。3層の独立収束、7セクションAGENTS.mdテンプレート、lint 6分類、操作層のソフトウェア実装（status: tentatively-adopted）
+- [リポジトリ分析 SMS-2026S-report](analyses/リポジトリ分析%20SMS-2026S-report.md) — パイロット6: 研究レポート型・grasp-backed。参照数分割lint（1頁=low-frequency / 2+頁=2-hop hubの種）、SQLite投影（182行 AGENTS.md, 128pages）
 - [log.mdとgit logの分工](analyses/log.mdとgit logの分工.md) — 「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）

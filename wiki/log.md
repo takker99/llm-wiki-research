@@ -155,3 +155,12 @@ query: 既存llm wikiのlog.md形式を実リポジトリで調査（about-nishi
 ## [2026-08-14] file-back | microsoft-llmwikiの草案への落とし込み候補
 
 query「microsoft/llmwikiからテンプレート草案づくりに有用な手法は？」の回答をfile-back。有用5点: lintのstale-entries/index-completeness分離、weighted query（title 3x/summary 2x/body 1x）、init scaffold最小セット、queries/+type:queryのfile-back制度化、MCP write系安全検証の執筆規約への翻訳。不採用: 7セクション全量・slugify・.wiki/埋め込み・Copilot依存。テンプレート草案ver.1のclaims#2/#4にevidence追記（Microsoftもinitで4分類固定＝初期固定型の分岐、index方式の独立実装+保守コスト対策）。リポジトリ分析ページに落とし込み候補セクション追加。index/log更新
+## [2026-08-14] ingest | cosense-link-concepts
+
+「2 hop linksや赤リンクなど、Cosenseのリンク概念を取り入れるのが望ましい。基本概念からLLM wikiとの組み合わせまで幅広くingestしたい」の依頼で実施。前半はvillagepump/nishioの基本概念、後半はLLM Wikiとの組み合わせ（nishio+villagepump+grasp理論+実践例BDL/SMS）。
+
+収集元: villagepump/nishioのCosenseページ群（grasp store + cosense CLI browsePage、Cosenseページ14枚をアーカイブしmanifest.md追記）。確認結果: **BDL-2026S（AGENTS.md:231-236, lint_wiki.py参照数分割）とSMS-2026S-report（lint_wiki.py:3-8）の両方がリンク概念を実装使用していた**（ユーザーの記憶通り）。
+
+抽出した知見: ①Cosenseの2 hop linkは「具体→抽象→別の具体」で思考ジャンプを生むshokai由来の概念。②赤リンク=情報の不在の表現で、LLM WikiのOpen Questionと同型（nishio）。③AIによる赤リンクの延伸（赤リンクをベクトル検索の入力にしてページを生成）。④リンクの4仕事（recall/attention/navigation/読者ケア）を1つの`[X]`に束ねるCosenseの設計と、recallを剥がすgrasp最適設計。⑤come-from（用語-大域の1宣言で全出現をgather）がAI default 裸（AI生成ページのリンク疎）問題の解。⑥参照数分割lint（1頁=broken/error、2+頁=aspect_handle/info）が赤リンク論争への第3の選択肢。
+
+(touched 12 pages: 5 new [Cosenseのリンク概念, 赤リンクとLLM Wiki, リポジトリ分析 SMS-2026S-report, sources×2] + 7 existing updated [リポジトリ分析 BDL-2026S, リポジトリ分析 grasp, このWikiの目的と研究課題, Lint, 赤リンクの数の議論のLLM Wiki, index, log] )

@@ -26,6 +26,11 @@
   - ⚠ 残TODO: llm-wiki.app・各種CLIツールの分析が未着手
 - [ ] Cosenseの設計原理をどう具体的なデフォルトに落とし込むか？
   - 2026-08-11: OKF議論から「同一の赤リンクを共有するページ群を2-hop関連として提示する」Cosenseの仮想ページ挙動を、lintの改善（エラーと発見の分離）として輸入する余地（[[Lint]]）
+  - 2026-08-14: リンク概念の体系ingest完了（[[Cosenseのリンク概念]]、[[赤リンクとLLM Wiki]]）。赤リンク許容とlintのエラー/発見分離が具体的になった。実装データ点3件:
+    - [[リポジトリ分析 BDL-2026S]]: 未解決wikilinkを参照数で分類（1頁=broken_wikilink/error、2+頁=aspect_handle/info）。「赤リンクはfeature、TODOリスト扱いするな」をAGENTS.md明文化
+    - [[リポジトリ分析 SMS-2026S-report]]: 同じ参照数分割。「unresolvedはbrokenではない、全て実参照」「2+頁参照=2-hop hubの種」
+    - [[リポジトリ分析 grasp]]: リンクの4仕事（recall/attention/navigation/読者ケア）の層分離理論。come-from（用語-大域の1宣言で全出現をgather）でAI作ページの裸言及問題（AI default 裸）に対処
+  - 追記すべき論点: 本wikiの[[Lint]]は現在broken-wikilink=エラー扱いだが、参照数分類（2+頁参照はinfo）に変更する余地。LLMが生成するページは元々リンク疎（AI default 裸）なので、wikilink強制より赤リンク許容＋come-from的gatherが向く可能性（要検証）
 - [ ] `AGENTS.md`はどこまで薄くできるか？ — **このwiki自身の存続が最小スキーマの実証になる**
 - [ ] テンプレートは「人間が読む前提」の可読性設計（overview重視・辞書的消費への警鐘）か、read-optional設計か？ — [[理解のボトルネック]]（tsurubee）と[[読まれなくてよい中間産物]]（nishio）の対立。2026-08-11 ingestで顕在化。[[テンプレート草案ver.1]] claim#7の検証データ
 - [ ] 情報信頼性（[[LLM Wikiの作文リスク]]）にテンプレートはどう対処すべきか？

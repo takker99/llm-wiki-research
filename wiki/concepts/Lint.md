@@ -56,6 +56,19 @@ missing-pages（info: 参照のみで未作成）/ frontmatter-validation。
 - concept ID＝ファイルパスのOKF・素のMarkdown wikiは赤リンクを「解決しないパス＝エラー」としか扱えず、キーワードベース・リンク（タイトル同一性での自動集約）の利点を取りこぼす（[[OKF]]、[[赤リンクの数の議論のLLM Wiki]]）
 - 本wikiは lint が basename 解決している分、偶然半分キーワード化していてこの利点に近い。「同一の赤リンクを共有する既存ページ群を2ホップ関連として提示」すれば、エラー（リネーム漏れ）と発見（前方参照）を分離できる（Karwiの提案）
 
+## 参照数分類lint（赤リンク論争への具体的解）
+
+2026-08-14 ingestで、赤リンク論争（許容 vs エラー）に対する**第3の選択肢**が実装データとして揃った（[[赤リンクとLLM Wiki]]）: 未解決wikilinkを**参照数で分類**する。
+
+| 分類 | 参照数 | 扱い | 実装 |
+|---|---|---|---|
+| broken_wikilink | 1ページのみ | error。typo or private jargon。ページ作成はしない | [[リポジトリ分析 BDL-2026S]] |
+| aspect_handle | 2+ページ | info。概念ハブの種。Cosense風では正常。参照が増えたらページ作成 | [[リポジトリ分析 BDL-2026S]]、[[リポジトリ分析 SMS-2026S-report]] |
+
+BDL-2026Sの明文化（AGENTS.md）: 「Do not treat unresolved wikilink references as a TODO list. In Scrapbox/Cosense style, red links are a feature... Do not create a page for a 1-page reference.」。SMS-2026S-reportは「unresolvedはbrokenではない、全て実参照」「2+頁参照=2-hop hubの種」とlintコメントに明記。
+
+graspの理論的裏付け（[[リポジトリ分析 grasp]]）: リンクにはrecall / attention / navigation / 読者ケアの4仕事があり、Cosenseはsubstrate制約で全部を1つのlinkに束ねている。recallをlinkの外へ出せば、linkは必須（infrastructure）から任意（editorial）に変わる。**書き手がAI化するほど裸言及が増える**（AI default 裸）ので、wikilink強制より赤リンク許容＋come-from（用語-大域の1宣言で全出現をgather）が向く可能性がある。
+
 ## 関連操作
 
 - [[Ingest]] — 新しい知識の流入（lintはその品質管理）
