@@ -264,3 +264,15 @@ M1達成。事前決定（v0.1スコープ決定）を実装に落とした。
 4. **frontmatter形式はingest skillに委譲** — file-backは既存wikiページを形式例として参照するため、最初のページ生成に使うingest skillに書くだけで足りる（AGENTS.mdの機械要件は引用の流れ・index行・log行・赤リンク許容のポリシーのみに縮小）。index行・log行はingest/file-back/lintの交差点のためAGENTS.mdに残留（分担基準の交差点ルール）
 
 (touched 4 pages: 3 existing updated [配布形式の決定とテンプレートの動機, claims対応表, overview] + README.md刷新 + template/ 5ファイル修正 + log)
+
+## [2026-08-14] refactor | template調整（manifest廃止・file-back拡張・PDF方針1行）
+
+人間の事前レビュー指摘5点への対応。M2着手前の軽微調整:
+
+1. **raw/manifest.md廃止** — 研究repoのmanifestは「raw/*がgitignoreされる」前提の存在記録だった（例外構成の実証例）。templateはraw/追跡デフォルトなのでgitが一覧・履歴を提供し、出典URLもsourcesページfrontmatter（source_url:）で記録済み → 重複メンテ作業なので削除。README・ingest skill・treeスケッチも修正
+2. **file-backを広義化** — トリガーを「Query回答後」から「Query回答後や作業（実装・議論・調査）中の知見の後」に一般化（nishioのプロジェクト目的Wiki「実装中に発覚したことを書く」がエビデンス）
+3. **PDF等の非テキストingest** — ingest skillの注意に1行追加: 「まずテキスト抽出で読む。図表が重要と判断したページのみ、当該ページと前後数ページを画像化して視覚モデルで読む」。詳細手順（references/化）は初回実遭遇時に書く（事前にやろうとしない）
+4. **言語（英語化）は現状維持で記録のみ** — AGENTS.mdは人間と共進化するファイルで、wiki本文が日本語なら指示も日本語で一貫が整合的。英語化は国際配布（M3）時の選択肢
+5. **AGENTS.md肥大化は既存知見で解決済みと確認** — BDL 15.8KBの原因はドメイン知識（skillで吸収不可）、解決はvanillaflava Cパターン（外部スキーマファイル分離、ver.2採用検討）。v0.1はvariant guide候補に維持
+
+(touched 3 pages: 2 existing updated [配布形式の決定とテンプレートの動機, README.md] + template/ 4ファイル修正 + log)

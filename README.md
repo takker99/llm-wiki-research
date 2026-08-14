@@ -25,7 +25,7 @@ KarpathyのLLM WikiパターンとCosense（Scrapbox）コミュニティの知�
 ### 最初の30分
 
 1. 目的を書く（上の手順3）
-2. 最初のソース（読みたい記事・PDF・メモ等）を `raw/` に置き、`raw/manifest.md` に1行追記する
+2. 最初のソース（読みたい記事・PDF・メモ等）を `raw/` に置く
 3. 「このソースをingestして」とLLMに依頼する
 4. LLMが `wiki/sources/` に要約ページを作り、`index.md`・`log.md` を更新する
 
