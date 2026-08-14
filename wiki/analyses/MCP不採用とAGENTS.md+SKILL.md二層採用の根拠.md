@@ -45,7 +45,7 @@ microsoft/llmwikiはMCPサーバ14ツール + VS Code拡張 + npmパッケージ
 
 ### 2往復目（配布の具体化）
 
-- **推奨構成（3層同梱）**: AGENTS.md（4-6KB自己完結・Quick Operations内蔵）+ `.agents/skills/llm-wiki/SKILL.md`（完全手順）+ root `scripts/lint.sh`（決定的実行）。GitHub Template Repositoryとして配布し、クローンだけでopencode/Codex/Cursor/Geminiでskill有効（Claude Codeのみ1コマンド）
+- **推奨構成（3層同梱）**: AGENTS.md（4-6KB自己完結・常時行動内蔵 ※Quick Operations内蔵は2026-08-14に見直し、[[AGENTS.md+SKILL.md二層設計]]参照）+ `.agents/skills/llm-wiki/SKILL.md`（完全手順）+ root `scripts/lint.sh`（決定的実行）。GitHub Template Repositoryとして配布し、クローンだけでopencode/Codex/Cursor/Geminiでskill有効（Claude Codeのみ1コマンド）
 - **lint.shはskill内に移さない**: root直下+自己相対パス方式を継承（skill非ロード環境から到達不能になるため）。grasp（root `scripts/` + skill）が実証前例
 - **明示パス参照が主契約**: AGENTS.mdに「`.agents/skills/llm-wiki/SKILL.md` を読め。ロードできない場合はファイルを直接読め」と書く。auto-discoveryはボーナス、トリガー構文（`$skill`等）はクライアント方言なのでオプション
 - **1.9KBは売りにしない**: AMMEの1.9KBはドメイン薄型（数学レポート・raw 5ファイル）の特殊条件。二層の価値は**メンテナンス性**（手順編集が基幹スキーマを汚さない・人間がAGENTS.mdをスキーマとしてレビュー可能・形式は標準化済み）で主張し、context削減はボーナス表記にとどめる
@@ -81,6 +81,8 @@ llm-wiki-template/                # GitHub Template Repository
 
 3層ともrepoに同梱・コミット済み（配布物の単一性）。AGENTS.md単体でも完全運用可能（フォールバック）。
 lint.shはskillの有無と無関係に動作。
+
+※2026-08-14見直し: 「AGENTS.md単体でも完全運用可能」の保険（Quick Operationsサマリ）は不要と判断（Agent Skillsのオープン標準化でskill非対応環境が消滅。[[2026-08-14 opencode Agent Skills仕様]]）。AGENTS.mdの役割は「常時行動 + スキーマ + 明示パス参照1行」に純化。分担基準は [[AGENTS.md+SKILL.md二層設計]] 参照。
 
 ## 残課題
 

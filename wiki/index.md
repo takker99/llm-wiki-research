@@ -57,7 +57,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [AIランチエ](concepts/AIランチエ.md) — スペキュラトゥールが内部に持てる退屈な保守仕事をこなすAI。接地の衛生は渡せても境界監督と創発は渡せない
 - [複数のLLM Wikiに共通のインプット](concepts/複数のLLM Wikiに共通のインプット.md) — 同じ資料を複数Wikiに投入→異なる切り出し方が生まれる現象
 - [目的明示（purpose-hoist）](concepts/目的明示（purpose-hoist）.md) — AGENTS.md冒頭に第一目的を明示し迷走を防ぐ。about-nishioで発見
-- [AGENTS.md+SKILL.md二層設計](concepts/AGENTS.md+SKILL.md二層設計.md) — 操作手順をskillに委譲しAGENTS.mdを薄く保つ。AMMEで実証
+- [AGENTS.md+SKILL.md二層設計](concepts/AGENTS.md+SKILL.md二層設計.md) — 操作手順をskillに委譲しAGENTS.mdを薄く保つ。AMMEで実証。分担基準（常時行動vsトリガー操作）・保険不要化・skillロード仕様を明確化
 - [操作層](concepts/操作層.md) — wikiへの操作を定義・実現する層。文書型（AGENTS.md指示）vs ツール型（MCP/拡張）。OKFが標準化しない層
 - [徒歩レビュー](concepts/徒歩レビュー.md) — 人間のレビュー負荷を最小化。AIがフィルタ→人間は違和感のみ。about-nishioで発見
 - [統合解説層（synthesis）](concepts/統合解説層（synthesis）.md) — 概念辞書の上のメタ層。素人向け入口。deliteが発明
@@ -110,6 +110,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [2026-08-14 SKILL併用LLM Wiki toolboxmd (github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20toolboxmd%20(github).md) — 4スキル+loader+SessionStart hook+デタッチドバックグラウンドingest（98★）
 - [2026-08-14 SKILL併用LLM Wiki micuintus (github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20micuintus%20(github).md) — 最小純skill ~6KB+lazy-loaded references。エコシステム比較表9repo収録（22★）
 - [2026-08-14 SKILL併用LLM Wiki ivankuznetsov (hackernoon+github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20ivankuznetsov%20(hackernoon+github).md) — 6プロジェクト実運用。CLAUDE.md 1行トリガー+wiki-researcher skill+QMD MCP併用
+- [2026-08-14 opencode Agent Skills仕様](sources/2026-08-14%20opencode%20Agent%20Skills仕様.md) — skillロードの2段構え。available_skills常駐+skillツール呼び出しはagent自律判断。トリガーはLLMの想起
 
 ## analyses
 

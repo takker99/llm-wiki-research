@@ -61,3 +61,4 @@ SKILL併用のLLM Wiki repo。web検索で発見しREADMEをraw/にアーカイ�
 - vanillaflava/llm-wiki-skills | 2026-08-14 | - | MIT | 6スキル構成。crystallizeが特徴 | (rawアーカイブのみ)
 - toolboxmd/karpathy-wiki | 2026-08-14 | - | MIT | 4スキル+SessionStart hook+デタッチドingester | (rawアーカイブのみ)
 - ivankuznetsov/llm-wiki | 2026-08-14 | - | - | HackerNoon記事のスキルパッケージ版（3スキル） | (rawアーカイブのみ)
+- opencode | Agent Skills docs | https://opencode.ai/docs/skills/ | 2026-08-14 | sha256:b9cd66f9155699b2bd807802e0f02c525c14d4ad48e2d69b12df6601075f241e | raw/opencode-docs-agent-skills.md

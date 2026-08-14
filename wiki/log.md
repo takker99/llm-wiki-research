@@ -217,3 +217,7 @@ template/ v0.1の構成スケッチ（AGENTS.md 9セクション+README+lint.sh+
 
 「深掘り分析必要そう？」の問いに対し、不要判断（microsoft-llmwikiのclone実測は設計決定の直接参照点だったが、6事例は既に二層採用決定を支持するデータ点で設計判断は抽出済み。[[事前にやろうとしない運用哲学]]に整合）。深掘りのトリガー（①テンプレートSKILL.md執筆時 ②claim争われた時 ③MCP-native実装がMCP指針の参照点になる時）を付して研究課題ページの「既存の実装との差別化」TODOに記録。
 (touched 2 pages: 1 existing updated [このWikiの目的と研究課題] + log)
+
+## [2026-08-14] file-back | AGENTS.mdとSKILL.mdの分担基準
+
+人間との設計議論をfile-back。常時行動（queryの作法・file-back提案・lint発動ポリシー）はAGENTS.md、トリガー操作（ingest）はSKILL.md、機械チェックはscripts/の3分解。opencode仕様（[[2026-08-14 opencode Agent Skills仕様]]、raw/にアーカイブ+manifest追記）からskillロードはagentの自律判断＝LLMの想起依存と判明し、常時行動をskillに置くと信頼性が落ちる根拠に。トリガー表・保険サマリは不要（2025-12-18オープン標準化で非対応環境消滅）、明示パス参照1行のみ残す。 (touched 6 pages: 1 new source + 3 existing updated + index/log)

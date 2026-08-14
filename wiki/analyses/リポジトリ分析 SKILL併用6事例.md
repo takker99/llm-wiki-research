@@ -87,7 +87,7 @@ ivankuznetsov: CLAUDE.mdで重要なのは **「Always check wiki/ before answer
 ## テンプレート設計への示唆
 
 1. **二層設計の独立収束**: jackwener（entry file数十行 + 操作skill）が本wikiの[[AGENTS.md+SKILL.md二層設計]]と同一構造。AMMEに加え外部実装でも実証（2系統目の証拠）
-2. **SKILL単独配布（パターンA）は有力な選択肢**: Astro-Han 1.9k★は「skillだけで完結」の需要の大きさを示す。ただしQuick Operations保険（フォールバック）の有無が分岐点
+2. **SKILL単独配布（パターンA）は有力な選択肢**: Astro-Han 1.9k★は「skillだけで完結」の需要の大きさを示す。ただしQuick Operations保険（フォールバック）の有無が分岐点（※2026-08-14再評価: Agent Skillsのオープン標準化で保険は不要となり、パターンAの欠点は減衰。[[AGENTS.md+SKILL.md二層設計]]の分担基準参照）
 3. **スキーマの外部分離（wiki-schema.md）を採用検討**: 人間編集対象とLLM手順の分離（vanillaflava C）は、本wikiの「AGENTS.mdは人間と共進化」と親和性が高い。テンプレート草案ver.2で検討
 4. **MCP併用の実証**: ivankuznetsov（skill→QMD MCP）により「デフォルト不採用・オプション追加可」の拡張パスが確認された。docs/DESIGN.mdのMCP指針に具体例として追記可能
 5. **crystallize（file-backの昇格）**: vanillaflavaの`/wiki-crystallize`は[[QueryとFile-back]]のfile-backを一次操作にした設計。テンプレートのFile-back操作の設計参考
