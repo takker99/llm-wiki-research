@@ -32,20 +32,21 @@ template/ v0.1執筆時の確信度タグ（この記述はエビデンスで裏
 | # | claim | 記述的検証結果 | 規範的决定 |
 |---|---|---|---|
 | 1 | AGENTS.mdが3層アーキテクチャ（`raw/`・`wiki/`・AGENTS.md）を定義 | 検証済み — Microsoft独立収束・SKILL併用6事例・パイロット6件全てで3層構造 | ①「この3層にする」と書く。実証性は書かない |
-| 2 | ディレクトリはconcepts/entities/sources/analysesの4分類 | 部分検証 — 実質3分類+ナビゲーション用タクソノミ（入リンク実測）。Microsoftも4分類で独立収束。設計空間は「初期固定vs伸びてから剪定」の分岐 | ③ 初期固定4分類をデフォルトに。剪定型はvariant guide |
+| 2 | ディレクトリはconcepts/entities/sources/analysesの4分類 | 部分検証 — 実質3分類+ナビゲーション用タクソノミ（入リンク実測）。Microsoftも4分類で独立収束。設計空間は「初期固定vs伸びてから剪定」の分岐 | ③ **必須=concepts/ + sources/、entities/・analyses/は任意デフォルト**（rename・削除自由。analyses相当は名前がwikiで異なる: synthesis・decisions等）。templateには4分類同梱するがAGENTS.md+READMEに任意性を明記 |
 | 3 | ファイル名は自然言語（日本語等） | 多数派（3/5） | ③ |
 | 4 | index.mdを先頭で読むカタログ方式 | 検証済み — 自己適用 + Microsoftが独立にソフトウェア実装 | ① |
 | 5 | Cosenseの6原理がデフォルト設計の土台 | 部分的 — 赤リンク許容・参照数分割lint（1頁=broken / 2+頁=aspect_handle）が具体化。他の原理は未落とし込み | ③ 赤リンク許容+参照数分類lintを焼き込む。残りはvariant guide（[[赤リンクとLLM Wiki]]） |
 | 6 | 1ソースで10-15ページに触れる | 本wikiで実測（[[ingestにおける編み込みの実際]]） | ② 期待値として軽く記述 |
 | 7 | 人間はwiki/を読まなくてよい（read-optional） | 反証（5/5 read-involved。tsurubeeとnishioの対立） | ③ read-involved前提の可読性最小保証をデフォルトに（失敗コスト非対称性: read-optional想定で実は読まれる→サイレント失敗 vs 可読性想定で実は読まれない→軽微なオーバーヘッド） |
 | 8 | wikilinkを本文中に書くべき（first-class） | 多数派（5/6）+ 反例AMME（wikilink 0で100ページ運用） | ③ 推奨するが強制しない。赤リンク許容と整合 |
-| 9 | 操作層はAGENTS.md+SKILL.md+scripts/の文書構成（MCPはデフォルト不採用・オプション追加可） | 検証済み — 本wiki採用・AMME実証・jackwener独立収束・SKILL併用6事例全件 | ① **v0.1から二層構成・skill同梱**（2026-08-14決定。単層自己完結案は撤回。[[配布形式の決定とテンプレートの動機]]） |
+| 9 | 操作層はAGENTS.md+SKILL.md+scripts/の文書構成（MCPはデフォルト不採用・オプション追加可） | 検証済み — 本wiki採用・AMME実証・jackwener独立収束・SKILL併用6事例全件 | ① **v0.1から二層構成・skill同梱**（2026-08-14決定。単層自己完結案は撤回。[[配布形式の決定とテンプレートの動機]]）。**skillは操作別分割**（llm-wiki-ingest / llm-wiki-lint。6事例の操作別分割が多数派。不要なskillはユーザーが削除可） |
 
 ## v0.1スコープ（対象範囲）
 
-- **実証経路: 個人・研究・読書・プロジェクト（開発）系** — パイロット6件中5件が研究・講義・個人系、graspがプロジェクト系（code+wikiハイブリッド）の実証。プロジェクト系固有要素（コードrepo接続・attribution・Qバックログ）はtemplateに含めずユーザー側 or variant guide
+- **templateはstarter kit**（2026-08-14決定）: 継承すべきは設計思想（3層・raw/不変・indexカタログ・file-back習慣）だけ。ディレクトリ構成・形式・手順・文言はプロジェクトに応じて**自由に改変すべきもの**。改変はdriftではなく適応。templateにversion番号等の自己言及メタ文言は置かない。この宣言は配布側root README + template/AGENTS.mdの冒頭で明示
+- **実証経路: 個人・研究・読書・プロジェクト（開発）系** — パイロット6件中5件が研究・講義・個人系、graspがプロジェクト系（code+wikiハイブリッド）の実証。プロジェクト系固有要素（コードrepo接続・attribution・Qバックログ）はtemplateに含めずユーザー側 or variant guide（wiki駆動開発の留保は不要: 追加要素は構造の外にあり3層を壊さない）
 - **ビジネス/チーム系はvariant guide** — 複数人・承認フロー・レビューループの実証なし。構造的差異が大きい
-- 汎用性は構造側で担保（Optionality・purpose-hoist・禁止事項の不在）。**スコープ限定はREADMEに明示する**（暗黙の限定はサイレント離脱を生む）
+- 汎用性は構造側で担保（Optionality・purpose-hoist・禁止事項の不在）。**スコープ限定は配布側root READMEに明示**（暗黙の限定はサイレント離脱を生む）
 
 ## 関連
 

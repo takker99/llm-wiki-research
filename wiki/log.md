@@ -238,3 +238,29 @@ template/ v0.1の構成スケッチ（AGENTS.md 9セクション+README+lint.sh+
 
 人間の指摘でQAゲートを改訂。「Stage 1: 同一モデル×2回の決定性」は撤回（再現性は目的ではない。揺れ対策の狙いは「いまいちな方向に進まない」方向付けであり、効果はbootstrap時点で測れず育ったwikiでしか評価できない）。新方針: 立ち上げスモークはM2 wikiが兼ねる（バグは立ち上げ時に自明）、主たる検証は「templateで外部wikiを立ち上げ育て、ある程度大きくなったらこのrepoが読んで評価」— 既存のGitHubリポジトリ分析方法論を適用し、結果をv0.2へフィードバック。confoundは外部リポジトリ分析のリスクと罠のフレームで扱う。旧Stage 0/1/2・構造diff・log形式一致は廃止。
 (touched 2 pages: 2 existing updated [配布形式の決定とテンプレートの動機, このWikiの目的と研究課題] + log)
+
+## [2026-08-14] feat | template/ v0.1実装
+
+M1達成。事前決定（v0.1スコープ決定）を実装に落とした。
+
+人間の設計指摘2件を反映:
+- **必須/任意の2分類**: concepts/ + sources/ は必須、entities/ + analyses/ は任意（rename・削除可。analyses相当はsynthesis/decisions等の名前が存在）。templateには4分類同梱、AGENTS.md+READMEに任意性を明記
+- **skillは操作別分割**: llm-wiki-ingest / llm-wiki-lint の2つ（6事例の操作別分割が多数派）。query/file-backは常時行動としてAGENTS.mdに残留（分担基準維持）。不要なskillはユーザーが削除可=Optionality
+- **starter kit原則**: templateはstarter kitであり改変は前提・推奨。継承すべきは設計思想（3層・raw/不変・indexカタログ・file-back習慣）のみ。改変はdriftではなく適応（git履歴で戻せる）。README+AGENTS.mdに宣言を明記
+
+実装ファイル（15ファイル）: AGENTS.md 4.8KB（9セクション）/ README.md（コピー手順・最初の30分・設計思想・スコープ宣言・改変自由宣言）/ scripts/lint.sh（研究repo版からraw検証2種を除去し一般化。赤リンク参照数分類は維持）/ skills×2（スタンドアロン可読）/ raw/manifest.md / wiki骨格（index・log・overview + 4分類.gitkeep）
+
+スモークテスト: templateを /tmp にコピーしlint.sh実行 → 空骨格でクリーン。検証方針（2026-08-14改訂）に従い、正式な検証はM2（templateで育てた外部wikiをこのrepoが読んで評価）。
+
+(touched 3 pages: 2 existing updated [配布形式の決定とテンプレートの動機, claims対応表] + template/ 15ファイル新規 + log)
+
+## [2026-08-14] refactor | template v0.1レビュー反映（README移動・メタ文言削除・frontmatter委譲）
+
+人間のtemplateレビュー指摘4点を反映:
+
+1. **template/README.md廃止** — コピー先の既存README.mdと衝突するため。コピー手順・最初の30分・設計思想・スコープ宣言は配布側repoのroot README.mdに移動（root READMEの陳腐化修正も兼ねる: 「raw/は1件のみ」等の乖離解消）
+2. **バージョン番号を全部削除** — templateに自己言及メタ文言を置かない。配布形式ページの「templateにバージョン+日付の1行記載」も撤回（改変される前提なら番号は無意味）。migration noteは配布側READMEのみ
+3. **AGENTS.mdから出所・git履歴の言及を削除** — 「このwikiはStarter Kit（v0.1）からコピー」「改変はgitの履歴に残るので気軽に試せる」を除去し、冒頭の設計思想継承+改変自由の2行に統合
+4. **frontmatter形式はingest skillに委譲** — file-backは既存wikiページを形式例として参照するため、最初のページ生成に使うingest skillに書くだけで足りる（AGENTS.mdの機械要件は引用の流れ・index行・log行・赤リンク許容のポリシーのみに縮小）。index行・log行はingest/file-back/lintの交差点のためAGENTS.mdに残留（分担基準の交差点ルール）
+
+(touched 4 pages: 3 existing updated [配布形式の決定とテンプレートの動機, claims対応表, overview] + README.md刷新 + template/ 5ファイル修正 + log)

@@ -12,22 +12,20 @@ villagepumpコミュニティの議論をingestし、以下の問いに答えて
 - 汎用的なテンプレートとして何を提供すべきか？
 - AGENTS.mdには何を書くべきか？何を書かないべきか？
 - ディレクトリ構成のベストプラクティスは？
-- 配布形式はどうするか？（別リポジトリ？ template/ ディレクトリ？
-  GitHub Template Repository？ npx initコマンド？）
+- 配布形式はどうするか？（`template/` ディレクトリ / 別repo / npx initコマンド？）
 - 既存の実装（Microsoft llmwiki, llm-wiki.app, 各種CLIツール）との差別化は？
 - AGENTS.mdはどこまで薄くできるか？（このwiki自身が実験台）
 
-## 現在のソース
+## 現状
 
-- `raw/karpathy-llm-wiki-gist.md` — Karpathyの原典
-
-> ⚠ 2026-08-11時点で実在するraw/ソースは上記1件のみ。
-> nishio・villagepumpのソース（6件: nishio 4 + villagepump 2）はユーザーによる誤削除で失われたため、再取得予定。
-> 詳細は [[LLM Wikiの作文リスク]] と [`wiki/log.md`](log.md) を参照。
+- `template/` v0.1実装済み（M1達成、2026-08-14）。配布形式・検証方針の決定は
+  [[配布形式の決定とテンプレートの動機]]、claimsの追跡は [[claims対応表]]
+- 次はM2: templateで外部wikiを立ち上げ・育て、このrepoが読んで評価する
+- ソースの一覧と研究の進捗は [[index]] と [[このWikiの目的と研究課題]] を参照
 
 ## 次のステップ
 
 - [x] Karpathy gist のingest（→ [[2026-08-11 Karpathy LLM Wiki Gist]]、concepts/多数、entities/多数）
 - [x] Cosense議論のingest（→ [[2026-08-11 AIを使った知識マネジメント (villagepump)]]、[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]、concepts/多数、entities/多数）
-- 誤削除されたソース（nishio 4件、villagepump 2件）の再取得
-- テンプレート草案ver.1のclaims検証（AGENTS.mdとの運用乖離検出等）
+- [x] template/ v0.1実装（M1）
+- [ ] M2: 外部wikiをtemplateで立ち上げ・育て、このrepoが評価

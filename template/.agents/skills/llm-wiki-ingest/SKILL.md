@@ -1,0 +1,45 @@
+---
+name: llm-wiki-ingest
+description: ソースをwikiに統合する。ユーザーが「このPDF/URL/ファイルをingestして」「このソースを読み込んで」と言った時に使用する。
+---
+
+# Ingest
+
+ソース（原文）を読み、wikiに統合する操作。ユーザーの明示的な依頼で発動する。
+
+## 前提
+
+- `raw/` は不変。ソースが `raw/` にない場合、追加できるのは**人間が明示的に依頼した場合のみ**。
+  追加時は `raw/manifest.md` に1行追記する（形式例はAGENTS.md「執筆の機械要件」）。
+- このファイルを読む時点でAGENTS.mdの文脈はない前提で動く。形式・命名の詳細はAGENTS.mdを参照する。
+
+## 手順
+
+1. ソースを読む
+2. `wiki/index.md` を読み、既存ページとの接続点と未カバー領域を特定する
+3. 人間と3-5つの要点を議論する。何を重視するか聞く
+4. ページを作成・更新:
+   - `wiki/sources/YYYY-MM-DD タイトル.md` を作成（要約 + 関連concept/entityへのリンク + `raw/` へのリンク。frontmatter形式は下記）
+   - 影響を受ける concepts/ と entities/ のページを更新（リンク追加、記述更新）
+   - 既存の主張と矛盾する場合は明示する: 「⚠ Contradiction: [旧主張] vs [新ソース]」
+   - 新規の概念・実体があれば概念ページを作成
+5. `wiki/index.md` を更新（新ページ追加、変更された要約の更新）
+6. `wiki/log.md` に追記: 見出し `## [YYYY-MM-DD] ingest | source-name` + 本文に触れたページ数
+
+## sourcesページのfrontmatter形式
+
+```yaml
+---
+raw: "raw/ファイル名.md"
+source_url: "https://..."
+accessed: YYYY-MM-DD
+---
+```
+
+`raw:` は必須。ファイルパスは `raw/` から書く。`source_url:` と `accessed:` は任意。
+
+## 注意
+
+- 存在しないソースを作文しない。不確かなら `raw/` に戻って検証する
+- 1ソースが複数ページに触れるのは正常（10-15ページ程度）
+- `raw/` のファイルは絶対に変更・削除しない。人間が明示的に依頼した場合のみ削除してよい
