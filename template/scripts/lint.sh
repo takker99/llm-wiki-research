@@ -74,6 +74,18 @@ find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" \
   done
 echo ""
 
+# Check that index.md entries point to existing files (stale entries)
+# URL-encoded paths (e.g. %20 for spaces) are decoded before checking
+echo "--- Stale index entries (target file missing) ---"
+grep -E '^- \[' "$WIKI_DIR/index.md" \
+  | grep -oE '\]\([^)]+\.md\)' \
+  | sed -e 's/^](//' -e 's/)$//' -e 's/%20/ /g' \
+  | sort -u \
+  | while read -r rel; do
+      [ -f "$WIKI_DIR/$rel" ] || echo "  STALE: $rel"
+    done
+echo ""
+
 # Count wiki pages
 total=$(find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" | wc -l)
 echo "Total wiki pages: $total"

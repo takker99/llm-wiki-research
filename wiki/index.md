@@ -139,3 +139,4 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [claims対応表](analyses/claims対応表.md) — 草案ver.1の9 claims × 2軸（記述的検証×規範的决定）の追跡器。v0.1スコープ決定（二層構成・対象範囲・規範のみ原則）
 - [log.mdとgit logの分工](analyses/log.mdとgit logの分工.md) — 「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）
 - [ingestとfile-backの反映方法の同型性](analyses/ingestとfile-backの反映方法の同型性.md) — 両者は同じ編み込み操作。差はソースの性質と頻度制御のみ。実行は軽同型、templateのFile-back実行契約欠損を是正（status: tentatively-adopted）
+- [index.md存廃の設計判断](analyses/index.md存廃の設計判断.md) — Cosense批判（大きなリンク論は適用範囲外・真の核心は登録作業への違和感）⇔ index維持。肥大化は可視・出口あり、廃止は不可視・サイレント。stale-entries lint + 「indexはキャッシュ」宣言はv0.1に実装済み、variant guideは撤回（改変はagent任せ）（status: hypothesis）

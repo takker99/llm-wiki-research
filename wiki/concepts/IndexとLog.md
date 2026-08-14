@@ -44,6 +44,14 @@ nishioの実測（[[LLM Wikiの実運用データ]]）:
 - 188ページでindexは約12K tokens = Opus 4.7の1.2%（問題ない）
 - Gemma 4等ローカルLLMでは超過。人間の可読性を捨てAI用に書き換えで1/8圧縮可能
 
+## index.md存廃論（2026-08-14検証）
+
+「Cosenseの思想から見てindex.mdは筋悪では？」という論点をsubagent相談2往復で検証済み（[[index.md存廃の設計判断]]）:
+
+- 「大きなリンク」論は適用範囲外（index.mdはplainリンクでwikilinkグラフの外）。真の批判の核心は「明示的登録作業」への違和感
+- 結論: index必須維持。肥大化は可視・出口あり（カテゴリ分割/1/8圧縮/株分け）、廃止は不可視・サイレントなrecall低下
+- 対応策3段階（未実装）: lintにstale-entries追加、AGENTS.mdに「indexはキャッシュ」（欠損・陳腐化時はLLMが再生成してよい）、生成型indexはvariant提示
+
 ## log.md
 
 時系列指向。追記専用の出来事記録。ingest、query、lintパスを記録する。

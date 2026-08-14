@@ -307,3 +307,23 @@ query: 「conceptsはatomicに保ち、追記ではなくページそのもの�
 
 query: 「統合した書き換えではなく追記が適しているパターンは？」→ 判別軸は状態vs出来事。概念（状態）は書き換え、時系列の蓄積（出来事）は追記。具体例: log.md・日記（[[IndexとLog]]・[[日記とLLM Wikiの併用]]）、履歴が価値のページ（nishio実Wikiの## Updates追記、[[リポジトリ分析 llm-wiki-about-nishio]]）、人間の手が入った領域。注釈: 追記も永続せず蓄積の後に整理（書き換え）が来る（villagepump L226の1日単位の切り取り）。[[fact-wiki-separation]]に「書き換え原則の適用外」節として追記
 (touched 2 pages: 1 existing updated [fact-wiki-separation] + index/log)
+
+## [2026-08-14] file-back | index.md存廃の設計判断
+
+query: 「index.mdは本当に必要か？Cosenseの思想ではindexは筋悪に見える。肥大化のデメリット vs 廃止のデメリットはどちらが大きいか？」→ subagent相談2往復で検証。結論: **index必須維持**（廃止のデメリットが大きい）。Cosense批判の分解: 大きなリンク論は適用範囲外（indexはwikilinkグラフ外）、本質はプラットフォーム非対称性、真の核心は「明示的登録作業」への違和感。代替4案（ls/検索/タグ/グラフ）は部分地図に過ぎず、組み合わせは分散した非決定的indexに退化。肥大化は可視・有界・出口あり（カテゴリ分割/1/8圧縮/株分け）、廃止は不可視・サイレントなrecall低下。推奨3段階（未実装）: ①lintにstale-entries追加 ②AGENTS.mdに「indexはキャッシュ」宣言 ③生成型indexをvariant提示。analyses/新規作成、IndexとLog・LLM Wikiのスケーラビリティにリンク追加
+(touched 3 pages: 1 new [index.md存廃の設計判断] + 2 existing updated [IndexとLog, LLM Wikiのスケーラビリティ] + index/log)
+
+## [2026-08-14] feat | index.md存廃の結論をtemplate v0.1に反映
+
+「index.md存廃の設計判断」の3段階アクションを実装（人間の承認済み）:
+
+1. **stale-entries lint追加** — `scripts/lint.sh`・`template/scripts/lint.sh`に「indexエントリ→実在ファイル」チェックを追加（URLエンコード%20デコード対応。ヘッダ例示行は除外）。負荷テスト: 実在しないエントリをSTALE検出→復元で0件を確認
+2. **「indexはキャッシュ」宣言** — `template/AGENTS.md`・本wiki `AGENTS.md`の執筆の機械要件に「index.mdはページから導出可能なビューのキャッシュ。陳腐化・欠損時はページ冒頭を読んで再生成してよい（lintが検証）」を追加。lint手順の機械チェック一覧にもstaleを追記（本wiki AGENTS.md + template lint SKILL.md）
+3. **生成型index variant** — `template/VARIANTS.md`を新規作成（frontmatter要約+生成スクリプト方式とトレードオフ）。README.md「改変は自由」にVARIANTS.mdへの言及追加
+
+(touched 2 pages: 1 existing updated [index.md存廃の設計判断] + template/ 6ファイル修正 [AGENTS.md, scripts/lint.sh, .agents/skills/llm-wiki-lint/SKILL.md, VARIANTS.md(新規)] + 本wiki AGENTS.md + scripts/lint.sh + README.md + log)
+
+## [2026-08-14] refactor | VARIANTS.md撤回（改変事例集は不要）
+
+前エントリで作成した `template/VARIANTS.md`（生成型indexの改変事例集）を削除し、READMEの言及もrevert。理由（人間の判断）: 「改変は自由（starter kit）」宣言がある以上、**改変の仕方は各wikiのagentが自分で考えればよく、改変事例集を配布する必要はない**。生成型indexのトレードオフ分析は[[index.md存廃の設計判断]]の検証メモに残存。1・2（stale-entries・「indexはキャッシュ」宣言）は有効のまま
+(touched 2 pages: 1 existing updated [index.md存廃の設計判断] + template/VARIANTS.md削除 + README.md revert + log)
