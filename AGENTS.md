@@ -71,7 +71,7 @@ wiki/
 2. 有望なページを読み、必要に応じてwikilinkを辿る。
 3. `[[wikilink]]`引用付きで回答を総合する。
 4. 回答後、「これをwikiページとしてfile-backする？」と提案する。
-5. 承諾されたらページを作成（通常は analyses/ か concepts/）し、index.md と log.md を更新する。
+5. 承諾されたらページを作成（通常は analyses/ か concepts/）し、関連する既存ページへのwikilinkを張る。明らかに影響を受ける既存ページがあればリンク・記述を更新し、矛盾が生じたら明示する。index.md と log.md を更新する。
 
 ### Lint
 
