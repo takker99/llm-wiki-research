@@ -26,7 +26,8 @@
   - 2026-08-11: [[OKF]]（Google、2026-06-12発表）を追加。OKFは成果物（format）層のみの標準化で操作（足場）層を標準化しない（nishioの考察1）——テンプレートは操作層（AGENTS.md）を提供する点で差別化可能。赤リンクはOKFが許容・本wikiがエラー扱いという設計分岐もある（[[Lint]]）。詳細は [[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]
   - 2026-08-14: [[Microsoft llmwiki]] を分析（ingest完了）。3層構造は当wikiと同一（構造は普遍）で、差別化の軸は**操作層の実現手段**: Microsoftはツール（MCP 14ツール・`@wiki`・lint/status自動化）で自動化する方向、本テンプレートは文書（AGENTS.md指示）でツール非依存・選択自由を保つ方向。MicrosoftはGitHub Copilot必須（モデル依存）・UIがVS Code固定。→ [[操作層]]、[[リポジトリ分析 microsoft-llmwiki]]
   - 2026-08-14: 操作層の実現手段を仮採用決定 — **MCPはデフォルト不採用・オプション追加可、AGENTS.md+SKILL.md+scripts/の文書構成で提供**。subagent相談2往復の検証（MCP 14ツール定義は実測1.6-2Kトークン/ターン常駐で単独軽微・集約環境で実害、Agent Skillsは2025-12オープン標準化、OpenAIが文書+skill構成を公式OSS採用）。→ [[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]
-  - ⚠ 残TODO: llm-wiki.app・各種CLIツールの分析が未着手
+  - 2026-08-14: **SKILL併用6事例はライト分析で完了**（README/SKILL.mdレベルの横断比較: [[リポジトリ分析 SKILL併用6事例]]）。clone実測の深掘りはしない。理由: microsoft-llmwikiのcloneは「MCP不採用」という設計決定の直接参照点だったが、6事例は既に二層採用決定を支持するデータ点で設計判断は抽出済み。[[事前にやろうとしない運用哲学]]に整合。深掘りはトリガー時（①テンプレートSKILL.md執筆時に実例が必要 ②二層設計のclaimが争われrepo検証が必要 ③lucasastorian等MCP-native実装がMCP指針の参照点になる）に絞って実施
+  - ⚠ 残TODO: llm-wiki.app・各種CLIツールの分析が未着手。SKILL併用サーベイでlucasastorian/llmwiki（808★・MCP-native）とPratiyush/llm-wiki（229★・16 lint規則のコード化）が候補として判明（deep-diveは上記トリガーに準拠）
 - [ ] Cosenseの設計原理をどう具体的なデフォルトに落とし込むか？
   - 2026-08-11: OKF議論から「同一の赤リンクを共有するページ群を2-hop関連として提示する」Cosenseの仮想ページ挙動を、lintの改善（エラーと発見の分離）として輸入する余地（[[Lint]]）
   - 2026-08-14: リンク概念の体系ingest完了（[[Cosenseのリンク概念]]、[[赤リンクとLLM Wiki]]）。赤リンク許容とlintのエラー/発見分離が具体的になった。実装データ点3件:

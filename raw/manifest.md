@@ -32,6 +32,13 @@
 - villagepump | 光る言葉リンク問題（赤リンクの利点） | https://scrapbox.io/villagepump/光る言葉リンク問題（赤リンクの利点） | 2026-08-14 | sha256:fa416c6c6b067a437cc5644537e7b33302c3fe3c826a97d1351d3098ddde4bea | raw/cosense/villagepump/光る言葉リンク問題（赤リンクの利点）-2026-08-14.md
 - villagepump | 関連ページリスト | https://scrapbox.io/villagepump/関連ページリスト | 2026-08-14 | sha256:62ea7e9fed881c25686667e0a4b2ec52bc74a320c5f7f0d9672d2888949f752b | raw/cosense/villagepump/関連ページリスト-2026-08-14.md
 - villagepump | 赤リンクの数の議論のLLM Wiki | https://scrapbox.io/villagepump/赤リンクの数の議論のLLM_Wiki | 2026-08-14 | sha256:75b7a9e3237c46154956af4062e70c7fcb272da338aa7f65c552fd6a2aa49e96 | "raw/cosense/villagepump/赤リンクの数の議論のLLM Wiki-2026-08-14.md"
+- github (jackwener) | LLM Wiki — CLI tool + 4 AI Agent skills (ingest/query/lint/research) | https://github.com/jackwener/llm-wiki | 2026-08-14 | sha256:ad2d862d4acb4113f951c557977076a50c10c1dfbd09959f5d0b5f780dc73851 | raw/github-jackwener-llm-wiki.md
+- github (Astro-Han) | karpathy-llm-wiki — 単一SKILL.md実装（1.9k stars）+ Design Boundaries | https://github.com/Astro-Han/karpathy-llm-wiki | 2026-08-14 | sha256:39966ad7416602abeb799482ad8c484b6f32d6fce57bedc38f6091a437f603af | raw/github-Astro-Han-karpathy-llm-wiki.md
+- github (micuintus) | @micuintus/llm-wiki — 最小SKILL.md (~6KB) + エコシステム比較表 | https://github.com/micuintus/llm-wiki | 2026-08-14 | sha256:14d0a25b36c66b420e9b54d094518af1f7b6fa7310ff83a47027d48e86d27673 | raw/github-micuintus-llm-wiki.md
+- github (vanillaflava) | llm-wiki-skills — 6スキル構成 + 3層セッションブートストラップ + プライバシー論 | https://github.com/vanillaflava/llm-wiki-skills | 2026-08-14 | sha256:7e9d59ad949e9e9a89f2306504dae1f4ea96476dd820d684b963d72ce012bf3a | raw/github-vanillaflava-llm-wiki-skills.md
+- github (toolboxmd) | karpathy-wiki — 4スキル分割 + SessionStart hook + デタッチドバックグラウンドingester | https://github.com/toolboxmd/karpathy-wiki | 2026-08-14 | sha256:2b03ca6795cd65f51d1f54300d29f48848b1fd1569b694311953e74b8865d307 | raw/github-toolboxmd-karpathy-wiki.md
+- hackernoon (ivankuznetsov) | 6プロジェクトの自己メンテ知識ベース構築（wiki-researcher SKILL + QMD MCP併用） | https://hackernoon.com/how-i-built-a-self-maintaining-knowledge-base-for-6-projects-using-claude-code-and-karpathys-llm-wiki | 2026-08-14 | sha256:be002358efc6422730cb15cacb579c070300235e76338ba55e943641bf4b4ce3 | raw/hackernoon-ivankuznetsov-6プロジェクトの知識ベース構築.md
+- github (ivankuznetsov) | llm-wiki — bootstrap-wiki / wiki-researcher / wiki-plan の3スキルパッケージ | https://github.com/ivankuznetsov/llm-wiki | 2026-08-14 | sha256:0ce62181201774bcf2f28c134ac007bf08da181efaf4837919bc67dba6d7f0a1 | raw/github-ivankuznetsov-llm-wiki.md
 
 ## GitHub repos（発見層）
 
@@ -43,3 +50,14 @@
 - takker99/AMME-2026S-report | 2026-08-12 | d3f10b83d9da1e24dd733e7aea88a2d0e1d237e1 | (private) | 研究レポートLLM Wiki。最薄AGENTS.md (1.9KB) | ~/git/AMME-2026S-report
 - takker99/BDL-2026S | 2026-08-12 | 42826ad5c20762ba27e1090269d91a945e2ec879 | (private) | 講義用LLM Wiki。330p/62K行の最大規模 | ~/git/BDL-2026S
 - nishio/llm-wiki-about-delite | 2026-08-12 | 4181dd42ff78d72a5e5a05512a59dc37d7ef97a2 | None | CLAUDE.mdのみ。43時間で停止。Quartz公開 | ~/git/llm-wiki-samples/llm-wiki-about-delite
+
+## GitHub repos（発見層・SKILL併用事例 2026-08-14）
+
+SKILL併用のLLM Wiki repo。web検索で発見しREADMEをraw/にアーカイブ済み（上記エントリ）。深掘り分析する場合はcloneして本セクションに追記。
+
+- jackwener/llm-wiki | 2026-08-14 | - | Apache-2.0 | CLI + 4操作スキル。.claude/skills/と.agents/skills/の両方にインストール | (rawアーカイブのみ)
+- Astro-Han/karpathy-llm-wiki | 2026-08-14 | - | MIT | 単一SKILL.md。1.9k stars。Design Boundariesが精緻 | (rawアーカイブのみ)
+- micuintus/llm-wiki | 2026-08-14 | - | MIT | 純SKILL ~6KB。エコシステム比較表あり | (rawアーカイブのみ)
+- vanillaflava/llm-wiki-skills | 2026-08-14 | - | MIT | 6スキル構成。crystallizeが特徴 | (rawアーカイブのみ)
+- toolboxmd/karpathy-wiki | 2026-08-14 | - | MIT | 4スキル+SessionStart hook+デタッチドingester | (rawアーカイブのみ)
+- ivankuznetsov/llm-wiki | 2026-08-14 | - | - | HackerNoon記事のスキルパッケージ版（3スキル） | (rawアーカイブのみ)

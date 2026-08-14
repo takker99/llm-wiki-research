@@ -198,3 +198,22 @@ query: 「MicrosoftはMCP多用のガチガチ構成。本repoのテンプレー
 
 template/ v0.1の構成スケッチ（AGENTS.md 9セクション+README+lint.sh+raw/manifest.md+wiki空骨格）とbootstrap成功基準（Stage 0/1/2）も同ページに記録。研究課題の配布形式TODOに暫定採用+クローズ条件（M1/M2/M3）を追記。
 (touched 3 pages: 1 new [配布形式の決定とテンプレートの動機] + 1 existing updated [このWikiの目的と研究課題] + index/log)
+
+## [2026-08-14] ingest | SKILL併用LLM Wiki 6事例
+
+「mcpを使ったllm wikiの事例としてmicrosoft/llmwikiをingestした。SKILLを併用している事例を探したい」の依頼でweb検索 → raw/に7ファイルアーカイブ（Astro-Han 1.9k★・jackwener・vanillaflava・toolboxmd・micuintus・ivankuznetsov×2、manifest.md追記済み）→ 観点「SKILL+Wikiの二層設計の詳細比較」でingest。
+
+抽出した知見:
+- **AGENTS.md/SKILL分担の5パターン類型化**: A: SKILLがSchema層を吸収（Astro-Han・micuintus） / B: entry file数十行+操作skillの二層（jackwener、**本wikiと同一構造の独立収束**） / C: 薄いCLAUDE.md+外部スキーマ/設定ファイル分離（vanillaflava） / D: hooksによる自動注入（toolboxmd、プラットフォーム固定を許容） / E: 1行トリガー+skill+MCP併用（ivankuznetsov）
+- SKILL分割粒度: 単一+lazy-loading（Astro-Han・micuintus）vs 操作別分割4-6個（jackwener・vanillaflava・ivankuznetsov）vs loader+分割（toolboxmd）
+- **Astro-Hanが「MCP・hooksはtool-agnostic skillの範囲外、agent harnessの仕事」をDesign Boundariesで明言** → MCP不採用決定の独立収束の追証
+- ivankuznetsovはskill→QMD MCPツール呼び出しの併用で実運用成功 → 「デフォルト不採用・オプション追加可」の拡張パス実証
+- 大規模実装は「検証・決定的実行はコード（scripts/CLI）、手順はskill」を共通採用、全6実装のが共通のスキーマ外部化（wiki-schema.md）は人間編集とskill手順の分離に有効
+- 残課題: lucasastorian/llmwiki（808★・MCP-native）とPratiyush/llm-wiki（229★・16 lint規則コード化）を別途分析候補に追加
+
+(touched 12 pages: 7 new [sources×6 + リポジトリ分析 SKILL併用6事例] + 3 existing updated [AGENTS.md+SKILL.md二層設計, 操作層, MCP不採用とAGENTS.md+SKILL.md二層採用の根拠] + index/log + raw/manifest.md)
+
+## [2026-08-14] file-back | SKILL併用6事例はライト分析で完了と記録
+
+「深掘り分析必要そう？」の問いに対し、不要判断（microsoft-llmwikiのclone実測は設計決定の直接参照点だったが、6事例は既に二層採用決定を支持するデータ点で設計判断は抽出済み。[[事前にやろうとしない運用哲学]]に整合）。深掘りのトリガー（①テンプレートSKILL.md執筆時 ②claim争われた時 ③MCP-native実装がMCP指針の参照点になる時）を付して研究課題ページの「既存の実装との差別化」TODOに記録。
+(touched 2 pages: 1 existing updated [このWikiの目的と研究課題] + log)

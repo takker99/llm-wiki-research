@@ -104,6 +104,12 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [2026-08-14 Wikiとコードリポジトリの関係 (nishio)](sources/2026-08-14%20Wikiとコードリポジトリの関係%20(nishio).md) — 別repoのコードをwiki repoから参照してingestする方式（wiki-driven workflow）
 - [2026-08-14 Cosenseのリンク概念 (villagepump+nishio)](sources/2026-08-14%20Cosenseのリンク概念%20(villagepump+nishio).md) — 2 hop link・赤リンク・大きなリンク・関連ページリスト・リンクサジェスト・come-fromの基本概念
 - [2026-08-14 赤リンクとLLM Wiki (nishio+villagepump)](sources/2026-08-14%20赤リンクとLLM%20Wiki%20(nishio+villagepump).md) — 赤リンク延伸・Open Questionとの同型性・リンクの4仕事・come-from理論・実践例（grasp/BDL/SMS）
+- [2026-08-14 SKILL併用LLM Wiki Astro-Han (github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20Astro-Han%20(github).md) — 単一SKILL.mdがSchema層を吸収。Design BoundariesでMCP/hooksをskillの範囲外と宣言（1.9k★）
+- [2026-08-14 SKILL併用LLM Wiki jackwener (github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20jackwener%20(github).md) — entry file(数十行)+4操作skillの二層。本wikiと同一構造の独立収束（95★）
+- [2026-08-14 SKILL併用LLM Wiki vanillaflava (github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20vanillaflava%20(github).md) — 6スキル構成+crystallize。薄いCLAUDE.md+外部スキーマ分離。プライバシー論（59★）
+- [2026-08-14 SKILL併用LLM Wiki toolboxmd (github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20toolboxmd%20(github).md) — 4スキル+loader+SessionStart hook+デタッチドバックグラウンドingest（98★）
+- [2026-08-14 SKILL併用LLM Wiki micuintus (github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20micuintus%20(github).md) — 最小純skill ~6KB+lazy-loaded references。エコシステム比較表9repo収録（22★）
+- [2026-08-14 SKILL併用LLM Wiki ivankuznetsov (hackernoon+github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20ivankuznetsov%20(hackernoon+github).md) — 6プロジェクト実運用。CLAUDE.md 1行トリガー+wiki-researcher skill+QMD MCP併用
 
 ## analyses
 
@@ -124,6 +130,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [リポジトリ分析 BDL-2026S](analyses/リポジトリ分析 BDL-2026S.md) — パイロット4: 講義型・最大規模。330p/62K行、SSOT分配設計、concept-rename-mapping（15.8KB AGENTS.md, 330pages）
 - [リポジトリ分析 llm-wiki-about-delite](analyses/リポジトリ分析 llm-wiki-about-delite.md) — パイロット5: 逸脱・停止型。CLAUDE.mdのみ、43時間で完了、Quartz公開、init.txt+先行概念マッピング（7.5KB CLAUDE.md, 100+pages）
 - [リポジトリ分析 microsoft-llmwiki](analyses/リポジトリ分析 microsoft-llmwiki.md) — 実装repo（ツール型）: VS Code拡張+MCP。3層の独立収束、7セクションAGENTS.mdテンプレート、lint 6分類、操作層のソフトウェア実装（status: tentatively-adopted）
+- [リポジトリ分析 SKILL併用6事例](analyses/リポジトリ分析%20SKILL併用6事例.md) — SKILL併用実装6件の横断比較。AGENTS.md/SKILL分担を5パターンに類型化、二層設計の独立収束、MCP併用の実証（status: tentatively-adopted）
 - [MCP不採用とAGENTS.md+SKILL.md二層採用の根拠](analyses/MCP不採用とAGENTS.md+SKILL.md二層採用の根拠.md) — MCPはデフォルト不採用・オプション追加可。実測（14ツール6.3KB≈1.6-2Kトークン常駐）+Agent Skills標準化+推奨構成（status: tentatively-adopted）
 - [リポジトリ分析 SMS-2026S-report](analyses/リポジトリ分析%20SMS-2026S-report.md) — パイロット6: 研究レポート型・grasp-backed。参照数分割lint（1頁=low-frequency / 2+頁=2-hop hubの種）、SQLite投影（182行 AGENTS.md, 128pages）
 - [配布形式の決定とテンプレートの動機](analyses/配布形式の決定とテンプレートの動機.md) — テンプレートの動機（お決まり経路の再発明防止・品質の揺れ対策）と配布形式の決定（template/コピペ・お膳立てがメイン）＋subagent相談の妥当性検証（status: tentatively-adopted）

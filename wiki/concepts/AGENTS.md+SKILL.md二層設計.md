@@ -1,7 +1,8 @@
 ---
 date: 2026-08-12
+updated: 2026-08-14
 tags: [template-design, agents-md, skill, pilot-finding]
-sources: "[[リポジトリ分析 AMME-2026S-report]]", "[[パイロット分析 横断所見]]"
+sources: "[[リポジトリ分析 AMME-2026S-report]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 SKILL併用6事例]]"
 ---
 
 # AGENTS.md+SKILL.md二層設計
@@ -40,6 +41,26 @@ skillは「操作手順」の外部化には有効だが、「ドメイン知識
 BDL-2026Sはskill（.agents/ 4件）を持ちながら15.8KBに達しており、
 SSOT分配設計のようなドメイン特化知識はskillでは吸収しきれない。
 
+## SKILL併用実装サーベイからの拡張（2026-08-14）
+
+外部LLM Wiki実装6件の比較（[[リポジトリ分析 SKILL併用6事例]]）から、
+「AGENTS.mdとSKILLの役割分担」は以下のパターンに類型化できる:
+
+| パターン | ag制御媒体の実例 | 分担の要旨 |
+|---|---|---|
+| **A: SKILLがSchema層を吸収** | Astro-Han (1.9k★)・micuintus | SKILL.md自体を3層の第3層と定義。AGENTS.md生成なし。skill単独で完結（ただしskill非ロード環境で動作不能） |
+| **B: entry file + 操作skillの二層** | jackwener | entry file（数十行）= 常駐ナビゲーション（vault案内・skill選択・cheat-sheet）、skill = オンデマンド手順。**本wikiと同じ構造の独立収束** |
+| **C: 薄いCLAUDE.md + 外部スキーマ/設定** | vanillaflava | CLAUDE.mdは1段落。「変化する契約」はwiki-config.md/wiki-schema.mdに分離し人間が編集、skillは手順のみ |
+| **D: hooksによる自動注入** | toolboxmd | loader skillをSessionStart hookで注入。起動トリガーを文書でなくhookに移す（プラットフォーム固定を許容） |
+| **E: 1行トリガー + skill + MCP併用** | ivankuznetsov | CLAUDE.mdの本質は1行のトリガー。skillがQMD MCPツールを呼ぶ併用も成立 |
+
+検証結果:
+
+- **Bの独立収束**: jackwenerが本wikiと同一構造（entry file薄さ + 操作skillオンデマンド）に独立到達。構造の普遍性の第2系統の証拠
+- **Aは需要がある**: Astro-Han 1.9k★。ただし「Quick Operations Summary保険」なしのためskill非ロード環境で機能しない。本wikiの保険付き二層の優位点
+- **Cが人間-LLM境界と親和**: スキーマ外部ファイル化は「人間がスキーマを編集し、skillは手順」の分離。テンプレート草案ver.2で採用検討
+- **EはMCP併用の実証**: 「デフォルト不採用・オプション追加可」（[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]）の拡張パスになる
+
 ## テンプレート設計への示唆
 
 **skill同梱か否かがテンプレート配布形式の最初の設計判断になる。**
@@ -53,6 +74,7 @@ Quick Operations Summaryを保険として残すことで、skillがない環境
 ## 関連
 
 - [[リポジトリ分析 AMME-2026S-report]] — 発見元
+- [[リポジトリ分析 SKILL併用6事例]] — 外部実装サーベイ（2026-08-14）
 - [[Schema（AGENTS.md）]] — AGENTS.mdの薄さの限界
 - [[Agent Skills]] — Anthropicのskill概念
 - [[GitHubリポジトリ分析の方法論]]

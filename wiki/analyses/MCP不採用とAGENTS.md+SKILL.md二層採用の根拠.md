@@ -86,11 +86,21 @@ lint.shはskillの有無と無関係に動作。
 
 - [ ] 自己適用実験: 本wikiの操作手順のみをskill化し差分を計測（[[このWikiの目的と研究課題]]にTODO化）
 - [ ] MCP版設計指針（どの検証を機械化するか）は需要が生じたらdocs/DESIGN.mdへ
-- [ ] llm-wiki.app・各種CLIツールの分析（既存TODO）
+- [ ] llm-wiki.app・各種CLIツールの分析（既存TODO）— SKILL併用6事例のサーベイでlucasastorian/llmwiki（808★・MCP-native）とPratiyush/llm-wiki（229★・16 lint規則のコード化）が候補として判明（[[リポジトリ分析 SKILL併用6事例]]）
+
+## 2026-08-14追記: SKILL併用実装による外部データ点
+
+[[リポジトリ分析 SKILL併用6事例]]のingestで得られた追証:
+
+- **SKILLの起動トリガーをhookに移すD型（toolboxmd）**はプラットフォーム固定を許容する実装に限られ、汎用テンプレートの「文書（description frontmatter）+ 明示パス参照」方針（2往復目で決定）と整合
+- **Astro-Han（1.9k★）が「MCP servers, UIs, output subsystems — outside the boundary of a tool-agnostic skill」「hooks belong to the agent harness」をDesign Boundariesで明言**。本決定と同一の線引きを独立収束で採用
+- **ivankuznetsovはskillがQMDのMCPツールを呼ぶ併用で実運用成功**。「デフォルト不採用・オプション追加可」の拡張パスが具体例として確認できた。docs/DESIGN.mdに一節書く際の実例に
+- **全6実装が「検証・決定的実行はコード（scripts/CLI）、手順はskill」**を共通採用。本推奨構成（lint.shをroot直下に置きskillから独立）の独立収束
 
 ## 関連
 
 - [[リポジトリ分析 microsoft-llmwiki]] — 参照点となったMCP実装の分析
+- [[リポジトリ分析 SKILL併用6事例]] — SKILL併用実装6件の横断比較（2026-08-14追証）
 - [[操作層]] — 文書型 vs ツール型のスペクトラム
 - [[AGENTS.md+SKILL.md二層設計]] — 二層パターンの発見元（AMME）
 - [[テンプレート草案ver.1]] — claim#9として追記
