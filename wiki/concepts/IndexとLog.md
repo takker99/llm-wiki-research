@@ -50,6 +50,23 @@ nishioの実測（[[LLM Wikiの実運用データ]]）:
 
 KarpathyのTip: 各エントリの先頭を一貫したプレフィックスにすると（例: `## [2026-04-02] ingest | Article Title`）、シンプルなUNIXツールでパース可能になる。例: `grep "^## \[" log.md | tail -5`
 
+### 形式のバリエーション（既存実装の実測）
+
+2026-08-14時点の実リポジトリ調査で、見出しは全実装で**短い**（`## [DATE] action | 短い対象名`がデファクト）、**詳細は本文**に書くのが標準。
+
+| wiki | 見出し形式 | 詳細の置き場所 | 粒度 |
+|---|---|---|---|
+| Karpathy gist（原典） | `## [2026-04-02] ingest | Article Title` | 本文前提 | 日付 |
+| about-nishio | `## [2026-06-04 23:00] filing-back | 書く場所による言語化の効果` | 本文に箇条書き | **時刻まで** |
+| delite | `## [2026-05-22] refactor | concepts/ → wiki/...` | 本文に詳細 | 日付 |
+| grasp | `## [2026-06-28 08:17] implementation+file-back | title` | 本文を `code: / tests: / file back:` で構造化 | **時刻まで** |
+| BDL | Query→作業→Changesの定型フォーマット | 構造化 | — |
+| tsurubee記事 | `\| YYYY-MM-DD HH:MM \| ingest-paper \| Added [[論文名]], updated [[concept名]] \|` | テーブル形式 | 時刻まで |
+
+種別語彙も拡張される: Karpathyの ingest/query/lint に対し、about-nishioは `filing-back`, `deliverable`, `correction`, `scaffold`、graspは `implementation+file-back` のような複合アクション。[[Microsoft llmwiki]] は `## [YYYY-MM-DD] verb | subject` で当wikiと同一（[[リポジトリ分析 microsoft-llmwiki]]）。
+
+→ 当wikiの旧形式（見出しに長文全込み）はむしろ例外的で、2026-08-14の変更でデファクト（見出し短＋本文詳細）に追いついた。
+
 ### log.md肥大化と自動化の相関
 
 パイロット分析から、file-back自動化がlog爆発を引き起こすことが確認された:
@@ -69,7 +86,7 @@ KarpathyのTip: 各エントリの先頭を一貫したプレフィックスに�
 
 ## 当wikiでの実装
 
-両方とも当wikiに採用されている。`index.md`の各エントリは1行ルール。`log.md`のフォーマットは `## [DATE] action | detail`。
+両方とも当wikiに採用されている。`index.md`の各エントリは1行ルール。`log.md`は見出し `## [DATE] action | 短い題名` + 詳細は本文（2026-08-14変更）。
 
 ## 関連概念
 

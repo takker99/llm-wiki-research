@@ -143,6 +143,10 @@ query: 「git管理下ならcommit messageで操作履歴を賄えlog.md不要�
 
 見出しを `## [DATE] action | 短い題名` に短縮し、詳細は本文（body）に移動。rendering時の見づらさ解消。既存エントリは情報を保持したまま再整形（追記専用の例外として明示的に実施）。`grep "^## \["` によるパースは引き続き可能。AGENTS.mdのフォーマット仕様2箇所・analyses/log.mdとgit logの分工の推奨文案を更新
 
+## [2026-08-14] file-back | log.md形式の既存実装調査
+
+query: 既存llm wikiのlog.md形式を実リポジトリで調査（about-nishio/delite/graspはraw.githubusercontentで実地確認、BDL/AMMEはprivateのためwiki記録のみ）。結果: 見出しは全実装で短い（`## [DATE] action | 短い対象名`がデファクト）、詳細は本文に書くのが標準。種別語彙はabout-nishio (filing-back/deliverable/correction/scaffold)・grasp (implementation+file-back複合) へ拡張。粒度はabout-nishio/graspが時刻まで、deliteは日付のみ。当wikiの旧形式（見出し長文込み）は例外的で、2026-08-14の変更でデファクトに追いついた。concepts/IndexとLogに形式バリエーション節を追加。index/log更新
+
 ## [2026-08-14] ingest | microsoft-llmwiki
 
 「Microsoft製のLLM Wiki製品repoをingestしてほしい」の依頼で実施。運用repo5件とは異なる**実装repo（ツール型）**として分析。cloneは発見層 ~/git/llm-wiki-samples/microsoft-llmwiki@b44df6ae（raw/コピーなし・ユーザー選択）。抽出した知見: 3層アーキテクチャの独立収束（index/log形式も当wikiとほぼ同一）、init生成の7セクションAGENTS.mdテンプレート（ガチガチ側の極）、lint 6分類（stale-entries/index-completeness）、weighted query（title 3x/summary 2x/body 1x）、操作層の完全ソフトウェア実装（MCP 14ツール・@wiki /save）、Copilot依存。研究課題「既存の実装との差別化」「配布形式」のTODOにデータ点を追加。
