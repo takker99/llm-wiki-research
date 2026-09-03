@@ -353,3 +353,22 @@ query: 「templateにscripts/lint.shがあるけど、.agents/skills/llm-wiki-li
 2. AMME-2026S-report（パイロット3、100ページ・frontmatter 不使用）と独立した2例目の「frontmatter 最小運用」事例として記録
 
 教訓: template の沈黙は実装上は最小哲学と整合するが、instantiate 側が「concept にもメタ情報が載る」挙動を期待すると意図の不一致になる。沈黙は書かないことが正解ではなく、**「書かなくてよい」を1行で宣言する**ことが正解。
+
+## [2026-09-03] refactor | LLM Wiki main value = knowledge network の明文化
+
+ユーザーの「knowledge graph の側面のほうが大事に思える」指摘を出発点に、subagent と深く相談。根底的な発見:
+
+1. **「raw/ が唯一の source」は gist に書かれていない派生解釈** — Karpathy は raw/ を source of truth として定義するが、**価値の中心として 3 回繰り返される主張（compounding artifact / cross-references / synthesis）に raw/ への言及は一度もない**。file-back も明示的に 2 つ目の source として位置付け（gist line 39）
+2. **nishio の raw/ への態度は 3 段階で変遷**: 厳格視 → 階層化・分散化 → 「再生成可能なら gitignore 可」。**捨てたのではなく役割を 2 種類に分けた**（スナップショット型/ライブ型）
+3. **LLM Wiki の main value = knowledge network** — Karpathy/nishio/全パイロット実装/ユーザーの直感の全てが支持。raw/ SSOT は補助装置（4 機能: 検証可能性・作文リスク防衛・ライセンス・LLM 範囲境界）
+
+反映:
+
+- 新規ページ 2 件: `analyses/raw SSOT原則への根本検証.md`（605行、根本検証の包括的議論）+ `concepts/LLM Wikiのmain value.md`（統合的結論のサマリ）
+- 既存ページ 3 件更新: [[3層アーキテクチャ]] に「価値の中心は knowledge network」を明記・[[rawディレクトリの取り扱い]] に「補助装置」補遺セクション追加・[[LLM Wikiの作文リスク]] に「主要防御は sources frontmatter」を明文化
+- [[claims対応表]] に新規 claim#10 追加（文種②お決まり経路）。既存 claim#1/#6/#8 の規範的決定欄に補助装置視点を追記
+- template への反映は保留（v0.1 はほぼ妥当、v0.2 への minor 反映で足りる）
+
+教訓: 過剰解釈（raw/ SSOT = main value）の解消は、本質（knowledge network = main value）の明文化と同義。 template 設計にとって重要な方針転換であり、ver.2 以降の claims に反映する価値がある。 M2（template で育てた外部 wiki をこの repo が読んで評価）で事後検証する。
+
+(touched 6 pages: 2 new [raw SSOT原則への根本検証, LLM Wikiのmain value] + 4 existing updated [3層アーキテクチャ, rawディレクトリの取り扱い, LLM Wikiの作文リスク, claims対応表] + index/log)

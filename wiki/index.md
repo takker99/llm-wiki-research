@@ -65,6 +65,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [赤リンクとLLM Wiki](concepts/赤リンクとLLM Wiki.md) — 赤リンク=情報の不在表現のLLM Wikiへの輸入。Open Questionとの同型性、リンクの4仕事、come-from、参照数分割lint
 - [AGENTS.md=CLAUDE.md管理パターン](concepts/AGENTS.md=CLAUDE.md管理パターン.md) — コピー・分離・片方のみの4パターンと推奨
 - [overviewの役割](concepts/overviewの役割.md) — 人間向けの入口ページ。原型（Karpathy gist）にはない独自発明だが「入門の1枚」はnishio実測・他実装に元ネタあり
+- [LLM Wikiのmain value](concepts/LLM Wikiのmain value.md) — LLM Wiki の価値の中心は knowledge network（補助装置: raw/ SSOT）。「raw が唯一の source」は派生解釈の解消
 
 ## entities
 
@@ -140,3 +141,4 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [log.mdとgit logの分工](analyses/log.mdとgit logの分工.md) — 「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）
 - [ingestとfile-backの反映方法の同型性](analyses/ingestとfile-backの反映方法の同型性.md) — 両者は同じ編み込み操作。差はソースの性質と頻度制御のみ。実行は軽同型、templateのFile-back実行契約欠損を是正（status: tentatively-adopted）
 - [index.md存廃の設計判断](analyses/index.md存廃の設計判断.md) — Cosense批判（大きなリンク論は適用範囲外・真の核心は登録作業への違和感）⇔ index維持。肥大化は可視・出口あり、廃止は不可視・サイレント。stale-entries lint + 「indexはキャッシュ」宣言はv0.1に実装済み、variant guideは撤回（改変はagent任せ）（status: hypothesis）
+- [raw SSOT原則への根本検証](analyses/raw%20SSOT原則への根本検証.md) — LLM Wiki の main value = knowledge network の根拠。Karpathy gist の派生解釈・nishio 3段階態度変遷・raw/ の 6 機能分解・パイロット 7 実装の観察。claim#10 草案（status: hypothesis）

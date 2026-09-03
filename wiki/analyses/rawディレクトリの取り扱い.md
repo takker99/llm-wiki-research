@@ -1,8 +1,8 @@
 ---
 status: tentatively-adopted
 date: 2026-08-11
-updated: 2026-08-14
-tags: [template-design, raw, ingest]
+updated: 2026-09-03
+tags: [template-design, raw, ingest, knowledge-graph, main-value]
 topic: raw/の取り扱い（gitignore・プライバシー・ライセンス・発見層の区別・不変性の設計思想）
 ---
 
@@ -173,3 +173,32 @@ raw/ — アーカイブ層。LLMができるのはアーカイブの新規追�
 - [[事前にやろうとしない運用哲学]] — cost inversionによる検証投資の放棄の背景
 - [[このWikiの目的と研究課題]] — 情報信頼性・配布形式の研究課題との接続
 - [[テンプレート草案ver.1]] — 検証対象。本ページはver.2へのインプット
+
+## 位置付けの再評価: raw/ は補助装置（2026-09-03 補遺）
+
+[[LLM Wikiのmain value]] の議論により、raw/ SSOT は **補助装置** に位置付けられることが明確化された。
+このページの従来の議論（不変性の3機能・コーパスモード・入場時の誓約）はそのまま有効だが、
+**「raw/ が wiki の main value の中心である」という暗黙の前提は撤回** する。
+
+### 補助装置としての raw/ の 4 機能
+
+| 機能 | 補助としての役割 |
+|---|---|
+| 検証可能性 | knowledge network の**信頼性を増す** |
+| 作文リスク防衛 | knowledge network の**完全性を保護** |
+| ライセンス・帰属台帳 | **法的・倫理的境界の管理** |
+| LLM 範囲境界 | **権限マップ**（LLM書込権の境界） |
+
+### 「再生成可能なら gitignore 可」の含意
+
+コーパスモードの正当化原則（nishio about-nishio 由来）は、raw/ を source of truth として扱うか
+単なる参照層として扱うかの**選択可能性**を含意する。これは raw/ を wiki 全体の source of truth
+と扱う前提（過剰解釈）の自然な解消。
+
+### template への含意（v0.2 候補）
+
+- AGENTS.md L16「LLM は読むだけで、絶対に変更しない」→「LLM は変更しない（例外: 人間依頼時の追加）」に弱める
+- ingest SKILL.md にライブソース URL対応の1行追加
+- 「wiki ページにも frontmatter 推奨」原則は**撤回**（知識の network 中心モデルでは過剰）
+
+詳細は [[LLM Wikiのmain value]] ・ [[raw SSOT原則への根本検証]] を参照。
