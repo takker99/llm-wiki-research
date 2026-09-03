@@ -48,6 +48,7 @@ wiki/
 
 - sourcesページは必ず `raw/` へのリンクを含める。引用の流れ: raw → sourceページ → concept/entity
 - sourcesページのfrontmatter（`raw:` 必須 等）の形式は `.agents/skills/llm-wiki-ingest/SKILL.md` に定義
+- frontmatter は任意（sources 以外）。書く場合はページ種別に応じて `tags:` / `dates:` / `status:` / `sources:` 等のメタ情報を付加してよい。書かなくても wiki は機能する
 - `index.md` の各エントリは1行: `- [ページタイトル](パス) — 1行要約`。index.mdはページから導出可能なビューのキャッシュ: 陳腐化・欠損時はページ冒頭を読んで再生成してよい（lintが検証）
 - `log.md` の各エントリ: 見出し `## [YYYY-MM-DD] action | 短い題名` + 詳細は本文
 - 赤リンク（未作成ページへのリンク）は許容: 1ページのみから参照されるリンクのためにページを作らない。2ページ以上から参照されるようになったらページ作成を検討

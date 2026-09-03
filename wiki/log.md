@@ -339,3 +339,17 @@ query: 「templateにscripts/lint.shがあるけど、.agents/skills/llm-wiki-li
 - 自己適用実験の部分着手: lint操作のskill化（[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]残課題TODOに記録。ingest等の他操作は未実施）
 
 (touched 8 pages: 7 existing updated [MCP不採用とAGENTS.md+SKILL.md二層採用の根拠, 配布形式の決定とテンプレートの動機, このWikiの目的と研究課題, Lint, AGENTS.md+SKILL.md二層設計, リポジトリ分析 SKILL併用6事例, index.md存廃の設計判断] + log + 非wiki [本wiki AGENTS.md, .agents/skills/llm-wiki-lint/SKILL.md 新規, lint.sh×2移動, template lint SKILL.md])
+
+## [2026-09-03] observation | template instantiateのfrontmatter沈黙
+
+`~/git/elastic-wave-analyzer-wiki`（template v0.1 で instantiate）を確認したところ、frontmatter が `sources/*.md`（2ファイル）にしか付いていなかった。concepts（17）・entities（2）・analyses（1）・index/overview/log は全て frontmatter なし。subagent 相談の結果:
+
+- 挙動は template + ingest SKILL.md の明示的仕様に忠実（`raw:` は sources のみ必須）。concepts/entities/analyses の frontmatter は template AGENTS.md で完全に沈黙
+- lint も frontmatter を検査しない＝「書いても書かなくてもよい」領域
+- ユーザーには「意図してない結果」に見え、沈黙は無自覚に発生している
+- 研究wiki AGENTS.md には「frontmatter は任意」と明記、template には不在 → 二層間のポリシー不一致
+
+1. `template/AGENTS.md` 執筆の機械要件に「frontmatter は任意（sources 以外）。書く場合はページ種別に応じて `tags:` / `dates:` / `status:` / `sources:` 等のメタ情報を付加してよい。書かなくても wiki は機能する」を追加。沈黙を「意図された沈黙」に変える最小介入
+2. AMME-2026S-report（パイロット3、100ページ・frontmatter 不使用）と独立した2例目の「frontmatter 最小運用」事例として記録
+
+教訓: template の沈黙は実装上は最小哲学と整合するが、instantiate 側が「concept にもメタ情報が載る」挙動を期待すると意図の不一致になる。沈黙は書かないことが正解ではなく、**「書かなくてよい」を1行で宣言する**ことが正解。
