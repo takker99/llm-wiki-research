@@ -35,7 +35,11 @@ accessed: YYYY-MM-DD
 ---
 ```
 
-`raw:` は必須。ファイルパスは `raw/` から書く。`source_url:` と `accessed:` は任意。
+情報源へのポインタ (`raw:` または `source_url:`) は**1つ以上必須**。ファイルが両方あれば両方書く。
+
+- `raw:` — ファイルパスは `raw/` から書く
+- `source_url:` — URL参照ソース (Web文書・リポジトリ等、`raw/` 未収録)。リポジトリは `commit:` に参照時のcommit hashを固定して追加で書く (cloneしない場合の検証用)
+- `accessed:` は任意。どちらのポインタも書けないソースはingestしない
 
 ## 注意
 

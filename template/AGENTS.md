@@ -49,6 +49,8 @@ wiki/
 - sourcesページは必ず `raw/` へのリンクを含める。引用の流れ: raw → sourceページ → concept/entity
 - sourcesページのfrontmatter（`raw:` 必須 等）の形式は `.agents/skills/llm-wiki-ingest/SKILL.md` に定義
 - frontmatter は任意（sources 以外）。書く場合はページ種別に応じて `tags:` / `dates:` / `status:` / `sources:` 等のメタ情報を付加してよい。書かなくても wiki は機能する
+- concepts/entities の出典は本文中に sources ページへの [[wikilink]] を置く (claim粒度)。analyses の frontmatter `sources:` は入力 raw データ・スクリプトの列挙 (reproducibility manifest) という別の意味を持ち、出典では表現しない
+- 著者-年表記 (`(Otsu, 1979)` 等の LLM 一般知識に由来する文献表記) は帰属引用 (手法の命名・背景) ならこのままでよい。外部論文の**内容**を主張の根拠に載せる前に、原典に相当する sources ページを作る
 - `index.md` の各エントリは1行: `- [ページタイトル](パス) — 1行要約`。index.mdはページから導出可能なビューのキャッシュ: 陳腐化・欠損時はページ冒頭を読んで再生成してよい（lintが検証）
 - `log.md` の各エントリ: 見出し `## [YYYY-MM-DD] action | 短い題名` + 詳細は本文
 - 赤リンク（未作成ページへのリンク）は許容: 1ページのみから参照されるリンクのためにページを作らない。2ページ以上から参照されるようになったらページ作成を検討

@@ -372,3 +372,18 @@ query: 「templateにscripts/lint.shがあるけど、.agents/skills/llm-wiki-li
 教訓: 過剰解釈（raw/ SSOT = main value）の解消は、本質（knowledge network = main value）の明文化と同義。 template 設計にとって重要な方針転換であり、ver.2 以降の claims に反映する価値がある。 M2（template で育てた外部 wiki をこの repo が読んで評価）で事後検証する。
 
 (touched 6 pages: 2 new [raw SSOT原則への根本検証, LLM Wikiのmain value] + 4 existing updated [3層アーキテクチャ, rawディレクトリの取り扱い, LLM Wikiの作文リスク, claims対応表] + index/log)
+
+## [2026-09-25] feedback | 下流wiki (txa-xray-ct-wiki) の出典運用の明文化を取り込み
+
+下流wiki (txa-xray-ct-wiki) で「conceptsページがどれもfrontmatterを持たない。どのrawやURL、repoから参照したのかわからない」という不満が再発 — 2026-09-03 の frontmatter沈黙 observation と同型だが、今回は**研究wiki (検証可能性要求が高い用途) での実感**として出た。subagent 2往復相談の結果、claim#10 の撤回と衝突しない形で落とし所が見つかった:
+
+- concepts/entities の出典は**本文中の sources ページ [[wikilink]] (claim粒度) が正本**、frontmatter `sources:` は必須化しない — claim#10 と整合。理由: (a) 一般知識由来の著者-年表記は対応物が存在せずfrontmatterに書けない (b) 書き換え運用では二重帳簿のsync漏れ＝偽出典 (c) atomicity は概念の粒度で引用の粒度ではない (複数出典混在が普通)
+- analyses の frontmatter `sources:` は入力 raw の列挙 (**reproducibility manifest**) という別の意味として明文化。reproducibility manifest は「ファイル列挙→再実行可能」の計算的依存に成立し、証拠的依存の concepts には通用しない
+- 著者-年表記は**帰属引用 (命名・背景) vs 内容引用 (原典の主張が根拠)** で区別。内容引用は原典 ingest を前に必要。「数値→ingest」ではなく「内容引用→ingest」で切る
+- lint: 出典引用ゼロページ列挙 (赤リンクは `?` 併記)・著者-年表記棚卸し (LLM判定)・analyses manifest の raw パス存在チェック
+
+template への反映: template AGENTS.md 執筆の機械要件に2行・template lint SKILL.md に provenance 機械/意味チェックを追加。正本の設計記録は txa-xray-ct-wiki の `wiki/analyses/出典運用の設計判断.md`。
+
+教訓: 「意図された沈黙」の1行宣言 (2026-09-03) に加えて、**出典の正本がどこにあるか (frontmatter でなく本文wikilink) を1行で宣言する**必要がある。宣言なしの沈黙は下流wikiで「欠陥」として再発見される。
+
+(touched: template/AGENTS.md, template/.agents/skills/llm-wiki-lint/SKILL.md, template/wiki/log.md)
