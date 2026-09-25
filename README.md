@@ -2,7 +2,8 @@
 
 LLM Wikiテンプレートの研究・開発を目的とした**研究wiki**です。
 KarpathyのLLM WikiパターンとCosense（Scrapbox）コミュニティの知見をingestし、
-汎用で実用的なテンプレートを研究します。
+テンプレートを研究します。第一のユーザーは作者本人で、公開はas-is——誰でも利用できますが、
+他者の使いやすさへの配慮や既存実装との差別化は目的に含みません（[目的の再定義](wiki/analyses/このWikiの目的と研究課題.md)）。
 
 ## これは何か（ではない何か）
 
@@ -15,6 +16,7 @@ KarpathyのLLM WikiパターンとCosense（Scrapbox）コミュニティの知�
 ## Starter kitの使い方（template/）
 
 `template/` はLLM Wikiを始めるためのstarter kit。中身を新規wikiのrootにコピーすれば、すぐに動き始められる。
+作者のニーズを第一に設計したas-isのstarter kitなので、合わない点があれば改変・フォークしてほしい。
 
 ### コピー手順
 
@@ -53,18 +55,17 @@ template v0.1は**個人・研究・読書・プロジェクト（開発）系**
 
 ## 研究課題（抜粋）
 
-- 汎用テンプレートとして何を提供し、何をユーザー任せにするか
-- 汎用 `AGENTS.md` には何を書くべきか。何を書かないべきか
+- 自分のwiki群に提供すべきテンプレートの中身は何か。何をユーザー任せにするか
+- `AGENTS.md` には何を書くべきか。何を書かないべきか
 - ディレクトリ構成のベストプラクティスは何か
 - 配布形式はどうするか（`template/` ディレクトリ / 別repo / `npx create-llm-wiki` / 他）
-- 既存実装（Microsoft llmwiki、llm-wiki.app、各種CLIツール）との差別化
 - `AGENTS.md` はどこまで薄くできるか（このwiki自身が実験台）
 
 ## 現状
 
 - **M1達成**: `template/` v0.1実装済み（2026-08-14）
-- 次はM2: templateで外部wikiを立ち上げ・育て、このrepoが読んで評価する
-- 研究wikiは120ページ（ingest/analysisともに多数の知見蓄積済み）
+- **M2進行中**: 下流wiki 2件（elastic-wave-analyzer-wiki、txa-xray-ct-wiki）がtemplateから立ち上がり、フィードバックは既に取り込み済み（2026-09-03 / 2026-09-25）。M2は2026-09-25に「この研究wiki以外のwiki」へ再定義
+- 研究wikiは125ページ（ingest/analysisともに多数の知見蓄積済み。index/log除くlint計測）
 
 ## ライセンス
 
