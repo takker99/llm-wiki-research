@@ -82,6 +82,8 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [家計LLM-wiki](entities/家計LLM-wiki.md) — 個人資産管理のLLM Wiki。個人系の価値を実証
 - [猫LLM Wiki](entities/猫LLM Wiki.md) — 猫の医療記録管理。知識は恐怖の解毒剤の実例
 - [dd2030-wiki](entities/dd2030-wiki.md) — デジタル民主主義2030プロジェクトWiki。Agentic Retrievalによる経緯再構成
+- [elastic-wave-analyzer-wiki](entities/elastic-wave-analyzer-wiki.md) — 弾性波解析アプリの使い込みWiki。template下流wiki 1件目（M2検証対象・frontmatter沈黙フィードバック元・purpose欄未記入）
+- [txa-xray-ct-wiki](entities/txa-xray-ct-wiki.md) — 三軸弾性波+X線CT同時計測実験の記録Wiki。template下流wiki 2件目（出典運用フィードバック元・コードrepo一体型）
 - [ブロードリスニング本Wiki](entities/ブロードリスニング本Wiki.md) — 書籍1冊から62ページのWikiを生成
 - [注釈駆動Wiki](entities/注釈駆動Wiki.md) — ソースコードに注釈を付けるように知識を構造化
 - [Kozaneba](entities/Kozaneba.md) — KJ法支援ツール。前言語的構造化に強い

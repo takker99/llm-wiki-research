@@ -405,3 +405,14 @@ template への反映: template AGENTS.md 執筆の機械要件に2行・templat
 教訓: 動機の記録と研究課題の記述が乖離していても、片方（動機）だけが正しかった。目的を見直すときは「当初の動機の記録」を最初に読み戻す。
 
 (touched 14 files: 12 wiki [このWikiの目的と研究課題, 配布形式の決定とテンプレートの動機, claims対応表, overview, index, log + concepts 6件: 研究目的Wikiとプロジェクト目的Wiki, LLM Wikiの応用領域, 目的明示（purpose-hoist）, AGENTS.md+SKILL.md二層設計, LLM WikiテンプレートのOptionality, 理解のボトルネック] + 非wiki [AGENTS.md, README.md])
+
+## [2026-09-25] file-back | 下流wiki 2件のentityページ作成
+
+M2の一次資料である下流wiki 2件をentitiesに登録。2件とも本文中で2+頁から参照されておりentity化の基準を満たしていたが未登録だった。
+
+- [[elastic-wave-analyzer-wiki]] — template v0.1 instantiate 1件目。frontmatter沈黙（2026-09-03 observation）のフィードバック元。**追加観察: AGENTS.mdのpurpose欄がプレースホルダのまま**（2026-09-25時点。目的は overview 側にのみ存在）— purpose-hoist「空欄のまま運用しない」指示が未遵守の実例
+- [[txa-xray-ct-wiki]] — 2件目。出典運用（2026-09-25 feedback）のフィードバック元。app/・tests/とwiki/が同居するコードrepo一体型
+
+あわせて [[このWikiの目的と研究課題]]・[[配布形式の決定とテンプレートの動機]] 内の実名表記をwikilink化し、READMEにリンク追加、index.mdに収載。
+
+(touched 7 files: 2 new [elastic-wave-analyzer-wiki, txa-xray-ct-wiki] + 4 existing updated [このWikiの目的と研究課題, 配布形式の決定とテンプレートの動機, README, index] + log)
