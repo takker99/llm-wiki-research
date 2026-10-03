@@ -416,3 +416,15 @@ M2の一次資料である下流wiki 2件をentitiesに登録。2件とも本文
 あわせて [[このWikiの目的と研究課題]]・[[配布形式の決定とテンプレートの動機]] 内の実名表記をwikilink化し、READMEにリンク追加、index.mdに収載。
 
 (touched 7 files: 2 new [elastic-wave-analyzer-wiki, txa-xray-ct-wiki] + 4 existing updated [このWikiの目的と研究課題, 配布形式の決定とテンプレートの動機, README, index] + log)
+
+## [2026-10-03] file-back | Hermes Agent llm-wiki skillとの比較
+
+query: 「Hermes AgentにはLLM wikiを作る組み込みのagent skillがあるようだ。自分はそれとは別にLLM wikiの研究&template開発をするLLM wikiを~/git/llm-wiki-templateに作成し、そこのtemplateを用いている。双方を比較し、機能レベル、設計思想レベルの双方で相違点を明らかにしてほしい。またllm-wiki-templateの流儀からみて、意外に感じられるHermes AgentのLLM wiki skillの特徴もあれば教えてほしい」
+
+Hermes Agentの`llm-wiki` skill（v2.1.0）と本テンプレート（v0.1）を比較。analyses/新規作成。
+
+- 機能レベル: 管理ファイル（単一SKILL.md vs AGENTS.md+2skill+lint.sh）、frontmatter（必須 vs sourcesのみ必須）、タグ管理（タクソノミー vs なし）、provenance（段落末マーカー vs wikilink）、source drift検出（sha256 vs なし）、矛盾処理（frontmatter vs lint意味チェック）、品質シグナル（confidence vs なし）、lint（12項目 vs 機械+意味）、Obsidian連携（充実 vs なし）、ファイル命名（英語強制 vs 言語非依存）、赤リンク（broken vs 許容）、目的（なし vs 必須）、配布（プラットフォーム組み込み vs as-is starter kit）
+- 設計思想: agent管理の完成システム vs 人間とLLMの共進化、機械的メタデータ vs 人間の判断、raw不変+sha256 vs raw不変（人間の目）、Obsidian依存 vs git+エディタ、完成品 vs 研究仮説
+- テンプレートの流儀から見たHermesの意外な特徴: agentへの権限集中、provenanceの過剰設計、sha256による完全検証、Obsidianへのツールロックイン、「追記ではなく書き換え」の共通点、赤リンクの扱い、研究リポジトリとしての自己言及、「目的」の必須化
+
+(touched 4 files: 1 new [Hermes Agent llm-wiki skillとの比較] + 3 existing updated [赤リンクとLLM Wiki, Schema（AGENTS.md）, このWikiの目的と研究課題] + index/log)

@@ -66,3 +66,4 @@
 - [[Cosenseソースのingest方式]] — Cosenseソースの取り込み方式の提案（研究課題「情報信頼性」「配布形式」へのインプット）
 - [[rawディレクトリの取り扱い]] — raw/のgitignore・プライバシー・ライセンス・発見層の区別（open question）
 - [[LLM Wikiの作文リスク]] — 情報信頼性の概念
+- [[Hermes Agent llm-wiki skillとの比較]] — Hermesのllm-wiki skill（v2.1.0）との機能・設計思想レベルの比較（2026-10-03）
