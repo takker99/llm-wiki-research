@@ -428,3 +428,30 @@ Hermes Agentの`llm-wiki` skill（v2.1.0）と本テンプレート（v0.1）を
 - テンプレートの流儀から見たHermesの意外な特徴: agentへの権限集中、provenanceの過剰設計、sha256による完全検証、Obsidianへのツールロックイン、「追記ではなく書き換え」の共通点、赤リンクの扱い、研究リポジトリとしての自己言及、「目的」の必須化
 
 (touched 4 files: 1 new [Hermes Agent llm-wiki skillとの比較] + 3 existing updated [赤リンクとLLM Wiki, Schema（AGENTS.md）, このWikiの目的と研究課題] + index/log)
+
+## [2026-10-23] file-back | LLM Wiki実装のingest形式と運用の比較
+
+`~/git/`配下のLLM Wiki 8実装と実装repo 1件を4 subagentでsurveyし、ingestの形式と操作・運用を横断比較した。対象は自作wiki 5件（txa、wings、EWA、information-seeking、template root）、外部3件（nishio、delite、grasp）、実装repo 1件（microsoft）。主要な事実は元ファイルで抜き取り検証した。
+
+- ingest単位は入力のトポロジーで分岐する。文書は1:1、WebはトピックN:1、Cosenseは1–2hopバンドル、実験データはディレクトリ、成果物はファイル単位
+- sourceページは要約・台帳・目録・決定の4類型に分かれる。テンプレートは見出し骨格を定義しておらず、実装ごとに「含意」の節が異なる仕事をしている
+- 出典ポインタはアーカイブ・URL・commit・セッションの4モード。information-seekingはraw 0・22/23がURLのみ、wingsのsubmoduleはcommit pinがdrift
+- 長期運用ではingestよりfile-back・訂正・成果物同期が主経路になる。txaはanalysis 60・file-back 39・ingest 30、template rootはfile-back 27・ingest 9で8/14以降ingest 0
+- 共通の失敗は、出典規約の文書間不一致、規則とlint実装のずれ、意図的赤リンクとlintの衝突、purposeの空文化、re-ingestの未定義、analysesの意味の揺れ、口頭知識のprovenance欠如
+- template自身も、AGENTS.md・ingest SKILL・lint SKILL・lint.shの4箇所で出典規約が一致せず、lint SKILLが列挙するsourcesのraw検査をlint.shが実装していない
+
+設計への含意として、provenanceモード、sourceのrole、ingest/re-ingest/batch/refactorの語彙、lintのself-check、purposeの非空検証を整理した。claim#6（10–15ページ）はentityを作るwikiに限られること、claim#9（文書構成）は規約の実行を保証しないことを[[テンプレート草案ver.1]]のevidenceと[[claims対応表]]に追記した。
+
+(touched 7 files: 1 new [LLM Wiki実装のingest形式と運用の比較] + 5 existing updated [テンプレート草案ver.1, claims対応表, このWikiの目的と研究課題, パイロット分析 横断所見, index] + log)
+
+## [2026-10-23] file-back | 自作wiki群の構成変異と規約の流通
+
+query: 「~/git/にあるllm wikiを、ingestの形式及び操作・運用についてsubagentにsurveyし、傾向や違いを報告して」。なお本エントリ前に、別sessionが同じqueryでsurveyした結果が[[LLM Wiki実装のingest形式と運用の比較]]としてfile-back済み。本調査は3 subagentで講義系10・テーマ系7・開発系3をsurveyし、前ページの方針を練り直して統合した。
+
+- 前ページの対象外だった12実装を観察: 構成原理5軸（概念軸・講義回軸・製作物軸・API解説軸・flat）、authority 5型（markdown直編集・コードSSOT・SQLite作業層・SQLite SSOT）、template家族の規約流通（PGE発祥→starter kit経由でMACS/SP1→EGME移植、SMS→PGE逆輸入）、失敗の3段階（purpose空欄→AGENTS.md不在→wiki不在）
+- re-ingestの最初の実運用実例: SP1-2026Aが2026-10-13にlog種別`re-ingest`で4本のsubagent並列・新規1更新16ページを実行。一方SP1・PGE・SMSのSKILLには手順がなく、語彙が手順に先行
+- purposeの非空確認はREADME:25とtemplate/AGENTS.md:63と家族wiki規約に既に存在。⚠ Contradiction: 前ページ「template rootのコピー手順にはpurposeの非空検証がない」vs READMEのコピー手順。欠落の実態はlintの機械検証側にあり、EWA・SMS・FFPの3実例が下流での不遵守を示す
+- rawの変異3件の観察も追加: PGEの年度raw差し替え（templateの例外規定の未定義域）、arduinoのraw直下SOURCES.md手作りmanifest（gitignore型raw）、txa-xray-ct-wiki-papergraphのworktree運用
+- 前ページから受け取り、本ページで統合した事項: 系統4分類・ingest単位・失敗パターンは再記述せずリンクで参照。本survey側の「グループ別3区分」は前ページの系統分類と重複するため削り、構成・authority・raw・失敗を読み取り軸に置換
+
+(touched 4 files: 1 new [自作wiki群の構成変異と規約の流通] + 2 existing updated [LLM Wiki実装のingest形式と運用の比較, index] + log)

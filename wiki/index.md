@@ -145,3 +145,5 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [index.md存廃の設計判断](analyses/index.md存廃の設計判断.md) — Cosense批判（大きなリンク論は適用範囲外・真の核心は登録作業への違和感）⇔ index維持。肥大化は可視・出口あり、廃止は不可視・サイレント。stale-entries lint + 「indexはキャッシュ」宣言はv0.1に実装済み、variant guideは撤回（改変はagent任せ）（status: hypothesis）
 - [raw SSOT原則への根本検証](analyses/raw%20SSOT原則への根本検証.md) — LLM Wiki の main value = knowledge network の根拠。Karpathy gist の派生解釈・nishio 3段階態度変遷・raw/ の 6 機能分解・パイロット 7 実装の観察。claim#10 草案（status: hypothesis）
 - [Hermes Agent llm-wiki skillとの比較](analyses/Hermes%20Agent%20llm-wiki%20skillとの比較.md) — Hermesのllm-wiki skill（v2.1.0）との機能・設計思想レベルの比較。agent管理の完成システム vs 人間とLLMの共進化という研究仮説の対比（2026-10-03）
+- [LLM Wiki実装のingest形式と運用の比較](analyses/LLM%20Wiki実装のingest形式と運用の比較.md) — 8実装のingest単位・sourceの4類型・出典ポインタの4モード・運用実態を横断比較。sourceの骨格、provenanceモード、re-ingest、規則とlintの不一致を整理（2026-10-23）
+- [自作wiki群の構成変異と規約の流通](analyses/自作wiki群の構成変異と規約の流通.md) — 上記対象外の講義wiki群等12実装のsurvey。構成原理5軸・authority 5型・template家族の規約流通・失敗3段階・re-ingest実運用・purpose非空手順の訂正（2026-10-23）

@@ -20,6 +20,8 @@ evidence:
   - "2026-08-14 microsoft-llmwiki照合（claim#2）: [[Microsoft llmwiki]]もEntities/Concepts/Sources/Queriesの4分類をinitで固定する初期固定型の実装例。indexの空カテゴリスケルトンを生成して分類を最初に固定する。本wikiの「実質3分類」観察（2026-08-11）と併せると、設計空間は「初期固定（Microsoft, Karpathy）vs 伸びてから剪定（nishio系）」の分岐として整理できる。→ [[リポジトリ分析 microsoft-llmwiki]]"
   - "2026-08-14 microsoft-llmwiki照合（claim#4）: indexカタログ方式がKarpathy/nishio系と独立にソフトウェア実装された（weighted query: title 3x/summary 2x/body 1x、upgrade pathとしてローカル検索ツール追加を明言）。保守コスト対策としてlintにstale-entries（indexエントリの陳腐化=error）とindex-completeness（掲載漏れ=warning）を分離。→ [[リポジトリ分析 microsoft-llmwiki]]"
   - "2026-08-14 subagent相談2往復（claim#9）: [[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]。microsoft/llmwikiのMCP 14ツール定義は実測6.3KB≈1.6-2.0Kトークン/ターン常駐（単独では軽微・集約環境で実害）。SKILL.mdもfrontmatter ~100トークン/skillが常駐（ゼロコストではない）。Agent Skillsは2025-12にオープン標準化（形式互換・発見パスは.agents/へ集約、Claude Codeのみ例外）。OpenAI自身がAGENTS.md+.agents/skills/+scripts構成を公式OSS運用に採用。二層の価値はメンテナンス性で主張し1.9KBは売りにしない"
+  - "2026-10-23 survey（claim#6）: 8実装の比較で「1ソース10-15ページ」はentityを作りconceptを厚く書くwikiに限られる。txaは9-16ページ、template rootは33-53ページ、information-seekingは3.4 concepts/source、wingsは通常1-5ページ。数値はwikiの種類に依存する期待値であり、普遍的な正常値ではない。→ [[LLM Wiki実装のingest形式と運用の比較]]"
+  - "2026-10-23 survey（claim#9）: 操作層をAGENTS.md+SKILL.md+scriptsで提供する構成は実装間で収束した。一方、template自身のAGENTS.md・ingest SKILL・lint SKILL・lint.shの4箇所で出典規約が一致せず、lint SKILLが列挙するsourcesのraw検査をlint.shが実装していない。文書構成の採用だけでは規約の実行は保証されない。→ [[LLM Wiki実装のingest形式と運用の比較]]"
 superseded_by:
 ---
 
@@ -48,4 +50,5 @@ superseded_by:
 - [[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]] — 20+ Wiki実運用データと運用知見
 - [[2026-08-11 AIを使った知識マネジメント (villagepump)]] — コミュニティ議論
 - [[このWikiの目的と研究課題]] — 研究課題とTODO
+- [[LLM Wiki実装のingest形式と運用の比較]] — 8実装のingest・運用比較とclaim#6/#9の追加データ点
 - [[LLM Wikiの作文リスク]] — 複製を作らない理由
