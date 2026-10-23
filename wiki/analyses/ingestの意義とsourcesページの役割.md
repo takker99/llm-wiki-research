@@ -6,6 +6,9 @@ sources:
   - "[[2026-08-11 Karpathy LLM Wiki Gist]]"
   - "[[LLM Wiki実装のingest形式と運用の比較]]"
   - "[[自作wiki群の構成変異と規約の流通]]"
+  - "[[Hermes Agent llm-wiki skillとの比較]]"
+  - "[[2026-08-14 SKILL併用LLM Wiki vanillaflava (github)]]"
+  - "[[事前にやろうとしない運用哲学]]"
 ---
 
 # ingestの意義とsourcesページの役割
@@ -30,16 +33,34 @@ post-ingestのレビュー（"I read the summaries, check the updates, and guide
 
 Karpathyが規定しなかった「ingestの単位」が入力のトポロジーで分岐する実測として確定し（1文書・トピック・成果物・コーパス・セッション）、「1ソースが10–15ページ」がwiki種類依存の期待値であることが訂正された（survey 1）。既存ページへの波及は下流wikiでも観察されている（txaで9–16ページ、SP1のre-ingestで新規1・更新16ページ）。surveyの共通する失敗パターン群に「孤立した要約の集合」は現れない。[[ingestにおける編み込みの実際]]の教訓「新規作成だけでは孤立した要約の集合になる」が下流で再発した兆候は観察されていない。
 
-### ②kept current: 前半は普及して、後半が欠落している
+### ②kept current: 検出はKarpathyが先行定義し、修復が未制度化
 
-compile onceの半分は全wikiに普及した。kept currentの半分は制度化されていない。
+compile onceの半分は全wikiに普及した。kept currentの半分について、Karpathy自身は**検出側をLintに先行定義している**: "Look for: contradictions between pages, stale claims that newer sources have superseded, orphan pages with no inbound links…"（raw/karpathy-llm-wiki-gist.mdのLint節）。Karpathyの設計は「検出はLintの仕事、修復手順は書かない」であり、修復の制度化は実装群に丸投げされている。本テンプレートのlint機械検査にstale-claims（新ソースに上書きされた主張）項目がなく、検出側から未実装である。
+
+修復（re-ingest）の実態:
 
 - re-ingestは「どのingest SKILLにも手順がない」。古い要約をどう捨てるか、`accessed`を更新するか、commit pinを進めるかが未定義（survey 1）
 - wingsのcommit pinは実HEADに追随していない
 - PGEの年度raw差し替えはtemplateの不変性例外の未定義域にある（survey 2）
 - SP1では`re-ingest`という語彙だけがlogに先出しし、手順の定義が来ていない（survey 2）
 
-survey 1の系統分類でtxaが「鮮度劣化が静か」と評価されているのはこの症状である。Karpathyの複利（[[永続Wikiと複利効果]]）は「編み込み × kept current」の積で成立するため、re-ingestの欠落は複利効果の半滅を意味する。
+一方で、re-ingestを名指す実装は2件ある。
+
+- [[Hermes Agent llm-wiki skillとの比較]]: rawのsha256を保存し、re-ingest時にdrift検出する。調査範囲で唯一の機械検出実装
+- [[2026-08-14 SKILL併用LLM Wiki vanillaflava (github)]]: raw/→ingested/移動の状態管理で冪等な再ingest（「再ingestしても害なし」）。`reliability:`の低いソースに強いソースを入れて再ingestすると`## Pending Review`節が消える
+
+限定条件が1つある。re-ingestが要るのは**rawが変異するwikiだけ**である（年度PDFの差し替え、コードpinの進行、コーパスの更新）。raw不変＋時系列append型のwikiでは、stalenessはappend構造に吸収される。したがって「どのSKILLにもre-ingestがない」は「不足」と「入力特性が生む負荷の偏り」の両方を含む観察であり、survey 1の系統分類でtxaが「鮮度劣化が静か」と評価されているのは、インバウンド型wikiでこの劣化が静かに進むことの指摘である。
+
+nishioはre-ingestという語彙を持たない（raw/と勉強会原文のgrepで出てこない）。しかしkept current問題に対して、名指しなしの4戦略を持つ。
+
+1. 時系列の重ね書き — 変化する値は古いページを改めず新しい時点をappend（猫wiki・家計wiki型）
+2. 発見駆動の一括修正 — ingest検証を毎回しない代わりに「間違いに気づいたら一括修正」（[[事前にやろうとしない運用哲学]]）。KarpathyのLint検出とほぼ同型の「使用時に発見 → まとめて修復」
+3. 作り直し — 壊れたwikiを直さず、rawから新wikiを作る（[[株分け（kabuwake）]]のraw-source方式）
+4. 深化型の再ingest — Deep Researchレポートをingest後、参照先論文を取得して再ingestする2段構え（[[ChatGPT ProとLLM Wikiの併用]]）。re-ingestを「再現」でなく「拡張」の文脈で使う
+
+「LLMによるcost inversion」の帰結として、定型的なre-ingest手順を候補から外したと読める。
+
+Karpathyの複利（[[永続Wikiと複利効果]]）は「編み込み × kept current」の積で成立する。検出・修復ともに制度化されていないままでは複利効果の半滅だが、使用時発見戦略が機能しているwikiでは損失は緩い。
 
 ### ③schemaへの明文化: 実質的に失敗している
 
@@ -60,7 +81,7 @@ wiki内でのingestの本質の定義は「孤立した要約でなく既存ネ�
 
 surveyの実測では、長期運用の主経路がingestの外に移っている。txaはanalysis 60・file-back 39・edit 36・fix 33・ingest 30、template rootはfile-back 27・ingest 9で2026-08-14以降ingest 0回（survey 1）。これは本質が忘れたのではなく、**編み込みという本質がingestという名前から脱退してfile-backとanalysisに移住した**と読むのが正しい。[[ingestとfile-backの反映方法の同型性]]は両者が同じ編み込み操作だと結論している。
 
-忘れかけているのは編み込み側ではなく②で述べた現状維持側。編み込みの忘却が将来観測されるなら、徴候は孤立要約の増加である。
+忘れかけているのは編み込み側ではなく②で述べた現状維持側。内訳は、検出（KarpathyがLintに先行定義したが本wikiのlint機械検査にstale-claims項目がない）と修復（re-ingest手順）の両方が実装されていないこと。ただしre-ingestの必要性はrawが変異するwikiに偏る。編み込みの忘却が将来観測されるなら、徴候は孤立要約の増加である。
 
 ## ingestの意義
 
@@ -90,12 +111,15 @@ wiki内の定式を重ねると、ingestの役割は次の3つで記述できる
 ## テンプレートへの含意
 
 - re-ingest制度化は、出典規約の一致とは独立の論点として切り出される根拠を持つ。survey 1の優先順位では「出典規約の一本化と規則・実装の一致テスト、次にre-ingestの定義」となっているが、②の照合はre-ingestの欠落をingest思想の半分の欠落として位置づける
+- kept currentの検出はKarpathyがLintに割り当てている。template側から着手するなら手順（re-ingest）より先にlintのstale-claims検査項目を追加するのが筋がよい。pin drift・`accessed`陳腐化の機械検査はその次
+- re-ingestの制度化の射程はrawが変異するwiki型（講義型・コードrepo一体型・コーパス型）に限定すべきで、raw不変＋append型wikiに手順を義務化すると規約が実態に合わなくなる
 - re-ingestの対象は既存のsourcesページ（仕事3）である。sourcesページの骨格（`## 要点`・`## 含意`・`## 関連`）とre-ingestの手順は同時に設計すると整合する
 - batch運用を続けるなら、人間の判断の痕跡の形式を決める必要がある。これはsurvey 1の「口頭知識のprovenanceがない」と同型の問題であり、`source: session`形式の必要性の根拠を強める
 
 ## 未解決
 
-- [ ] kept currentの欠落をlintで検知できるか。pin driftや`accessed`の陳腐化の機械検査は、survey 1の`--self-check`論点に接続する
+- [ ] kept currentの欠落をlintで検知できるか。Karpathyは検出をLintに割り当てているため、まずstale-claims（新ソースに上書きされた主張）検査項目をlintに足すかどうかが論点。pin driftや`accessed`の陳腐化の機械検査はその次で、survey 1の`--self-check`論点に接続する
+- [ ] nishioの4戦略（重ね書き・一括修正・作り直し・深化型再ingest）をkept currentの選択肢としてvariant guideに記載するか
 - [ ] sourcesページの4仕事のうちテンプレートに既定するのはどれか。`role:`で分けるかvariant guideに回すか、骨格との関係をどうするか
 - [ ] 編み込み忘却の徴候（孤立要約の増加）をどう検知するか
 - [ ] 3関節の分解自体は本ページの提案。Karpathyの他の言及や他実装との照合で反例があるか
@@ -113,3 +137,7 @@ wiki内の定式を重ねると、ingestの役割は次の3つで記述できる
 - [[LLM Wikiは要約の改良版ではない]] — 99ページ結合の原典
 - [[永続Wikiと複利効果]] — 複利 = 編み込み × kept current
 - [[注意の足場]] — ingestが作る層構造
+- [[Hermes Agent llm-wiki skillとの比較]] — rawのsha256保存とre-ingest時のdrift検出。re-ingestを名指す実装
+- [[2026-08-14 SKILL併用LLM Wiki vanillaflava (github)]] — ingested/状態管理による冪等な再ingestと`reliability:`更新
+- [[事前にやろうとしない運用哲学]] — 発見駆動の一括修正。kept currentのnishio流の解法
+- [[株分け（kabuwake）]] — rawから作り直すkept current

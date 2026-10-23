@@ -467,3 +467,14 @@ query: 「HEAD commitで調べたllm wikiはkarpathyの設計思想にそったi
 - sourcesページの4仕事の分解: 出典単位の主張の台帳 / 編み込みの照合台帳 / stalenessのハンドル / 人間レビューの接点。survey 1の4類型観察を意義面から補強し、role:提案を支持。re-ingestの対象は既存sourcesページなので、骨格と手順の同時設計を提案
 
 (touched 6 files: 1 new [ingestの意義とsourcesページの役割] + 3 existing updated [Ingest, LLM Wiki実装のingest形式と運用の比較, 自作wiki群の構成変異と規約の流通] + index/log)
+
+## [2026-10-23] file-back | ingestの意義とsourcesページの役割（kept currentの検出・修復分解）
+
+query: 「re-ingest/keep currentって、そもそも言及しているllm wikiはあるの？llm wikiをよく研究しているnishioは何も触れてないの？」。前エントリで作ったページの②節を精読し直して更新した。
+
+- Karpathyはkept currentの検出をLintに先行して定義している（"stale claims that newer sources have superseded"）。Karpathyの設計は「検出はLintの仕事、修復手順は書かない」。本テンプレートのlint機械検査にはstale-claims項目がなく、検出側から未実装
+- re-ingestを名指す実装は2件: Hermes（rawのsha256を保存しre-ingest時drift検出。調査範囲で唯一の機械検出）、vanillaflava（raw/→ingested/状態管理で冪等な再ingest＋reliability更新で`## Pending Review`解除）。実運用ではSP1のlog語彙・EWA・information-seeking・PGEが手順なしに自然発生
+- nishioはre-ingestという語彙を持たない（raw/・勉強会原文のgrepで不在）。ただし名指しなしの4戦略でkept current問題を解く: 時系列の重ね書き（猫wiki・家計wiki型）、発見駆動の一括修正（[[事前にやろうとしない運用哲学]]）、作り直し（raw-source [[株分け（kabuwake）]]）、深化型再ingest（[[ChatGPT ProとLLM Wikiの併用]]の2段構え）。cost inversionの帰結として、定型的なre-ingest手順を候補から外したと読める
+- 限定を追加: re-ingestが必要になるのはrawが変異するwiki（年度PDF・コードpin・コーパス更新）だけ。raw不変＋時系列append型ではstalenessはappend構造に吸収される。「どのSKILLにもない」は不足と入力特性が生む負荷の偏りの両方。含意を更新: template側から着手するなら手順より先にlintのstale-claims検査項目追加、re-ingest手順の義務化射程はraw変異型wikiに限定
+
+(touched 3 files: 1 existing updated [ingestの意義とsourcesページの役割] + index + log)
