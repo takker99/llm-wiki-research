@@ -248,6 +248,7 @@ file-back中心の運用には、会話・口頭知識用のsource形式が必�
 ## 関連
 
 - [[自作wiki群の構成変異と規約の流通]] — 対象外であった講義wiki群と開発wiki群12実装のsurvey。構成原理の分岐、authorityの分布、規約の家族内流通を補い、purpose非空手順の所在を訂正する観察を含む
+- [[ingestの意義とsourcesページの役割]] — 本ページの知見をKarpathy gist原文のingest節の3関節へ照合し直した分解。re-ingest欠落をkept currentの欠落として位置づけ、sourceページの4類型を4仕事の可変配分として読み直す
 - [[パイロット分析 横断所見]] — 外部repo 5件の横断比較。本ページは自作wikiと運用実態を加えた拡張
 - [[テンプレート草案ver.1]] — 検証対象のclaims
 - [[claims対応表]] — claimごとの記述的検証と規範的决定

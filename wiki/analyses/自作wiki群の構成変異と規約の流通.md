@@ -137,6 +137,7 @@ phase差として整理するには観察期間が足りない。
 ## 関連
 
 - [[LLM Wiki実装のingest形式と運用の比較]] — ingest単位と出典ポインタの9実装横断。本ページを補完し、purpose非空手順の指摘1件を訂正する
+- [[ingestの意義とsourcesページの役割]] — Karpathy gist原文のingest節への照合。本ページのre-ingest語彙先行の観察をkept currentの欠落として位置づけ直す
 - [[パイロット分析 横断所見]] — AGENTS.mdのサイズとindex/log配置の横断
 - [[AGENTS.md+SKILL.md二層設計]] — 家族wikiを通じて広がった二層化
 - [[Wikiとコードリポジトリの関係]] — コードSSOT型とSQLite型のデータ点

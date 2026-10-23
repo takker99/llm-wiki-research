@@ -147,3 +147,4 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [Hermes Agent llm-wiki skillとの比較](analyses/Hermes%20Agent%20llm-wiki%20skillとの比較.md) — Hermesのllm-wiki skill（v2.1.0）との機能・設計思想レベルの比較。agent管理の完成システム vs 人間とLLMの共進化という研究仮説の対比（2026-10-03）
 - [LLM Wiki実装のingest形式と運用の比較](analyses/LLM%20Wiki実装のingest形式と運用の比較.md) — 8実装のingest単位・sourceの4類型・出典ポインタの4モード・運用実態を横断比較。sourceの骨格、provenanceモード、re-ingest、規則とlintの不一致を整理（2026-10-23）
 - [自作wiki群の構成変異と規約の流通](analyses/自作wiki群の構成変異と規約の流通.md) — 上記対象外の講義wiki群等12実装のsurvey。構成原理5軸・authority 5型・template家族の規約流通・失敗3段階・re-ingest実運用・purpose非空手順の訂正（2026-10-23）
+- [ingestの意義とsourcesページの役割](analyses/ingestの意義とsourcesページの役割.md) — Karpathy gist原文のingest節3関節×2surveyの照合。統合は精緻化、kept currentとschema明文化が欠落、編み込みは本質がfile-backに移住。ingest=種まきの初期投資、sourcesページ=4仕事の可変配分（2026-10-23）

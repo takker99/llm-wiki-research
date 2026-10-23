@@ -455,3 +455,15 @@ query: 「~/git/にあるllm wikiを、ingestの形式及び操作・運用に�
 - 前ページから受け取り、本ページで統合した事項: 系統4分類・ingest単位・失敗パターンは再記述せずリンクで参照。本survey側の「グループ別3区分」は前ページの系統分類と重複するため削り、構成・authority・raw・失敗を読み取り軸に置換
 
 (touched 4 files: 1 new [自作wiki群の構成変異と規約の流通] + 2 existing updated [LLM Wiki実装のingest形式と運用の比較, index] + log)
+
+## [2026-10-23] file-back | ingestの意義とsourcesページの役割
+
+query: 「HEAD commitで調べたllm wikiはkarpathyの設計思想にそったingestになっているのか。ingestの本質が忘れられていることはないか。そもそもingestの意義は何だったのか。sourcesページの意義がわからん」。2つのHEAD surveyをKarpathy gist原文（ingest節）へ照合し直した。survey自体は原文照合をしていなかった。
+
+- Karpathyのingest節は3関節に分解できる: ①既存ネットワークへの統合 ②compiled once and then kept current ③schemaへの明文化。post-ingestレビューはbatch許容と併記された本人の選好で、3関節の外側
+- 照合結果: ①はむしろ精緻化された（単位のトポロジー分岐・波及数のwiki依存性・孤立要約は失敗パターンに不在）。②の前半は普及したが後半が制度化されていない（re-ingest手順なし・wingsのpin drift・PGEの年度差し替え未定義域・SP1の語彙先行）。③は規則と実装のdriftで実質失敗（template自身4箇所の不一致・家族内コピー差分）
+- ingestの本質（編み込み）は忘れられていない。名前から脱退してfile-backとanalysisに移住した（txaでingest 30に対しanalysis 60・file-back 39）。欠けているのは現状維持の半分で、複利効果の半滅に対応
+- ingestの意義の定式: 要約を作ることではなく「後に来る全ての問いとソースの結合確率を高める初期投資」。front-loadedで、種まき期後の主経路がfile-backに譲るのは正常状態
+- sourcesページの4仕事の分解: 出典単位の主張の台帳 / 編み込みの照合台帳 / stalenessのハンドル / 人間レビューの接点。survey 1の4類型観察を意義面から補強し、role:提案を支持。re-ingestの対象は既存sourcesページなので、骨格と手順の同時設計を提案
+
+(touched 6 files: 1 new [ingestの意義とsourcesページの役割] + 3 existing updated [Ingest, LLM Wiki実装のingest形式と運用の比較, 自作wiki群の構成変異と規約の流通] + index/log)
