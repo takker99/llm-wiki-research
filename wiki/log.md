@@ -511,3 +511,11 @@ query: 「file backとingestは、queryを起点とするかarchiveしたrawを�
 - [[ingestとfile-backの反映方法の同型性]]、[[AGENTS.md+SKILL.md二層設計]]、[[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]を更新
 
 (touched 9 files: 2 new/renamed skills [template/.agents/skills/llm-wiki-write/SKILL.md, .agents/skills/llm-wiki-write/SKILL.md] + 3 existing wiki pages updated [ingestとfile-backの反映方法の同型性, AGENTS.md+SKILL.md二層設計, Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計] + index/log + AGENTS.md + template/AGENTS.md)
+
+## [2026-10-24] file-back | 知識グラフ読み書きの先行研究サーベイ
+
+query: 「knowledge graphの効果的な読み書き（human/AI）についての研究はないか。subagent（GLM-5.3 Flash Free high）に調べさせて」
+
+subagentの文献サーベイを出発点に、主要文献を出版社・arXiv・ACM DLの原典ページで再確認してanalysesページを作成した。結論は「研究はあるが単一分野としては存在せず、人間の読み書き（ハイパーテキスト・information foraging・sensemaking・PKM）、AIの読み（GraphRAG・multi-hop retrieval）、AIの書き（agent memory・KG構築）の3系統に分断」。近傍同梱はHippoRAGのPPRやGraphRAGのlocal searchとアルゴリズム的に同型で裏付けが厚い一方、2 hop linkの認知効果、大きなリンクの実害、意図的赤リンクの設計、書く前の近傍読解の因果効果はPKM文脈では未実証であることを整理した。subagent報告の書誌誤り（Chi et al.の年、Lydon-Staleyの掲載誌、McDonald & Stevensonの題名、West et al.の著者、Salton & Buckleyの誤用）は修正済み。URL引用のみで、raw/へのアーカイブは行っていない。
+
+(touched 5 pages: 1 new [知識グラフ読み書きの先行研究サーベイ] + 3 existing updated [Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計, Cosenseのリンク概念, LLM Wikiのmain value] + index/log)

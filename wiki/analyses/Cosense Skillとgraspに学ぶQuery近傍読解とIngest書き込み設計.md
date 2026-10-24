@@ -53,6 +53,8 @@ Cosense CLIの`browsePage`もgraspの`read`も、未作成ページが指定さ�
 
 [[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]が示す通り、人間がCosenseを「ちゃんと読む」と呼ぶ行為は、本文・メタデータ・関連ページリストを1画面のUIで同時に知覚することで成立している。手順書で「逆リンクもgrepしろ、関連ページも探せ」と複雑に指示すると下位モデルで動かなくなるが、1ページ読むコマンドの出力末尾に`Related Pages`を強制的に同梱すれば、手順書を薄く保ったままAIの自律的な近傍探索を引き出せる。
 
+これらの優位性のうち、近傍同梱はHippoRAGのPersonalized PageRankやGraphRAGのlocal searchとアルゴリズム的に同型であり、人間のリンク追従も2〜4 hopで閉じることが知られる（[[知識グラフ読み書きの先行研究サーベイ]]）。一方、2 hop linkの認知効果や大きなリンクの実害はPKM文脈では未実証であり、本ページの主張は実装と実践の観察に基づく仮説である。
+
 ---
 
 ## 2. Query用shell scriptの設計原則
@@ -155,6 +157,7 @@ Query・File-backのusability testでは、3モデルとも`search-pages.sh`の�
 ## 関連
 
 - [[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]] — 本分析の主ソース
+- [[知識グラフ読み書きの先行研究サーベイ]] — 2 hop link・近傍同梱・赤リンクに対応する既存研究と未検証点
 - [[Cosenseのリンク概念]] — 2 hop link・大きなリンク・関連ページリストの理論
 - [[赤リンクとLLM Wiki]] — 未解決ターゲットの概念ハブとしての機能
 - [[LLM Wikiのmain value]] — 価値の中心としてのknowledge network
