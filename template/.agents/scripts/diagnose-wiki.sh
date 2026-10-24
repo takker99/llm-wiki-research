@@ -152,13 +152,13 @@ END {
   for (i = 0; i < n && i < 15; i++) printf "  %3d  [[%s]]\n", d[i], name[i]
 
   print ""
-  print "--- [赤リンク(未作成)] 被リンク top 30 (中間概念ハブ化候補: 2+参照をlintがASPECT_HANDLE扱い) ---"
+  print "--- [オープンリンク(未作成)] 被リンク top 30 (中間概念ハブ化候補: 2+参照はlintがOPEN_LINK表示) ---"
   n = 0
   for (t in n_all) if (!(t in exists)) { d[n] = n_all[t]; name[n] = t; n++ }
   for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) if (d[j] > d[i]) { dd=d[i]; d[i]=d[j]; d[j]=dd; nn=name[i]; name[i]=name[j]; name[j]=nn }
   total_unres = 0
   for (i = 0; i < n; i++) { total_unres++; if (i < 30) printf "  %3d  [[%s]]\n", d[i], name[i] }
-  printf "  (赤リンク総数: %d)\n", total_unres
+  printf "  (オープンリンク総数: %d)\n", total_unres
 }
 '
 echo ""
