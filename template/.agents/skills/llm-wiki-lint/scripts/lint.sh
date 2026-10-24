@@ -4,7 +4,7 @@
 # Run with: bash .agents/skills/llm-wiki-lint/scripts/lint.sh
 
 set -euo pipefail
-WIKI_DIR="$(dirname "$0")/../../../../wiki"
+WIKI_DIR="$(cd "$(dirname "$0")/../../../.." && pwd)/wiki"
 
 echo "=== LLM Wiki Lint ==="
 echo ""
@@ -17,12 +17,12 @@ for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/anal
   basename="$(basename "$page" .md)"
   # Count how many other wiki pages link to this page
   if [[ "$page" == "$WIKI_DIR"/sources/* ]]; then
-    count=$(grep -rl "\[\[${basename}\]\]" "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources --include="*.md" 2>/dev/null | wc -l || true)
+    count=$(grep -rl --exclude="$(basename "$page")" "\[\[${basename}\]\]" "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources --include="*.md" 2>/dev/null | wc -l || true)
   else
-    count=$(grep -rl "\[\[${basename}\]\]" "$WIKI_DIR" --include="*.md" 2>/dev/null | wc -l || true)
+    count=$(grep -rl --exclude="index.md" --exclude="log.md" --exclude="$(basename "$page")" "\[\[${basename}\]\]" "$WIKI_DIR" --include="*.md" 2>/dev/null | wc -l || true)
   fi
   if [ "$count" -eq 0 ]; then
-    echo "  ORPHAN: $page"
+    echo "  ORPHAN: ${page#"$WIKI_DIR"/}"
   fi
 done
 echo ""
@@ -32,7 +32,7 @@ echo ""
 #   1 page   = BROKEN       (likely typo / private jargon, or intentional red link)
 #   2+ pages = ASPECT_HANDLE (concept hub seed; candidate for page creation)
 echo "--- Broken wikilinks (classified by ref count) ---"
-find "$WIKI_DIR" -name "*.md" -print0 | xargs -0 awk '
+find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xargs -0 awk '
   /^```/ { inblock = !inblock; next }
   !inblock {
     line = $0

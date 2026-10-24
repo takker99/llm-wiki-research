@@ -53,26 +53,15 @@ wiki/
 
 ### Ingest
 
-1. `raw/` の新ファイルを読む。
-2. `index.md` を読み、このWikiの目的に照らして既存ページとの接続点と未カバー領域を特定する。
-3. 人間と3-5つの要点を議論する。何を重視するか聞く。
-4. ページを作成・更新:
-   - `sources/YYYY-MM-DD タイトル.md`（要約 + 関連concept/entityへのリンク）
-   - 影響を受ける concepts/ と entities/ のページを更新（リンク追加、記述更新）
-   - 既存の主張と矛盾する場合は明示する: 「⚠ Contradiction: [旧主張] vs [新ソース]」
-   - 新規の概念・実体があれば概念ページを作成
-5. `index.md` を更新（新ページ追加、変更された要約の更新）。
-6. `log.md` に追記: 見出し `## [DATE] ingest | source-name` + 本文に `(touched N pages: M new + K existing updated + index/log)`
-
-`raw/` のファイルは絶対に変更・削除しない。人間が明示的に依頼した場合のみ削除してよい。
+「ingestして」と言われたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う。
 
 ### Query
 
-1. まず `index.md` を読んで関連ページを探す。
-2. 有望なページを読み、必要に応じてwikilinkを辿る。
+1. `bash .agents/scripts/search-pages.sh "<検索語>"` と `wiki/index.md` で関連ページや未作成リンクを探す。見つからない時は `--fulltext` で本文全文を検索する。
+2. 有望なページや複数ページから参照される未作成リンクを `bash .agents/scripts/read-page.sh "<タイトル>"` で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る。
 3. `[[wikilink]]`引用付きで回答を総合する。
 4. 回答後、「これをwikiページとしてfile-backする？」と提案する。
-5. 承諾されたらページを作成（通常は analyses/ か concepts/）し、関連する既存ページへのwikilinkを張る。明らかに影響を受ける既存ページがあればリンク・記述を更新し、矛盾が生じたら明示する。index.md と log.md を更新する。
+5. 承諾されたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う。
 
 ### Lint
 

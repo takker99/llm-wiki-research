@@ -47,7 +47,7 @@ wiki/
 ## 執筆の機械要件
 
 - sourcesページは必ず `raw/` へのリンクを含める。引用の流れ: raw → sourceページ → concept/entity
-- sourcesページのfrontmatter（`raw:` 必須 等）の形式は `.agents/skills/llm-wiki-ingest/SKILL.md` に定義
+- sourcesページのfrontmatter（`raw:` 必須 等）の形式は `.agents/skills/llm-wiki-write/SKILL.md` に定義
 - frontmatter は任意（sources 以外）。書く場合はページ種別に応じて `tags:` / `dates:` / `status:` / `sources:` 等のメタ情報を付加してよい。書かなくても wiki は機能する
 - concepts/entities の出典は本文中に sources ページへの [[wikilink]] を置く (claim粒度)。analyses の frontmatter `sources:` は入力 raw データ・スクリプトの列挙 (reproducibility manifest) という別の意味を持ち、出典では表現しない
 - 著者-年表記 (`(Otsu, 1979)` 等の LLM 一般知識に由来する文献表記) は帰属引用 (手法の命名・背景) ならこのままでよい。外部論文の**内容**を主張の根拠に載せる前に、原典に相当する sources ページを作る
@@ -62,18 +62,18 @@ wiki/
 
 1. 人間がpurposeを確認・確定する（空欄のままなら運用しない）
 2. 最初のingestの種（ソース）は人間が持ってくる
-3. 「このソースをingestして」と依頼されたら `.agents/skills/llm-wiki-ingest/SKILL.md` を読んで従う
+3. 「このソースをingestして」と依頼されたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う
 
 ## オペレーション
 
 ### Ingest
 
-「ingestして」と言われたら `.agents/skills/llm-wiki-ingest/SKILL.md` を読んで従う。
+「ingestして」と言われたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う。
 
 ### Query（常時行動）
 
-1. まず `index.md` を読んで関連ページを探す
-2. 有望なページを読み、必要に応じてwikilinkを辿る
+1. `bash .agents/scripts/search-pages.sh "<検索語>"`と`wiki/index.md`で関連ページや未作成リンクを探す。見つからない時は`--fulltext`で本文全文を検索する
+2. 有望なページや複数ページから参照される未作成リンクを`bash .agents/scripts/read-page.sh "<タイトル>"`で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る
 3. `[[wikilink]]`引用付きで回答を総合する
 4. 回答後、「これをwikiページとしてfile-backする？」と提案する
 
@@ -87,9 +87,7 @@ wiki/
 実質的なQuery回答の後や、作業（実装・議論・調査）中に生まれた知見の後は、
 wikiページとして保存するか提案する。消えていく知識をデフォルトで保存する方向にする。
 
-承諾されたら analyses/ か concepts/ に作成し、既存ページへのwikilinkを張る。
-明らかに影響を受ける既存ページがあればリンク・記述を更新し、矛盾が生じたら明示する。
-index.md と log.md を更新する。
+承諾されたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う。
 
 ## よくあるパターン
 
