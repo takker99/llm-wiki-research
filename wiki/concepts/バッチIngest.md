@@ -36,8 +36,6 @@ raw/へのdrag&dropをfile watcherが自動ingest、外部ファイルは `.wiki
 
 ## 関連概念
 
-- [[Ingest]] — 基本のingest操作
-- [[Post-ingestレビューループ]] — 1つずつingestと相性が良い
 - [[Lint]] — バッチingest後の品質回復手段
 - [[LLM WikiテンプレートのOptionality]] — どちらをデフォルトにするかはテンプレート設計の判断ポイント
 - [[ingestの監視頻度とソース数の2軸]] — バッチの本質は「多数のソース」ではなく「少ない監視」にあるという整理

@@ -19,15 +19,11 @@ nishioの20+ Wiki実践（[[LLM Wikiの実運用データ]]）では、[[Wikis-a
 ## 関連概念
 
 - [[永続Wikiと複利効果]] — RAGとの対比で「compounding artifact」を説明
-- [[LLM Wikiは要約の改良版ではない]] — 情報を圧縮せず注意の足場を作る
-- [[LLM Wikiの本質定義]] — nishioによる最も簡潔な定義
 - [[3層アーキテクチャ]] — raw / wiki / Schema
 - [[Ingest]] / [[QueryとFile-back]] / [[Lint]] — 3つの基本操作
 - [[Obsidian as IDE]] — 具体的なツールチェーン
 - [[Memex]] — Vannevar Bush の先駆的ビジョンとの接続
 - [[LLM Wikiの応用領域]] — 個人・研究・読書・ビジネス等
-- [[LLM Wikiの実運用データ]] — 25 Wiki/1647ページの定量データ
+- LLM Wikiの実運用データ — 25 Wiki/1647ページの定量データ
 - [[事前にやろうとしない運用哲学]] — nishioの実運用から導かれた中核哲学
-- [[Wikis-as-personas]] — 各Wikiが仮想的人格として振る舞う
-- [[株分け（kabuwake）]] — 育ったWikiから別Wikiを派生
 - [[LLM WikiテンプレートのOptionality]] — パターンと実装の分離

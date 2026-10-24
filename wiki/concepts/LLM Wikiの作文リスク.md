@@ -6,7 +6,7 @@ LLM Wikiでは `wiki/` は派生物であり、ソース一覧を書いたペー
 
 ## 観察記録（このwikiでの実例）
 
-- 2026-08-11: [[overview]]が7件のraw/ソースを列挙していたが、実在したのは1件のみ。
+- 2026-08-11: overviewが7件のraw/ソースを列挙していたが、実在したのは1件のみ。
 - 原因はユーザーによる誤削除（nishio 4件、villagepump 2件）で、**LLMの作文ではない**。
 - ただし、`raw/`と照合するまで「虚偽の一覧」であることを**人間もLLMも検出できなかった**。
   つまり実在確認なしに流通したソース一覧は、原因が何であれ同じリスクを帯びる。
@@ -31,7 +31,7 @@ LLM Wikiでは `wiki/` は派生物であり、ソース一覧を書いたペー
 - raw/ の **不変性** は LLM 範囲境界の**権限マップ**として機能
 - 過度に raw/ SSOT を厳格化すると（例: 全 wiki/ ページに frontmatter `sources:` 必須）、過剰防衛になり軽量な LLM Wiki 運用と緊張する
 
-詳細は [[LLM Wikiのmain value]] を参照。
+詳細は LLM Wikiのmain value を参照。
 
 ## 研究への接続
 
@@ -42,14 +42,8 @@ LLM Wikiでは `wiki/` は派生物であり、ソース一覧を書いたペー
   Karpathy自身も[[3層アーキテクチャ]]の第1層としてraw/の不変性を定義している → [[2026-08-11 Karpathy LLM Wiki Gist]]。
 - nishioの[[Wikiはワークショップ]]概念も、wikiをsource of truthにしないことでこのリスクに対処している。
   wikiは動的合成層であり、気軽に書き換え・削除できる。信頼できる情報源（raw/）と明瞭分離されていることに意味がある。
-- **2026-09-03 補遺**: ただし raw/ SSOT は [[LLM Wikiのmain value]] の意味で **補助装置** であり、knowledge network の main value を支える機能の1つにすぎない。template 設計では過剰防衛を避け、sources frontmatter 検証 + lint チェックで実用上対処する
+- **2026-09-03 補遺**: ただし raw/ SSOT は LLM Wikiのmain value の意味で **補助装置** であり、knowledge network の main value を支える機能の1つにすぎない。template 設計では過剰防衛を避け、sources frontmatter 検証 + lint チェックで実用上対処する
 
 ## 関連
 
-- [[overview]] — ソース一覧の掲載箇所（今回の実例の現場）
-- [[テンプレート草案ver.1]] — 検証対象の設計
 - [[このWikiの目的と研究課題]] — 研究課題との対応
-- [[Wikiはワークショップ]] — wikiをsource of truthにしない設計
-- [[3層アーキテクチャ]] — raw/の不変性の理論的基盤
-- [[LLM Wikiのmain value]] — raw/ は補助装置・価値は knowledge network 自体
-- [[raw SSOT原則への根本検証]] — 「raw/ SSOT = main value」は派生解釈の根拠

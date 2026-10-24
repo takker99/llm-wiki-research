@@ -24,5 +24,5 @@ Karpathyが提唱するLLM Wikiパターンの原典。LLMが永続的なMarkdow
 
 ## 触れている概念・実体
 
-- 概念: [[LLM Wiki]] / [[永続Wikiと複利効果]] / [[3層アーキテクチャ]] / [[Schema（AGENTS.md）]] / [[Ingest]] / [[QueryとFile-back]] / [[Lint]] / [[Post-ingestレビューループ]] / [[バッチIngest]] / [[IndexとLog]] / [[Obsidian as IDE]] / [[Memex]] / [[連想トレイル]] / [[LLM Wikiのスケーラビリティ]] / [[LLM Wikiの応用領域]] / [[LLM WikiテンプレートのOptionality]]
-- 実体: [[Andrej Karpathy]] / [[Obsidian]] / [[Obsidian Web Clipper]] / [[qmd]] / [[Marp]] / [[Dataview]] / [[Vannevar Bush]] / [[Tolkien Gateway]] / [[NotebookLM]]
+- 概念: [[LLM Wiki]] / 永続Wikiと複利効果 / [[3層アーキテクチャ]] / Schema（AGENTS.md） / Ingest / QueryとFile-back / Lint / [[Post-ingestレビューループ]] / [[バッチIngest]] / [[IndexとLog]] / [[Obsidian as IDE]] / Memex / [[連想トレイル]] / [[LLM Wikiのスケーラビリティ]] / [[LLM Wikiの応用領域]] / LLM WikiテンプレートのOptionality
+- 実体: [[Andrej Karpathy]] / Obsidian / [[Obsidian Web Clipper]] / [[qmd]] / Marp / Dataview / Vannevar Bush / [[Tolkien Gateway]] / [[NotebookLM]]

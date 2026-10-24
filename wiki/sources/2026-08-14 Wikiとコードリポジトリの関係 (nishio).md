@@ -25,5 +25,5 @@ nishioのcosenseでの「中にコードリポジトリを持つパターン」�
 
 ## 触れている概念・実体
 
-- 概念: [[Wikiとコードリポジトリの関係]] / [[Wiki駆動開発]] / [[研究目的Wikiとプロジェクト目的Wiki]] / [[LLM Wikiの実運用データ]] / [[Coding Agentの歴史とLLM Wikiの位置づけ]]
+- 概念: Wikiとコードリポジトリの関係 / [[Wiki駆動開発]] / [[研究目的Wikiとプロジェクト目的Wiki]] / [[LLM Wikiの実運用データ]] / [[Coding Agentの歴史とLLM Wikiの位置づけ]]
 - 実体: [[dd2030-wiki]] / [[注釈駆動Wiki]] / [[Codex Mobile]]

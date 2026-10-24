@@ -13,5 +13,4 @@ LLMがwikiページにfrontmatterを付与すれば、Dataviewで動的なビュ
 ## 関連概念
 
 - [[Obsidian as IDE]] — ツールチェーン全体
-- [[Obsidian]] — ホストアプリケーション
 - [[LLM WikiテンプレートのOptionality]] — optionalな要素

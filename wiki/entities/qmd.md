@@ -20,6 +20,5 @@ Markdownファイル用のローカル検索エンジン。KarpathyがLLM Wiki�
 
 ## 関連概念
 
-- [[LLM Wikiのスケーラビリティ]] — どの段階で必要になるか
 - [[IndexとLog]] — 基本のナビゲーション（qmd導入前）
 - [[LLM WikiテンプレートのOptionality]] — テンプレートに含めるかどうか

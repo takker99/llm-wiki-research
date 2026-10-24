@@ -63,11 +63,11 @@ missing-pages（info: 参照のみで未作成）/ frontmatter-validation。
 | 分類 | 参照数 | 扱い | 実装 |
 |---|---|---|---|
 | broken_wikilink | 1ページのみ | error。typo or private jargon。ページ作成はしない | [[リポジトリ分析 BDL-2026S]] |
-| aspect_handle | 2+ページ | info。概念ハブの種。Cosense風では正常。参照が増えたらページ作成 | [[リポジトリ分析 BDL-2026S]]、[[リポジトリ分析 SMS-2026S-report]] |
+| aspect_handle | 2+ページ | info。概念ハブの種。Cosense風では正常。参照が増えたらページ作成 | リポジトリ分析 BDL-2026S、[[リポジトリ分析 SMS-2026S-report]] |
 
 BDL-2026Sの明文化（AGENTS.md）: 「Do not treat unresolved wikilink references as a TODO list. In Scrapbox/Cosense style, red links are a feature... Do not create a page for a 1-page reference.」。SMS-2026S-reportは「unresolvedはbrokenではない、全て実参照」「2+頁参照=2-hop hubの種」とlintコメントに明記。
 
-**当wikiでの実装（2026-08-14）**: 参照数分類を導入（1頁= B R O K E N / 2+頁= ASPECT_HANDLE、エイリアス解決、インラインコード除外）。スクリプトはroot `scripts/lint.sh`から`.agents/skills/llm-wiki-lint/scripts/lint.sh`へ同日移動（llm-wiki-lint skill同梱。[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]の改訂）。AGENTS.mdのLintセクション・執筆要件にも「赤リンクは許容」を明文化。lint結果の`[[fact-wiki-separation]]`（3頁参照=ASPECT_HANDLE）が概念ページ化された最初の事例。
+**当wikiでの実装（2026-08-14）**: 参照数分類を導入（1頁= B R O K E N / 2+頁= ASPECT_HANDLE、エイリアス解決、インラインコード除外）。スクリプトはroot `scripts/lint.sh`から`.agents/skills/llm-wiki-lint/scripts/lint.sh`へ同日移動（llm-wiki-lint skill同梱。MCP不採用とAGENTS.md+SKILL.md二層採用の根拠の改訂）。AGENTS.mdのLintセクション・執筆要件にも「赤リンクは許容」を明文化。lint結果の`[[fact-wiki-separation]]`（3頁参照=ASPECT_HANDLE）が概念ページ化された最初の事例。
 
 graspの理論的裏付け（[[リポジトリ分析 grasp]]）: リンクにはrecall / attention / navigation / 読者ケアの4仕事があり、Cosenseはsubstrate制約で全部を1つのlinkに束ねている。recallをlinkの外へ出せば、linkは必須（infrastructure）から任意（editorial）に変わる。**書き手がAI化するほど裸言及が増える**（AI default 裸）ので、wikilink強制より赤リンク許容＋come-from（用語-大域の1宣言で全出現をgather）が向く可能性がある。
 
@@ -76,6 +76,5 @@ graspの理論的裏付け（[[リポジトリ分析 grasp]]）: リンクには
 - [[Ingest]] — 新しい知識の流入（lintはその品質管理）
 - [[QueryとFile-back]] — 探索（lintはその網羅性チェック）
 - [[IndexとLog]] — lint結果を反映する基盤
-- [[AIによるingest停止判断]] — Lintの延長としての自己評価
 - [[LLM Wikiの実運用データ]] — Lintが検出すべきスケール問題
 - [[繋げる力]] — 概念ページの重複ドリフトが繋がりを阻害する

@@ -49,6 +49,4 @@ superseded_by:
 - [[2026-08-11 Karpathy LLM Wiki Gist]] — テンプレート草案の原典となるLLM Wikiパターン定義
 - [[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]] — 20+ Wiki実運用データと運用知見
 - [[2026-08-11 AIを使った知識マネジメント (villagepump)]] — コミュニティ議論
-- [[このWikiの目的と研究課題]] — 研究課題とTODO
 - [[LLM Wiki実装のingest形式と運用の比較]] — 8実装のingest・運用比較とclaim#6/#9の追加データ点
-- [[LLM Wikiの作文リスク]] — 複製を作らない理由

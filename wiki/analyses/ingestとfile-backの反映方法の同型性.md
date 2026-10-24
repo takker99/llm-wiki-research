@@ -49,7 +49,7 @@ microsoft `@wiki /save`（単一queryページ+index自動upsert）やtsurubee `
 
 1. 研究wiki AGENTS.md Query step 5: 「関連する既存ページへのwikilink・明らかに影響を受けるページの更新・矛盾の明示・index/log更新」を追加
 2. template/AGENTS.md File-back節: 上記の軽い実行契約を追加
-3. [[QueryとFile-back]] に「『このログ』=会話ログ、`log.md`とは別物」の注記
+3. QueryとFile-back に「『このログ』=会話ログ、`log.md`とは別物」の注記
 
 フィルタ規則（「感想はfile-backしない」等）は**書かない**選択: 人間ゲートが既にフィルタであり、nishioの「面白いね→イマイチ→…言語化」のループ（L242-245）を切る恐れがあるため。
 
@@ -64,10 +64,7 @@ microsoft `@wiki /save`（単一queryページ+index自動upsert）やtsurubee `
 
 ## 関連
 
-- [[QueryとFile-back]] — file-backの基本操作（本検証の是正が反映済み）
 - [[Ingest]] — 対比される知識流入経路
 - [[ingestにおける編み込みの実際]] — 編み込みの内実（3層波及構造はfile-backにも同型適用可能）
-- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]] — usability testによる検証と`llm-wiki-write`への統合
-- [[AGENTS.md+SKILL.md二層設計]] — 提案習慣（常時行動）と書き込み実行（トリガー操作）の分離
 - [[操作層]] — 文書型vsツール型の実現手段の軸
 - [[テンプレート草案ver.1]] — テンプレートのclaims（薄さvs欠損の区別）

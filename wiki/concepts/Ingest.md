@@ -37,7 +37,7 @@ Karpathy自身の好み:
 4. index.md更新
 5. log.md追記
 
-⚠ Contradiction: 当wikiのAGENTS.mdには[[Post-ingestレビューループ]]（作成後の人間チェック＋再調整）が明示されていない。Karpathyの記述にはある。
+⚠ Contradiction: 当wikiのAGENTS.mdにはPost-ingestレビューループ（作成後の人間チェック＋再調整）が明示されていない。Karpathyの記述にはある。
 
 さらにnishioの運用では、**毎回のチェックすら省略する**「[[事前にやろうとしない運用哲学]]」が成立している。間違いに気づいたらAIが一括修正。また[[AIによるingest停止判断]]のように、AI側がingestの要不要を自己評価する事例もある。
 
@@ -62,7 +62,5 @@ tsurubeeはingestスキルに「横断的知見」（複数のソースを並べ
 - [[QueryとFile-back]] — もう1つの知識流入経路
 - [[Lint]] — 健全性チェック
 - [[IndexとLog]] — ingest時に更新される2つの特殊ファイル
-- [[繋げる力]] — 編み込みが生む価値
 - [[理解のボトルネック]] — ソース選定・監視の考え方の分岐
 - [[ingestの意義とsourcesページの役割]] — Karpathy原文の3関節（統合・現状維持・schema明文化）と下流実装の照合。ingestの意義の定式とsourcesページの4仕事
-- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]] — 書き込み時の近傍確認・スタイル観察・リンク選定規律

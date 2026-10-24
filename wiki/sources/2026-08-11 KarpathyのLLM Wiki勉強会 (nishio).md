@@ -33,5 +33,5 @@ nishioによるKarpathyのLLM Wiki勉強会の講義資料。20+ Wikiの実運�
 
 ## 触れている概念・実体
 
-- 概念: [[事前にやろうとしない運用哲学]] / [[Wikis-as-personas]] / [[研究目的Wikiとプロジェクト目的Wiki]] / [[株分け（kabuwake）]] / [[LLM Wikiの実運用データ]] / [[Coding Agentの歴史とLLM Wikiの位置づけ]] / [[Wiki駆動開発]] / [[LLM Wikiの本質定義]] / [[コンテキスト外部化の歴史]] / [[AIによるingest停止判断]]
-- 実体: [[Andrej Karpathy]] / [[家計LLM-wiki]] / [[猫LLM Wiki]] / [[dd2030-wiki]] / [[ブロードリスニング本Wiki]] / [[Karwi]] / [[Devin]] / [[Agent Skills]] / [[Codex Mobile]] / [[注釈駆動Wiki]] / [[LENCHI]] / [[Kozaneba]] / [[ConnectingDotsシステム]] / [[MindTrellis]]
+- 概念: 事前にやろうとしない運用哲学 / Wikis-as-personas / 研究目的Wikiとプロジェクト目的Wiki / 株分け（kabuwake） / LLM Wikiの実運用データ / Coding Agentの歴史とLLM Wikiの位置づけ / Wiki駆動開発 / LLM Wikiの本質定義 / [[コンテキスト外部化の歴史]] / [[AIによるingest停止判断]]
+- 実体: [[Andrej Karpathy]] / 家計LLM-wiki / 猫LLM Wiki / dd2030-wiki / [[ブロードリスニング本Wiki]] / [[Karwi]] / [[Devin]] / [[Agent Skills]] / [[Codex Mobile]] / [[注釈駆動Wiki]] / [[LENCHI]] / [[Kozaneba]] / [[ConnectingDotsシステム]] / [[MindTrellis]]

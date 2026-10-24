@@ -65,9 +65,6 @@ AGENTS.mdのQueryフロー:
 
 - [[Ingest]] — ソースからの知識流入
 - [[Lint]] — 健全性チェック
-- [[IndexとLog]] — Query時のナビゲーション基盤
-- [[読まれなくてよい中間産物]] — read-optionalの理論的根拠
 - [[複数のLLM Wikiに共通のインプット]] — 複数Wikiへの並列Query
 - [[繋げる力]] — query結果がwikiに残ることで生まれる横断的価値
 - [[ingestとfile-backの反映方法の同型性]] — file-backもingest同様の編み込み操作であることの検証
-- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]] — 2 hop近傍読解の優位性とQueryスクリプト設計

@@ -38,8 +38,6 @@ LLM Wikiをソフトウェア製品として実装した**ツールrepo**の分�
 | 依存 | VS Code LM API（**GitHub Copilot必須**） |
 | 言語 | TypeScript / Node.js ≥ 20 / Vitest / gray-matter |
 
-## 設計上の核心的特徴
-
 ### 1. 3層アーキテクチャの独立収束
 
 Karpathyの3層（`raw/`・`wiki/`・`AGENTS.md`）と同一構造を独立に実装。
@@ -83,7 +81,7 @@ broken-links=error は赤リンク許容派（[[OKF]] §9）と対立する設�
 ### 4. Queryのweighted検索
 
 indexエントリの title 3x / summary 2x、本文 1x の重み付き全文検索（`query.ts`）。
-「index.mdが個人規模で十分機能する」（[[IndexとLog]]）の実装版。
+「index.mdが個人規模で十分機能する」（IndexとLog）の実装版。
 ARCHITECTURE.mdは「Why index.md instead of a search engine?」で
 **upgrade path（規模が必要になったらローカル検索ツールを足す。indexは可読カタログとして残る）**を明言。
 
@@ -97,7 +95,7 @@ index更新のupsert（重複エントリ防止）、エラー分離。
 `@wiki`チャット参加者: `/status` `/save` `/lint` `/fix` — **file-backが`/save`としてコマンド化**。
 status: ページ数・ソース数・coverage %・最終ingest日をステータスバー常時表示（メトリクス管理）。
 
-→ 文書指示（AGENTS.md）で実現してきた操作層をコード化した先鋭例。[[操作層]]を参照。
+→ 文書指示（AGENTS.md）で実現してきた操作層をコード化した先鋭例。操作層を参照。
 
 ### 6. バルクIngestの製品化
 
@@ -113,8 +111,6 @@ status: ページ数・ソース数・coverage %・最終ingest日をステー�
 - UIはVS Code拡張のみ（CLIの独立UIなし）。「Single surface」を設計判断として明記。
 - ARCHITECTURE.mdに設計根拠を網羅: Why not RAG（合成済みwikiがRAGの再導出を不要にする・個人規模ではembedding過剰）、
   Why git repo（ゼロインフラ・バージョン履歴・Markdown普遍性・agent-friendly）。
-
-## テンプレート研究への示唆
 
 ### 取り込める要素
 
@@ -139,7 +135,7 @@ status: ページ数・ソース数・coverage %・最終ingest日をステー�
 
 - **方向性の違い**: Microsoftは操作層をソフトウェア（MCPツール・拡張機能）として自動化する方向。
   本テンプレートは操作層をAGENTS.md（文書指示）として提供し、ツール非依存・選択自由を保つ方向。
-- 3層構造は同一 → **構造は普遍。差別化の軸は操作層の実現手段**（[[操作層]]）。
+- 3層構造は同一 → **構造は普遍。差別化の軸は操作層の実現手段**（操作層）。
 - ツール型は「操作の決定的実行・安全検証・メトリクス」を可能にする一方、
   モデル依存（Copilot）と実装コスト・監視の自動化（人間の関与除去）が伴う。
 
@@ -157,9 +153,6 @@ status: ページ数・ソース数・coverage %・最終ingest日をステー�
 
 ## 関連
 
-- [[操作層]] — ツール型実装の概念ホーム
 - [[Microsoft llmwiki]] — 製品エンティティ
 - [[GitHubリポジトリ分析の方法論]] — 分析の方法論
-- [[パイロット分析 横断所見]] — 運用repo5件との対比
-- [[このWikiの目的と研究課題]] — 「既存の実装との差別化」TODO
-- [[3層アーキテクチャ]] / [[Schema（AGENTS.md）]] / [[Lint]] / [[QueryとFile-back]] / [[IndexとLog]] / [[バッチIngest]]
+- 3層アーキテクチャ / Schema（AGENTS.md） / Lint / [[QueryとFile-back]] / IndexとLog / バッチIngest

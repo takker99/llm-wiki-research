@@ -36,6 +36,4 @@ Karpathyはこれらすべてを「オプショナルでモジュラー」と位
 ## 関連概念
 
 - [[LLM Wiki]] — 全体パターン
-- [[Vault分離と人間-AIの境界]] — AI用/人間用Vaultの分離
 - [[LLM Wikiのスケーラビリティ]] — どの段階でどのツールが必要になるか
-- [[scbdown]] — Cosense寄りのMarkdown方言

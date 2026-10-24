@@ -67,13 +67,11 @@ llm-wiki/
 - [[Schema（AGENTS.md）]]には**何を書くべきか、何を書かないべきか**
 - 複数Wiki時代のテンプレートは、単一Wikiの枠を越えるべきか
 
-当wikiの研究課題そのもの → [[このWikiの目的と研究課題]]
+当wikiの研究課題そのもの → このWikiの目的と研究課題
 
 ## 関連概念
 
 - [[LLM Wiki]] — 全体パターン
-- [[Schema（AGENTS.md）]] — Optionalityを具体化する設定文書
 - [[Obsidian as IDE]] — optionalなツールチェーンの一例
 - [[株分け（kabuwake）]] — optionalだが有用な拡張パターン
-- [[このWikiの目的と研究課題]] — この原則をテンプレート設計にどう落とし込むか
 - [[繋げる力]] — 「読み返したい形に育てる」実践の概念化

@@ -38,7 +38,7 @@ Karpathy: "This works surprisingly well at moderate scale"
 
 [[Microsoft llmwiki]] もH2カテゴリ（## Entities / ## Concepts / ## Sources）+ `- [Title](path) — summary #tag` の
 同一形式を独立実装（Karpathy/nishio系統と独立の収束）。log.mdも `## [YYYY-MM-DD] verb | subject` で当wikiと同一。
-→ [[リポジトリ分析 microsoft-llmwiki]]
+→ リポジトリ分析 microsoft-llmwiki
 
 nishioの実測（[[LLM Wikiの実運用データ]]）:
 - 188ページでindexは約12K tokens = Opus 4.7の1.2%（問題ない）
@@ -71,7 +71,7 @@ KarpathyのTip: 各エントリの先頭を一貫したプレフィックスに�
 | BDL | Query→作業→Changesの定型フォーマット | 構造化 | — |
 | tsurubee記事 | `\| YYYY-MM-DD HH:MM \| ingest-paper \| Added [[論文名]], updated [[concept名]] \|` | テーブル形式 | 時刻まで |
 
-種別語彙も拡張される: Karpathyの ingest/query/lint に対し、about-nishioは `filing-back`, `deliverable`, `correction`, `scaffold`、graspは `implementation+file-back` のような複合アクション。[[Microsoft llmwiki]] は `## [YYYY-MM-DD] verb | subject` で当wikiと同一（[[リポジトリ分析 microsoft-llmwiki]]）。
+種別語彙も拡張される: Karpathyの ingest/query/lint に対し、about-nishioは `filing-back`, `deliverable`, `correction`, `scaffold`、graspは `implementation+file-back` のような複合アクション。Microsoft llmwiki は `## [YYYY-MM-DD] verb | subject` で当wikiと同一（リポジトリ分析 microsoft-llmwiki）。
 
 → 当wikiの旧形式（見出しに長文全込み）はむしろ例外的で、2026-08-14の変更でデファクト（見出し短＋本文詳細）に追いついた。
 
@@ -99,6 +99,5 @@ KarpathyのTip: 各エントリの先頭を一貫したプレフィックスに�
 ## 関連概念
 
 - [[LLM Wikiのスケーラビリティ]] — index.mdの有効範囲と限界
-- [[LLM Wikiの実運用データ]] — 実測値
 - [[qmd]] — indexベースを超えた後の検索ソリューション
 - [[Ingest]] / [[QueryとFile-back]] — 両方を更新する操作

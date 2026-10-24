@@ -20,7 +20,7 @@ Open Knowledge Format。2026-06-12にGoogle Cloud Data Cloudチームが発表�
 
 ## 性格: データカタログ由来
 
-stakiranの分析（[[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]）:
+stakiranの分析（2026-08-11 OKFとLLM Wiki (nishio+villagepump)）:
 
 - OKFのDNAはwiki文化ではなく、Dataplex系のデータカタログ（Entry / Aspect / EntryLinkモデル）。仕組み（markdown + frontmatter + リンク + index）はwikiの末裔だが、性格（何を概念とし、どう型付けし、何に紐づけるか）はデータカタログ
 - 位置づけとしては「Metadata as Code」— メタデータの真実の源を専用サービスからGitリポジトリのファイルへ移す設計思想。観測された事実（データ側がマスター、source→file）とキュレーションされた知識（ファイル側がマスター、file→service）でマスターが層ごとに分かれ、`catalog.yaml` のsnapshot/publishingがその境界を宣言する
@@ -35,11 +35,10 @@ stakiranの分析（[[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]）:
 | 由来 | データカタログ（Dataplex） | 知的生産の方法論 |
 | 進化 | provenance/trust/lifecycle/attestation | AGENTS.mdの運用規則 |
 
-Google自身はOKFを「LLM Wikiの改良版」と位置付けており、nishioは「標準化戦争」と認識している（[[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]）。
+Google自身はOKFを「LLM Wikiの改良版」と位置付けており、nishioは「標準化戦争」と認識している（2026-08-11 OKFとLLM Wiki (nishio+villagepump)）。
 
 ## 関連概念
 
-- [[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]] — 本ページの主ソース
 - [[nishioのOKF評価]] — nishioの2つの否定理由（format層のみ・cross-run stability批判）
 - [[LLM WikiテンプレートのOptionality]] — format層/操作層の区別（差別化点）
 - [[Lint]] — 赤リンク論争（許容 vs エラー）

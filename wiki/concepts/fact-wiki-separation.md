@@ -31,7 +31,4 @@ tags: [template-design, llm-wiki-pattern]
 
 ## 関連概念
 
-- [[3層アーキテクチャ]] — raw/wikiの分離が本概念の構造的基盤
-- [[Vault分離と人間-AIの境界]] — 人間vault/AI vault分離の延長線上
-- [[Wikiはワークショップ]] — Wikiを加工場として捉える
 - [[LLM WikiテンプレートのOptionality]] — 外部ソースとの連携方法はユーザー任せ

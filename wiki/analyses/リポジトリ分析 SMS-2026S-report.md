@@ -25,8 +25,6 @@ type: 研究レポート型（grasp-backed）
 | report.md | 講義レポート本体（wikiを参照して執筆） |
 | raw/ | gitignored |
 
-## 設計上の核心的特徴
-
 ### grasp-backed運用
 
 AGENTS.mdはgraspの使い方を第一に定義:
@@ -54,8 +52,6 @@ PDF論文をingestするワークフロー。`grasp unresolved`で未解決targe
 
 「sourceページは入口、conceptページが本体」が明文化（AGENTS.md:91-96）。論文が導入する新規概念は必ず独立conceptページとして抽出しcross-linkを整備する。Q1-Q4の判断基準で概念分解を機械的に行う。
 
-## テンプレート研究への示唆
-
 ### 取り込める要素
 - **参照数分割lint**: 未解決wikilinkを1-ref（typo/error）と2+ref（aspect-handle/info）に分ける分類は、[[Lint]]の赤リンク論争に対する具体的な解。broken-links=errorのハードラインを和らげる第3の選択肢
 - **grasp unresolvedのaspect-handle確認**: 概念ページ作成前に「既に2+ページから参照されているか」を確認するワークフローは、赤リンクを概念ノードとして扱う運用の実装例
@@ -67,8 +63,6 @@ PDF論文をingestするワークフロー。`grasp unresolved`で未解決targe
 
 ## 関連
 
-- [[リポジトリ分析 grasp]] — SQLite-authorityパターンの原典
 - [[リポジトリ分析 AMME-2026S-report]] — 同系統の研究レポート型（wikilink 0）
 - [[リポジトリ分析 BDL-2026S]] — 同じ参照数分割lintを持つ講義型
-- [[赤リンクとLLM Wiki]] — 本分析の概念ページ
 - [[パイロット分析 横断所見]] — 横断比較

@@ -27,5 +27,5 @@ tags: [template-design, skill, implementation, repos]
 
 ## 触れている概念
 
-- 概念: [[AGENTS.md+SKILL.md二層設計]] / [[操作層]] / [[Schema（AGENTS.md）]] / [[LLM Wikiのスケーラビリティ]] / [[赤リンクとLLM Wiki]]（wanted pages）
-- 実体: [[Agent Skills]] / [[Obsidian]] / [[Microsoft llmwiki]]（対比）
+- 概念: AGENTS.md+SKILL.md二層設計 / [[操作層]] / [[Schema（AGENTS.md）]] / [[LLM Wikiのスケーラビリティ]] / [[赤リンクとLLM Wiki]]（wanted pages）
+- 実体: [[Agent Skills]] / [[Obsidian]] / Microsoft llmwiki（対比）

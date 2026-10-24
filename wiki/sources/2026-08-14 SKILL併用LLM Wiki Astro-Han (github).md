@@ -30,5 +30,5 @@ tags: [template-design, skill, implementation, repos]
 
 ## 触れている概念
 
-- 概念: [[Schema（AGENTS.md）]] / [[操作層]] / [[AGENTS.md+SKILL.md二層設計]] / [[Lint]] / [[LLM Wikiの作文リスク]] / [[赤リンクとLLM Wiki]]
+- 概念: Schema（AGENTS.md） / [[操作層]] / [[AGENTS.md+SKILL.md二層設計]] / [[Lint]] / [[LLM Wikiの作文リスク]] / [[赤リンクとLLM Wiki]]
 - 実体: [[Agent Skills]] / [[OKF]] / [[Microsoft llmwiki]]（対極として）

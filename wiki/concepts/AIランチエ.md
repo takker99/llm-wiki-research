@@ -32,8 +32,6 @@ tags: [template-design]
 
 ## 関連
 
-- [[一貫・網羅・頂点]] — ランチエ/スペキュラトゥールの基盤。cross-run stability批判と分業論
-- [[LLM Wiki]] — 「LLMs don't get bored」＝疲れないAIランチエ
 - [[Lint]] — 接地の衛生の実装例
 - [[LLM Wikiの作文リスク]] — 接地の重要性
 - [[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]] — 主ソース

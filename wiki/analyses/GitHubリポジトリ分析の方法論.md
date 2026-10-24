@@ -13,8 +13,6 @@ schema/formatの具体例とbest practice/bad practiceを抽出するための�
 
 subagent 3体との相談（2026-08-12）に基づく。
 
-## 技術方式
-
 ### 発見層＋選択的アーカイブ（二層構造）
 
 - **発見層**（`raw/` 外、例: `~/git/llm-wiki-samples/<repo>/`）: 分析対象repoを `git clone` した全ファイル。全文横断検索・パターン分析に使用
@@ -45,8 +43,6 @@ manifest.mdが肥大化する場合はセクション分割または manifest-re
 sourcesページでの引用: `raw/<repo>/AGENTS.md@<commit-hash-short>:L42` 形式。
 これによりcommit hash・ファイルパス・行番号が特定でき、研究の再現性が担保される。
 
-## 研究デザイン
-
 ### 事前注目点
 
 決めすぎない。ただし完全白紙は非効率なので、以下の緩いguiding questionsを持つ:
@@ -71,7 +67,7 @@ sourcesページでの引用: `raw/<repo>/AGENTS.md@<commit-hash-short>:L42` 形
 ### 分析方法
 
 質的調査の **Template Analysis** 手法を採用:
-1. a prioriテーマ = [[テンプレート草案ver.1]] の8 claims
+1. a prioriテーマ = テンプレート草案ver.1 の8 claims
 2. パイロット（2〜3 repo）分析後にテーマ改訂
 3. 拡大（〜10 repo）分析
 4. 飽和チェック（新パターンが出現しなくなったら打ち切り）
@@ -102,11 +98,11 @@ sourcesページでの引用: `raw/<repo>/AGENTS.md@<commit-hash-short>:L42` 形
 - 情報の劣化（陳腐化、git履歴喪失、メタデータ欠落、削除・非公開化）
 - 見落としパターン（AGENTS.md非依存、マルチエージェント、CI/CD統合、ハイブリッド運用）
 
-深刻度×検出難易度のリスクマトリクスは [[外部リポジトリ分析のリスクと罠]] を参照。
+深刻度×検出難易度のリスクマトリクスは 外部リポジトリ分析のリスクと罠 を参照。
 
 ## 選定基準（未確定・要議論）
 
-- [[テンプレート草案ver.1]] 準拠（AGENTS.md + raw/ + wiki/ の3層を持つ）
+- テンプレート草案ver.1 準拠（AGENTS.md + raw/ + wiki/ の3層を持つ）
 - nishio派生 / Karpathyパターン準拠 / 独立系 のバランス
 - 成功例だけでなく失敗例（放棄・停滞）も含める
 - 日本語圏 / 英語圏 のバランス
@@ -122,7 +118,6 @@ sourcesページでの引用: `raw/<repo>/AGENTS.md@<commit-hash-short>:L42` 形
 ## 関連
 
 - [[rawディレクトリの取り扱い]] — 発見層＋選択的アーカイブの先行分析
-- [[テンプレート草案ver.1]] — a prioriテーマとして使用する8 claims
 - [[このWikiの目的と研究課題]] — 研究の完了定義との整合性確認
 - [[LLM Wikiの実運用データ]] — nishioの25 Wikiデータ（主観的選定の補完）
 - [[LLM Wikiの本質定義]] — 「LLM Wikiとは何か」の操作的定義の循環問題

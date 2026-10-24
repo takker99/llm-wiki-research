@@ -14,7 +14,7 @@ OKFがコモディティ化したのは**成果物（format）層**であって*
 - KarpathyのLLM Wikiは「知的生産の操作を言語化してAIに代行させられるようにする」こと
 - それと違ってOKFは操作の標準化ではなく、成果物のフォーマットの標準化しかしない
 
-→ Google自身の「LLM Wikiの改良版」という位置付け（[[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]）は過大。テンプレート設計上の含意: 操作層（AGENTS.md）を提供する点が差別化要素（[[LLM WikiテンプレートのOptionality]]）。
+→ Google自身の「LLM Wikiの改良版」という位置付け（2026-08-11 OKFとLLM Wiki (nishio+villagepump)）は過大。テンプレート設計上の含意: 操作層（AGENTS.md）を提供する点が差別化要素（[[LLM WikiテンプレートのOptionality]]）。
 
 ## 評価2: cross-run stabilityは「アホかと思っている」（考察2）
 
@@ -40,7 +40,5 @@ villagepump日記（`raw/cosense/villagepump/2026-06-13-2026-08-11.md` L353-354�
 
 ## 関連
 
-- [[OKF]] — 評価対象
-- [[一貫・網羅・頂点]] — 評価2から生まれた「安定性」の3価値分解
+- 一貫・網羅・頂点 — 評価2から生まれた「安定性」の3価値分解
 - [[Lint]] — 赤リンク論争（OKF §9許容 vs エラー）
-- [[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]] — 主ソース

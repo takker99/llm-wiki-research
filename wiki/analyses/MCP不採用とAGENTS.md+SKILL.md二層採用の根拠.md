@@ -5,14 +5,12 @@ tags: [template-design, operation-layer, agents-md, skill, mcp]
 sources: "[[リポジトリ分析 microsoft-llmwiki]]", "[[AGENTS.md+SKILL.md二層設計]]", "[[操作層]]", "[[テンプレート草案ver.1]]", "[[パイロット分析 横断所見]]"
 ---
 
-# MCP不採用とAGENTS.md+SKILL.md二層採用の根拠
-
 ## 決定の要旨
 
-本テンプレートの[[操作層]]は、MCPサーバ等のツールではなく **AGENTS.md + skill（SKILL.md + 同梱スクリプト）の文書構成**で提供する。
+本テンプレートの操作層は、MCPサーバ等のツールではなく **AGENTS.md + skill（SKILL.md + 同梱スクリプト）の文書構成**で提供する。
 MCPは**デフォルト不採用・オプション追加可**（[[LLM WikiテンプレートのOptionality]]哲学に整合。絶対に使わない、ではない）。
 
-- 参照点: [[リポジトリ分析 microsoft-llmwiki]]（MCP 14ツール+VS Code拡張のガチガチ構成）
+- 参照点: リポジトリ分析 microsoft-llmwiki（MCP 14ツール+VS Code拡張のガチガチ構成）
 - subagent相談2往復（2026-08-14）の検証を経て決定
 - 定量データの出典: subagentによるrepo実測（`~/git/llm-wiki-samples/microsoft-llmwiki@b44df6ae`）+ 公開情報（Anthropic/GitHub/agentskills.io）。raw/コピーなし
 
@@ -32,8 +30,6 @@ microsoft/llmwikiはMCPサーバ14ツール + VS Code拡張 + npmパッケージ
 7. **中間に固有のリスク** → 形式の環境間非互換・skill非ロード環境での動作不能・決定的実行の再現不能
 8. **表現は「不採用」でよいか** → Optionality哲学では「デフォルト不採用・オプション追加可」が正確
 
-## subagent相談の検証結果
-
 ### 1往復目（判断の検証）
 
 - ✅ **context圧迫は実在する（実測）**: 14ツール定義は6.3KB≈1.6〜2.0Kトークン/ターン常駐。ただし**単独wikiサーバとしては軽微**。実害の主座は他MCPサーバとの集約・注意容量・キャッシュ無効化
@@ -45,7 +41,7 @@ microsoft/llmwikiはMCPサーバ14ツール + VS Code拡張 + npmパッケージ
 
 ### 2往復目（配布の具体化）
 
-- **推奨構成**: AGENTS.md（4-6KB自己完結・常時行動内蔵 ※Quick Operations内蔵は2026-08-14に見直し、[[AGENTS.md+SKILL.md二層設計]]参照）+ `.agents/skills/llm-wiki/SKILL.md`（完全手順）+ skill同梱の決定スクリプト（`.agents/skills/llm-wiki-lint/scripts/lint.sh`）。GitHub Template Repositoryとして配布し、クローンだけでopencode/Codex/Cursor/Geminiでskill有効（Claude Codeのみ1コマンド）
+- **推奨構成**: AGENTS.md（4-6KB自己完結・常時行動内蔵 ※Quick Operations内蔵は2026-08-14に見直し、AGENTS.md+SKILL.md二層設計参照）+ `.agents/skills/llm-wiki/SKILL.md`（完全手順）+ skill同梱の決定スクリプト（`.agents/skills/llm-wiki-lint/scripts/lint.sh`）。GitHub Template Repositoryとして配布し、クローンだけでopencode/Codex/Cursor/Geminiでskill有効（Claude Codeのみ1コマンド）
 - **lint.shは対応するskillのディレクトリ内に同梱**（2026-08-14改訂。下記「改訂: スクリプトの配置」参照）。手順（SKILL.md）と決定スクリプトの凝集性が高まり、汎用root `scripts/`名前空間の衝突（既存コードrepoへの埋め込み時のdev用スクリプトとの混在・`scripts/lint.sh`の曖昧さ）を避ける。grasp（root `scripts/` + skill）は実証前例のままだが、配置の規範ではない
 - **明示パス参照が主契約**: AGENTS.mdに「`.agents/skills/llm-wiki/SKILL.md` を読め。ロードできない場合はファイルを直接読め」と書く。auto-discoveryはボーナス、トリガー構文（`$skill`等）はクライアント方言なのでオプション
 - **1.9KBは売りにしない**: AMMEの1.9KBはドメイン薄型（数学レポート・raw 5ファイル）の特殊条件。二層の価値は**メンテナンス性**（手順編集が基幹スキーマを汚さない・人間がAGENTS.mdをスキーマとしてレビュー可能・形式は標準化済み）で主張し、context削減はボーナス表記にとどめる
@@ -82,7 +78,7 @@ llm-wiki-template/                # GitHub Template Repository
 3層ともrepoに同梱・コミット済み（配布物の単一性）。AGENTS.md単体でも完全運用可能（フォールバック）。
 lint.shは明示パス参照によりskillロードの有無と無関係に実行可能。
 
-※2026-08-14見直し: 「AGENTS.md単体でも完全運用可能」の保険（Quick Operationsサマリ）は不要と判断（Agent Skillsのオープン標準化でskill非対応環境が消滅。[[2026-08-14 opencode Agent Skills仕様]]）。AGENTS.mdの役割は「常時行動 + スキーマ + 明示パス参照1行」に純化。分担基準は [[AGENTS.md+SKILL.md二層設計]] 参照。
+※2026-08-14見直し: 「AGENTS.md単体でも完全運用可能」の保険（Quick Operationsサマリ）は不要と判断（Agent Skillsのオープン標準化でskill非対応環境が消滅。[[2026-08-14 opencode Agent Skills仕様]]）。AGENTS.mdの役割は「常時行動 + スキーマ + 明示パス参照1行」に純化。分担基準は AGENTS.md+SKILL.md二層設計 参照。
 
 ## 残課題
 
@@ -92,7 +88,7 @@ lint.shは明示パス参照によりskillロードの有無と無関係に実�
 
 ## 2026-08-14追記: SKILL併用実装による外部データ点
 
-[[リポジトリ分析 SKILL併用6事例]]のingestで得られた追証:
+リポジトリ分析 SKILL併用6事例のingestで得られた追証:
 
 - **SKILLの起動トリガーをhookに移すD型（toolboxmd）**はプラットフォーム固定を許容する実装に限られ、汎用テンプレートの「文書（description frontmatter）+ 明示パス参照」方針（2往復目で決定）と整合
 - **Astro-Han（1.9k★）が「MCP servers, UIs, output subsystems — outside the boundary of a tool-agnostic skill」「hooks belong to the agent harness」をDesign Boundariesで明言**。本決定と同一の線引きを独立収束で採用
@@ -110,10 +106,5 @@ lint.shは明示パス参照によりskillロードの有無と無関係に実�
 
 ## 関連
 
-- [[リポジトリ分析 microsoft-llmwiki]] — 参照点となったMCP実装の分析
-- [[リポジトリ分析 SKILL併用6事例]] — SKILL併用実装6件の横断比較（2026-08-14追証）
-- [[操作層]] — 文書型 vs ツール型のスペクトラム
-- [[AGENTS.md+SKILL.md二層設計]] — 二層パターンの発見元（AMME）
 - [[テンプレート草案ver.1]] — claim#9として追記
 - [[パイロット分析 横断所見]] — 運用repo5件の横断比較
-- [[LLM WikiテンプレートのOptionality]] — デフォルト不採用・オプション追加可の哲学

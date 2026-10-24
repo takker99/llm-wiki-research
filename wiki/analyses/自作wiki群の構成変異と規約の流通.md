@@ -8,7 +8,7 @@ sources: "[[LLM Wiki実装のingest形式と運用の比較]]", "[[パイロッ�
 
 # 自作wiki群の構成変異と規約の流通
 
-[[LLM Wiki実装のingest形式と運用の比較]]は9実装でingestの単位と出典ポインタを横断比較した。
+LLM Wiki実装のingest形式と運用の比較は9実装でingestの単位と出典ポインタを横断比較した。
 本ページはその対象外だった講義wiki群と開発wiki群をsurveyし、wiki/の構成原理の分岐、authorityの所在、規約がwiki間をどう移動するかを観察する。
 焦点がingestの形式である前ページに対して、本ページはwikiの骨組みと規約の変異に焦点を置く。
 主要な事実はlogとAGENTS.mdの元ファイルで抜き取り検証した。
@@ -31,7 +31,7 @@ sources: "[[LLM Wiki実装のingest形式と運用の比較]]", "[[パイロッ�
 | modbus-strain-calibrator | fork元コードベースのwiki化 | なし |
 
 この他にtxa-xray-ct-wikiのworktree運用と、外部実践のarchivalであるllm-wiki-samplesを観察した。
-llm-wiki-samplesはmicrosoft・nishio・delite・graspの4サブプロジェクトを包含し、[[LLM Wiki実装のingest形式と運用の比較]]の外部実装を素材として保持している。
+llm-wiki-samplesはmicrosoft・nishio・delite・graspの4サブプロジェクトを包含し、LLM Wiki実装のingest形式と運用の比較の外部実装を素材として保持している。
 
 ## template家族の系譜と規約の流通
 
@@ -49,7 +49,7 @@ llm-wiki-samplesはmicrosoft・nishio・delite・graspの4サブプロジェク�
 
 ここで前ページへの訂正が発生した。
 
-⚠ Contradiction: [[LLM Wiki実装のingest形式と運用の比較]]の「template rootのコピー手順にはpurposeの非空検証がない」vs README.mdのコピー手順は「目的に1文書く。唯一の記入事項。空欄のまま運用しない」を明記する。
+⚠ Contradiction: LLM Wiki実装のingest形式と運用の比較の「template rootのコピー手順にはpurposeの非空検証がない」vs README.mdのコピー手順は「目的に1文書く。唯一の記入事項。空欄のまま運用しない」を明記する。
 
 README.md:25とtemplate/AGENTS.mdの初期構成手順:63の両方に非空確認は存在する。
 さらに家族wikiではMACS-2026AのAGENTS.mdが「空欄のままなら運用しない」を規約に書き、EGME-2026Aは開設日に人間の言語化を経てpurposeを1文で記入した。
@@ -81,7 +81,7 @@ README.md:25とtemplate/AGENTS.mdの初期構成手順:63の両方に非空確�
 | SQLite SSOT | SMS-2026S-report | wiki/は読み取り専用の投影。書き込みは`grasp write-page`経由 |
 | SQLite SSOT | grasp | 前ページと[[リポジトリ分析 grasp]]を参照 |
 
-- SQLite化の変異が開発wikiから講義・研究wikiに届いた。SMS-2026S-reportが極端形、BDL-2026Sが折衷形である。[[Wikiとコードリポジトリの関係]]のSSOT論点に、講義・研究wiki側からのデータ点が加わる。
+- SQLite化の変異が開発wikiから講義・研究wikiに届いた。SMS-2026S-reportが極端形、BDL-2026Sが折衷形である。Wikiとコードリポジトリの関係のSSOT論点に、講義・研究wiki側からのデータ点が加わる。
 - modbus-strain-calibratorのwiki logはtypecheck、lint、test 55/55の結果まで刻む。wikiのlogが実装のoperation ledgerと一本化されている。
 - modbus-strain-calibratorのwiki logはエントリを末尾に追加すると明言する。本wikiやgraspがエントリを先頭に追加するのと逆方向であり、logの追加方向も実装間で分岐している。
 
@@ -136,15 +136,11 @@ phase差として整理するには観察期間が足りない。
 
 ## 関連
 
-- [[LLM Wiki実装のingest形式と運用の比較]] — ingest単位と出典ポインタの9実装横断。本ページを補完し、purpose非空手順の指摘1件を訂正する
 - [[ingestの意義とsourcesページの役割]] — Karpathy gist原文のingest節への照合。本ページのre-ingest語彙先行の観察をkept currentの欠落として位置づけ直す
 - [[パイロット分析 横断所見]] — AGENTS.mdのサイズとindex/log配置の横断
 - [[AGENTS.md+SKILL.md二層設計]] — 家族wikiを通じて広がった二層化
-- [[Wikiとコードリポジトリの関係]] — コードSSOT型とSQLite型のデータ点
-- [[rawディレクトリの取り扱い]] — manifestと不変性の例外のデータ点
 - [[テンプレート草案ver.1]] — 検証対象のclaims
 - [[claims対応表]] — claimごとの追跡器
 - [[IndexとLog]] — 台帳が講義スケジュールを兼ねる実例
-- [[株分け（kabuwake）]] — query後のfile-backでの実施行
 - [[elastic-wave-analyzer-wiki]]、[[txa-xray-ct-wiki]] — template由来の下流wiki
-- [[リポジトリ分析 AMME-2026S-report]]、[[リポジトリ分析 BDL-2026S]]、[[リポジトリ分析 SMS-2026S-report]]、[[リポジトリ分析 grasp]] — 先行のパイロット分析
+- リポジトリ分析 AMME-2026S-report、リポジトリ分析 BDL-2026S、リポジトリ分析 SMS-2026S-report、リポジトリ分析 grasp — 先行のパイロット分析

@@ -31,6 +31,5 @@ KarpathyのX投稿に対し、kepanoが「AI用のVaultと人間用のVaultを�
 ## 関連概念
 
 - [[3層アーキテクチャ]] — raw/wikiの分離がVault分離の基盤
-- [[Wikiはワークショップ]] — Wikiをsource of truthにしない設計
 - [[株分け（kabuwake）]] — Vault間の知識移植
 - [[Obsidian as IDE]] — 具体的なツール分離

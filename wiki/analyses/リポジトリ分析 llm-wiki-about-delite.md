@@ -65,7 +65,7 @@ nishioの自己WikiのAGENTS.mdにdelite Wikiが `projects/Delite-LLM-Wiki` と�
 他人の思想を分析するWikiならではの発明。維持コストは高い。
 
 ### 統合解説層（syntheses/）
-概念辞書の上に「特殊用語を使わずに全体像を描く」メタページ群。
+概念辞書の上に「特殊用語を使わずに全体像を描く」メタページ群（→ [[統合解説層（synthesis）]]）。
 delite Wikiの最大の発明であり、テンプレートとして抽出価値がある。
 
 ### スクリプト事故

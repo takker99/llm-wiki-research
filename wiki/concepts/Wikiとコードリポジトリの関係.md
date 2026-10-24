@@ -79,8 +79,6 @@ AGENTS.md — 運用規則
 ## 関連概念
 
 - [[Wiki駆動開発]] — 構造・効果の詳細。本ページはrepo関係の対比に焦点
-- [[研究目的Wikiとプロジェクト目的Wiki]] — プロジェクト目的Wikiの典型
 - [[Coding Agentの歴史とLLM Wikiの位置づけ]] — 知識外部化の歴史的位置づけ
-- [[LLM Wikiの実運用データ]] — raw 1ページあたりwikiページ数の量的データ
 - [[dd2030-wiki]] — 先駆例
 - [[注釈駆動Wiki]] — 同じくkabuwakeされたプロジェクト目的Wiki

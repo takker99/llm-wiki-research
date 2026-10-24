@@ -20,8 +20,6 @@ SAKURA internetの研究者（AI/ML for drug discovery and material science）�
 - **導入3ステップ**: (1) gistをLLMに読ませ雛形を作る（ミニマム構成サンプル: CLAUDE.md + 4スキル + vault/、ingest-paper SKILL.md全文あり）(2) 5本ingestして「読み返したい形か」を確認 (3) テンプレをドメインに合わせてLLMと育てる
 - **課題**: 人間が読んで理解することがボトルネック。対策としてソース選定は手動主義（自動ingestは「いつの間にページができたんだ」状態を招くとして警戒）
 
-## 考察（このwikiの評価）
-
 ### 新規性は限定的。nishio/villagepumpより考察が浅い
 
 - 前半のアーキテクチャ説明はgistの忠実な要約で、[[3層アーキテクチャ]]・[[Ingest]]・[[Lint]]等の既知内容を超えない
@@ -30,12 +28,12 @@ SAKURA internetの研究者（AI/ML for drug discovery and material science）�
 
 ### 「人間が読む前提」の設計思想はnishioと正面対立
 
-記事は「wikiを人間が読んで理解しないと自分の知識にならない」を前提とし、概念ページを「自分が読み返したい形に育てる」ことを目的とする。これは[[読まれなくてよい中間産物]]（読む主体はLLMへ、読みやすさは不要）の否定に近い。
+記事は「wikiを人間が読んで理解しないと自分の知識にならない」を前提とし、概念ページを「自分が読み返したい形に育てる」ことを目的とする。これは読まれなくてよい中間産物（読む主体はLLMへ、読みやすさは不要）の否定に近い。
 → [[理解のボトルネック]]として概念化。テンプレート設計のopen question（可読性重視 vs read-optional）
 
 ### テンプレート設計に使える具体案
 
-- 概念ページに「横断的知見」「未解決の問い」セクションを必置にするingestスキル運用 → [[Ingest]]
+- 概念ページに「横断的知見」「未解決の問い」セクションを必置にするingestスキル運用 → Ingest
 - ミニマム構成サンプル（CLAUDE.md + 4スキル + vault/、SKILL.mdの最小例）→ [[LLM WikiテンプレートのOptionality]]・[[Schema（AGENTS.md）]]
 - queryのスコープ閉鎖性（自分のキュレーションしたソースだけを根拠に答える）→ [[QueryとFile-back]]
 - 手動ソース選定主義（自動ingestへの警戒）→ [[バッチIngest]]・[[AIによるingest停止判断]]
@@ -43,7 +41,5 @@ SAKURA internetの研究者（AI/ML for drug discovery and material science）�
 ## 関連
 
 - [[繋げる力]] — 記事の中心概念を一般化
-- [[理解のボトルネック]] — 記事が提起した課題（nishioとの対立点）
-- [[LLM Wikiは要約の改良版ではない]] — 記事の「要約より繋げる力」論との異同
 - [[2026-08-11 Karpathy LLM Wiki Gist]] — 記事の要約元
 - [[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]] — より深い実践知の対比対象

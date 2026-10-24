@@ -37,5 +37,4 @@ nishioが20+ Wikiの運用から発見した、LLM Wikiの2つの根本的に異
 
 - [[Wikis-as-personas]] — Wikiタイプの違いが人格の違いとして現れる
 - [[株分け（kabuwake）]] — 研究WikiからプロジェクトWikiを派生させる典型パターン
-- [[Wiki駆動開発]] — プロジェクト目的Wikiの一形態
 - [[LLM Wikiの実運用データ]] — 両タイプの実測

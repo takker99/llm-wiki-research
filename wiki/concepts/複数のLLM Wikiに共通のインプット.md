@@ -26,6 +26,5 @@ MindTrellis論文を3つのWiki（LLM WikiについてのWiki / ConnectingDots�
 
 ## 関連概念
 
-- [[Wikis-as-personas]] — この現象の理論化
 - [[株分け（kabuwake）]] — raw-source kabuwakeとの関係
 - [[研究目的Wikiとプロジェクト目的Wiki]] — Wikiタイプによる回答の違い

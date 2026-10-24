@@ -83,9 +83,7 @@ n| **frontmatter** | **必須**（title, created, updated, type, tags, sources, 
 - [[LLM Wiki]] — 全体パターン
 - [[テンプレート草案ver.1]] — テンプレート設計の仮説
 - [[LLM WikiテンプレートのOptionality]] — オプショナリティの原則
-- [[このWikiの目的と研究課題]] — 研究課題とTODO
 - [[Microsoft llmwiki]] — 既存実装の分析
 - [[Schema（AGENTS.md）]] — 設計文書
-- [[赤リンクとLLM Wiki]] — 赤リンクの扱い
 - [[LLM Wikiの作文リスク]] — 複製リスク
 - [[繋げる力]] — 「読み返したい形に育てる」実践の概念化

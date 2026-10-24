@@ -20,4 +20,3 @@ sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ## 関連概念
 
 - [[Obsidian as IDE]] — ツールチェーン全体
-- [[Obsidian]] — ホストアプリケーション

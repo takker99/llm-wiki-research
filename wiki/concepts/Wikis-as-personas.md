@@ -30,7 +30,6 @@ tags: [template-design, llm-wiki-pattern]
 
 ## 関連概念
 
-- [[株分け（kabuwake）]] — Wiki間の知識移植
 - [[研究目的Wikiとプロジェクト目的Wiki]] — 人格分化の典型パターン
 - [[複数のLLM Wikiに共通のインプット]] — 具体的事例
 - [[LLM Wikiの実運用データ]] — 20+ Wikiの観察

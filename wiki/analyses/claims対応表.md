@@ -8,7 +8,7 @@ sources: "[[テンプレート草案ver.1]]", "[[配布形式の決定とテン�
 
 # claims対応表
 
-[[テンプレート草案ver.1]] の9 claimsを「**記述的検証結果 × 規範的决定**」の2軸で整理する追跡器。
+テンプレート草案ver.1 の9 claimsを「**記述的検証結果 × 規範的决定**」の2軸で整理する追跡器。
 template/ v0.1執筆時の確信度タグ（この記述はエビデンスで裏付けられたものか、習慣か、暫定デフォルトか）。
 
 **追跡器であって生成器ではない** — この表は答えを生まず、記録する。書き始めて違和感が出たらこの表を更新する。
@@ -17,7 +17,7 @@ template/ v0.1執筆時の確信度タグ（この記述はエビデンスで裏
 
 **templateには「こうする」という規範（指示）だけを書く。検証状態・エビデンス・根拠・動機は一切書かない。**
 実証されているかどうかは研究wikiの領分であり、templateを使う側のwikiにとってはどうでもいい。
-2026-08-11決定「template/内には動機を記載しない」の一般化（[[配布形式の決定とテンプレートの動機]]）。
+2026-08-11決定「template/内には動機を記載しない」の一般化（配布形式の決定とテンプレートの動機）。
 
 ## 文種4分類（規範的决定の軸）
 
@@ -40,7 +40,7 @@ template/ v0.1執筆時の確信度タグ（この記述はエビデンスで裏
 | 6 | 1ソースで10-15ページに触れる | 本wikiで実測（[[ingestにおける編み込みの実際]]）。2026-10-23 surveyではentityを作らないwikiが3.4 concepts/source、成果物型が1-5ページとなり、entityの有無で再現しないことを確認（[[LLM Wiki実装のingest形式と運用の比較]]） | ② 期待値として軽く記述。knowledge network 中心モデルでは「network の種まき」として再解釈。entityを作る場合の条件付き期待値にするか削除を検討 |
 | 7 | 人間はwiki/を読まなくてよい（read-optional） | 反証（5/5 read-involved。tsurubeeとnishioの対立） | ③ read-involved前提の可読性最小保証をデフォルトに（失敗コスト非対称性: read-optional想定で実は読まれる→サイレント失敗 vs 可読性想定で実は読まれない→軽微なオーバーヘッド） |
 | 8 | wikilinkを本文中に書くべき（first-class） | 多数派（5/6）+ 反例AMME（wikilink 0で100ページ運用） | ③ 推奨するが強制しない。赤リンク許容と整合。**main value = knowledge network（claim#10）の観点からは、wikilink が価値の中心要素であることを強調** |
-| 9 | 操作層はAGENTS.md+SKILL.md+scripts/の文書構成（MCPはデフォルト不採用・オプション追加可） | 検証済み — 本wiki採用・AMME実証・jackwener独立収束・SKILL併用6事例全件。2026-10-23 surveyでは文書構成の収束を再確認した一方、AGENTS.md・ingest SKILL・lint SKILL・lint.shの間で出典規約が一致しない実装を観測（[[LLM Wiki実装のingest形式と運用の比較]]） | ① **v0.1から二層構成・skill同梱**（2026-08-14決定。単層自己完結案は撤回。[[配布形式の決定とテンプレートの動機]]）。**skillは操作別分割**（llm-wiki-ingest / llm-wiki-lint。6事例の操作別分割が多数派。不要なskillはユーザーが削除可）。規約とscriptの一致を検証する仕組みを追加する |
+| 9 | 操作層はAGENTS.md+SKILL.md+scripts/の文書構成（MCPはデフォルト不採用・オプション追加可） | 検証済み — 本wiki採用・AMME実証・jackwener独立収束・SKILL併用6事例全件。2026-10-23 surveyでは文書構成の収束を再確認した一方、AGENTS.md・ingest SKILL・lint SKILL・lint.shの間で出典規約が一致しない実装を観測（LLM Wiki実装のingest形式と運用の比較） | ① **v0.1から二層構成・skill同梱**（2026-08-14決定。単層自己完結案は撤回。配布形式の決定とテンプレートの動機）。**skillは操作別分割**（llm-wiki-ingest / llm-wiki-lint。6事例の操作別分割が多数派。不要なskillはユーザーが削除可）。規約とscriptの一致を検証する仕組みを追加する |
 | **10** | **LLM Wiki の main value は knowledge network である（raw/ SSOT は補助装置）** | **検証済み — Karpathy gist（価値主張3回のうち raw への言及0）・nishio 勉強会 L189「知識のネットワークを人間の外側で作っている」・全パイロット実装（AMME/grasp/BDL/delite/SMS/Microsoft）の観察・ユーザー直感。[[raw SSOT原則への根本検証]] を参照** | ② **草案 ver.2 で新規 claim として登録**。template v0.1 には直接焼き込まないが、AGENTS.md の設計思想リスト（3層・raw/不変・…）の**重み付け**を v0.2 で調整（wikilink の重要性が上がり、raw/ 不変性の絶対性が下がる）。「wiki ページにも frontmatter 必須」原則（過剰防衛）は撤回、sources ページの `raw:` 必須化 + lint チェックで実用上対処 |
 
 ## v0.1スコープ（対象範囲）
@@ -52,6 +52,4 @@ template/ v0.1執筆時の確信度タグ（この記述はエビデンスで裏
 
 ## 関連
 
-- [[テンプレート草案ver.1]] — claimsの出典（このページは不変。対応表はこちらの派生）
-- [[配布形式の決定とテンプレートの動機]] — 文種4分類・v0.1スコープの決定元
 - [[パイロット分析 横断所見]] — 反証データ（claim#7/#8）

@@ -16,4 +16,3 @@ sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 
 - [[Kozaneba]]
 - [[ConnectingDotsシステム]]
-- [[複数のLLM Wikiに共通のインプット]]

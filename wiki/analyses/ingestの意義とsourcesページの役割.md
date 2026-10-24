@@ -15,7 +15,7 @@ sources:
 
 query: 「HEAD commitで調べたllm wikiは、karpathyの設計思想にそったingestになっているのか？ingestの本質が忘れられていることはないか？そもそもingestの意義は何だったのか？sourcesページの意義が全然わからん」
 
-本ページはquery回答のfile-back。[[LLM Wiki実装のingest形式と運用の比較]]と[[自作wiki群の構成変異と規約の流通]]の2つのsurveyはingestの単位・出典ポインタ・運用実態の観察が焦点で、Karpathy gist原文のingest節への照合は行っていなかった。本ページでraw/karpathy-llm-wiki-gist.mdに戻って照合し直す。
+本ページはquery回答のfile-back。LLM Wiki実装のingest形式と運用の比較と自作wiki群の構成変異と規約の流通の2つのsurveyはingestの単位・出典ポインタ・運用実態の観察が焦点で、Karpathy gist原文のingest節への照合は行っていなかった。本ページでraw/karpathy-llm-wiki-gist.mdに戻って照合し直す。
 
 ## Karpathyのingest思想の3関節
 
@@ -26,8 +26,6 @@ ingest節の主張は次の3つに分解できる（本ページによる分解�
 3. **schemaへの明文化** — "It's up to you to develop the workflow that fits your style and document it in the schema for future sessions"
 
 post-ingestのレビュー（"I read the summaries, check the updates, and guide the LLM on what to emphasize"）はKarpathy本人の選好として書かれ、batch ingestは同じ節で明示的に許容されている。つまりレビューループは3関節の外側にある。
-
-## 照合: 2survey × 3関節
 
 ### ①統合: 忘れられておらず、むしろ精緻化された
 
@@ -46,15 +44,13 @@ compile onceの半分は全wikiに普及した。kept currentの半分につい�
 
 一方で、re-ingestを名指す実装は2件ある。
 
-- [[Hermes Agent llm-wiki skillとの比較]]: rawのsha256を保存し、re-ingest時にdrift検出する。調査範囲で唯一の機械検出実装
-- [[2026-08-14 SKILL併用LLM Wiki vanillaflava (github)]]: raw/→ingested/移動の状態管理で冪等な再ingest（「再ingestしても害なし」）。`reliability:`の低いソースに強いソースを入れて再ingestすると`## Pending Review`節が消える
 
 限定条件が1つある。re-ingestが要るのは**rawが変異するwikiだけ**である（年度PDFの差し替え、コードpinの進行、コーパスの更新）。raw不変＋時系列append型のwikiでは、stalenessはappend構造に吸収される。したがって「どのSKILLにもre-ingestがない」は「不足」と「入力特性が生む負荷の偏り」の両方を含む観察であり、survey 1の系統分類でtxaが「鮮度劣化が静か」と評価されているのは、インバウンド型wikiでこの劣化が静かに進むことの指摘である。
 
 nishioはre-ingestという語彙を持たない（raw/と勉強会原文のgrepで出てこない）。しかしkept current問題に対して、名指しなしの4戦略を持つ。
 
 1. 時系列の重ね書き — 変化する値は古いページを改めず新しい時点をappend（猫wiki・家計wiki型）
-2. 発見駆動の一括修正 — ingest検証を毎回しない代わりに「間違いに気づいたら一括修正」（[[事前にやろうとしない運用哲学]]）。KarpathyのLint検出とほぼ同型の「使用時に発見 → まとめて修復」
+2. 発見駆動の一括修正 — ingest検証を毎回しない代わりに「間違いに気づいたら一括修正」（事前にやろうとしない運用哲学）。KarpathyのLint検出とほぼ同型の「使用時に発見 → まとめて修復」
 3. 作り直し — 壊れたwikiを直さず、rawから新wikiを作る（[[株分け（kabuwake）]]のraw-source方式）
 4. 深化型の再ingest — Deep Researchレポートをingest後、参照先論文を取得して再ingestする2段構え（[[ChatGPT ProとLLM Wikiの併用]]）。re-ingestを「再現」でなく「拡張」の文脈で使う
 
@@ -101,8 +97,8 @@ wiki内の定式を重ねると、ingestの役割は次の3つで記述できる
 
 意義を分解するとsourcesページには4つの仕事がある。
 
-1. **出典単位の主張の台帳** — conceptページは合成なので「どの主張がどのrawから来たか」を請け負う中間層。引用の流れ「raw → sourceページ → concept/entity」の結節点。frontmatterの`raw:`必須化は作文リスク防衛の大部分を占める（[[LLM Wikiのmain value]]）
-2. **編み込みの照合台帳** — 「このソースが本wikiに何を変えたか」を記録する。既存ページとの照合の判定場（[[ingestにおける編み込みの実際]]）
+1. **出典単位の主張の台帳** — conceptページは合成なので「どの主張がどのrawから来たか」を請け負う中間層。引用の流れ「raw → sourceページ → concept/entity」の結節点。frontmatterの`raw:`必須化は作文リスク防衛の大部分を占める（LLM Wikiのmain value）
+2. **編み込みの照合台帳** — 「このソースが本wikiに何を変えたか」を記録する。既存ページとの照合の判定場（ingestにおける編み込みの実際）
 3. **stalenessのハンドル** — rawが更新されたとき「どの要約が古くなったか」を特定する単位。re-ingestを制度化するならその対象リストは既存のsourcesページである
 4. **人間レビューの接点** — "guide the LLM on what to emphasize"。batch運用では④が消え、①〜③の台帳役だけが残る
 
@@ -126,18 +122,5 @@ wiki内の定式を重ねると、ingestの役割は次の3つで記述できる
 
 ## 関連
 
-- [[Ingest]] — 3基本操作の1つ。本ページの照合対象の概念ページ
-- [[LLM Wiki実装のingest形式と運用の比較]] — survey 1。ingest単位・4類型・4モード・運用実態の観察
-- [[自作wiki群の構成変異と規約の流通]] — survey 2。構成原理・authority・規約流通・re-ingest語彙先行の観察
 - [[2026-08-11 Karpathy LLM Wiki Gist]] — 照合の原文
-- [[ingestにおける編み込みの実際]] — 編み込みの構成要素と波及の3層
-- [[ingestとfile-backの反映方法の同型性]] — 編み込みの脱移先
-- [[Post-ingestレビューループ]] — 3関節の外側の選好
-- [[LLM Wikiのmain value]] — knowledge networkと補助装置の分解
-- [[LLM Wikiは要約の改良版ではない]] — 99ページ結合の原典
-- [[永続Wikiと複利効果]] — 複利 = 編み込み × kept current
-- [[注意の足場]] — ingestが作る層構造
-- [[Hermes Agent llm-wiki skillとの比較]] — rawのsha256保存とre-ingest時のdrift検出。re-ingestを名指す実装
-- [[2026-08-14 SKILL併用LLM Wiki vanillaflava (github)]] — ingested/状態管理による冪等な再ingestと`reliability:`更新
-- [[事前にやろうとしない運用哲学]] — 発見駆動の一括修正。kept currentのnishio流の解法
-- [[株分け（kabuwake）]] — rawから作り直すkept current
+- Hermes Agent llm-wiki skillとの比較 — rawのsha256保存とre-ingest時のdrift検出。re-ingestを名指す実装

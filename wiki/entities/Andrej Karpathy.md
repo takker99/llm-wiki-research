@@ -18,4 +18,3 @@ AI研究者・エンジニア。OpenAIの共同創業者、TeslaのAIディレ�
 
 - [[LLM Wiki]] — 提唱したパターン
 - [[Obsidian as IDE]] — 提唱したツールチェーン像
-- [[Memex]] — 引用した歴史的先駆

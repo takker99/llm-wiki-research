@@ -64,10 +64,4 @@ nishioの観察（[[研究目的Wikiとプロジェクト目的Wiki]]）では�
 
 - [[3層アーキテクチャ]] — Schemaが属する構造
 - [[LLM Wiki]] — 全体パターン
-- [[LLM WikiテンプレートのOptionality]] — 何をテンプレート化し何をユーザー任せにするか
-- [[研究目的Wikiとプロジェクト目的Wiki]] — Schemaの目的文がWikiタイプを規定
-- [[株分け（kabuwake）]] — 株分け時に新Schemaを書く
-- [[AGENTS.md+SKILL.md二層設計]] — 薄型化の中核技術
-- [[目的明示（purpose-hoist）]] — 迷走防止パターン
-- [[AGENTS.md=CLAUDE.md管理パターン]] — ファイル管理の4パターン
 - [[Hermes Agent llm-wiki skillとの比較]] — HermesのSCHEMA.mdはagent管理のためのメタデータ（frontmatter必須、タグタクソノミー、provenance、sha256）を定義するが、本テンプレートのAGENTS.mdは人間とLLMの共進化を前提とする設計思想の相違

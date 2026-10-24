@@ -91,9 +91,7 @@ Cosenseの単一`[X]`は宛先の違う2種類のリンクを束ねていた:
 ## 関連概念
 
 - [[Cosenseのリンク概念]] — 基本概念の体系
-- [[Lint]] — 壊れリンクの扱い論争
 - [[LLM Wiki]] — Open Questionとの同型性
-- [[徒歩レビュー]] — 違和感フィードバックの分業
 - [[OKF]] — §9の赤リンク許容
 - [[LLM Wikiの作文リスク]] — 赤リンク延伸が作文リスクとどう関わるか
 - [[Hermes Agent llm-wiki skillとの比較]] — Hermesのlintは赤リンクをbroken wikilinkとして検出するが、本テンプレートは許容する設計思想の相違
