@@ -83,7 +83,7 @@ grep -E '^- \[' "$WIKI_DIR/index.md" \
   | sort -u \
   | while read -r rel; do
       [ -f "$WIKI_DIR/$rel" ] || echo "  STALE: $rel"
-    done
+    done || true
 echo ""
 
 # Check that raw/ files referenced from wiki/ actually exist
@@ -95,7 +95,7 @@ grep -roE 'raw/[^])"'"'"'`\[,<>。、「」（）、→]+\.md' "$WIKI_DIR" --inc
     if [ ! -f "$(dirname "$WIKI_DIR")/$ref" ]; then
       echo "  MISSING RAW: $ref"
     fi
-  done
+  done || true
 echo ""
 
 # Check that sources/ pages declare their raw archive in frontmatter
