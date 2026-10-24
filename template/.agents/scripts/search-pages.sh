@@ -25,6 +25,14 @@ Options:
   --wiki-dir <dir>     wikiディレクトリのパス（既定: リポジトリルートの wiki/）
   -h, --help           このヘルプを表示する
 
+search-aliases.tsv:
+  WIKI_DIR 直下に search-aliases.tsv（TSV: 1列目=alias、2列目=canonical語）を置くと、
+  query内の語がalias列に大小文字無視で一致した場合に canonical語も検索語として追加する。
+  追加された語の検索結果には ':alias' 表示が付く。query語数が10を超えた場合は追加を打ち切る。
+  ファイルが無い場合は何も変わらない。例:
+    ころがり    転がり
+    ML          機械学習
+
 Examples:
   bash .agents/scripts/search-pages.sh "動的マイクロバッチ"
   bash .agents/scripts/search-pages.sh "トポロジー認識" "勾配累積"
@@ -91,12 +99,18 @@ fi
 
 QUERY_JOINED="${QUERIES[*]}"
 
+ALIAS_FILE=""
+if [ -f "$WIKI_DIR/search-aliases.tsv" ]; then
+  ALIAS_FILE="$WIKI_DIR/search-aliases.tsv"
+fi
+
 find "$WIKI_DIR" -name "*.md" -print0 | xargs -0 awk \
   -v wiki_dir="$WIKI_DIR" \
   -v query_str="$QUERY_JOINED" \
   -v fulltext_mode="$FULLTEXT" \
   -v max_dist_override="$MAX_DIST_OVERRIDE" \
-  -v limit="$LIMIT" '
+  -v limit="$LIMIT" \
+  -v alias_file="$ALIAS_FILE" '
 function trim(s) {
   sub(/^[ \t\r\n]+/, "", s)
   sub(/[ \t\r\n]+$/, "", s)
@@ -150,6 +164,21 @@ function sub_edit_dist(pat, txt, max_d,    m, n, p, t, prev, curr, i, j, cost, d
 }
 
 BEGIN {
+  # aliases.tsv を読み込む（存在する場合のみ）
+  if (alias_file != "") {
+    while ((getline _aline < alias_file) > 0) {
+      _n = split(_aline, _acols, "\t")
+      if (_n >= 2) {
+        _a = trim(_acols[1])
+        _c = trim(_acols[2])
+        if (_a != "" && _c != "") {
+          alias_map[tolower(_a)] = _c
+        }
+      }
+    }
+    close(alias_file)
+  }
+
   nq = split(query_str, raw_q, /[ \t]+/)
   qcount = 0
   for (i = 1; i <= nq; i++) {
@@ -157,6 +186,27 @@ BEGIN {
       qcount++
       qwords[qcount] = raw_q[i]
       qlens[qcount] = length(raw_q[i])
+      q_is_alias[qcount] = 0
+    }
+  }
+
+  # alias展開: query内の語がalias列に一致したら canonical語を追加（最大10語）
+  _orig_count = qcount
+  for (i = 1; i <= _orig_count; i++) {
+    if (qcount >= 10) break
+    _key = tolower(qwords[i])
+    if (_key in alias_map) {
+      _canon = alias_map[_key]
+      _dup = 0
+      for (j = 1; j <= qcount; j++) {
+        if (tolower(qwords[j]) == tolower(_canon)) { _dup = 1; break }
+      }
+      if (!_dup) {
+        qcount++
+        qwords[qcount] = _canon
+        qlens[qcount] = length(_canon)
+        q_is_alias[qcount] = 1
+      }
     }
   }
 }
@@ -170,7 +220,7 @@ FNR == 1 {
   base = relpath
   sub(/^.*\//, "", base)
   sub(/\.md$/, "", base)
-  is_meta_file = (relpath == "index.md" || relpath == "log.md")
+  is_meta_file = (relpath == "index.md" || relpath == "log.md" || relpath == "overview.md")
   if (!is_meta_file) {
     existing_path[base] = relpath
     title_lc_to_canon[tolower(base)] = base
@@ -266,18 +316,31 @@ END {
         qw = qwords[qi]
         max_d = allowed_dist(qlens[qi])
         d = sub_edit_dist(qw, node, max_d)
+        if (q_is_alias[qi]) {
+          _alias_suffix = ":alias"
+        } else {
+          _alias_suffix = ""
+        }
         if (d <= max_d) {
           matched_q++
           tier = (d == 0) ? 1 : 2
           if (tier < best_tier) best_tier = tier
           total_dist += d
-          lbl = (d == 0) ? (qw ":exact") : (qw ":dist=" d)
+          if (_alias_suffix != "") {
+            lbl = qw ":alias"
+          } else {
+            lbl = (d == 0) ? (qw ":exact") : (qw ":dist=" d)
+          }
           match_labels = (match_labels == "") ? lbl : (match_labels ", " lbl)
         } else if (sum_txt != "" && index(tolower(sum_txt), tolower(qw)) > 0) {
           matched_q++
           if (3 < best_tier) best_tier = 3
           total_dist += max_d + 1
-          lbl = qw ":summary"
+          if (_alias_suffix != "") {
+            lbl = qw ":alias"
+          } else {
+            lbl = qw ":summary"
+          }
           match_labels = (match_labels == "") ? lbl : (match_labels ", " lbl)
         }
       }
@@ -337,6 +400,88 @@ END {
     }
     if (hit_count > limit) {
       printf "\n(他 %d 件を省略。--limit で件数を変更できます)\n", hit_count - limit
+    }
+
+    # fulltext 共走: タイトル検索で件数>0 でも全文検索を走らせて reference として追加
+    _ft_count = 0
+    delete _ft_hits
+    delete _ft_mq
+    delete _ft_lhits
+    delete _ft_snippet_count
+    for (page in existing_path) {
+      _matched_q = 0
+      _total_line_hits = 0
+      _sc = 0
+      for (qi = 1; qi <= qcount; qi++) {
+        qw_lc = tolower(qwords[qi])
+        _q_hit = 0
+        if (index(tolower(page), qw_lc) > 0) {
+          _q_hit = 1
+        }
+        nl = body_line_count[page] + 0
+        for (li = 1; li <= nl; li++) {
+          bline = body_lines[page, li]
+          if (index(tolower(bline), qw_lc) > 0) {
+            _q_hit = 1
+            _total_line_hits++
+            if (_sc < 1 && !( (page SUBSEP li) in seen_snippet )) {
+              seen_snippet[page SUBSEP li] = 1
+              _sc++
+              _ft_snippets[page] = bline
+            }
+          }
+        }
+        if (_q_hit) _matched_q++
+      }
+      if (_matched_q > 0) {
+        _ft_count++
+        _ft_hits[_ft_count] = page
+        _ft_mq[page] = _matched_q
+        _ft_lhits[page] = _total_line_hits
+        _ft_snippet_count[page] = _sc
+      }
+    }
+
+    # sort
+    for (i = 1; i <= _ft_count; i++) {
+      for (j = i + 1; j <= _ft_count; j++) {
+        a = _ft_hits[i]
+        b = _ft_hits[j]
+        swap = 0
+        if (_ft_mq[b] > _ft_mq[a]) swap = 1
+        else if (_ft_mq[b] == _ft_mq[a]) {
+          in_a = inbound_count[a] + 0
+          in_b = inbound_count[b] + 0
+          if (in_b > in_a) swap = 1
+          else if (in_b == in_a && _ft_lhits[b] > _ft_lhits[a]) swap = 1
+        }
+        if (swap) {
+          _ft_hits[i] = b
+          _ft_hits[j] = a
+        }
+      }
+    }
+
+    print ""
+    print "## Full-Text Search Results (reference)"
+    print "Query: " query_str
+    print ""
+    if (_ft_count == 0) {
+      print "(該当するページはありません)"
+    } else {
+      _ref_limit = (_ft_count < 10) ? _ft_count : 10
+      for (i = 1; i <= _ref_limit; i++) {
+        page = _ft_hits[i]
+        in_c = inbound_count[page] + 0
+        sum_part = (page in index_summary && index_summary[page] != "") ? (" — " index_summary[page]) : ""
+        printf "- [[%s]] (path: %s, linked: %d, matched_words: %d/%d)%s\n", page, existing_path[page], in_c, _ft_mq[page], qcount, sum_part
+        if (_ft_snippet_count[page] > 0) {
+          printf "    L%s\n", _ft_snippets[page]
+        }
+      }
+      if (_ft_count > 10) {
+        printf "\n(他 %d 件を省略)\n", _ft_count - 10
+      }
     }
     exit 0
   }

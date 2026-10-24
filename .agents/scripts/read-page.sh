@@ -20,6 +20,8 @@ Usage:
 
 Options:
   --hub-threshold <N>  2 hop展開から除外するハブの被リンク数閾値（既定: 10）
+  --no-2hop            2 hopセクション（## 2 hop link 以降）の出力を丸ごとskipする
+  --2hop-limit <N>     2 hop展開するpivotを被リンク数降順の先頭N個に制限する（残りは1行で要約）
   --wiki-dir <dir>     wikiディレクトリのパス（既定: リポジトリルートの wiki/）
   -h, --help           このヘルプを表示する
 
@@ -30,6 +32,8 @@ EOF
 }
 
 HUB_THRESHOLD=10
+NO_2HOP=0
+TWOHOP_LIMIT=""
 WIKI_DIR="$(cd "$(dirname "$0")/../.." && pwd)/wiki"
 TARGETS=()
 
@@ -37,6 +41,14 @@ while [ $# -gt 0 ]; do
   case "$1" in
     --hub-threshold)
       HUB_THRESHOLD="$2"
+      shift 2
+      ;;
+    --no-2hop)
+      NO_2HOP=1
+      shift
+      ;;
+    --2hop-limit)
+      TWOHOP_LIMIT="$2"
       shift 2
       ;;
     --wiki-dir)
@@ -88,7 +100,9 @@ done
 find "$WIKI_DIR" -name "*.md" -print0 | xargs -0 awk \
   -v wiki_dir="$WIKI_DIR" \
   -v targets_str="$TARGETS_JOINED" \
-  -v hub_threshold="$HUB_THRESHOLD" '
+  -v hub_threshold="$HUB_THRESHOLD" \
+  -v no_2hop="$NO_2HOP" \
+  -v twohop_limit="$TWOHOP_LIMIT" '
 function trim(s) {
   sub(/^[ \t\r\n]+/, "", s)
   sub(/[ \t\r\n]+$/, "", s)
@@ -426,6 +440,10 @@ END {
       printf "- [%s] [[%s]] (linked: %d)%s\n", rel, nb, nb_in, sum_part
     }
 
+    if (no_2hop == 1) {
+      continue
+    }
+
     # 2-hop近傍を集計する（本文中のリンクのみを媒介にし、被リンク数 >= hub_threshold のハブを除外する）
     delete body_hop1_seen
     delete body_hop1_list
@@ -463,10 +481,18 @@ END {
       }
     }
 
+    if (twohop_limit == "") {
+      _2hl = 999999
+    } else {
+      _2hl = twohop_limit + 0
+      if (_2hl < 0) _2hl = 0
+    }
     print ""
     print "## 2 hop link"
     print ""
     printed_2hop_any = 0
+    expanded_2hop = 0
+    omitted_pivots = ""
     for (i = 1; i <= bh1_count; i++) {
       pivot = body_hop1_list[i]
       piv_in = in_deg_all[pivot] + 0
@@ -475,7 +501,16 @@ END {
         printed_2hop_any = 1
         continue
       }
+      if (expanded_2hop >= _2hl) {
+        if (omitted_pivots == "") {
+          omitted_pivots = "[[" pivot "]] (linked: " piv_in ")"
+        } else {
+          omitted_pivots = omitted_pivots ", [[" pivot "]] (linked: " piv_in ")"
+        }
+        continue
+      }
 
+      expanded_2hop++
       delete p_sec_seen
       delete p_sec_list
       p2_count = 0
@@ -530,6 +565,10 @@ END {
         }
         printed_2hop_any = 1
       }
+    }
+    if (omitted_pivots != "") {
+      printf "- (2hop-limit: 以下の pivot の展開を省略: %s)\n", omitted_pivots
+      printed_2hop_any = 1
     }
     if (!printed_2hop_any) {
       print "(該当する2 hop linkはありません)"
