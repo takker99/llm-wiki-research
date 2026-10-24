@@ -156,12 +156,16 @@ END {
   }
 
   print "# Numeric token duplicates (informational; not a lint)"
+  print "# Bare short integers (e.g. \"2\") are filtered: a token is shown only when its length is >= 3, or when it carries a unit (%), a range dash, or +/- uncertainty"
   print "# token  (pages: N, occurrences: M)"
   print ""
   shown = 0
   for (i = 1; i <= dt_n && shown < 30; i++) {
     tok = distinct_tokens[i]
     if (page_count[tok] < 2) continue
+    # display filter: drop bare short integers; keep tokens with a unit,
+    # range dash or +/- qualifier even if short
+    if (length(tok) < 3 && tok !~ /[%µ±]/ && tok !~ /[–—−]/) continue
     shown++
     printf "%s  (pages: %d, occurrences: %d)\n", tok, page_count[tok], total_count[tok]
     # page list

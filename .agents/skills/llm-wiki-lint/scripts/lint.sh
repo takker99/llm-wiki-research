@@ -124,6 +124,10 @@ find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xarg
   }
 '
 echo ""
+# Known limitation: wikilinks containing https:// or # (URL/anchor targets)
+# cannot be resolved to files by any classification above
+echo "  NOTE: wikilinks containing https:// or # are not resolvable here — manual check at review is fine"
+echo ""
 
 # Check that all pages in wiki/ appear in index.md
 echo "--- Pages missing from index.md ---"
@@ -165,12 +169,13 @@ find "$WIKI_DIR" -name "*.md" -print0 | xargs -0 awk '
   done || true
 echo ""
 
-# Check that sources/ pages declare their raw archive in frontmatter
-echo "--- Sources pages without raw: field ---"
+# Check that sources/ pages declare a pointer to the source in frontmatter
+# (raw: path or source_url: — at least one is required)
+echo "--- Sources pages without raw: or source_url: ---"
 for page in "$WIKI_DIR"/sources/*.md; do
   [ -f "$page" ] || continue
-  if ! grep -qE '^raw:' "$page"; then
-    echo "  NO RAW: $page"
+  if ! grep -qE '^(raw|source_url):' "$page"; then
+    echo "  NO POINTER: $page"
   fi
 done
 echo ""

@@ -58,7 +58,7 @@ wiki/
 ### Query
 
 1. `bash .agents/scripts/search-pages.sh "<検索語>"` と `wiki/index.md` で関連ページや未作成リンクを探す。見つからない時は `--fulltext` で本文全文を検索する。
-2. 有望なページや複数ページから参照される未作成リンクを `bash .agents/scripts/read-page.sh "<タイトル>"` で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る。
+2. 有望なページや複数ページから参照される未作成リンクを `bash .agents/scripts/read-page.sh "<タイトル>"` で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る。巨大な2 hopは `--no-2hop` / `--2hop-limit <N>` で絞ってよい。
 3. `[[wikilink]]`引用付きで回答を総合する。
 4. 回答後、「これをwikiページとしてfile-backする？」と提案する。
 5. 承諾されたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う。
@@ -80,7 +80,7 @@ wiki/
 ## 執筆の機械要件
 
 - sourcesページは必ず raw/ へのリンクを含める。引用の流れ: raw → sourceページ → concept/entity
-- 出典はfrontmatterに書く: 全ページ任意 `sources:`（`raw/パス` または `[[wikilink]]`、空白を含むパスはダブルクォート）。sourcesページは `raw:` 必須（リスト・1以上）+ `source_url:` / `accessed:` 任意。`raw/`への参照は必ずパス形式で
+- 出典はfrontmatterに書く: 全ページ任意 `sources:`（`raw/パス` または `[[wikilink]]`、空白を含むパスはダブルクォート）。sourcesページは `raw:` もしくは `source_url:` の1以上を必須（`accessed:` 任意）。`raw/`への参照は必ずパス形式で
 - `index.md` の各エントリは1行。index.mdはページから導出可能なビューのキャッシュ: 陳腐化・欠損時はページ冒頭を読んで再生成してよい（lintが検証）
 - frontmatterは任意だが、あれば有用（tags, dates, status等）
 - **オープンリンク（空リンク）は許容**: リンク先ページがまだないリンクは未来の接続点として残してよい。1ページのみから参照されるリンクのためにページを作らない。2+ページから参照されるようになったら（lintの`OPEN_LINK`表示）ページ作成を検討する
