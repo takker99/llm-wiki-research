@@ -1,5 +1,5 @@
 ---
-sources: "[[2026-08-14 Cosenseのリンク概念 (villagepump+nishio)]]"
+sources: "[[2026-08-14 Cosenseのリンク概念 (villagepump+nishio)]]", "[[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]"
 tags: [cosense, link-concepts]
 ---
 
@@ -46,6 +46,7 @@ shokaiの提唱。「別カテゴリのページへのリンクが媒介とな�
 ## 関連概念
 
 - [[赤リンクとLLM Wiki]] — 赤リンクのLLM Wikiへの輸入（Open Questionとの同型性、come-from、lint設計）
+- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]] — 2 hop linkの読解・書き込みへの具体的な落とし込み
 - [[連想トレイル]] — 文書間の連想的な繋がり。wikilinkによる現代的実装
 - [[Lint]] — 壊れリンクの扱い（エラー vs 赤リンク許容の論争）
 - [[OKF]] — §9で壊れリンク＝「未記述知識」として許容

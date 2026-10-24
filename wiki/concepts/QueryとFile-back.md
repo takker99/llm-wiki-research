@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[リポジトリ分析 microsoft-llmwiki]]"
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -51,11 +51,15 @@ file-backはコマンド化・ページ種別化されている: `@wiki /save` �
 ## 当wikiでの実装
 
 AGENTS.mdのQueryフロー:
-1. `index.md` を読んで関連ページを探す
-2. 有望なページを読み、wikilinkを辿る
-3. `[[wikilink]]`引用付きで回答
-4. 回答後「これをwikiページとしてfile-backする？」と提案
-5. 承諾されたら analyses/ か concepts/ に作成し、関連する既存ページへのwikilinkを張る。明らかに影響を受ける既存ページがあればリンク・記述を更新し、矛盾があれば明示。index/logも更新
+1. `bash .agents/scripts/search-pages.sh "<検索語>"`と`wiki/index.md`で関連ページや未作成リンクを探す。見つからない時は`--fulltext`で本文全文を検索する
+2. 有望なページや複数ページから参照される未作成リンクを`bash .agents/scripts/read-page.sh "<タイトル>"`で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る
+3. `[[wikilink]]`引用付きで回答を総合する
+4. 回答後「これをwikiページとしてfile-backする？」と提案する
+5. 承諾されたら`wiki/analyses/`か`wiki/concepts/`に作成し、関連する既存ページと相互にwikilinkを張る。影響を受ける既存ページの記述を更新し、矛盾があれば明示する。`wiki/index.md`と`wiki/log.md`も更新する
+
+## 2 hop近傍読解とAI向けブラウザUI
+
+単体ファイルを順次`read_file`するだけのQueryでは、順リンクしか見えず逆リンクや2 hop近傍を取りこぼす。`grasp read`や`cosense browsePage`のように、1ページ読む出力にメタデータ・本文・1 hopおよび2 hopの関連ページ一覧を同梱することで、知識ネットワークとしての価値をQuery時に引き出せる。詳細は[[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]を参照。
 
 ## 関連操作
 
@@ -66,3 +70,4 @@ AGENTS.mdのQueryフロー:
 - [[複数のLLM Wikiに共通のインプット]] — 複数Wikiへの並列Query
 - [[繋げる力]] — query結果がwikiに残ることで生まれる横断的価値
 - [[ingestとfile-backの反映方法の同型性]] — file-backもingest同様の編み込み操作であることの検証
+- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]] — 2 hop近傍読解の優位性とQueryスクリプト設計

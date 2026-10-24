@@ -1,8 +1,8 @@
 ---
 date: 2026-08-12
-updated: 2026-08-14
+updated: 2026-10-23
 tags: [template-design, agents-md, skill, pilot-finding]
-sources: "[[リポジトリ分析 AMME-2026S-report]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 SKILL併用6事例]]", "[[2026-08-14 opencode Agent Skills仕様]]"
+sources: "[[リポジトリ分析 AMME-2026S-report]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 SKILL併用6事例]]", "[[2026-08-14 opencode Agent Skills仕様]]", "[[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]"
 ---
 
 # AGENTS.md+SKILL.md二層設計
@@ -79,12 +79,12 @@ Quick Operations Summaryを保険として残すことで、skillがない環境
 ### 基準
 
 1. **常時行動（ユーザーが明示しなくても発動すべき行動）→ AGENTS.md**
-   - 例: queryの作法（index.mdから読む・wikilink引用で総合）、file-backの提案習慣、lintの発動ポリシー（自律提案するか・言われた時だけか）
+   - 例: queryの作法（`search-pages.sh`と`index.md`から探し`read-page.sh`で近傍ごと読む・wikilink引用で総合）、file-backの提案習慣、lintの発動ポリシー（自律提案するか・言われた時だけか）
    - 理由: **決定論性**。AGENTS.mdは毎ターン必ずコンテキストに入る
-2. **トリガー操作（ユーザーの明示で発動する操作）→ SKILL.md**
-   - 例: ingest
-   - 理由: 「ingestして」のような明示トリガーのある操作は発動が確実にマッチする。手順を毎ターン常駐させるコストを払う価値がない
-3. **交差点 → AGENTS.mdに1行のポリシー**（例: lintの「いつ実行するか」はAGENTS.md、実行手順はSKILL.md）
+2. **トリガー操作（ユーザーの明示または提案への承諾で発動する操作）→ SKILL.md**
+   - 例: 書き込み・編み込み操作（ingestおよび承諾後のfile-back実行を統合した`llm-wiki-write`）、lintの実行手順（`llm-wiki-lint`）
+   - 理由: 「ingestして」やfile-back提案への「お願い」のような明確な開始合図がある操作は、AGENTS.mdの1行参照から確実にロードできる。書き込み手順やリンク選定基準をAGENTS.mdとSKILL.mdに二重書きするとdriftとFile-back時の手順欠落を招くため、提案習慣だけをAGENTS.mdに残し、書き込み手順は`llm-wiki-write/SKILL.md`に一本化する（[[ingestとfile-backの反映方法の同型性]]）
+3. **交差点 → AGENTS.mdに1行のポリシー**（例: file-backの「いつ提案するか」とlintの「いつ実行するか」はAGENTS.md、承諾後・発動後の実行手順はSKILL.md）
 4. **機械チェック → skill同梱の決定スクリプト**（本wiki: `.agents/skills/llm-wiki-lint/scripts/lint.sh`）。[[リポジトリ分析 SKILL併用6事例]]の全6実装が「検証・決定的実行はコード」で一致（配置は6事例がroot `scripts/`、本wikiは2026-08-14からskill内に改訂: 手順と一体の凝集性・汎用`scripts/`名前空間の衝突回避。[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]参照）
 
 ### skillロードの仕様（[[2026-08-14 opencode Agent Skills仕様]]）
@@ -107,6 +107,7 @@ AGENTS.md = スキーマ（構造・命名・禁止事項）+ 常時行動 + 明
 
 - [[リポジトリ分析 AMME-2026S-report]] — 発見元
 - [[リポジトリ分析 SKILL併用6事例]] — 外部実装サーベイ（2026-08-14）
+- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]] — CLIの`--help`・SKILL.md・手順書・AI向けUI出力の責任境界
 - [[Schema（AGENTS.md）]] — AGENTS.mdの薄さの限界
 - [[Agent Skills]] — Anthropicのskill概念
 - [[GitHubリポジトリ分析の方法論]]

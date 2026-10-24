@@ -62,3 +62,5 @@ SKILL併用のLLM Wiki repo。web検索で発見しREADMEをraw/にアーカイ�
 - toolboxmd/karpathy-wiki | 2026-08-14 | - | MIT | 4スキル+SessionStart hook+デタッチドingester | (rawアーカイブのみ)
 - ivankuznetsov/llm-wiki | 2026-08-14 | - | - | HackerNoon記事のスキルパッケージ版（3スキル） | (rawアーカイブのみ)
 - opencode | Agent Skills docs | https://opencode.ai/docs/skills/ | 2026-08-14 | sha256:b9cd66f9155699b2bd807802e0f02c525c14d4ad48e2d69b12df6601075f241e | raw/opencode-docs-agent-skills.md
+- shokai | 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill | https://scrapbox.io/shokai/熟練者と同等のCosense読み書きを実現するハーネスとAgent_Skill | 2026-10-23 | sha256:3ec3434fb2109a3da9e7cb32a542b899245908521ea8f5ee2f50a04ab96d73f0 | "raw/cosense/shokai/熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill-2026-10-23.md"
+- helpfeel/cosense-cli | 2026-10-23 | e06bc890958cfe8d1b6fe932db06c35eb8c8577d | MIT | Cosenseのページを読み・調べ・編集するAgent Skill用のCLI | ~/temp/cosense-cli

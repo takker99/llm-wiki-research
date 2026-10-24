@@ -53,10 +53,21 @@ microsoft `@wiki /save`（単一queryページ+index自動upsert）やtsurubee `
 
 フィルタ規則（「感想はfile-backしない」等）は**書かない**選択: 人間ゲートが既にフィルタであり、nishioの「面白いね→イマイチ→…言語化」のループ（L242-245）を切る恐れがあるため。
 
+## 書き込み手順のSkill一本化（2026-10-24改訂）
+
+2026-08-14時点では、`template/AGENTS.md`のFile-back節に簡易な実行契約を置き、Ingestの手順は`llm-wiki-ingest/SKILL.md`に置いていた。しかし[[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]の3モデルusability testで、以下の2つの問題が顕在化した。
+
+1. File-back実行時に`llm-wiki-ingest/SKILL.md`は読まれないため、SKILL側に書かれた周囲ページのスタイル観察、内部リンクの選定基準、`lint.sh`による機械検証がFile-back時に適用されず、孤立ページの発生や手順の手探り状態を招いた。
+2. 入口が`raw/`の外部ソースかQuery回答・対話知見かと、`sources/`ページを作るか否かを除けば、既存ページの近傍読解・スタイル観察・書き換え統合・双方向リンク・`index.md`と`log.md`の更新・`lint.sh`検証はIngestとFile-backで同一である。これを`AGENTS.md`と`SKILL.md`の2箇所に分散して持つとSchema driftの温床になる。
+
+[[AGENTS.md+SKILL.md二層設計]]の基準に照らすと、File-backのうち毎ターンの常時行動なのは「Query回答や議論の後にfile-backを提案すること」だけであり、人間が承諾した後の書き込み実行はIngestと同じトリガー操作である。そこで`llm-wiki-ingest`を`llm-wiki-write/SKILL.md`へ統合し、`AGENTS.md`の`### Ingest`と`### File-back`の両方から`llm-wiki-write/SKILL.md`を参照する構成に改めた。
+
 ## 関連
 
 - [[QueryとFile-back]] — file-backの基本操作（本検証の是正が反映済み）
 - [[Ingest]] — 対比される知識流入経路
 - [[ingestにおける編み込みの実際]] — 編み込みの内実（3層波及構造はfile-backにも同型適用可能）
+- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]] — usability testによる検証と`llm-wiki-write`への統合
+- [[AGENTS.md+SKILL.md二層設計]] — 提案習慣（常時行動）と書き込み実行（トリガー操作）の分離
 - [[操作層]] — 文書型vsツール型の実現手段の軸
 - [[テンプレート草案ver.1]] — テンプレートのclaims（薄さvs欠損の区別）

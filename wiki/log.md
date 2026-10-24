@@ -478,3 +478,36 @@ query: 「re-ingest/keep currentって、そもそも言及しているllm wiki�
 - 限定を追加: re-ingestが必要になるのはrawが変異するwiki（年度PDF・コードpin・コーパス更新）だけ。raw不変＋時系列append型ではstalenessはappend構造に吸収される。「どのSKILLにもない」は不足と入力特性が生む負荷の偏りの両方。含意を更新: template側から着手するなら手順より先にlintのstale-claims検査項目追加、re-ingest手順の義務化射程はraw変異型wikiに限定
 
 (touched 3 files: 1 existing updated [ingestの意義とsourcesページの役割] + index + log)
+
+## [2026-10-23] file-back | Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計
+
+query: 「現在llm wikiを読むときは、単純にファイルを順次読み込んでいる。しかし、knowledge graphを活かすなら、cosense skillやgraspが行っているように、2 hop linksを重視して、関連ページも含めて読んでいく手法のほうがいいのではないか？」「熟練者と同等のCosense読み書きを実現するハーネスとAgent Skillも、queryの設計に有用な情報だと思う。加えて、cosense skillは書き込みの工夫も記しているかも。それを読んで、ingestの方法に反映したい」
+
+- shokaiのCosenseページを`raw/cosense/shokai/`にアーカイブし、`@helpfeel/cosense-cli`の`SKILL.md`・`read-page.md`・`edit-page.md`・`cli-vs-skill.md`と合わせて[[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]を作成
+- 単体ファイル順次読解に対する2 hop近傍読解の優位性を5点に整理: ①具体⇄抽象の思考ジャンプ ②逆リンクの不可視性とAI作ページのリンク疎問題の解消 ③未作成の赤リンクを概念ハブとして機能させる ④`index.md`の1行要約では見えない編み込み波及の回収 ⑤人間向けUIのAI版による手順書簡素化
+- Query用shell scriptの設計原則を整理: 単一ページ閲覧時のメタデータ＋本文＋1 hop/2 hop同梱、未作成ページの概念ノード扱い、`index.md`の1行要約と被リンク数を用いた2 hop一覧と巨大ハブ除外、CLIの`--help`とSkillの責任境界
+- Cosense Skillの`edit-page.md`からIngest・File-backへ輸入する5つの書き込み規律を整理し、`template/.agents/skills/llm-wiki-ingest/SKILL.md`と`AGENTS.md`に反映: ①新規作成でも先に近傍と未作成リンクへの言及を読む ②固定スタイルをSchemaに肥大化させず同ディレクトリの直近ページ1〜2枚を観察して合わせる ③内部リンクは中心概念に絞り巨大ハブへの雑リンク・重複リンクを却下する ④人間との合意対象に編み込み計画を含める ⑤書き込み後にリンク表記と既存ページタイトルの一致を確かめる
+
+(touched 10 files: 2 new [2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai), Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計] + 4 existing wiki pages updated [QueryとFile-back, Ingest, Cosenseのリンク概念, AGENTS.md+SKILL.md二層設計] + index/log + AGENTS.md + template ingest SKILL)
+
+## [2026-10-24] file-back | Query近傍読解スクリプト実装とIngest・Query usability test
+
+- `search-pages.sh`と`read-page.sh`を`template/.agents/scripts/`と`.agents/scripts/`に実装:
+  - `search-pages.sh`: 実在ページタイトル・全`[[wikilink]]`（未作成赤リンク含む）のSellers編集距離による曖昧部分一致検索＋`index.md`の1行要約検索。0件時または`--fulltext`指定時は本文全文検索を実行
+  - `read-page.sh`: メタデータ・本文（未作成リンクの場合は逆リンク行抜粋）・`## 1 hop link`・本文リンク媒介かつ被リンク10以上のハブを除外した`## 2 hop link`を`index.md`の1行要約付きで出力
+- `flash_lite`・`opencode-go/deepseek-v4.1-flash`・`opencode-go/glm-5.3-flash`の3モデルでIngestおよびQuery・File-backのusability testを実施し、インタビューとtranscript監査から以下を改善:
+  - Ingest: 過去`sources/`ページを時点要約として保全し矛盾・比較が長くなる場合は`analyses/`へ切り出すこと、同義語を初出で既存ページタイトルに揃えてリンクすること、ステップ5で`lint.sh`を実行することを明記
+  - Query・File-back: File-back時に新規ページと関連する既存ページとで相互にwikilinkを張ること、`search-pages.sh`の全文検索条件を「見つからない時は`--fulltext`」とすること、`lint.sh`のOrphan・Broken wikilinks集計から`index.md`・`log.md`・自ページを除外することを反映
+- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]のstatusを`tentatively-adopted`に更新
+
+(touched 11 files: 4 new scripts [template/.agents/scripts/{search-pages,read-page}.sh, .agents/scripts/{search-pages,read-page}.sh] + 2 existing wiki pages updated [Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計, QueryとFile-back] + index/log + AGENTS.md + template/AGENTS.md + template/root lint.sh & ingest SKILL)
+
+## [2026-10-24] file-back | IngestとFile-backの書き込み手順をllm-wiki-write/SKILL.mdに一本化
+
+query: 「file backとingestは、queryを起点とするかarchiveしたrawを起点とするかの違いで、それ以外の読み書きは同じ操作ではないか？もしそうだとすると、操作の記述がAGENTS.mdとSKILL.mdに重複して分散しているのは懸念では？」
+
+- `template/.agents/skills/llm-wiki-ingest/SKILL.md`を`llm-wiki-write/SKILL.md`へ発展・改名し、外部ソース起点のIngestとQuery回答・対話知見起点のFile-back実行の両方を担う単一の書き込みSkillに統合
+- `template/AGENTS.md`および本研究wikiの`AGENTS.md`では、File-backの提案習慣だけを常時行動として残し、Ingest時およびFile-back承諾後の書き込み実行はともに`.agents/skills/llm-wiki-write/SKILL.md`を参照する構成に統一。これにより`AGENTS.md`と`SKILL.md`の重複記述を排除し、File-back時にもスタイル観察・内部リンク選定基準・`lint.sh`機械検証が一貫して適用されるようにした
+- [[ingestとfile-backの反映方法の同型性]]、[[AGENTS.md+SKILL.md二層設計]]、[[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]を更新
+
+(touched 9 files: 2 new/renamed skills [template/.agents/skills/llm-wiki-write/SKILL.md, .agents/skills/llm-wiki-write/SKILL.md] + 3 existing wiki pages updated [ingestとfile-backの反映方法の同型性, AGENTS.md+SKILL.md二層設計, Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計] + index/log + AGENTS.md + template/AGENTS.md)

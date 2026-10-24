@@ -115,6 +115,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [2026-08-14 SKILL併用LLM Wiki micuintus (github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20micuintus%20(github).md) — 最小純skill ~6KB+lazy-loaded references。エコシステム比較表9repo収録（22★）
 - [2026-08-14 SKILL併用LLM Wiki ivankuznetsov (hackernoon+github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20ivankuznetsov%20(hackernoon+github).md) — 6プロジェクト実運用。CLAUDE.md 1行トリガー+wiki-researcher skill+QMD MCP併用
 - [2026-08-14 opencode Agent Skills仕様](sources/2026-08-14%20opencode%20Agent%20Skills仕様.md) — skillロードの2段構え。available_skills常駐+skillツール呼び出しはagent自律判断。トリガーはLLMの想起
+- [2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)](sources/2026-10-23%20熟練者と同等のCosense読み書きを実現するハーネスとAgent%20Skill%20(shokai).md) — 人間向けUIのAI版翻訳、browsePageによるメタデータ・1 hop関連ページ強制同梱、edit-page.mdの周囲スタイル観察とリンク選定基準、CLIとSkillの責任境界
 
 ## analyses
 
@@ -141,10 +142,11 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [配布形式の決定とテンプレートの動機](analyses/配布形式の決定とテンプレートの動機.md) — テンプレートの動機（お決まり経路の再発明防止・品質の揺れ対策・第一のユーザーは作者本人）と配布形式の決定（template/コピペ・お膳立てがメイン）＋subagent相談の妥当性検証（status: tentatively-adopted）
 - [claims対応表](analyses/claims対応表.md) — 草案ver.1の9 claims × 2軸（記述的検証×規範的决定）の追跡器。v0.1スコープ決定（二層構成・対象範囲・規範のみ原則）
 - [log.mdとgit logの分工](analyses/log.mdとgit logの分工.md) — 「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）
-- [ingestとfile-backの反映方法の同型性](analyses/ingestとfile-backの反映方法の同型性.md) — 両者は同じ編み込み操作。差はソースの性質と頻度制御のみ。実行は軽同型、templateのFile-back実行契約欠損を是正（status: tentatively-adopted）
+- [ingestとfile-backの反映方法の同型性](analyses/ingestとfile-backの反映方法の同型性.md) — 両者は同じ編み込み操作。提案習慣だけをAGENTS.mdに残し、Ingestと承諾後File-backの書き込み手順をllm-wiki-write/SKILL.mdに一本化（status: tentatively-adopted）
 - [index.md存廃の設計判断](analyses/index.md存廃の設計判断.md) — Cosense批判（大きなリンク論は適用範囲外・真の核心は登録作業への違和感）⇔ index維持。肥大化は可視・出口あり、廃止は不可視・サイレント。stale-entries lint + 「indexはキャッシュ」宣言はv0.1に実装済み、variant guideは撤回（改変はagent任せ）（status: hypothesis）
 - [raw SSOT原則への根本検証](analyses/raw%20SSOT原則への根本検証.md) — LLM Wiki の main value = knowledge network の根拠。Karpathy gist の派生解釈・nishio 3段階態度変遷・raw/ の 6 機能分解・パイロット 7 実装の観察。claim#10 草案（status: hypothesis）
 - [Hermes Agent llm-wiki skillとの比較](analyses/Hermes%20Agent%20llm-wiki%20skillとの比較.md) — Hermesのllm-wiki skill（v2.1.0）との機能・設計思想レベルの比較。agent管理の完成システム vs 人間とLLMの共進化という研究仮説の対比（2026-10-03）
 - [LLM Wiki実装のingest形式と運用の比較](analyses/LLM%20Wiki実装のingest形式と運用の比較.md) — 8実装のingest単位・sourceの4類型・出典ポインタの4モード・運用実態を横断比較。sourceの骨格、provenanceモード、re-ingest、規則とlintの不一致を整理（2026-10-23）
 - [自作wiki群の構成変異と規約の流通](analyses/自作wiki群の構成変異と規約の流通.md) — 上記対象外の講義wiki群等12実装のsurvey。構成原理5軸・authority 5型・template家族の規約流通・失敗3段階・re-ingest実運用・purpose非空手順の訂正（2026-10-23）
 - [ingestの意義とsourcesページの役割](analyses/ingestの意義とsourcesページの役割.md) — Karpathy gist原文のingest節3関節×2surveyの照合。統合は精緻化、kept currentは検出がLint節に先行定義され修復（re-ingest）が未制度化、schema明文化がdrift、編み込みの本質はfile-backに移住。re-ingestを名指す実装はHermesとvanillaflava、nishioは4戦略を名前なしで持つ。ingest=種まきの初期投資、sourcesページ=4仕事の可変配分（2026-10-23）
+- [Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計](analyses/Cosense%20Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計.md) — 2 hop近傍読解の5つの優位性、search-pages.shとread-page.shの実装、Ingest・Queryの3モデルusability test検証（status: tentatively-adopted, 2026-10-24）
