@@ -36,7 +36,7 @@ template/ v0.1執筆時の確信度タグ（この記述はエビデンスで裏
 | 2 | ディレクトリはconcepts/entities/sources/analysesの4分類 | 部分検証 — 実質3分類+ナビゲーション用タクソノミ（入リンク実測）。Microsoftも4分類で独立収束。設計空間は「初期固定vs伸びてから剪定」の分岐 | ③ **必須=concepts/ + sources/、entities/・analyses/は任意デフォルト**（rename・削除自由。analyses相当は名前がwikiで異なる: synthesis・decisions等）。templateには4分類同梱するがAGENTS.md+READMEに任意性を明記 |
 | 3 | ファイル名は自然言語（日本語等） | 多数派（3/5） | ③ |
 | 4 | index.mdを先頭で読むカタログ方式 | 検証済み — 自己適用 + Microsoftが独立にソフトウェア実装 | ① |
-| 5 | Cosenseの6原理がデフォルト設計の土台 | 部分的 — 赤リンク許容・参照数分割lint（1頁=broken / 2+頁=aspect_handle）が具体化。他の原理は未落とし込み | ③ 赤リンク許容+参照数分類lintを焼き込む。残りはvariant guide（[[赤リンクとLLM Wiki]]） |
+| 5 | Cosenseの6原理がデフォルト設計の土台 | 部分的 — オープンリンク許容・参照数分割lint（1参照=表記確認 / 2+参照=ハブ候補）が具体化。他の原理は未落とし込み | ③ オープンリンク許容+参照数分類lintを焼き込む。残りはvariant guide（[[赤リンクとLLM Wiki]]） |
 | 6 | 1ソースで10-15ページに触れる | 本wikiで実測（[[ingestにおける編み込みの実際]]）。2026-10-23 surveyではentityを作らないwikiが3.4 concepts/source、成果物型が1-5ページとなり、entityの有無で再現しないことを確認（[[LLM Wiki実装のingest形式と運用の比較]]） | ② 期待値として軽く記述。knowledge network 中心モデルでは「network の種まき」として再解釈。entityを作る場合の条件付き期待値にするか削除を検討 |
 | 7 | 人間はwiki/を読まなくてよい（read-optional） | 反証（5/5 read-involved。tsurubeeとnishioの対立） | ③ read-involved前提の可読性最小保証をデフォルトに（失敗コスト非対称性: read-optional想定で実は読まれる→サイレント失敗 vs 可読性想定で実は読まれない→軽微なオーバーヘッド） |
 | 8 | wikilinkを本文中に書くべき（first-class） | 多数派（5/6）+ 反例AMME（wikilink 0で100ページ運用） | ③ 推奨するが強制しない。赤リンク許容と整合。**main value = knowledge network（claim#10）の観点からは、wikilink が価値の中心要素であることを強調** |

@@ -7,6 +7,8 @@ tags: [template-design, cosense, llm-wiki-pattern, red-links]
 
 KarpathyのLLM Wikiには想定されていなかったCosenseのリンク概念を、LLM Wikiに取り入れる方法論とその理論的裏付け。赤リンク＝情報の不在表現がLLM WikiのOpen Questionと同型であること、AIによる赤リンク延伸、リンクの仕事の層分離（come-from）、lint設計への含意を扱う。
 
+本ページの「赤リンク」はCosenseの通称で、リンク先ページがまだ存在しないリンクを指す（公式用語は空リンク、色に依存しない設計語彙では開いたリンク／未来へのリンク）。欠陥やエラーの意味はない。
+
 ## 赤リンクは情報の不在の表現
 
 nishioの分析（2026-05-31）: **赤リンクは未充足の情報の存在＝「情報の不在」を表現している**。KarpathyのLLM Wikiの「Open Question」セクションがLLMが書いてくる質問は、この赤リンクの同型物である。Open Questionに対して人間が答えるのと同じく、赤リンク（情報の不在）をAIに埋めさせてみる実験がなされていた。
@@ -79,12 +81,12 @@ Cosenseの単一`[X]`は宛先の違う2種類のリンクを束ねていた:
 ## 実践例
 
 - [[リポジトリ分析 grasp]]関連: `unresolved`コマンドで未解決targetのrank view（TODOではなく概念ノード）、`mentions`で裸言及の監査、`related`で2-hop、`read`で近傍同梱
-- [[リポジトリ分析 BDL-2026S]]: broken_wikilink（1頁参照）=typo扱い / aspect_handle（2+頁参照）=概念ハブの種に分類。「赤リンクはfeature、TODOリスト扱いするな」「1頁参照だけでページを作るな」
+- [[リポジトリ分析 BDL-2026S]]: broken_wikilink（1頁参照）=typo扱い / aspect_handle（2+頁参照）=概念ハブの種に分類（同repoの語彙）。「赤リンクはfeature、TODOリスト扱いするな」「1頁参照だけでページを作るな」
 - [[リポジトリ分析 SMS-2026S-report]]: lint_wiki.pyで参照数分割。「unresolvedはbrokenではない、全て実参照」「2+頁参照=aspect-handle候補（2-hop hubの種）」
 
 ## テンプレート設計への含意
 
-1. **lintの設計**: broken-wikilink=エラー一辺倒ではなく、参照数による分類（1頁=typo/error、2+頁=aspect_handle/info）が有力。本wikiの[[Lint]]は現在エラー扱いであり、赤リンク許容との分岐が研究課題
+1. **lintの設計**: 未解決リンクをエラー一辺倒にせず、参照数で扱いを分ける（1参照=表記の確認、2+参照=ハブ候補）のが有力。本wikiは2026-10-24に`OPEN_LINK`へ語彙を変更した
 2. **LLM生成ページのリンク疎問題**: AIが書くページは元々リンク疎（(c)）なので、wikilinkの追加を強制するよりcome-from的gatherや、赤リンク許容で「将来の接続点」として残す運用が向く
 3. **2 hop linkの輸入**: 赤リンク（同一の赤リンクを共有するページ群）を2-hop関連として提示するlint改善は既に研究課題にある（[[このWikiの目的と研究課題]]）
 

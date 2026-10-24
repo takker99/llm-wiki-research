@@ -28,7 +28,7 @@ description: ソースのingestや、Query回答・対話知見のfile-backに�
    - 追加・変更したリンク表記が接続先の既存ページタイトルと一致しているか確かめる。表記ゆれで繋がっていない箇所があれば修正する
    - `wiki/index.md`を更新し、新ページの追加と変更された要約の反映を行う
    - `wiki/log.md`に`ingest`または`file-back`のエントリを追記し、本文に触れたページ数の内訳を記録する
-   - `bash .agents/skills/llm-wiki-lint/scripts/lint.sh`を実行し、孤立ページ、壊れたリンク、`index.md`の漏れがないか機械検証する
+   - `bash .agents/skills/llm-wiki-lint/scripts/lint.sh`を実行し、孤立ページ、オープンリンク（未作成ページへのリンク）、`index.md`の漏れがないか機械検証する。オープンリンクは欠陥ではないので、表記・パス形式の確認だけ行い、意図的なものは残す
 
 ## 内部リンクの選定基準
 

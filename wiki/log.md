@@ -519,3 +519,15 @@ query: 「knowledge graphの効果的な読み書き（human/AI）について�
 subagentの文献サーベイを出発点に、主要文献を出版社・arXiv・ACM DLの原典ページで再確認してanalysesページを作成した。結論は「研究はあるが単一分野としては存在せず、人間の読み書き（ハイパーテキスト・information foraging・sensemaking・PKM）、AIの読み（GraphRAG・multi-hop retrieval）、AIの書き（agent memory・KG構築）の3系統に分断」。近傍同梱はHippoRAGのPPRやGraphRAGのlocal searchとアルゴリズム的に同型で裏付けが厚い一方、2 hop linkの認知効果、大きなリンクの実害、意図的赤リンクの設計、書く前の近傍読解の因果効果はPKM文脈では未実証であることを整理した。subagent報告の書誌誤り（Chi et al.の年、Lydon-Staleyの掲載誌、McDonald & Stevensonの題名、West et al.の著者、Salton & Buckleyの誤用）は修正済み。URL引用のみで、raw/へのアーカイブは行っていない。
 
 (touched 5 pages: 1 new [知識グラフ読み書きの先行研究サーベイ] + 3 existing updated [Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計, Cosenseのリンク概念, LLM Wikiのmain value] + index/log)
+
+## [2026-10-24] refactor | 未解決リンクをオープンリンクへ改名、空リンク/赤リンクの定義を原典に合わせる
+
+user: 「赤リンクや空リンクの定義を確認して修正して。赤リンクは未来へのハンドルなのにbrokenと扱うのは誤解を生む」
+
+- 原典確認: Cosense公式ヘルプでは「空リンク」が正式用語で、リンク先ページがまだ存在しないリンクを指す（赤リンクは通称）。参照数は公式定義に含まれない。seibe提案（villagepump「赤リンク」）は1参照=赤/2+参照=青の機能的整理。nishioは色非依存の「開いたリンク／オープンリンク／未来へのリンク」を推奨
+- lint.sh（root/template）のラベルを`BROKEN`/`ASPECT_HANDLE`から`OPEN_LINK`へ統一。1参照は表記・パス形式の確認、2+参照は仮想ページ／ハブ候補として扱う
+- llm-wiki-lint SKILL / llm-wiki-write SKILL / AGENTS.md / template AGENTS.md の「壊れたリンク」表現を「オープンリンク」へ変更
+- [[Cosenseのリンク概念]]に用語3層（空リンク／赤リンク／開いたリンク）とseibe提案の注記を追加。[[赤リンクとLLM Wiki]]・[[Lint]]・[[claims対応表]]を更新
+- 歴史的記録（raw/、sources/、log.mdの既存行、他実装の分析ページ）は変更しない
+
+(touched 13 files: lint script ×2, lint SKILL ×2, write SKILL ×2, AGENTS.md ×2, concepts ×3 [Cosenseのリンク概念, 赤リンクとLLM Wiki, Lint], claims対応表 + index/log)

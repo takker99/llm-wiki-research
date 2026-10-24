@@ -31,7 +31,7 @@ tsurubeeの運用報告: ingestを繰り返すと「`agent-harness`と`エージ
 ## 当wikiでの実装
 
 AGENTS.mdでは機械チェックと意味チェックに分類:
-1. 機械チェック: 孤立ページ、壊れたwikilink、index未掲載、raw/参照不整合
+1. 機械チェック: 孤立ページ、オープンリンク（未解決wikilink）、index未掲載、raw/参照不整合
 2. 意味チェック: 矛盾、古い主張、概念ページ不在、クロスリファレンス不足
 3. 新しい調査課題とソースの提案
 4. 重大度別報告 + 機械的問題の自動修正提案
@@ -50,15 +50,15 @@ missing-pages（info: 参照のみで未作成）/ frontmatter-validation。
 
 ## 赤リンク論争（OKF §9との対比）
 
-[[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]: OKFは壊れリンクを「未記述知識」として許容（§9）するのに対し、このwiki含むLLM Wiki系はlintが壊れリンクをエラー扱いする。nishioは「意図的な前方参照（未作成ページへのstub）とリネーム漏れ/誤りを区別する余地。前者を許す運用はwikiを育てやすい」と指摘する。
+[[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]: OKFは壊れリンクを「未記述知識」として許容（§9）するのに対し、LLM Wiki系の実装にはlintが壊れリンクをエラー扱いするものも多い（本wikiは2026-10-24にオープンリンクとして許容する語彙へ変更）。nishioは「意図的な前方参照（未作成ページへのstub）とリネーム漏れ/誤りを区別する余地。前者を許す運用はwikiを育てやすい」と指摘する。
 
 - Cosenseの「同一の赤リンクが複数ページに出現→仮想的ページ（バックリンクリスト）ができる＋2ホップリンクで繋がる」挙動は一歩先で、OKFにも言及がない
 - concept ID＝ファイルパスのOKF・素のMarkdown wikiは赤リンクを「解決しないパス＝エラー」としか扱えず、キーワードベース・リンク（タイトル同一性での自動集約）の利点を取りこぼす（[[OKF]]、[[赤リンクの数の議論のLLM Wiki]]）
 - 本wikiは lint が basename 解決している分、偶然半分キーワード化していてこの利点に近い。「同一の赤リンクを共有する既存ページ群を2ホップ関連として提示」すれば、エラー（リネーム漏れ）と発見（前方参照）を分離できる（Karwiの提案）
 
-## 参照数分類lint（赤リンク論争への具体的解）
+## 参照数分類lint（未解決リンク論争への具体的解）
 
-2026-08-14 ingestで、赤リンク論争（許容 vs エラー）に対する**第3の選択肢**が実装データとして揃った（[[赤リンクとLLM Wiki]]）: 未解決wikilinkを**参照数で分類**する。
+2026-08-14 ingestで、赤リンク論争（許容 vs エラー）に対する**第3の選択肢**が実装データとして揃った（[[赤リンクとLLM Wiki]]）: 未解決wikilinkを**参照数で分類**する。下表の名称はBDL-2026Sの語彙で、本テンプレートは2026-10-24に`OPEN_LINK`へ改名した（下記「本テンプレートの語彙」）。
 
 | 分類 | 参照数 | 扱い | 実装 |
 |---|---|---|---|
@@ -68,6 +68,17 @@ missing-pages（info: 参照のみで未作成）/ frontmatter-validation。
 BDL-2026Sの明文化（AGENTS.md）: 「Do not treat unresolved wikilink references as a TODO list. In Scrapbox/Cosense style, red links are a feature... Do not create a page for a 1-page reference.」。SMS-2026S-reportは「unresolvedはbrokenではない、全て実参照」「2+頁参照=2-hop hubの種」とlintコメントに明記。
 
 **当wikiでの実装（2026-08-14）**: 参照数分類を導入（1頁= B R O K E N / 2+頁= ASPECT_HANDLE、エイリアス解決、インラインコード除外）。スクリプトはroot `scripts/lint.sh`から`.agents/skills/llm-wiki-lint/scripts/lint.sh`へ同日移動（llm-wiki-lint skill同梱。MCP不採用とAGENTS.md+SKILL.md二層採用の根拠の改訂）。AGENTS.mdのLintセクション・執筆要件にも「赤リンクは許容」を明文化。lint結果の`[[fact-wiki-separation]]`（3頁参照=ASPECT_HANDLE）が概念ページ化された最初の事例。
+
+### 本テンプレートの語彙（2026-10-24〜）
+
+lintの出力は「壊れたリンク」ではなく**オープンリンク（未解決リンク）**と呼ぶ。状態は1つで、参照数によって扱いだけが変わる。
+
+| 出力 | 参照数 | 扱い |
+|---|---|---|
+| OPEN_LINK (1 page) | 1ページ | 表記ゆれ・パス形式・未作成ページのいずれか。意図的なら放置、表記の誤りなら修正 |
+| OPEN_LINK (n pages) | 2+ページ | 仮想ページ／概念ハブの種。ページ作成を候補として提案 |
+
+`broken_wikilink` / `aspect_handle` はBDL-2026Sの語彙であり、分類の由来として残す（名称は本テンプレートに持ち込まない）。
 
 graspの理論的裏付け（[[リポジトリ分析 grasp]]）: リンクにはrecall / attention / navigation / 読者ケアの4仕事があり、Cosenseはsubstrate制約で全部を1つのlinkに束ねている。recallをlinkの外へ出せば、linkは必須（infrastructure）から任意（editorial）に変わる。**書き手がAI化するほど裸言及が増える**（AI default 裸）ので、wikilink強制より赤リンク許容＋come-from（用語-大域の1宣言で全出現をgather）が向く可能性がある。
 

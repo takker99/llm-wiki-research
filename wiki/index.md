@@ -61,8 +61,8 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [操作層](concepts/操作層.md) — wikiへの操作を定義・実現する層。文書型（AGENTS.md指示）vs ツール型（MCP/拡張）。OKFが標準化しない層
 - [徒歩レビュー](concepts/徒歩レビュー.md) — 人間のレビュー負荷を最小化。AIがフィルタ→人間は違和感のみ。about-nishioで発見
 - [統合解説層（synthesis）](concepts/統合解説層（synthesis）.md) — 概念辞書の上のメタ層。素人向け入口。deliteが発明
-- [Cosenseのリンク概念](concepts/Cosenseのリンク概念.md) — 2 hop link・赤リンク（空リンク）・大きなリンク・関連ページリスト・リンクサジェスト等の用語体系。リンクで思考をジャンプさせる運用思想
-- [赤リンクとLLM Wiki](concepts/赤リンクとLLM Wiki.md) — 赤リンク=情報の不在表現のLLM Wikiへの輸入。Open Questionとの同型性、リンクの4仕事、come-from、参照数分割lint
+- [Cosenseのリンク概念](concepts/Cosenseのリンク概念.md) — 2 hop link・空リンク（通称 赤リンク）・大きなリンク・関連ページリスト・リンクサジェスト等の用語体系。リンクで思考をジャンプさせる運用思想
+- [赤リンクとLLM Wiki](concepts/赤リンクとLLM Wiki.md) — 赤リンク=情報の不在表現＝未来へのハンドルのLLM Wikiへの輸入。Open Questionとの同型性、リンクの4仕事、come-from、参照数分割lint
 - [AGENTS.md=CLAUDE.md管理パターン](concepts/AGENTS.md=CLAUDE.md管理パターン.md) — コピー・分離・片方のみの4パターンと推奨
 - [overviewの役割](concepts/overviewの役割.md) — 人間向けの入口ページ。原型（Karpathy gist）にはない独自発明だが「入門の1枚」はnishio実測・他実装に元ネタあり
 - [LLM Wikiのmain value](concepts/LLM Wikiのmain value.md) — LLM Wiki の価値の中心は knowledge network（補助装置: raw/ SSOT）。「raw が唯一の source」は派生解釈の解消

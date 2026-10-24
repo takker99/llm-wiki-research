@@ -1,6 +1,6 @@
 #!/bin/bash
 # Simple lint script for LLM Wiki.
-# Checks for orphan pages, broken wikilinks, and index consistency.
+# Checks for orphan pages, open (unresolved) wikilinks, and index consistency.
 # Run with: bash .agents/skills/llm-wiki-lint/scripts/lint.sh
 
 set -euo pipefail
@@ -27,11 +27,13 @@ for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/anal
 done
 echo ""
 
-# Check for broken wikilinks in wiki/ (skipping fenced code blocks and inline code)
-# Classification by reference count (pages that link to the target):
-#   1 page   = BROKEN       (likely typo / private jargon, or intentional red link)
-#   2+ pages = ASPECT_HANDLE (concept hub seed; candidate for page creation)
-echo "--- Broken wikilinks (classified by ref count) ---"
+# Check for open links (wikilinks whose target page does not exist yet) in wiki/.
+# An open link is not a defect: it marks a place where the graph has no node yet.
+# Classification by reference count is our operating rule, not a Cosense term:
+#   1 page   = OPEN_LINK (1 page)  — check spelling/path form; leave it if intentional
+#   2+ pages = OPEN_LINK (n pages) — virtual page / hub seed; candidate for page creation
+# Open links never fail the run.
+echo "--- Open links (unresolved wikilinks, classified by ref count) ---"
 find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xargs -0 awk '
   /^```/ { inblock = !inblock; next }
   !inblock {
@@ -55,9 +57,9 @@ find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xarg
     found=$(find "$WIKI_DIR" -name "${target}.md" 2>/dev/null | head -1)
     if [ -z "$found" ]; then
       if [ "$count" -ge 2 ]; then
-        echo "  ASPECT_HANDLE ($count pages): [[${target}]] — page creation candidate"
+        echo "  OPEN_LINK ($count pages): [[${target}]] — virtual page / hub seed; candidate for page creation"
       else
-        echo "  BROKEN (1 page): [[${target}]] — typo or intentional red link"
+        echo "  OPEN_LINK (1 page): [[${target}]] — check spelling or path form; leave it if intentional"
       fi
     fi
   done
