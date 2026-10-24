@@ -63,7 +63,7 @@ Karpathy の gist で raw/ に言及しているのは3箇所のみ（line 29 �
 
 ## nishio の態度変遷（再評価）
 
-`raw/nishio-LLM_Wikiが何かのためのものか.md`・`raw/nishio-KarpathyのLLM_Wiki勉強会.md` 等の時系列から:
+`raw/nishio-LLM_Wikiがなんのためのものか.md`・`raw/nishio-KarpathyのLLM_Wiki勉強会.md` 等の時系列から:
 
 | 段階 | 時期 | 態度 | 観察源 |
 |---|---|---|---|

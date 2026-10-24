@@ -87,9 +87,14 @@ grep -E '^- \[' "$WIKI_DIR/index.md" \
 echo ""
 
 # Check that raw/ files referenced from wiki/ actually exist
+# Inline code and fenced code blocks are stripped first (quoted design
+# examples in analyses pages are not raw references)
 echo "--- Missing raw files referenced from wiki/ ---"
-grep -roE 'raw/[^])"'"'"'`\[,<>。、「」（）、→]+\.md' "$WIKI_DIR" --include="*.md" \
-  | sed 's/.*://' \
+find "$WIKI_DIR" -name "*.md" -print0 | xargs -0 awk '
+  /^```/ { inblock = !inblock; next }
+  !inblock { gsub(/`[^`]*`/, "", $0); print }
+' \
+  | grep -oE 'raw/[^])"'"'"'`\[,<>。、「」（）、→]+\.md' \
   | sort -u \
   | while read -r ref; do
     if [ ! -f "$(dirname "$WIKI_DIR")/$ref" ]; then
@@ -106,6 +111,23 @@ for page in "$WIKI_DIR"/sources/*.md; do
     echo "  NO RAW: $page"
   fi
 done
+echo ""
+
+# Check image links (../assets/...) resolve, and no asset is unused
+echo "--- Image links / unused assets ---"
+links=$(grep -roh --include='*.md' '(\.\./assets/[^)]*)' "$WIKI_DIR" 2>/dev/null | sed 's/^(//;s/)$//;s|^\.\./||' | sort -u || true)
+echo "$links" | while read -r rel; do
+  [ -n "$rel" ] || continue
+  [ -f "$WIKI_DIR/$rel" ] || echo "  MISSING IMAGE: $rel"
+done
+if [ -d "$WIKI_DIR/assets" ]; then
+  for f in "$WIKI_DIR"/assets/*; do
+    [ -f "$f" ] || continue
+    if ! grep -qr --include='*.md' "$(basename "$f")" "$WIKI_DIR"; then
+      echo "  UNUSED ASSET: ${f#"$WIKI_DIR"/}"
+    fi
+  done
+fi
 echo ""
 
 # Count wiki pages
