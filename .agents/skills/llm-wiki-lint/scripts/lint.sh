@@ -63,6 +63,66 @@ find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xarg
   done
 echo ""
 
+# Check duplicate wikilinks within each page body (claim-granularity
+# citations with distinct p.XX pinpointers are exempt)
+echo "--- Duplicate wikilinks within pages ---"
+find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xargs -0 awk '
+  FNR == 1 {
+    infm = 0; inblock = 0
+    relpath = FILENAME
+    base = relpath; sub(/^.*\//, "", base); sub(/\.md$/, "", base)
+    self = base
+  }
+  {
+    line = $0
+    if (FNR == 1 && line == "---") { infm = 1; next }
+    if (infm == 1 && line == "---") { infm = 2; next }
+    if (infm == 1) next
+    if (line ~ /^```/) { inblock = !inblock; next }
+    if (inblock) next
+    clean = line
+    gsub(/`[^`]*`/, "", clean)
+    work = clean
+    while (match(work, /\[\[[^]]+\]\]/)) {
+      m_start = RSTART; m_len = RLENGTH
+      raw_link = substr(work, m_start + 2, m_len - 4)
+      split(raw_link, parts, "|")
+      target = parts[1]
+      sub(/^[ \t\r\n]+/, "", target); sub(/[ \t\r\n]+$/, "", target)
+      if (target != "" && target !~ /^http/ && target != self) {
+        key = self SUBSEP target
+        n_occ[key]++
+        tail = substr(work, m_start + m_len)
+        pin = ""
+        if (match(tail, /^ *p\.[0-9]+[0-9.-]*/)) pin = substr(tail, RSTART, RLENGTH)
+        occ_pin[key, n_occ[key]] = pin
+      }
+      work = substr(work, m_start + m_len)
+    }
+  }
+  END {
+    for (key in n_occ) {
+      n = n_occ[key]
+      if (n < 2) continue
+      split(key, kp, SUBSEP)
+      page = kp[1]; tgt = kp[2]
+      npinned = 0; npinless = 0; duppin = 0
+      for (i = 1; i <= n; i++) {
+        pi = occ_pin[key, i]
+        if (pi == "") { npinless++; continue }
+        npinned++
+        for (j = i + 1; j <= n; j++) {
+          if (occ_pin[key, j] == pi) duppin++
+        }
+      }
+      if (npinless >= 2 || duppin > 0 || npinned == 0) {
+        printf "  DUPLICATE x%d (pinless=%d, dup-pin=%d): [[%s]] in %s\n", n, npinless, duppin, tgt, page
+      }
+    }
+  }
+'
+echo ""
+
 # Check that all pages in wiki/ appear in index.md
 echo "--- Pages missing from index.md ---"
 find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" \
