@@ -170,7 +170,7 @@ FNR == 1 {
   base = relpath
   sub(/^.*\//, "", base)
   sub(/\.md$/, "", base)
-  is_meta_file = (relpath == "index.md" || relpath == "log.md")
+  is_meta_file = (relpath == "index.md" || relpath == "log.md" || relpath == "overview.md")
   if (!is_meta_file) {
     existing_path[base] = relpath
     title_lc_to_canon[tolower(base)] = base
