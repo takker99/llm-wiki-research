@@ -50,6 +50,7 @@ wiki/
 - sourcesページのfrontmatter（`raw:` もしくは `source_url:` の1以上を必須（`accessed:` 任意）等）の形式は `.agents/skills/llm-wiki-write/SKILL.md` に定義
 - frontmatter は任意（sources 以外）。書く場合はページ種別に応じて `tags:` / `dates:` / `status:` / `sources:` 等のメタ情報を付加してよい。書かなくても wiki は機能する
 - concepts/entities の出典は本文中に sources ページへの [[wikilink]] を置く (claim粒度)。analyses の frontmatter `sources:` は入力 raw データ・スクリプトの列挙 (reproducibility manifest) という別の意味を持ち、出典では表現しない
+- 外部URLを出典にする場合は frontmatter の `source_url:`（と任意で `accessed:`）を使う。
 - 著者-年表記 (`(Otsu, 1979)` 等の LLM 一般知識に由来する文献表記) は帰属引用 (手法の命名・背景) ならこのままでよい。外部論文の**内容**を主張の根拠に載せる前に、原典に相当する sources ページを作る
 - `index.md` の各エントリは1行: `- [ページタイトル](パス) — 1行要約`。index.mdはページから導出可能なビューのキャッシュ: 陳腐化・欠損時はページ冒頭を読んで再生成してよい（lintが検証）
 - `log.md` の各エントリ: 見出し `## [YYYY-MM-DD] action | 短い題名` + 詳細は本文

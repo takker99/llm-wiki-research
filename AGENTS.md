@@ -81,6 +81,7 @@ wiki/
 
 - sourcesページは必ず raw/ へのリンクを含める。引用の流れ: raw → sourceページ → concept/entity
 - 出典はfrontmatterに書く: 全ページ任意 `sources:`（`raw/パス` または `[[wikilink]]`、空白を含むパスはダブルクォート）。sourcesページは `raw:` もしくは `source_url:` の1以上を必須（`accessed:` 任意）。`raw/`への参照は必ずパス形式で
+- 外部URLを出典にする場合は frontmatter の `source_url:`（と任意で `accessed:`）を使う。
 - `index.md` の各エントリは1行。index.mdはページから導出可能なビューのキャッシュ: 陳腐化・欠損時はページ冒頭を読んで再生成してよい（lintが検証）
 - frontmatterは任意だが、あれば有用（tags, dates, status等）
 - **オープンリンク（空リンク）は許容**: リンク先ページがまだないリンクは未来の接続点として残してよい。1ページのみから参照されるリンクのためにページを作らない。2+ページから参照されるようになったら（lintの`OPEN_LINK`表示）ページ作成を検討する
