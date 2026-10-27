@@ -73,6 +73,9 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [プロンプト自己言及汚染](concepts/プロンプト自己言及汚染.md) — LLMは指示内容だけでなく指示文自体の文体をFew-shot手本として模倣する。Schema層の書き方が出力品質の上限になる（2026-10-27）
 - [Knowledge Atom](concepts/Knowledge Atom.md) — 命題の最小単位。本wikiのclaim粒度引用＋sources→conceptの引用流れはAEG二部グラフと同型（2026-10-27）
 - [Instruction Dilution](concepts/Instruction Dilution.md) — 常駐指示の過密による注意力分散。1,000-2,000語超・15ルール超で発生、Prompt Cachingでは解決しない。3段階開示が対策（2026-10-27）
+- [メンタルレキシコン不在](concepts/メンタルレキシコン不在.md) — LLMは抽象的語彙辞書を持たず記憶痕跡の類推で造語。語彙的阻止の欠如が擬似漢語と同義語増殖の生成根。誘発条件はオープンエンド圧縮指示（2026-10-27）
+- [CJトークンファミリー](concepts/CJトークンファミリー.md) — 中日漢字トークンの統合・モノリシック化・SFT高ノルム化。漢語トークンがデコードで常時浮上する機構、LCGの死角、漢字長キャップでしか対抗できない理論根拠（2026-10-27）
+- [中国語ピボットCoT](concepts/中国語ピボットCoT.md) — 中国語思考パターンの概念漏出（Attention転写）と蒸留SFT模倣トラップ。CoT言語固定・量子化回避・モデル選択というパイプライン層防御の根拠（2026-10-27）
 
 ## entities
 
@@ -125,6 +128,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)](sources/2026-10-23%20熟練者と同等のCosense読み書きを実現するハーネスとAgent%20Skill%20(shokai).md) — 人間向けUIのAI版翻訳、browsePageによるメタデータ・1 hop関連ページ強制同梱、edit-page.mdの周囲スタイル観察とリンク選定基準、CLIとSkillの責任境界
 - [2026-10-27 低コストLLMの日本語矯正とスキル設計](sources/2026-10-27%20低コストLLMの日本語矯正とスキル設計.md) — 低コストモデルの日本語劣化をAgent Skillsで抑制する報告。OSS矯正スキル8種比較、造語抑制の4技法、AGENTS.md/SKILL.mdのトークン経済学、テンプレート集
 - [2026-10-27 LLM知識ベースの言語ドリフト検証](sources/2026-10-27%20LLM知識ベースの言語ドリフト検証.md) — read-optional知識ベースの言語ドリフト放置仮説への反証。自己消費ループの非可逆劣化、複合名詞化・同義語増殖の実害、許容圧縮と必須抑制の境界線
+- [2026-10-27 多言語LLMの擬似漢語生成と過剰圧縮の機構](sources/2026-10-27%20多言語LLMの擬似漢語生成と過剰圧縮の機構.md) — 擬似漢語生成の4機構（メンタルレキシコン不在・CJトークン・中国語ピボットCoT・要約指示の圧縮圧力）の解明。前2件に対する生成機構側の第3報告
 
 ## analyses
 
@@ -161,4 +165,4 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計](analyses/Cosense%20Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計.md) — 2 hop近傍読解の5つの優位性、search-pages.shとread-page.shの実装、Ingest・Queryの3モデルusability test検証（status: tentatively-adopted, 2026-10-24）
 - [知識グラフ読み書きの先行研究サーベイ](analyses/知識グラフ読み書きの先行研究サーベイ.md) — 人間/AIのKG読み書き研究の横断survey。近傍同梱はHippoRAG/GraphRAG、2-hopの認知効果・大きなリンク・赤リンクは未実証。7仮説との対応と研究空白（2026-10-24）
 - [日本語矯正Agent Skill群の設計空間](analyses/日本語矯正Agent Skill群の設計空間.md) — OSS矯正skill 8種の階層×アーキテクチャ比較。「検出は機械・判断はAI」、無制約推敲は事実を壊す、忠実さ優先の選定軸とAGENTS.md絶対ルール候補（2026-10-27）
-- [出典の読み優先度（2026-10-27 ingest）](analyses/出典の読み優先度（2026-10-27 ingest）.md) — 2つのDeepResearchレポート出典104件の評価。Tier1=定量主張の原典検証5件、Tier2=テンプレート課題に効く実装系、読まない系の判別基準（2026-10-27）
+- [出典の読み優先度（2026-10-27 ingest）](analyses/出典の読み優先度（2026-10-27 ingest）.md) — 3つのDeepResearchレポート出典172件の評価。Tier1=定量主張の原典検証17作、Tier2=テンプレート課題に効く実装系、出典結合の疑義3件、読まない系の判別基準（2026-10-27）

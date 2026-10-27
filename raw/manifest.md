@@ -66,3 +66,4 @@ SKILL併用のLLM Wiki repo。web検索で発見しREADMEをraw/にアーカイ�
 - helpfeel/cosense-cli | 2026-10-23 | e06bc890958cfe8d1b6fe932db06c35eb8c8577d | MIT | Cosenseのページを読み・調べ・編集するAgent Skill用のCLI | ~/temp/cosense-cli
 - 出典不明 | 低コストLLMの日本語矯正とスキル設計 | -（URL不明・ユーザー提供） | 2026-10-27 | sha256:9d5d2e54fac5343c0c643a760ef9ec3b5e3519124fb36356997ce746e67c02af | raw/低コストLLMの日本語矯正とスキル設計.md
 - 出典不明 | LLM知識ベースの言語ドリフト検証 | -（URL不明・ユーザー提供） | 2026-10-27 | sha256:72f207e36df8b4ca78429483e15295a04fa16be19d668b82fb470695a73752e3 | raw/LLM知識ベースの言語ドリフト検証.md
+- 出典不明 | 多言語LLMの擬似漢語生成と過剰圧縮の機構 | -（URL不明・ユーザー提供） | 2026-10-27 | sha256:b050347acb26fb946cf3a49b791ac6fa207e18037da997522f6f2dfe9b08c630 | raw/多言語LLMの擬似漢語生成と過剰圧縮の機構.md
