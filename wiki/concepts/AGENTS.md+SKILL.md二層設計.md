@@ -1,8 +1,8 @@
 ---
 date: 2026-08-12
-updated: 2026-10-23
+updated: 2026-10-27
 tags: [template-design, agents-md, skill, pilot-finding]
-sources: "[[リポジトリ分析 AMME-2026S-report]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 SKILL併用6事例]]", "[[2026-08-14 opencode Agent Skills仕様]]", "[[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]"
+sources: "[[リポジトリ分析 AMME-2026S-report]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 SKILL併用6事例]]", "[[2026-08-14 opencode Agent Skills仕様]]", "[[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]", "[[2026-10-27 低コストLLMの日本語矯正とスキル設計]]"
 ---
 
 # AGENTS.md+SKILL.md二層設計
@@ -102,6 +102,12 @@ Quick Operations Summaryを保険として残すことで、skillがない環境
 ### 結果
 
 AGENTS.md = スキーマ（構造・命名・禁止事項）+ 常時行動 + 明示パス参照1行。AMME（1.9KB + Quick Operations保険）よりさらに薄い構成が可能。AGENTS.mdの純化の帰結として、`analyses/MCP不採用とAGENTS.md+SKILL.md二層採用の根拠.md`の推奨構成も修正済み。
+
+## トークン経済学の定量根拠（2026-10-27 ingest）
+
+低コストモデルの日本語矯正スキル設計報告（[[2026-10-27 低コストLLMの日本語矯正とスキル設計]]）が、二層設計と一致する方向で定量的根拠を提出した。発生メカニズム（Instruction Dilution・Lost in the middle）、3段階開示のトークン消費、Prompt CachingがAttention分散を解決しない点、実測（yomiyasu 116KB→コスト約4.3倍）、AGENTS.md側の上限（全体1,500語以内・絶対ルール5項目以内300-400トークン）は[[Instruction Dilution]]に集約した。
+
+「skillの本文を肥大化させない」分担基準に、サイズの定量的上限が付いた形。skillの中身側の設計は[[語彙接地（Lexical Grounding）]]。
 
 ## 関連
 

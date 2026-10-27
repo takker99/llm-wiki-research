@@ -531,3 +531,17 @@ user: 「赤リンクや空リンクの定義を確認して修正して。赤�
 - 歴史的記録（raw/、sources/、log.mdの既存行、他実装の分析ページ）は変更しない
 
 (touched 13 files: lint script ×2, lint SKILL ×2, write SKILL ×2, AGENTS.md ×2, concepts ×3 [Cosenseのリンク概念, 赤リンクとLLM Wiki, Lint], claims対応表 + index/log)
+
+## [2026-10-27] ingest | 低コストLLMの日本語矯正とスキル設計 + LLM知識ベースの言語ドリフト検証
+
+低コストモデル（DeepSeek/GLM等）運用の日本語劣化をスキル設計で抑制する報告と、read-optional知識ベースの言語ドリフト放置仮説への反証検証の2報告をingest。前者は実装面（造語抑制の4技法・トークン経済学）、後者は理論面（自己消費ループの非可逆劣化・複合名詞化と同義語増殖の実害・許容圧縮と必須抑制の境界線）で相互補完。両rawファイルに圧縮パイプライン由来のspanノイズがある旨をsourcesページに注記。raw/manifest.mdに2ファイル登録（出典不明・ユーザー提供）。
+
+編み込みは初回の3概念から拡張: 自己消費ループ・プロンプト自己言及汚染・Knowledge Atom・Instruction Dilutionを独立概念化、8スキルの設計空間をanalyses化し、Schema（書き込みゲート）・Lint（語用論的ドリフトの検知不能性）・raw SSOT検証（出典切断禁止の裏付け）・複利効果（複利の裏面）・ingestの意義（可逆的照合）・サーベイ（自己消費ループ系研究）・二層設計（定量根拠の委譲）に反映。
+
+(touched 21 files: 2 new sources [低コストLLMの日本語矯正とスキル設計, LLM知識ベースの言語ドリフト検証] + 7 new concepts [言語ドリフト（LLM Wiki）, 語彙接地（Lexical Grounding）, 同義語増殖, 自己消費ループ, プロンプト自己言及汚染, Knowledge Atom, Instruction Dilution] + 1 new analyses [日本語矯正Agent Skill群の設計空間] + 8 existing updated [読まれなくてよい中間産物, AGENTS.md+SKILL.md二層設計, 知識グラフ読み書きの先行研究サーベイ, Schema（AGENTS.md）, Lint, raw SSOT原則への根本検証, 永続Wikiと複利効果, ingestの意義とsourcesページの役割] + index/log + raw/manifest.md)
+
+## [2026-10-27] file-back | 出典の読み優先度（2026-10-27 ingest）
+
+本日のingestレポート2件（引用出典リスト計104件）の出典を、既存ページの定量主張への検証価値で評価したquery回答をfile-back。Tier1（原典検証5件）: IJCNLP 2025伝達チェーン・Gerstgrasser 2024（累積で再帰の呪いが破れる→append-only設計に直結）・AtomicRAG・SSGM・Lazaridou 2020。Tier2（テンプレート課題に効く実装系6件）: Pratiyush/llm-wiki（既存分析候補の再発見）・prompt-lsp・Agent Skills設計論文・「AI臭は語彙よりリズムに出る」・運用進化系・MCP対比。Tier3（需要が生えたら7系統）と「ingestしなくてよい系」の判別基準も整理。DeepResearch出典の品質勾配、spanノイズによるURL破壊、書誌確認の注意を記録。
+
+(touched 5 files: 1 new analyses [出典の読み優先度（2026-10-27 ingest）] + 2 existing updated [低コストLLMの日本語矯正とスキル設計, LLM知識ベースの言語ドリフト検証] + index/log)

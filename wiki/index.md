@@ -66,6 +66,13 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [AGENTS.md=CLAUDE.md管理パターン](concepts/AGENTS.md=CLAUDE.md管理パターン.md) — コピー・分離・片方のみの4パターンと推奨
 - [overviewの役割](concepts/overviewの役割.md) — 人間向けの入口ページ。原型（Karpathy gist）にはない独自発明だが「入門の1枚」はnishio実測・他実装に元ネタあり
 - [LLM Wikiのmain value](concepts/LLM Wikiのmain value.md) — LLM Wiki の価値の中心は knowledge network（補助装置: raw/ SSOT）。「raw が唯一の source」は派生解釈の解消
+- [言語ドリフト（LLM Wiki）](concepts/言語ドリフト（LLM Wiki）.md) — 独自の圧縮言語・擬似漢語が蓄積する現象。許容は文体の表層まで、命題構造と識別子のドリフトはLLM専用でも致命的（2026-10-27）
+- [語彙接地（Lexical Grounding）](concepts/語彙接地（Lexical Grounding）.md) — 執筆前に用語対応を確定させ擬似漢語造語を構造的に遮断する4技法。低コストモデルの日本語ingestの品質劣化対策（2026-10-27）
+- [同義語増殖](concepts/同義語増殖.md) — 同一概念への造語・表記ゆれが別ノード化する現象。ハブ形成失敗・断片化・BM25語彙ギャップの3崩壊と正規化の共通点（2026-10-27）
+- [自己消費ループ](concepts/自己消費ループ.md) — 反復要約が前世代のLLM出力を入力に再エンコードするループ。相互情報量の単調減少、第2ホップで事実歪曲が固定化。複利効果の裏面とraw/再読による防衛線（2026-10-27）
+- [プロンプト自己言及汚染](concepts/プロンプト自己言及汚染.md) — LLMは指示内容だけでなく指示文自体の文体をFew-shot手本として模倣する。Schema層の書き方が出力品質の上限になる（2026-10-27）
+- [Knowledge Atom](concepts/Knowledge Atom.md) — 命題の最小単位。本wikiのclaim粒度引用＋sources→conceptの引用流れはAEG二部グラフと同型（2026-10-27）
+- [Instruction Dilution](concepts/Instruction Dilution.md) — 常駐指示の過密による注意力分散。1,000-2,000語超・15ルール超で発生、Prompt Cachingでは解決しない。3段階開示が対策（2026-10-27）
 
 ## entities
 
@@ -116,6 +123,8 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [2026-08-14 SKILL併用LLM Wiki ivankuznetsov (hackernoon+github)](sources/2026-08-14%20SKILL併用LLM%20Wiki%20ivankuznetsov%20(hackernoon+github).md) — 6プロジェクト実運用。CLAUDE.md 1行トリガー+wiki-researcher skill+QMD MCP併用
 - [2026-08-14 opencode Agent Skills仕様](sources/2026-08-14%20opencode%20Agent%20Skills仕様.md) — skillロードの2段構え。available_skills常駐+skillツール呼び出しはagent自律判断。トリガーはLLMの想起
 - [2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)](sources/2026-10-23%20熟練者と同等のCosense読み書きを実現するハーネスとAgent%20Skill%20(shokai).md) — 人間向けUIのAI版翻訳、browsePageによるメタデータ・1 hop関連ページ強制同梱、edit-page.mdの周囲スタイル観察とリンク選定基準、CLIとSkillの責任境界
+- [2026-10-27 低コストLLMの日本語矯正とスキル設計](sources/2026-10-27%20低コストLLMの日本語矯正とスキル設計.md) — 低コストモデルの日本語劣化をAgent Skillsで抑制する報告。OSS矯正スキル8種比較、造語抑制の4技法、AGENTS.md/SKILL.mdのトークン経済学、テンプレート集
+- [2026-10-27 LLM知識ベースの言語ドリフト検証](sources/2026-10-27%20LLM知識ベースの言語ドリフト検証.md) — read-optional知識ベースの言語ドリフト放置仮説への反証。自己消費ループの非可逆劣化、複合名詞化・同義語増殖の実害、許容圧縮と必須抑制の境界線
 
 ## analyses
 
@@ -151,3 +160,5 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [ingestの意義とsourcesページの役割](analyses/ingestの意義とsourcesページの役割.md) — Karpathy gist原文のingest節3関節×2surveyの照合。統合は精緻化、kept currentは検出がLint節に先行定義され修復（re-ingest）が未制度化、schema明文化がdrift、編み込みの本質はfile-backに移住。re-ingestを名指す実装はHermesとvanillaflava、nishioは4戦略を名前なしで持つ。ingest=種まきの初期投資、sourcesページ=4仕事の可変配分（2026-10-23）
 - [Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計](analyses/Cosense%20Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計.md) — 2 hop近傍読解の5つの優位性、search-pages.shとread-page.shの実装、Ingest・Queryの3モデルusability test検証（status: tentatively-adopted, 2026-10-24）
 - [知識グラフ読み書きの先行研究サーベイ](analyses/知識グラフ読み書きの先行研究サーベイ.md) — 人間/AIのKG読み書き研究の横断survey。近傍同梱はHippoRAG/GraphRAG、2-hopの認知効果・大きなリンク・赤リンクは未実証。7仮説との対応と研究空白（2026-10-24）
+- [日本語矯正Agent Skill群の設計空間](analyses/日本語矯正Agent Skill群の設計空間.md) — OSS矯正skill 8種の階層×アーキテクチャ比較。「検出は機械・判断はAI」、無制約推敲は事実を壊す、忠実さ優先の選定軸とAGENTS.md絶対ルール候補（2026-10-27）
+- [出典の読み優先度（2026-10-27 ingest）](analyses/出典の読み優先度（2026-10-27 ingest）.md) — 2つのDeepResearchレポート出典104件の評価。Tier1=定量主張の原典検証5件、Tier2=テンプレート課題に効く実装系、読まない系の判別基準（2026-10-27）

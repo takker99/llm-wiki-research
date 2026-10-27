@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 microsoft-llmwiki]]"
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[2026-10-27 LLM知識ベースの言語ドリフト検証]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -39,6 +39,16 @@ prescriptiveな「スターターとして配られるschema」の実例。た�
 共進化前提である点はKarpathy/nishioと同じ。
 file-backを `queries/` ディレクトリ + `type: query` ページとしてページ種別に制度化している。
 → [[リポジトリ分析 microsoft-llmwiki]]
+
+## 書き込みゲート（2026-10-27 ingest）
+
+エージェントの記憶更新を「永続化前の整合性検証を通すゲート付き演算」として定式化するSSGM（Stability- and Safety-Governed Memory）の観点（[[2026-10-27 LLM知識ベースの言語ドリフト検証]]）。LLM Wikiにはraw/とwiki/の二層分離が既にあり、Schema層の規約が書き込みゲートの実装になる。
+
+- 命題のKnowledge Atom化（複合名詞化による因果圧縮の禁止）→ [[Knowledge Atom]]
+- 正規名レジストリとaliasesの強制参照（新規ページ作成前のindex走査）→ [[同義語増殖]]
+- 出典と時間・信頼度メタデータの分離保持（上書きによる出典切断の禁止）
+
+AGENTS.md自体の文体が出力のFew-shot手本になる問題（[[プロンプト自己言及汚染]]）と、常駐サイズ上限のメカニズム（[[Instruction Dilution]]）もSchema設計の対象になる。
 
 ## 目的明示
 

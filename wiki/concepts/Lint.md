@@ -1,5 +1,5 @@
 ---
-sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[リポジトリ分析 microsoft-llmwiki]]"
+sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[2026-10-27 LLM知識ベースの言語ドリフト検証]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
@@ -81,6 +81,12 @@ lintの出力は「壊れたリンク」ではなく**オープンリンク（�
 `broken_wikilink` / `aspect_handle` はBDL-2026Sの語彙であり、分類の由来として残す（名称は本テンプレートに持ち込まない）。
 
 graspの理論的裏付け（[[リポジトリ分析 grasp]]）: リンクにはrecall / attention / navigation / 読者ケアの4仕事があり、Cosenseはsubstrate制約で全部を1つのlinkに束ねている。recallをlinkの外へ出せば、linkは必須（infrastructure）から任意（editorial）に変わる。**書き手がAI化するほど裸言及が増える**（AI default 裸）ので、wikilink強制より赤リンク許容＋come-from（用語-大域の1宣言で全出現をgather）が向く可能性がある。
+
+## 機械検査で捕捉できないドリフト（2026-10-27 ingest）
+
+マルチエージェント通信研究の分類では、語用論的ドリフト（流暢さと表層の意味整合を保ったまま機能的解釈が標準から乖離する現象）は流暢性指標や単純な接地指標では自動検知できない（[[2026-10-27 LLM知識ベースの言語ドリフト検証]]）。機械lintが捕捉するのは形態・構文の表層までであり、意味の乖離は意味チェック（矛盾・陳腐化）とraw/との照合に依存する。→ [[言語ドリフト（LLM Wiki）]]
+
+reconciliation（可逆的照合）への拡張案: 概念ページの主張文から複合名詞化・抽象化表現を検出したら、紐づくraw/原典を再読して動作主・極性・境界条件を明示した命題形式へ展開し直す。stale-claims検出（未実装）とraw再読の組み合わせとして提案されており、stale-claimsの論点整理は[[ingestの意義とsourcesページの役割]]にある。
 
 ## 関連操作
 
