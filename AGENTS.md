@@ -58,7 +58,7 @@ wiki/
 ### Query
 
 1. `bash .agents/scripts/search-pages.sh "<検索語>"` と `wiki/index.md` で関連ページや未作成リンクを探す。見つからない時は `--fulltext` で本文全文を検索する。
-2. 有望なページや複数ページから参照される未作成リンクを `bash .agents/scripts/read-page.sh "<タイトル>"` で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る。巨大な2 hopは `--no-2hop` / `--2hop-limit <N>` で絞ってよい。
+2. 有望なページや複数ページから参照される未作成リンクは、必ず `bash .agents/scripts/read-page.sh "<タイトル>"` で読む。1 hop・2 hopの関連ページ一覧は read-page.sh が末尾に付けるもので、`read` で直接読むと得られない。末尾の関連一覧と要約から深掘り先を選んで辿る。巨大な2 hopは `--no-2hop` / `--2hop-limit <N>` で絞ってよい。再読や部分読み（offset/limit）等で直接 `read` した場合は、回答末尾に `direct-read` と1行明示する。
 3. `[[wikilink]]`引用付きで回答を総合する。
 4. 回答後、「これをwikiページとしてfile-backする？」と提案する。
 5. 承諾されたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う。
