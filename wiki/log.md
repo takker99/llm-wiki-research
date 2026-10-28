@@ -597,3 +597,13 @@ query: 「そもそもindex.mdっているの？窓口役割はページ数に�
 - 採用判断は観測期間（目安≥4週 or ≥10コミット・指標はrecall劣化/summary陳腐化/語彙到達失敗/汚染）後に。template側は変更なし
 - 詳細: [[index.md存廃の設計判断]] のPGE-2026A実験節。生データは `.dev/pge-2026a-experiment/`
 
+
+## [2026-10-28] decision | template骨格からoverview.mdを除外（Option A）
+
+- subagent相談（GLM-5.3-Flash Free max）を経て、template/ の骨格から overview.md を完全に除外する Option A を採用
+- 主根拠は「LLMが読まない」ではなく、claims対象外の骨格継承品・AGENTS.md目的欄＋READMEと機能重複・陳腐化罠の実証・Optionality原則との整合
+- 実装: template/AGENTS.md ディレクトリ構成節からoverview行削除 / template/wiki/overview.md 削除 / template/wiki/index.md の top-level overviewエントリ削除。scripts×5 のoverviewハードコードは無変更（メタファイル判定のため）
+- 下流3 wiki の stub 実使用データ（txa 16 commits / PGE 豊富 / EWA 4 commits）は Option B の材料として [[overviewの役割]] に記録。将来の再検討材料
+- usability testは不要と判断（失敗モードが可視・可逆）
+- 本wiki自身のoverview.mdは残す（研究対象保護・後方適用しない既存規定）。重複解消は禁則checklistで対応
+- 詳細: [[overviewの役割]] の「テンプレート骨格からの除外決定」節

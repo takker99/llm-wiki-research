@@ -31,7 +31,6 @@ wiki/
 
   index.md    — 全ページのカタログ。各エントリ1行。Query時は最初に読む
   log.md      — 追記専用のタイムライン
-  overview.md — エントリーポイント。このwikiの俯瞰図
 ```
 
 `concepts/`と`sources/`は必須。`entities/`・`analyses/`は必要になってから使う。
