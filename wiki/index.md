@@ -158,7 +158,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [claims対応表](analyses/claims対応表.md) — 草案ver.1の9 claims × 2軸（記述的検証×規範的决定）の追跡器。v0.1スコープ決定（二層構成・対象範囲・規範のみ原則）
 - [log.mdとgit logの分工](analyses/log.mdとgit logの分工.md) — 「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）
 - [ingestとfile-backの反映方法の同型性](analyses/ingestとfile-backの反映方法の同型性.md) — 両者は同じ編み込み操作。提案習慣だけをAGENTS.mdに残し、Ingestと承諾後File-backの書き込み手順をllm-wiki-write/SKILL.mdに一本化（status: tentatively-adopted）
-- [index.md存廃の設計判断](analyses/index.md存廃の設計判断.md) — Cosense批判（大きなリンク論は適用範囲外・真の核心は登録作業への違和感）⇔ index維持。肥大化は可視・出口あり、廃止は不可視・サイレント。2026-10-28再検証: スクリプト等価物実在で問いは要約台帳の居場所へ縮退、audit実測で陳腐化0%・Phase 2見送り（status: hypothesis）
+- [index.md存廃の設計判断](analyses/index.md存廃の設計判断.md) — Cosense批判（大きなリンク論は適用範囲外・真の核心は登録作業への違和感）⇔ index維持。2026-10-28再検証で問いは要約台帳の居場所へ縮退、audit陳腐化0%→実在wiki PGE-2026Aで廃止＋fm summary正本の実装実験（baseline/after失敗指標ゼロ・same-edit規則2/2遵守・採用判断は観測期間待ち）（status: hypothesis）
 - [raw SSOT原則への根本検証](analyses/raw%20SSOT原則への根本検証.md) — LLM Wiki の main value = knowledge network の根拠。Karpathy gist の派生解釈・nishio 3段階態度変遷・raw/ の 6 機能分解・パイロット 7 実装の観察。claim#10 草案（status: hypothesis）
 - [Hermes Agent llm-wiki skillとの比較](analyses/Hermes%20Agent%20llm-wiki%20skillとの比較.md) — Hermesのllm-wiki skill（v2.1.0）との機能・設計思想レベルの比較。agent管理の完成システム vs 人間とLLMの共進化という研究仮説の対比（2026-10-03）
 - [LLM Wiki実装のingest形式と運用の比較](analyses/LLM%20Wiki実装のingest形式と運用の比較.md) — 8実装のingest単位・sourceの4類型・出典ポインタの4モード・運用実態を横断比較。sourceの骨格、provenanceモード、re-ingest、規則とlintの不一致を整理（2026-10-23）

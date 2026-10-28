@@ -588,3 +588,12 @@ query: 「そもそもindex.mdっているの？窓口役割はページ数に�
 
 (touched 2 files: 1 existing analyses [index.md存廃の設計判断] + index/log)
 
+## [2026-10-28] experiment | PGE-2026Aでindex.md廃止＋frontmatter summary正本の実装実験（baseline/after test完了）
+
+- Phase 0/1/2の刻みを放棄し（ユーザー判断「無駄に慎重」）、実在wiki PGE-2026Aへの1実験に圧縮。移行（スクリプト・SKILL・AGENTS.md改稿＋index.md削除・3コミット）とusability-test（baseline/after・同課題・同model・T1-T3読み系＋T4 ingest probe）を実施
+- 結果: 制御実験内で失敗指標ゼロ。T1のsearch bypass消滅・T2語彙はfm summaryへ置換されて到達維持・T3否定回答維持（ただし--catalogはopt-inで未発動）・T4でsame-edit summary規則2/2遵守・index再生成ゼロ
+- 前提訂正: 「frontmatter要約の観察例ゼロ」は誤りだった（PGE-2026Aが76/76頁・lint完備の反例実在。誰にも消費されないwrite-onlyなdual-copy）。要約の注入案はindex×fm一致0/79のため廃止。PGEコミットe6c479d（本文+18行で要約両方未更新）の観測によりsame-edit規則を明示し遵守率を測る設計に変更
+- 発見: 廃止検知はlog末尾依存／summary「1〜2文」規則と実例の乖離／overview.mdを被験体が誰も読まない／direct-read規則の射程がQuery節限定
+- 採用判断は観測期間（目安≥4週 or ≥10コミット・指標はrecall劣化/summary陳腐化/語彙到達失敗/汚染）後に。template側は変更なし
+- 詳細: [[index.md存廃の設計判断]] のPGE-2026A実験節。生データは `.dev/pge-2026a-experiment/`
+
