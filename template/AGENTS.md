@@ -52,7 +52,7 @@ wiki/
 - concepts/entities の出典は本文中に sources ページへの [[wikilink]] を置く (claim粒度)。analyses の frontmatter `sources:` は入力 raw データ・スクリプトの列挙 (reproducibility manifest) という別の意味を持ち、出典では表現しない
 - 外部URLを出典にする場合は frontmatter の `source_url:`（と任意で `accessed:`）を使う。
 - 著者-年表記 (`(Otsu, 1979)` 等の LLM 一般知識に由来する文献表記) は帰属引用 (手法の命名・背景) ならこのままでよい。外部論文の**内容**を主張の根拠に載せる前に、原典に相当する sources ページを作る
-- `index.md` の各エントリは1行: `- [ページタイトル](パス) — 1行要約`。index.mdはページから導出可能なビューのキャッシュ: 陳腐化・欠損時はページ冒頭を読んで再生成してよい（lintが検証）
+- `index.md` の各エントリは1行: `- [ページタイトル](パス) — 1行要約`。欠損・参照切れはlintが検証し、要約内容の陳腐化はlint SKILLの意味チェックで見る。陳腐化・欠損時はページ冒頭を読んで再生成してよい
 - `log.md` の各エントリ: 見出し `## [YYYY-MM-DD] action | 短い題名` + 詳細は本文
 - オープンリンク（未作成ページへのリンク）は許容: 1ページのみから参照されるリンクのためにページを作らない。2ページ以上から参照されるようになったらページ作成を検討
 - wiki/のページは追記ではなく**書き換え**で更新する。既存の記述に手を加えず追記だけするのはwikiではない。raw/がsource of truthなので書き換え・削除は自由
@@ -74,7 +74,7 @@ wiki/
 ### Query（常時行動）
 
 1. `bash .agents/scripts/search-pages.sh "<検索語>"`と`wiki/index.md`で関連ページや未作成リンクを探す。見つからない時は`--fulltext`で本文全文を検索する
-2. 有望なページや複数ページから参照される未作成リンクを`bash .agents/scripts/read-page.sh "<タイトル>"`で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る。巨大な2 hopは`--no-2hop` / `--2hop-limit <N>` で絞ってよい
+2. 有望なページや複数ページから参照される未作成リンクは、必ず`bash .agents/scripts/read-page.sh "<タイトル>"`で読む。1 hop・2 hopの関連ページ一覧はread-page.shが末尾に付けるもので、`read`で直接読むと得られない。末尾の関連一覧と要約から深掘り先を選んで辿る。巨大な2 hopは`--no-2hop` / `--2hop-limit <N>` で絞ってよい。再読や部分読み（offset/limit）等で直接`read`した場合は、回答末尾に`direct-read`と1行明示する
 3. `[[wikilink]]`引用付きで回答を総合する
 4. 回答後、「これをwikiページとしてfile-backする？」と提案する
 
