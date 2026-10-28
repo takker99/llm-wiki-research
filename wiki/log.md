@@ -582,3 +582,9 @@ query: 「そもそもindex.mdっているの？窓口役割はページ数に�
 
 (touched 11 files: 3 wiki pages updated [index.md存廃の設計判断, IndexとLog, QueryとFile-back] + AGENTS.md×2 + lint SKILL×2 + wiki/index.md×2 [root/template ヘッダナッジ+エントリ更新] + log + .dev/index-staleness-audit-prompt)
 
+## [2026-10-28] file-back | index.md staleness audit（149件）の実施と陳腐化率0%の観測
+
+全149エントリの要約陳腐化監査（staleness audit）を実施し、結果を [[index.md存廃の設計判断]] に反映。3体のsubagent並行で全エントリの現行本文冒頭・定量記述を直接照合（AGENTS.md Query節2のdirect-read契約遵守）。結果: ①一致 149件（100.0%）、②軽微なずれ 0件、③陳腐化 0件、④参照不能 0件。陳腐化率は0.0%。「要約だけの陳腐化」という唯一の実害仮説は反証され、Phase 2（frontmatter summary正本＋生成ビュー＋index.md省略パイロット起動。目安10-15%以上）はトリガー非発火（見送り・index維持支持）と判定。手続的同時性（llm-wiki-write SKILLの同時更新ワークフロー）が要約の品質と鮮度を強力に担保している実態を確認。
+
+(touched 2 files: 1 existing analyses [index.md存廃の設計判断] + index/log)
+
