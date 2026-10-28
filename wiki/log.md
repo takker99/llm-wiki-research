@@ -569,3 +569,16 @@ user: 「赤リンクや空リンクの定義を確認して修正して。赤�
 
 (touched 8 files: scripts×4 [search/read × root/template] + AGENTS.md×2 + 分析ページ + log)
 
+## [2026-10-28] file-back | index.md存廃の再検証 — 問いは要約台帳の居場所へ縮退
+
+query: 「そもそもindex.mdっているの？窓口役割はページ数にスケールしない。概要ならfrontmatter summaryを拾って都度一覧を作ればいい。スクリプト前提ではindex.mdは不要なのでは？」をsubagent相談1往復で検証。
+
+- 縮退: 窓口の本体=完全要約カタログ機構は否定回答・語彙浮上・横断併存の根拠から廃止できない。ページから導出できないのは要約の中身だけで、存廃論の実体は「要約の単一情報源の居場所（中央台帳 vs ページ同置）」
+- 前提崩れの確認: 等価物（検索・逆リンク・2hopのスクリプト提供）が実在し、生成型index variantの破棄根拠「等価物不在」は消失。一方スクリプトはindex.mdを要約台帳として消費しており「導出可能なキャッシュ」宣言は部分的に虚偽だった
+- 反転を支えない実測: 73コミット中47(64%)がindex.mdに触れ登録は機能中。「要約だけの陳腐化」実害は未観測（意味チェック割当済み・logに実行記録0件）→測定ファースト。co-location利得は仮説（編集忘れ型のみ構造的に減らす）。AMMEは互換性データ点で規範的反証に非ず・frontmatter要約の観察例ゼロ→デフォルト反転はさらに重い。bypass論点は廃止を支持せず（逸脱対策の未適用箇所=indexヘッダはナッジで補完）
+- 行動方針: Phase 0（文言縮小・indexヘッダナッジ・staleness audit）→ Phase 1（search-pages.sh --catalog）→ Phase 2（実測後に新規小wikiでパイロット。研究wiki自体の移行は検証系汚染で非推奨）
+- 実施: AGENTS.md ×2「（lintが検証）」文言縮小・lint SKILL ×2 同一文言修正（scope拡張）・wiki/index.md ×2 ヘッダナッジ・QueryとFile-back.md step5の1世代陳腐化修正・IndexとLog.md存廃論節更新。auditは別sessionへ（prompt: .dev/index-staleness-audit-prompt-2026-10-28.md）
+- 記録用memo: 本日のsubagent相談が回答末尾にdirect-read申告を行った=朝のdirect-read契約が実効を上げた最初の観測データ点
+
+(touched 11 files: 3 wiki pages updated [index.md存廃の設計判断, IndexとLog, QueryとFile-back] + AGENTS.md×2 + lint SKILL×2 + wiki/index.md×2 [root/template ヘッダナッジ+エントリ更新] + log + .dev/index-staleness-audit-prompt)
+

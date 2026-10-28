@@ -1,5 +1,5 @@
 ---
-sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[IndexとLog]]", "[[LLM Wikiのスケーラビリティ]]", "[[Cosenseのリンク概念]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[パイロット分析 横断所見]]"
+sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[IndexとLog]]", "[[LLM Wikiのスケーラビリティ]]", "[[Cosenseのリンク概念]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[パイロット分析 横断所見]]", "[[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]"
 tags: [template-design, llm-wiki-pattern, cosense, navigation]
 status: hypothesis
 ---
@@ -56,6 +56,35 @@ index.md必須維持。ただし地位を「手書きの登録簿」から「キ
 1. **lintにstale-entries追加**（✅ 実装済み: `.agents/skills/llm-wiki-lint/scripts/lint.sh`・`template/.agents/skills/llm-wiki-lint/scripts/lint.sh`。2026-08-14にroot `scripts/`から移動）: 「indexエントリが指すファイルが存在しない」を検出（%20等のURLエンコードをデコードして判定）。現行の「indexに載っていないページ」（index-completeness）と合わせて両方向をカバー。Microsoftがerror/warningで実装済み（[[リポジトリ分析 microsoft-llmwiki]]）。これで登録作業の失敗は静かに起きず、検出可能なエラーになる（[[事前にやろうとしない運用哲学]]に整合）
 2. **「indexはキャッシュ」宣言**（✅ 実装済み: `template/AGENTS.md`執筆の機械要件 + 本wiki `AGENTS.md`）: 「index.mdはページから導出可能なビューのキャッシュ。陳腐化・欠損時はLLMがページ冒頭を読んで再生成してよい（lintが検証）」。スクリプト不要（ビルド依存を作らない＝文書構成主義 claim#9 に整合）、決定性維持（Query時はまずindexを読む）。Cosenseの「登録不要で自動」をツールなしでLLMの能力で実現する形
 3. **生成型indexのvariant guide提示**（❌ 撤回・不採用 2026-08-14）: 一旦 `template/VARIANTS.md`（frontmatter要約+生成スクリプト方式とトレードオフの改変事例集）として作成したが、人間の判断で削除。「改変は自由（starter kit）」宣言がある以上、**改変の仕方は各wikiのagentが自分で考えればよく、改変事例集は不要**。生成型indexのトレードオフ分析自体は本ページの検証メモに残る。デフォルト化の反証（frontmatter必須化が「任意」原則と衝突、AMME反証、ビルド実行忘れという新種の陳腐化、要約のエディトリアル性喪失、日本語パスエンコーディング罠）は有効なまま
+
+## 前提の変化と再検証（2026-10-28）
+
+「Query用スクリプト（search-pages.sh / read-page.sh）を実装した今、index.mdは不要では？」という再挑戦をsubagent相談1往復で検証した。2026-08-14結論の前提が崩れた点と、崩れていない結論の根拠の内訳を更新する。
+
+### 前提の変化
+
+- 等価物が実在した: 検索（曖昧一致＋要約照合＋fulltextフォールバック）・逆リンク・2hop計算はスクリプトで自前提供される。Cosenseに構造的に近づき、当時「無indexなら等価物を自前で用意する必要がある」とした条件が満たされた
+- 生成型index variant（第3段階）の破棄根拠「等価物不在」は消失した。variantは別の根拠（互換性・観察実績・未測定の利得）で再評価する資格を持つ
+- スクリプトはindex.mdを要約のデータストアとして消費しており（検索結果・hop一覧に要約行を添付）、「導出可能なビューのキャッシュ」宣言は部分的に虚偽だった。lint.shの機械検査は未掲載ページ・参照切れのみで、要約内容の陳腐化はlint SKILLの意味チェックの領域（AGENTS.md・lint SKILLの宣言文言は実態に合わせて縮小済み）
+- 「クロスカットな知見の回収不能」論はfulltext実装で半分失効。残る要約台帳の固有価値は「まだクエリ語として打てない語彙の浮上」と否定回答の補強。search-aliases.tsv（実装済み・当wiki未使用）はaliasとcanonicalの両方を知っていることが前提のため、recallの代替にならない
+
+### 問いの縮退
+
+存廃論の実体は「index.mdというファイル」ではなく**要約の単一情報源（要約台帳）の居場所**: 中央（index.md）かページ同置（frontmatter summary）か。窓口の本体=完全要約カタログ機構は否定回答・語彙浮上・横断併存の根拠から廃止できない。ページ群から導出できないのは要約の中身だけで、カタログ自体はon-demandで再生成可能。
+
+### 反転を支えない要因（実測）
+
+- 登録作業は機能している: 73コミット中47コミット（64%）がwiki/index.mdに触れている。lint未掲載0・参照切れ0
+- 「要約だけの陳腐化」の実害は未観測: 意味チェックに割当済みだが実行記録がlogに一度もない。反転の根拠になりうる唯一の実害であり、これは**測ってから**決める（staleness audit。別sessionに引き継ぎ。prompt: `.dev/index-staleness-audit-prompt-2026-10-28.md`）
+- co-location利得は仮説: ページは「追記ではなく書き換え」で更新されるため、要約がページ内（frontmatter）にあれば同じ編集単位で更新され、「もう一方のファイルの編集忘れ」を構造的に減らせる。ただし手続的同時性はllm-wiki-write SKILLが既に実現しており、「要約の中身の陳腐化」は同置でも機械検出不能のまま
+- AMMEは互換性データ点で規範的反証ではない: frontmatter不使用100ページ運用が崩壊しないことを証明するのみ（AMME分析自身はfrontmatter放棄を❌欠陥と評価）。frontmatter要約の観察例は調査対象中ゼロ → テンプレートデフォルト反転は観察ゼロの構成への変更であり、重い
+- bypass論点は廃止を支持しない: パス情報はsearch出力にも残る。2026-10-28の逸脱（選択時点ナッジ）の未適用箇所はindex.mdヘッダであり、対策は廃止ではなくヘッダナッジの追記（✅実施済み）
+
+### 再検証後の行動方針
+
+- **Phase 0（構造変更ゼロ）**: 「（lintが検証）」文言を実態に縮小（✅） / index.mdヘッダにread-page.shナッジ（✅） / 149エントリのstaleness audit（別sessionへ引き継ぎ）
+- **Phase 1（可逆な能力追加）**: `search-pages.sh --catalog`（frontmatter summary優先→index要約→タイトルのみの3段フォールバック）= 生成型index variantの等価物実在後の再実装候補
+- **Phase 2（観測次第）**: auditで要約陳腐化が実測された場合のみ、templateコピーの新規小wikiで「frontmatter summary正本＋生成ビュー＋index.md省略」をパイロット。デフォルト反転はその後。研究wiki自体の即時移行は非推奨（本wikiのindex.mdは122→149頁の遷移実測として分析ページから引用されており、検証系が汚れる）
 
 ## 検証メモ
 
