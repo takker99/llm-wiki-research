@@ -162,7 +162,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [LLM Wiki実装のingest形式と運用の比較](analyses/LLM%20Wiki実装のingest形式と運用の比較.md) — 8実装のingest単位・sourceの4類型・出典ポインタの4モード・運用実態を横断比較。sourceの骨格、provenanceモード、re-ingest、規則とlintの不一致を整理（2026-10-23）
 - [自作wiki群の構成変異と規約の流通](analyses/自作wiki群の構成変異と規約の流通.md) — 上記対象外の講義wiki群等12実装のsurvey。構成原理5軸・authority 5型・template家族の規約流通・失敗3段階・re-ingest実運用・purpose非空手順の訂正（2026-10-23）
 - [ingestの意義とsourcesページの役割](analyses/ingestの意義とsourcesページの役割.md) — Karpathy gist原文のingest節3関節×2surveyの照合。統合は精緻化、kept currentは検出がLint節に先行定義され修復（re-ingest）が未制度化、schema明文化がdrift、編み込みの本質はfile-backに移住。re-ingestを名指す実装はHermesとvanillaflava、nishioは4戦略を名前なしで持つ。ingest=種まきの初期投資、sourcesページ=4仕事の可変配分（2026-10-23）
-- [Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計](analyses/Cosense%20Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計.md) — 2 hop近傍読解の5つの優位性、search-pages.shとread-page.shの実装、Ingest・Queryの3モデルusability test検証（status: tentatively-adopted, 2026-10-24）
+- [Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計](analyses/Cosense%20Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計.md) — 2 hop近傍読解の5つの優位性、search-pages.shとread-page.shの実装、3モデルusability test検証、実運用逸脱観察と選択時点ナッジ（status: tentatively-adopted, 2026-10-28）
 - [知識グラフ読み書きの先行研究サーベイ](analyses/知識グラフ読み書きの先行研究サーベイ.md) — 人間/AIのKG読み書き研究の横断survey。近傍同梱はHippoRAG/GraphRAG、2-hopの認知効果・大きなリンク・赤リンクは未実証。7仮説との対応と研究空白（2026-10-24）
 - [日本語矯正Agent Skill群の設計空間](analyses/日本語矯正Agent Skill群の設計空間.md) — OSS矯正skill 8種の階層×アーキテクチャ比較。「検出は機械・判断はAI」、無制約推敲は事実を壊す、忠実さ優先の選定軸とAGENTS.md絶対ルール候補（2026-10-27）
 - [出典の読み優先度（2026-10-27 ingest）](analyses/出典の読み優先度（2026-10-27 ingest）.md) — 3つのDeepResearchレポート出典172件の評価。Tier1=定量主張の原典検証17作、Tier2=テンプレート課題に効く実装系、出典結合の疑義3件、読まない系の判別基準（2026-10-27）

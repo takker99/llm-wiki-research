@@ -558,3 +558,14 @@ user: 「赤リンクや空リンクの定義を確認して修正して。赤�
 
 (touched 3 files: 1 existing analyses [出典の読み優先度（2026-10-27 ingest）] + index/log)
 
+## [2026-10-28] refactor(agents) | Query時のread-page.sh逸脱対策（選択時点ナッジ）
+
+実運用中の別wikiで、agentがQuery時にsearch-pages.shは使いつつ本文候補をreadで直接読む逸脱を複数回起こした。逸脱agentの回顧: index.mdに完全パス付きエントリが並んでいたため「直読みのほうが安い」と判断した逸脱（契約違反は自覚）。AGENTS.mdのQuery規則と2026-10-24の3モデルusability test合格があっても実運用で逸脱が起きること、read-page.shは<title-or-path>を受け付けるためパス判明後のコスト優位は実在しないことを確認。対策は指示強化ではなく、逸脱が起きる決定時点の文脈に規則を置く方針（本wiki+template双方）:
+
+- search-pages.sh ×2: 出力末尾に「候補ページの本文はread-page.shで読む（パス直readではhop情報が得られない）」の1行ナッジ
+- read-page.sh ×2: Related Pages節に「深掘りするページの本文もread-page.shで読む」の1行ナッジ
+- AGENTS.md ×2: Query節2を「必ずread-page.shで読む」+「再読・部分読み等で直接readした場合は回答末尾にdirect-readと1行明示」に改稿。例外列挙は薄さ方針により書かず、自己申告が例外許可と観測可能性を兼ねる
+- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]] §4に逸脱観察と対策を追記（status: tentatively-adoptedのまま）。§1⑤「出力で強制」の一段上流（スクリプトを呼ぶ選択）への拡張
+
+(touched 8 files: scripts×4 [search/read × root/template] + AGENTS.md×2 + 分析ページ + log)
+
