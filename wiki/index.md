@@ -166,3 +166,4 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [知識グラフ読み書きの先行研究サーベイ](analyses/知識グラフ読み書きの先行研究サーベイ.md) — 人間/AIのKG読み書き研究の横断survey。近傍同梱はHippoRAG/GraphRAG、2-hopの認知効果・大きなリンク・赤リンクは未実証。7仮説との対応と研究空白（2026-10-24）
 - [日本語矯正Agent Skill群の設計空間](analyses/日本語矯正Agent Skill群の設計空間.md) — OSS矯正skill 8種の階層×アーキテクチャ比較。「検出は機械・判断はAI」、無制約推敲は事実を壊す、忠実さ優先の選定軸とAGENTS.md絶対ルール候補（2026-10-27）
 - [出典の読み優先度（2026-10-27 ingest）](analyses/出典の読み優先度（2026-10-27 ingest）.md) — 3つのDeepResearchレポート出典172件の評価。Tier1=定量主張の原典検証17作、Tier2=テンプレート課題に効く実装系、出典結合の疑義3件、読まない系の判別基準（2026-10-27）
+- [知識基盤wikiと実験repoの構成判断](analyses/知識基盤wikiと実験repoの構成判断.md) — PGE-2026Aとtxaで同一文献のingestが違った原因（目的文・図版規約・指示の具体度）と、本棚/工房・第三wiki・目的文修正の比較、subagent3系統の見解。作者は判断保留（status: hypothesis, 2026-10-29）
