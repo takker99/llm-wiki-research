@@ -558,3 +558,11 @@ user: 「赤リンクや空リンクの定義を確認して修正して。赤�
 
 (touched 3 files: 1 existing analyses [出典の読み優先度（2026-10-27 ingest）] + index/log)
 
+
+## [2026-10-29] file-back | 知識基盤wikiと実験repoの構成判断
+
+- PGE-2026Aとtxa-xray-ct-wikiで同じ松島研案内をingestした際の挙動差（目的文、図版規約、指示の具体度）を、opencodeのセッションDBと両wikiの実物で調べた対話をfile-back
+- subagent相談（gemini-2.5-pro 2回、deepseek-v4.1-flash 1回）で「本棚と工房」「第三wiki」「目的文修正」を比較。作者は移行を決めかねており結論なし（status: hypothesis）
+- nishioの「目的ごとに切り替え」という規範はraw/で確認できず、確認できた4点（人格化、別の切り出し、迷ったら両方、育ってから分ける）のみ記録
+- 新規 analyses 1 + 既存 concepts 1（株分け（kabuwake）の関連概念に1行）+ index + log
+- 詳細: [[知識基盤wikiと実験repoの構成判断]]
