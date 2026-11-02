@@ -100,7 +100,7 @@ bash "$TMP/lint.sh" || true
 
 echo ""
 echo "############ 2. 肥大化ページ (top 15 by lines) ############"
-find "$WIKI" -name "*.md" ! -name "index.md" ! -name "log.md" -exec wc -l {} + | sort -rn | head -16
+find "$WIKI" -name "*.md" ! -name "log.md" -exec wc -l {} + | sort -rn | head -16
 
 echo ""
 echo "############ 3. リンク次数統計 ############"
@@ -111,7 +111,7 @@ FNR == 1 {
   infm = 0
   relpath = FILENAME
   base = relpath; sub(/^.*\//, "", base); sub(/\.md$/, "", base)
-  is_meta = (relpath ~ /\/index\.md$/ || relpath ~ /\/log\.md$/ || relpath ~ /\/overview\.md$/)
+  is_meta = (relpath ~ /\/log\.md$/ || relpath ~ /\/overview\.md$/)
   exists[base] = 1
   self = base
 }
