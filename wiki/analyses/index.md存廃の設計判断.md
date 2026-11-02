@@ -1,12 +1,13 @@
 ---
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[IndexとLog]]", "[[LLM Wikiのスケーラビリティ]]", "[[Cosenseのリンク概念]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[パイロット分析 横断所見]]", "[[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]"
 tags: [template-design, llm-wiki-pattern, cosense, navigation]
-status: hypothesis
+status: tentatively-adopted
 ---
 
 # index.md存廃の設計判断
 
 「index.md（全ページの1行カタログ）は本当に必要か？」という問いを、Cosenseの設計思想からの批判（ユーザーの直感）を起点に subagent 相談2往復で検証した記録。結論: **index.mdは維持すべき。廃止のデメリット＞肥大化のデメリット**。ただしユーザー直感の核心（明示的登録作業への違和感）は正しく、「indexを消す」ではなく「登録の失敗を死なせる」ことで満たされる。
+【2026-11-02更新】templateのデフォルトを反転（tentatively-adopted・下記採用節）。本文中のindex維持主張は「当時の正答」として読み継ぐ。
 
 ## 論点
 
@@ -138,6 +139,20 @@ index.md必須維持。ただし地位を「手書きの登録簿」から「キ
 付帯観測: 遡及更新をbeam-free#max subagentに委譲した際、**本文に存在しない数式**をsummaryに混入（検証で捕捉・除去）。委譲編集には本文対照検証が必須。
 
 判定基準: ≥10コミットに到達。ただし5日の窓での採用判断はせず、次の中間点検で再評価。templateは未変更。
+
+### 採用判断（2026-11-02・template反転実行）
+
+stress-round（2026-11-02・125頁現状態・読み専4課題・glm-5.3-flash-free）が失敗指標ゼロでクリーンだったため、事前合意の「ストレステスト→採用」経路でtemplate反転を実行（tentatively-adopted）:
+
+- **T5 低冗長語彙**（p-q平面・fulltext 1ページのみのヒット語）: [[応力経路]]に到達
+- **T6 横断統合**（接触力直接計測の理論効用）: **6系統・20頁超の繋ぎ合わせに成功**。入口選定とソース5頁の根拠づけはカタログ要約＋1hop要約だけで完遂（課題内の追加searchゼロ）
+- **T7 日英橋渡し**（critical state soil mechanics）: 「専用頁なし・観点は複数頁に厚く存在」の限定付きで正確。否定の保証はtitle/summary層＋カタログ全走査が担い、fulltext参照欄のtruncation限界を被験体自身が自己申告
+- **T8 広域列挙**（強度関連全頁）: **被験体が自発的に`--catalog`を使用**して55頁分を6分類で列挙。前回までの「opt-in未発動」懸念は「できるだけ多く」型のトリガー条件で自然解消した（カタログは発見可能であり、課題形によっては発動する）
+- 汚染: 読み専のためgit statusクリーン（検証済み）
+
+採用の根拠合成: control実験（baseline/after＋T4 ingest）＋中間点検（実運用17コミット・same-edit遵守30/32）＋本ラウンド（読み経路の高難度4課題）。残余リスク（通常Queryでのsilent recall failure）はincident-baseで継続観測し、観測されたらrevert可能（PGE・templateともgit履歴で即時復元）。
+
+template改稿実装の注意: PGE分岐後にtemplateへ別改訂が入っていたため、search/readスクリプトはPGE版をコピーし（root.latest=template、root=PGEベースの等価確認済み）、lint.sh（差分66行）・write SKILL・lint SKILL・AGENTS.mdは同じ意味改修をtemplateの現行テキストに部分適用した。`frontmatter は任意`原則はユーザーの当初提案（「各ページfrontmatterにsummaryを書く」）に沿ってtype+summary必須へ。
 
 ## 検証メモ
 

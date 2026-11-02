@@ -606,6 +606,13 @@ query: 「そもそもindex.mdっているの？窓口役割はページ数に�
 - 委譲編集の検証工程の実証: beam-free#max subagentのsummary遡及更新が本文に無い数式を混入→検証で捕捉・除去
 - 詳細: [[index.md存廃の設計判断]] 中間点検節。生データ `.dev/pge-2026a-experiment/midterm-checkpoint-2026-11-02.md`
 
+## [2026-11-02] adoption | templateのデフォルトをfrontmatter summary正本＋--catalogへ反転（index.md廃止を採用）
+
+- stress-round（125頁現状態・読み専4課題・同model）が失敗指標ゼロでクリーン → 事前合意の「ストレステスト→採用」経路でtemplate反転を実行。分析ページはtentatively-adoptedへ遷移
+- T6横断統合（6系統・20頁超をカタログ要約＋1hop要約のみで繋ぎT8広域列挙で被験体が自発的に--catalog使用）が読み経路の残余リスクを実測で閉じた
+- template改稿: search/readスクリプトはPGE検証版コピー、lint.sh/SKILL/AGENTS.mdは意味改修の部分適用（PGE分岐後のtemplate別改訂を尊重）。skeletonのindex.md削除・fm summary必須化（ユーザー当初提案どおり）
+- commit: `c3d4fd1`。研究wiki自身はindex.md維持（検証系保護）
+
 
 ## [2026-10-28] decision | template骨格からoverview.mdを除外（Option A）
 
