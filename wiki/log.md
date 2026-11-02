@@ -597,6 +597,15 @@ query: 「そもそもindex.mdっているの？窓口役割はページ数に�
 - 採用判断は観測期間（目安≥4週 or ≥10コミット・指標はrecall劣化/summary陳腐化/語彙到達失敗/汚染）後に。template側は変更なし
 - 詳細: [[index.md存廃の設計判断]] のPGE-2026A実験節。生データは `.dev/pge-2026a-experiment/`
 
+## [2026-11-02] checkpoint | PGE-2026A実験の中間点検（移行5日目）
+
+- 実運用17コミット・wiki 80→125頁で点検。index再生成汚染0・recall劣化未観測・lint ORPHAN/MISSING 0・catalog 120頁正常
+- summary陳腐化1件実測。原因はwrite SKILL内の規則矛盾（旧「過去sourcesページは時点の要約を維持」節×same-edit規則）。実運用LLMは選別的適用（同一コミットでanalyses2頁は更新・sources1頁だけ不更新）→ 矛盾解消の改稿＋summary遡及更新を実施（PGE: bd35c25・d62e54f）
+- same-edit規則遵守率: 機械計測27/32（84%）・妥当性判定込み30/32（94%）
+- ≥10コミット基準は到達。ただし同日の採用判断はせず次点検で再評価。templateは未変更
+- 委譲編集の検証工程の実証: beam-free#max subagentのsummary遡及更新が本文に無い数式を混入→検証で捕捉・除去
+- 詳細: [[index.md存廃の設計判断]] 中間点検節。生データ `.dev/pge-2026a-experiment/midterm-checkpoint-2026-11-02.md`
+
 
 ## [2026-10-28] decision | template骨格からoverview.mdを除外（Option A）
 
