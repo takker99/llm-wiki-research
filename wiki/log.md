@@ -634,3 +634,12 @@ query: 「そもそもindex.mdっているの？窓口役割はページ数に�
 - **スクリプト・SKILLの更新**: `llm-wiki-write/SKILL.md` ×2・`llm-wiki-lint/SKILL.md` ×2・`lint.sh` ×2（root/template）を `SAME_LINE_DUPLICATE` 方式およびサブディレクトリ・相対画像リンク・表内エスケープパイプ `\|` 対応に更新。`template/.agents/scripts/search-pages.sh` の `--catalog` 見出しをトップレベルディレクトリ単位のグルーピングに修正
 
 (touched 15 files: 1 new analyses [下流wikiの大規模リストラクチャリングと文体・リンク規約の検証] + 5 existing wiki pages updated [txa-xray-ct-wiki, 日本語矯正Agent Skill群の設計空間, Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計, このWikiの目的と研究課題, claims対応表] + index/log + SKILL.md×4 + lint.sh×2 + search-pages.sh×1)
+
+## [2026-11-03] revise | 下流wikiリストラクチャリング知見の論文型統一部分を仮説に降格
+
+[[下流wikiの大規模リストラクチャリングと文体・リンク規約の検証]]の `status` を tentatively-adopted から hypothesis に変更し、「事後検証」節を追加した。
+
+- 論文型（仮説・方法・結果・結論）への統一は、調査（[[karpathy-llm-wiki-gist]]等）から導かれたものではなく、[[txa-xray-ct-wiki]]のリファクタリング中に導入された規則だった。リファクタリングの結果が根拠として調査側に逆流していた
+- 全analysisをこの型にした結果、計画の進捗や候補の採否など、型に収まらない情報が欠落した（OpenCodeがgit logを遡って回答した事例）
+- 維持候補は、図・スクリプトの同居（テーマ別フォルダ）と `docs/` 分離。型の統一は仮説として扱う
+- 再改修の方針は相談中。決まり次第、[[このWikiの目的と研究課題]]に反映する
