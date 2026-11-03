@@ -12,19 +12,19 @@ echo ""
 # Check for orphan pages (no inbound links from other wiki pages)
 # sources/ pages: index.md listing does not count (unlinked source = not digested)
 echo "--- Orphan pages (no inbound links) ---"
-for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/analyses/*.md "$WIKI_DIR"/sources/*.md; do
+while read -r page; do
   [ -f "$page" ] || continue
   basename="$(basename "$page" .md)"
   # Count how many other wiki pages link to this page
   if [[ "$page" == "$WIKI_DIR"/sources/* ]]; then
-    count=$(grep -rl --include="*.md" --exclude="$(basename "$page")" "\[\[${basename}\]\]" "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources 2>/dev/null | wc -l || true)
+    count=$(grep -rl --include="*.md" --exclude="$(basename "$page")" "\[\[${basename}\([\\|].*\)\?\]\]" "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources 2>/dev/null | wc -l || true)
   else
-    count=$(grep -rl --include="*.md" --exclude="index.md" --exclude="log.md" --exclude="overview.md" --exclude="$(basename "$page")" "\[\[${basename}\]\]" "$WIKI_DIR" 2>/dev/null | wc -l || true)
+    count=$(grep -rl --include="*.md" --exclude="index.md" --exclude="log.md" --exclude="overview.md" --exclude="$(basename "$page")" "\[\[${basename}\([\\|].*\)\?\]\]" "$WIKI_DIR" 2>/dev/null | wc -l || true)
   fi
   if [ "$count" -eq 0 ]; then
     echo "  ORPHAN: ${page#"$WIKI_DIR"/}"
   fi
-done
+done < <(find "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources -name "*.md" 2>/dev/null | sort)
 echo ""
 
 # Check for open links (wikilinks whose target page does not exist yet) in wiki/.
@@ -46,7 +46,7 @@ find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xarg
   }
 ' \
   | sed 's/\[\[//;s/\]\]//' \
-  | awk -F'\t' '{ split($2, a, "|"); print $1 "\t" a[1] }' \
+  | awk -F'\t' '{ split($2, a, "|"); sub(/\\$/, "", a[1]); print $1 "\t" a[1] }' \
   | sort -u \
   | awk -F'\t' '{ count[$2]++ } END { for (t in count) print count[t] "\t" t }' \
   | sort -rn \
@@ -65,15 +65,16 @@ find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xarg
   done
 echo ""
 
-# Check duplicate wikilinks within each page body (claim-granularity
-# citations with distinct p.XX pinpointers are exempt)
-echo "--- Duplicate wikilinks within pages ---"
-find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xargs -0 awk '
+# Check same-line duplicate wikilinks within pages
+# (detects accidental duplicates caused by batch replacement, e.g. [[PageA]]...[[PageA]] on the same line)
+echo "--- Same-line duplicate wikilinks ---"
+find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xargs -0 awk -v wiki_dir="$WIKI_DIR" '
   FNR == 1 {
     infm = 0; inblock = 0
     relpath = FILENAME
-    base = relpath; sub(/^.*\//, "", base); sub(/\.md$/, "", base)
-    self = base
+    if (index(relpath, wiki_dir "/") == 1) {
+      relpath = substr(relpath, length(wiki_dir) + 2)
+    }
   }
   {
     line = $0
@@ -82,43 +83,33 @@ find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xarg
     if (infm == 1) next
     if (line ~ /^```/) { inblock = !inblock; next }
     if (inblock) next
+
     clean = line
     gsub(/`[^`]*`/, "", clean)
     work = clean
+    delete count_on_line
+    delete targets_on_line
+    n_targets = 0
+
     while (match(work, /\[\[[^]]+\]\]/)) {
       m_start = RSTART; m_len = RLENGTH
       raw_link = substr(work, m_start + 2, m_len - 4)
       split(raw_link, parts, "|")
+      sub(/\\$/, "", parts[1])
       target = parts[1]
       sub(/^[ \t\r\n]+/, "", target); sub(/[ \t\r\n]+$/, "", target)
-      if (target != "" && target !~ /^http/ && target != self) {
-        key = self SUBSEP target
-        n_occ[key]++
-        tail = substr(work, m_start + m_len)
-        pin = ""
-        if (match(tail, /^ *p\.[0-9]+[0-9.-]*/)) pin = substr(tail, RSTART, RLENGTH)
-        occ_pin[key, n_occ[key]] = pin
+      if (target != "" && target !~ /^http/) {
+        if (++count_on_line[target] == 1) {
+          targets_on_line[++n_targets] = target
+        }
       }
       work = substr(work, m_start + m_len)
     }
-  }
-  END {
-    for (key in n_occ) {
-      n = n_occ[key]
-      if (n < 2) continue
-      split(key, kp, SUBSEP)
-      page = kp[1]; tgt = kp[2]
-      npinned = 0; npinless = 0; duppin = 0
-      for (i = 1; i <= n; i++) {
-        pi = occ_pin[key, i]
-        if (pi == "") { npinless++; continue }
-        npinned++
-        for (j = i + 1; j <= n; j++) {
-          if (occ_pin[key, j] == pi) duppin++
-        }
-      }
-      if (npinless >= 2 || duppin > 0 || npinned == 0) {
-        printf "  DUPLICATE x%d (pinless=%d, dup-pin=%d): [[%s]] in %s\n", n, npinless, duppin, tgt, page
+
+    for (i = 1; i <= n_targets; i++) {
+      t = targets_on_line[i]
+      if (count_on_line[t] >= 2) {
+        printf "  L%d: SAME_LINE_DUPLICATE x%d: [[%s]] in %s\n", FNR, count_on_line[t], t, relpath
       }
     }
   }
@@ -180,12 +171,33 @@ for page in "$WIKI_DIR"/sources/*.md; do
 done
 echo ""
 
-# Check image links (../assets/...) resolve, and no asset is unused
+# Check image links resolve, and no asset is unused
 echo "--- Image links / unused assets ---"
-links=$(grep -roh --include='*.md' '(\.\./assets/[^)]*)' "$WIKI_DIR" 2>/dev/null | sed 's/^(//;s/)$//;s|^\.\./||' | sort -u || true)
-echo "$links" | while read -r rel; do
-  [ -n "$rel" ] || continue
-  [ -f "$WIKI_DIR/$rel" ] || echo "  MISSING IMAGE: $rel"
+find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xargs -0 awk '
+  /^```/ { inblock = !inblock; next }
+  !inblock {
+    line = $0
+    gsub(/`[^`]*`/, "", line)
+    while (match(line, /!\[[^]]*\]\([^)]+\)/)) {
+      m = substr(line, RSTART, RLENGTH)
+      sub(/^!\[[^]]*\]\(/, "", m)
+      sub(/\)$/, "", m)
+      sub(/^[ \t]*</, "", m)
+      sub(/>[ \t]*$/, "", m)
+      sub(/[ \t]+["'\''].*$/, "", m)
+      sub(/[?#].*$/, "", m)
+      print FILENAME "\t" m
+      line = substr(line, RSTART + RLENGTH)
+    }
+  }
+' | while IFS=$'\t' read -r md img; do
+  [ -n "$img" ] || continue
+  [[ "$img" =~ ^https?:// ]] && continue
+  [[ "$img" =~ ^data: ]] && continue
+  dir=$(dirname "$md")
+  if [ ! -f "$dir/$img" ]; then
+    echo "  MISSING IMAGE: ${md#"$WIKI_DIR"/} -> $img"
+  fi
 done
 if [ -d "$WIKI_DIR/assets" ]; then
   for f in "$WIKI_DIR"/assets/*; do
