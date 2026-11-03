@@ -95,7 +95,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [猫LLM Wiki](entities/猫LLM Wiki.md) — 猫の医療記録管理。知識は恐怖の解毒剤の実例
 - [dd2030-wiki](entities/dd2030-wiki.md) — デジタル民主主義2030プロジェクトWiki。Agentic Retrievalによる経緯再構成
 - [elastic-wave-analyzer-wiki](entities/elastic-wave-analyzer-wiki.md) — 弾性波解析アプリの使い込みWiki。template下流wiki 1件目（M2検証対象・frontmatter沈黙フィードバック元・purpose欄未記入）
-- [txa-xray-ct-wiki](entities/txa-xray-ct-wiki.md) — 三軸弾性波+X線CT同時計測実験の記録Wiki。template下流wiki 2件目（出典運用フィードバック元・コードrepo一体型）
+- [txa-xray-ct-wiki](entities/txa-xray-ct-wiki.md) — 三軸弾性波+X線CT同時計測実験の記録Wiki。template下流wiki 2件目（出典運用・テーマフォルダコロケーション・2回目以降wikilink維持・文体lint過剰規制のフィードバック元、コードrepo一体型）
 - [ブロードリスニング本Wiki](entities/ブロードリスニング本Wiki.md) — 書籍1冊から62ページのWikiを生成
 - [注釈駆動Wiki](entities/注釈駆動Wiki.md) — ソースコードに注釈を付けるように知識を構造化
 - [Kozaneba](entities/Kozaneba.md) — KJ法支援ツール。前言語的構造化に強い
@@ -166,5 +166,6 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [ingestの意義とsourcesページの役割](analyses/ingestの意義とsourcesページの役割.md) — Karpathy gist原文のingest節3関節×2surveyの照合。統合は精緻化、kept currentは検出がLint節に先行定義され修復（re-ingest）が未制度化、schema明文化がdrift、編み込みの本質はfile-backに移住。re-ingestを名指す実装はHermesとvanillaflava、nishioは4戦略を名前なしで持つ。ingest=種まきの初期投資、sourcesページ=4仕事の可変配分（2026-10-23）
 - [Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計](analyses/Cosense%20Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計.md) — 2 hop近傍読解の5つの優位性、search-pages.shとread-page.shの実装、3モデルusability test検証、実運用逸脱観察と選択時点ナッジ（status: tentatively-adopted, 2026-10-28）
 - [知識グラフ読み書きの先行研究サーベイ](analyses/知識グラフ読み書きの先行研究サーベイ.md) — 人間/AIのKG読み書き研究の横断survey。近傍同梱はHippoRAG/GraphRAG、2-hopの認知効果・大きなリンク・赤リンクは未実証。7仮説との対応と研究空白（2026-10-24）
-- [日本語矯正Agent Skill群の設計空間](analyses/日本語矯正Agent Skill群の設計空間.md) — OSS矯正skill 8種の階層×アーキテクチャ比較。「検出は機械・判断はAI」、無制約推敲は事実を壊す、忠実さ優先の選定軸とAGENTS.md絶対ルール候補（2026-10-27）
+- [日本語矯正Agent Skill群の設計空間](analyses/日本語矯正Agent Skill群の設計空間.md) — OSS矯正skill 8種の階層×アーキテクチャ比較。「検出は機械・判断はAI」、無制約推敲は事実を壊す、機械文体lintの過剰規制による研究ノート構造散文化アンチパターン（status: tentatively-adopted, 2026-11-03更新）
 - [出典の読み優先度（2026-10-27 ingest）](analyses/出典の読み優先度（2026-10-27 ingest）.md) — 3つのDeepResearchレポート出典172件の評価。Tier1=定量主張の原典検証17作、Tier2=テンプレート課題に効く実装系、出典結合の疑義3件、読まない系の判別基準（2026-10-27）
+- [下流wikiの大規模リストラクチャリングと文体・リンク規約の検証](analyses/下流wikiの大規模リストラクチャリングと文体・リンク規約の検証.md) — txa-xray-ct-wikiの大規模改修と5クラスタ監査の実証知見。analyses/テーマ別フォルダコロケーションとdocs/分離、2回目以降[[wikilink]]維持とSAME_LINE_DUPLICATE、機械文体lintによる箇条書き・Callout散文化のアンチパターン（status: tentatively-adopted, 2026-11-03）

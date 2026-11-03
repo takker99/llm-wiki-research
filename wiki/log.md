@@ -623,3 +623,14 @@ query: 「そもそもindex.mdっているの？窓口役割はページ数に�
 - usability testは不要と判断（失敗モードが可視・可逆）
 - 本wiki自身のoverview.mdは残す（研究対象保護・後方適用しない既存規定）。重複解消は禁則checklistで対応
 - 詳細: [[overviewの役割]] の「テンプレート骨格からの除外決定」節
+
+## [2026-11-03] file-back | 下流wiki（txa-xray-ct-wiki）の大規模リストラクチャリングと文体・リンク規約の検証
+
+下流wiki 2件目 [[txa-xray-ct-wiki]]（154ページ・コード一体型）における大規模リストラクチャリングと全変更差分の5クラスタ監査の知見を [[下流wikiの大規模リストラクチャリングと文体・リンク規約の検証]]（status: tentatively-adopted）としてfile-backし、本wikiおよび`template/`のスキル・スクリプトへ反映。
+
+- **ディレクトリ境界とテーマ別フォルダコロケーション**: 非ドメイン運用文書（手順書・環境設定・ポスター発表準備等62本）を `docs/`・`poster/docs/` へ分離し、日付別断片ページ73本を12個の実験テーマフォルダ `wiki/analyses/<テーマ名>/`（`<テーマ名>.md`＋固有スクリプト＋生成図表＋データを同居）に統合、一般理論・文献調査10本を `wiki/concepts/` へ抽出。未整理状態のwikiの大規模整理は上位モデル（Gemini / DeepSeek等）で一度だけ行い、整備後の日常運用を軽量モデルでも回せる薄いSchemaにする役割分担を確認
+- **ページ内2回目以降の `[[wikilink]]` 維持と `SAME_LINE_DUPLICATE` への転換**: 「同一ページ内の2回目以降のリンクを平文にする」規則は、①誤字・表記ゆれが `OPEN_LINK` で検出できなくなる、②ページ統合・改名時の一括追従から漏れる、③長大ページで後半節や表から参照先へ飛べなくなる実害が判明したため撤回。ページ内の複数回 `[[wikilink]]` を維持し、一括置換の事故で生じる同一行内の重複リンク（`SAME_LINE_DUPLICATE`）のみを `lint.sh` で検出する方式へ転換
+- **機械的文体リンターの過剰規制による「研究ノート構造の散文化」アンチパターン**: 体言止め・丸括弧・太字・スラッシュ・矢印・ダッシュを機械的に禁止すると、LLMがエラー回避のために箇条書き・番号付きリスト・比較表・`> [!WARNING]` Calloutを「第1に…第2に…」という1段落の論文調散文へ平坦化し、バグ検死プロセスや棄却仮説の検証数値、文献表まで削ぎ落とす副作用（Cluster 2・3・4）を実証。機械検査は構造を壊さない `CHAR_DRIFT`（簡体字・繁体字混入）と `STYLE_SPACE`（和欧間の不要な半角空白）のみに限定し、文体指針は「視覚的に構造化された研究ノート（箇条書き・番号付きリスト・階層リスト・ラベル付き箇条書き・表・Calloutの活用）」とする
+- **スクリプト・SKILLの更新**: `llm-wiki-write/SKILL.md` ×2・`llm-wiki-lint/SKILL.md` ×2・`lint.sh` ×2（root/template）を `SAME_LINE_DUPLICATE` 方式およびサブディレクトリ・相対画像リンク・表内エスケープパイプ `\|` 対応に更新。`template/.agents/scripts/search-pages.sh` の `--catalog` 見出しをトップレベルディレクトリ単位のグルーピングに修正
+
+(touched 15 files: 1 new analyses [下流wikiの大規模リストラクチャリングと文体・リンク規約の検証] + 5 existing wiki pages updated [txa-xray-ct-wiki, 日本語矯正Agent Skill群の設計空間, Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計, このWikiの目的と研究課題, claims対応表] + index/log + SKILL.md×4 + lint.sh×2 + search-pages.sh×1)
