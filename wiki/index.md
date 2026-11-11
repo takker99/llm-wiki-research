@@ -18,7 +18,7 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [fact-wiki-separation](concepts/fact-wiki-separation.md) — Wikiをsource of truthにしない。書き換え自由の担保と簡潔さの維持。書き換え原則の適用外（時系列・履歴・人間の記録は追記）
 - [Ingest](concepts/Ingest.md) — 3基本操作の1つ。raw/ソースを読みwikiに統合するプロセス
 - [QueryとFile-back](concepts/QueryとFile-back.md) — 質問応答＋回答のwiki化。探索の蓄積が複利効果を生む
-- [Lint](concepts/Lint.md) — wikiの健全性チェック。矛盾検出＋新調査課題の提案
+- [Lint](concepts/Lint.md) — wikiの健全性チェック。診断（機械・意味・構造）と承認後の治療（リファクタ/re-ingest）を含む健康管理ワークフロー
 - [Post-ingestレビューループ](concepts/Post-ingestレビューループ.md) — ingest後に人間が要約を確認しLLMをガイドするステップ（Karpathyの運用スタイル）
 - [バッチIngest](concepts/バッチIngest.md) — 多数のソースを一度にingestし監視を減らす代替スタイル
 - [IndexとLog](concepts/IndexとLog.md) — wikiナビゲーションを支える2つの特殊ファイル。中規模までRAG不要
