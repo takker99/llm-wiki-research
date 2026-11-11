@@ -623,3 +623,14 @@ query: 「そもそもindex.mdっているの？窓口役割はページ数に�
 - usability testは不要と判断（失敗モードが可視・可逆）
 - 本wiki自身のoverview.mdは残す（研究対象保護・後方適用しない既存規定）。重複解消は禁則checklistで対応
 - 詳細: [[overviewの役割]] の「テンプレート骨格からの除外決定」節
+
+## [2026-11-11] file-back | Lintを診断と治療のワークフローへ拡張
+
+- Karpathy gistのLint節は「LLMに健康診断を依頼し、矛盾・陳腐化・孤立・概念ページ不在・クロスリファレンス不足・データギャップを検出し、新しい問い・ソースを提案する」まで。nishioは成長方向の提案、tsurubeeは修正提案として読む。評価・提案は元からLintの一部で、機械チェックだけではない
+- Queryがfile-backで書き込むのと同型に、Lintを診断（read-only）→トリアージ→治療（承認後）のワークフローとする。治療は `.agents/skills/llm-wiki-write/SKILL.md` 経由
+- **リファクタは意味保存**（統合・分割・rename・節の移動・リンク修理）、**re-ingestは意味変更**（古い主張・矛盾の解消）として分離。Lintが内容を直接書き換えない線引き
+- 構造の診断（重複・肥大化/過小ページ・リンク密度・命名・ディレクトリ偏り）をdeep lintとして追加。routine lint（機械＋意味＋要約）と分ける
+- 実装: root/templateのlint SKILLを6段階の手順へ、AGENTS.mdのLint節に治療はwrite SKILL経由と明記、write SKILL×2の適用範囲にリファクタを追加
+- 詳細: [[Lint]] の「診断と治療」節
+
+(touched 9 files: 1 existing concepts [Lint] + index/log + lint SKILL×2 + AGENTS.md×2 + write SKILL×2)

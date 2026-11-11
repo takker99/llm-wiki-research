@@ -79,6 +79,7 @@ wiki/
 ### Lint
 
 「lintして」と言われたら `.agents/skills/llm-wiki-lint/SKILL.md` を読んで従う。
+lintは診断（read-only）と、承認後の治療（リファクタ）からなる。治療は `.agents/skills/llm-wiki-write/SKILL.md` に従い、意味を変える変更はingestへ回す。
 疑問があれば自律的にlintを提案してよい。
 
 ### File-back（常時行動）

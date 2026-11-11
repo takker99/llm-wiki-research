@@ -67,6 +67,7 @@ wiki/
 
 「lintして」と言われたら `.agents/skills/llm-wiki-lint/SKILL.md` を読んで従う。
 機械チェックは `bash .agents/skills/llm-wiki-lint/scripts/lint.sh`（決定的実行）。
+lintは診断（read-only）と、承認後の治療（リファクタ）からなる。治療は `.agents/skills/llm-wiki-write/SKILL.md` に従い、意味を変える変更はingestへ回す。
 疑問があれば自律的にlintを提案してよい。
 
 ### Review（研究の進行管理）
