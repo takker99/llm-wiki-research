@@ -1,12 +1,13 @@
 ---
-sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[IndexとLog]]", "[[LLM Wikiのスケーラビリティ]]", "[[Cosenseのリンク概念]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[パイロット分析 横断所見]]"
+sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[IndexとLog]]", "[[LLM Wikiのスケーラビリティ]]", "[[Cosenseのリンク概念]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[パイロット分析 横断所見]]", "[[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]"
 tags: [template-design, llm-wiki-pattern, cosense, navigation]
-status: hypothesis
+status: tentatively-adopted
 ---
 
 # index.md存廃の設計判断
 
 「index.md（全ページの1行カタログ）は本当に必要か？」という問いを、Cosenseの設計思想からの批判（ユーザーの直感）を起点に subagent 相談2往復で検証した記録。結論: **index.mdは維持すべき。廃止のデメリット＞肥大化のデメリット**。ただしユーザー直感の核心（明示的登録作業への違和感）は正しく、「indexを消す」ではなく「登録の失敗を死なせる」ことで満たされる。
+【2026-11-02更新】templateのデフォルトを反転（tentatively-adopted・下記採用節）。本文中のindex維持主張は「当時の正答」として読み継ぐ。
 
 ## 論点
 
@@ -56,6 +57,102 @@ index.md必須維持。ただし地位を「手書きの登録簿」から「キ
 1. **lintにstale-entries追加**（✅ 実装済み: `.agents/skills/llm-wiki-lint/scripts/lint.sh`・`template/.agents/skills/llm-wiki-lint/scripts/lint.sh`。2026-08-14にroot `scripts/`から移動）: 「indexエントリが指すファイルが存在しない」を検出（%20等のURLエンコードをデコードして判定）。現行の「indexに載っていないページ」（index-completeness）と合わせて両方向をカバー。Microsoftがerror/warningで実装済み（[[リポジトリ分析 microsoft-llmwiki]]）。これで登録作業の失敗は静かに起きず、検出可能なエラーになる（[[事前にやろうとしない運用哲学]]に整合）
 2. **「indexはキャッシュ」宣言**（✅ 実装済み: `template/AGENTS.md`執筆の機械要件 + 本wiki `AGENTS.md`）: 「index.mdはページから導出可能なビューのキャッシュ。陳腐化・欠損時はLLMがページ冒頭を読んで再生成してよい（lintが検証）」。スクリプト不要（ビルド依存を作らない＝文書構成主義 claim#9 に整合）、決定性維持（Query時はまずindexを読む）。Cosenseの「登録不要で自動」をツールなしでLLMの能力で実現する形
 3. **生成型indexのvariant guide提示**（❌ 撤回・不採用 2026-08-14）: 一旦 `template/VARIANTS.md`（frontmatter要約+生成スクリプト方式とトレードオフの改変事例集）として作成したが、人間の判断で削除。「改変は自由（starter kit）」宣言がある以上、**改変の仕方は各wikiのagentが自分で考えればよく、改変事例集は不要**。生成型indexのトレードオフ分析自体は本ページの検証メモに残る。デフォルト化の反証（frontmatter必須化が「任意」原則と衝突、AMME反証、ビルド実行忘れという新種の陳腐化、要約のエディトリアル性喪失、日本語パスエンコーディング罠）は有効なまま
+
+## 前提の変化と再検証（2026-10-28）
+
+「Query用スクリプト（search-pages.sh / read-page.sh）を実装した今、index.mdは不要では？」という再挑戦をsubagent相談1往復で検証した。2026-08-14結論の前提が崩れた点と、崩れていない結論の根拠の内訳を更新する。
+
+### 前提の変化
+
+- 等価物が実在した: 検索（曖昧一致＋要約照合＋fulltextフォールバック）・逆リンク・2hop計算はスクリプトで自前提供される。Cosenseに構造的に近づき、当時「無indexなら等価物を自前で用意する必要がある」とした条件が満たされた
+- 生成型index variant（第3段階）の破棄根拠「等価物不在」は消失した。variantは別の根拠（互換性・観察実績・未測定の利得）で再評価する資格を持つ
+- スクリプトはindex.mdを要約のデータストアとして消費しており（検索結果・hop一覧に要約行を添付）、「導出可能なビューのキャッシュ」宣言は部分的に虚偽だった。lint.shの機械検査は未掲載ページ・参照切れのみで、要約内容の陳腐化はlint SKILLの意味チェックの領域（AGENTS.md・lint SKILLの宣言文言は実態に合わせて縮小済み）
+- 「クロスカットな知見の回収不能」論はfulltext実装で半分失効。残る要約台帳の固有価値は「まだクエリ語として打てない語彙の浮上」と否定回答の補強。search-aliases.tsv（実装済み・当wiki未使用）はaliasとcanonicalの両方を知っていることが前提のため、recallの代替にならない
+
+### 問いの縮退
+
+存廃論の実体は「index.mdというファイル」ではなく**要約の単一情報源（要約台帳）の居場所**: 中央（index.md）かページ同置（frontmatter summary）か。窓口の本体=完全要約カタログ機構は否定回答・語彙浮上・横断併存の根拠から廃止できない。ページ群から導出できないのは要約の中身だけで、カタログ自体はon-demandで再生成可能。
+
+### 反転を支えない要因（実測）
+
+- 登録作業は機能している: 73コミット中47コミット（64%）がwiki/index.mdに触れている。lint未掲載0・参照切れ0
+- 「要約だけの陳腐化」の実害は実測0件: 2026-10-28に全149エントリのstaleness auditを実施（3 subagent並行・本文冒頭direct-read照合）。結果は①一致149件（100%）、②軽微なずれ0件、③陳腐化0件、④参照不能0件。陳腐化率0.0%。目的再定義・SKILL一本化・オープンリンク改名等の大改訂後も要約同期漏れはゼロだった。唯一の実害仮説は反証された
+- co-location利得は仮説: ページは「追記ではなく書き換え」で更新されるため、要約がページ内（frontmatter）にあれば同じ編集単位で更新され、「もう一方のファイルの編集忘れ」を構造的に減らせる。ただし手続的同時性はllm-wiki-write SKILLが既に実現しており、「要約の中身の陳腐化」は同置でも機械検出不能のまま
+- AMMEは互換性データ点で規範的反証ではない: frontmatter不使用100ページ運用が崩壊しないことを証明するのみ（AMME分析自身はfrontmatter放棄を❌欠陥と評価）。~~frontmatter要約の観察例は調査対象中ゼロ~~ → **訂正（2026-10-28・subagent相談検証）**: PGE-2026Aが反例実在だった（AGENTS.mdがtype+summary必須規定・lintのMISSING summary機械チェック・実測76/76頁がsummary持ち・[[自作wiki群の構成変異と規約の流通]]記録済み）。ただし誰にも消費されないwrite-onlyなdual-copyだった（スクリプトはindex.mdのみを読む）。デフォルト反転は「観察ゼロの構成への変更」ではなく「実在・実運用・lint完備の構成の消費側スイッチ」へ評価が変わった
+- bypass論点は廃止を支持しない: パス情報はsearch出力にも残る。2026-10-28の逸脱（選択時点ナッジ）の未適用箇所はindex.mdヘッダであり、対策は廃止ではなくヘッダナッジの追記（✅実施済み）
+
+### 再検証後の行動方針
+
+- **Phase 0（構造変更ゼロ）**: 「（lintが検証）」文言を実態に縮小（✅） / index.mdヘッダにread-page.shナッジ（✅） / 149エントリのstaleness audit（✅実施完了: 陳腐化0件・0.0%）
+- **Phase 1（可逆な能力追加）**: `search-pages.sh --catalog`（frontmatter summary優先→index要約→タイトルのみの3段フォールバック）= 生成型index variantの等価物実在後の再実装候補
+- **Phase 2（観測次第）**: auditで要約陳腐化（目安10-15%以上）が実測された場合のみパイロット起動とする方針だったが、実測0.0%によりトリガー非発火（見送り・index.md維持を支持）。デフォルト反転の根拠は実証的に否定された
+- **Phase刻みの放棄と実験への圧縮（2026-10-28・ユーザー判断）**: 「無駄に慎重」との指摘によりPhase 1+2を実在wiki PGE-2026Aへの1実験に圧縮。Phase 1単体（--catalogのみ）は要約源がindex.mdのままで循環し検証価値がほぼゼロだったため、飛ばすのが正しかった。実験の詳細は下記節
+
+## PGE-2026A実験（2026-10-28・実装実験）
+
+実在の実運用wiki PGE-2026A（地盤工学講義・80頁・index.md 16.5KB・template由来スクリプト済み）を実験台に、index.md廃止＋frontmatter summary正本＋スクリプト改造を実装し、usability-test（baseline／after・同課題・同model glm-5.3-flash-free paired design）で検証した。生データ: `.dev/pge-2026a-experiment/`（transcriptはsession記録内）。
+
+### 実験設計の修正（subagent相談で判明）
+
+- 「要約のindex→frontmatter一括注入」案は廃止: index要約とfm summaryの一致は0/79（index側は平均46字のキーワード形式、fm側は平均92字の1〜2文形式）。注入は新しい方を古い方で上書きする事故になる。照合・統合が必要だが、index-only語彙の候補例（b値可変・Casagrande）は検証で本文・fm summaryに実在が判明し、reconciliation自体を軽量化（語彙到達はpaired testで実測する方が証拠として強く、index.mdのgit履歴が残るためrecall失敗時の事後帰属も常に可能）
+- co-location利得の前提修正: PGEコミット`e6c479d`（ページ本文+18行）でfm summary・index要約とも未更新 → 利得は構造ではなく運用規則に依存する疑い。対策として「本文を書き換えたら同じ編集でsummary見直し」規則を明示し、遵守率を測る設計に変更
+
+### baseline（index.mdあり・読み取り専用T1-T3）
+
+3/3成功。ただしT1でsearch-pages.shを飛ばしindex.md直接read→ページ直読するbypassが再現（逸脱の決断点がindex要約行であることが裏付き）。T2はindex要約行語彙（「b値可変」）が決定打。T3の否定回答の確信は「完全カタログとして規定されたindex＋fulltext 0件」の合成だった。
+
+### after（index.md廃止・同課題・同model）
+
+3/3成功・失敗指標ゼロ:
+- T1: **bypass消滅**。search→read-pageに整流
+- T2: 決定打語彙がfm summary（「中間主応力比bを自由に変えられる」）＋用語集fulltextへ移行。到達ページは同一。**index要約の語彙担持はfm summaryで置換可能だった**
+- T3: 否定回答維持。確信の基盤が「完全カタログ規定」→「多語fulltext帰納＋受け皿ページ目視」へ変化。**--catalogは被験体が認知していたが不使用**（トリガ条件「全体像が必要な時は」の判定がopt-in。否定回答の堅牢化という本領は課題分類次第で未発動になりうる=index時代の「最初に読む」常時発動との差）
+- T4（ingest probe・書き込み許可）: write SKILL手順2でsearch使用（index参照・ls列挙なし）／手順3で計画提示して停止（提議主義どおり）／**same-edit summary規則を2/2で遵守**（更新した既存2ページのfm summaryを同一編集で更新）／**index.md再生成ゼロ**／lintで自作重複リンクを検出し自己修復
+
+### 実験が明らかにした構造的発見
+
+1. **廃止検知はlog依存**: 「台帳更新不要」の決定打はlog末尾の移行エントリ。被験体自身「logに廃止エントリが無ければls等でindex.mdの有無を確認する運次第」。新規sessionがlog末尾を見る運用は規則に明記されておらず、構造変更の正規記録場所がlogしかない現状では検知が運任せ
+2. **規則文言と実例の乖離**: summary「1〜2文」に対し実例は長文1文が多く、新規LLMは無自覚に実例側へ流れた（3文相当で作成。lintは文数を見ない）
+3. **overview.mdは全被験体が読まなかった**（baseline・after通じ）。LLMにとってエントリーポイントが機能していない可能性
+4. direct-read明示規則の射程がQuery節限定（ingest中の部分読み・log読みが未規定）／検索語の選び方未規定／fulltext自動fallbackが規則に記述なし／編集ミス（文字列破壊）を検出する機械チェックなし（被験体はgrep自己検証で2件検出・修正）
+5. 環境注入（親repo AGENTS.md自動注入）の摩擦: baselineでは規約不在のdirect-read契約を自己課税 → afterでは親子規約が双方search起点に収斂し矛盾として知覚されず。multi-wiki運用では親子規約の収斂が干渉の有無を決める
+
+### 採用判断（未決・観測期間待ち）
+
+制御実験の範囲では4失敗指標（recall劣化／summary陳腐化／語彙到達失敗／汚染）すべてゼロ。ただし80頁は影響の現れにくい規模であり、本採用は実運用観測（目安: ≥4週 or ≥10コミットの早い方。観測指標は上記4つ＋same-edit規則の遵守率）の後に決める。template側は変更していない。
+
+### 中間点検（2026-11-02・移行5日目）
+
+実運用17コミット・PR2件merge・wiki 80→**125頁**（catalog 120頁＝5日で50%超成長。第5回講義ingest・最上1969第8章精読×3・松島系譜計量・引用断絶計量等）で点検:
+
+| 指標 | 結果 |
+|---|---|
+| index再生成汚染 | **0件**。wiki/index.mdへのタッチは削除コミットで停止、実ツリーにも非存在 |
+| summary陳腐化 | **1件実測**（下記の規則矛盾に起因） |
+| same-edit規則遵守 | 既存ページ編集32件中summary同時更新27件＝**機械計測84%**。妥当性判定込み**30/32**。非更新5件のうち4件は見直し不要と判定（講義の見取り図×2＝役割安定の対応表・大坪系譜の系譜図追加＝既存主張の可視化・ファブリック測定法の関連節1行＝ナビゲーション行） |
+| recall劣化・語彙到達失敗 | 直接観測なし（incident-base観測の限界） |
+| lint | ORPHAN 0・MISSING 0・新規45頁すべてfm summary付き。DUPLICATE 1件（系譜図追加のwikilink重複→点検で解消） |
+| --catalog | 120頁で正常 |
+
+**最大の発見は実運用検出の文書バグ**: write SKILL内に旧規約「既存の過去`sources/`ページは当該ソース時点の要約として維持する」が残存し、same-edit規則と正方向に矛盾していた。LLM（実運用session）は矛盾時に旧文言へ従い、**同じコミットでanalyses2頁のsummaryは正しく更新したままsources1頁だけ未更新**（規則間の仲裁がLLMの選別に委ねられた実例）。control実験では検出不能な種類——「精読の追記でsourcesページの本文を更新する」という実運用手順が初めて矛盾を活性化させた。改稿（sourcesページもsame-edit規則へ統合・要約の過去状態はgit履歴で参照）＋陳腐化summaryの遡及更新を実施済み。
+
+付帯観測: 遡及更新をbeam-free#max subagentに委譲した際、**本文に存在しない数式**をsummaryに混入（検証で捕捉・除去）。委譲編集には本文対照検証が必須。
+
+判定基準: ≥10コミットに到達。ただし5日の窓での採用判断はせず、次の中間点検で再評価。templateは未変更。
+
+### 採用判断（2026-11-02・template反転実行）
+
+stress-round（2026-11-02・125頁現状態・読み専4課題・glm-5.3-flash-free）が失敗指標ゼロでクリーンだったため、事前合意の「ストレステスト→採用」経路でtemplate反転を実行（tentatively-adopted）:
+
+- **T5 低冗長語彙**（p-q平面・fulltext 1ページのみのヒット語）: [[応力経路]]に到達
+- **T6 横断統合**（接触力直接計測の理論効用）: **6系統・20頁超の繋ぎ合わせに成功**。入口選定とソース5頁の根拠づけはカタログ要約＋1hop要約だけで完遂（課題内の追加searchゼロ）
+- **T7 日英橋渡し**（critical state soil mechanics）: 「専用頁なし・観点は複数頁に厚く存在」の限定付きで正確。否定の保証はtitle/summary層＋カタログ全走査が担い、fulltext参照欄のtruncation限界を被験体自身が自己申告
+- **T8 広域列挙**（強度関連全頁）: **被験体が自発的に`--catalog`を使用**して55頁分を6分類で列挙。前回までの「opt-in未発動」懸念は「できるだけ多く」型のトリガー条件で自然解消した（カタログは発見可能であり、課題形によっては発動する）
+- 汚染: 読み専のためgit statusクリーン（検証済み）
+
+採用の根拠合成: control実験（baseline/after＋T4 ingest）＋中間点検（実運用17コミット・same-edit遵守30/32）＋本ラウンド（読み経路の高難度4課題）。残余リスク（通常Queryでのsilent recall failure）はincident-baseで継続観測し、観測されたらrevert可能（PGE・templateともgit履歴で即時復元）。
+
+template改稿実装の注意: PGE分岐後にtemplateへ別改訂が入っていたため、search/readスクリプトはPGE版をコピーし（root.latest=template、root=PGEベースの等価確認済み）、lint.sh（差分66行）・write SKILL・lint SKILL・AGENTS.mdは同じ意味改修をtemplateの現行テキストに部分適用した。`frontmatter は任意`原則はユーザーの当初提案（「各ページfrontmatterにsummaryを書く」）に沿ってtype+summary必須へ。
 
 ## 検証メモ
 

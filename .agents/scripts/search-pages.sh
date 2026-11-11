@@ -567,3 +567,6 @@ END {
   }
 }
 '
+
+echo ""
+echo "→ 候補ページの本文は bash .agents/scripts/read-page.sh \"<タイトル>\" で読むこと（末尾に1 hop・2 hopの関連ページが付く。パスを直接 read するとhop情報が得られない）"

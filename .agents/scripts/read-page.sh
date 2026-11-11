@@ -430,6 +430,7 @@ END {
 
     print ""
     print "-------------------- Related Pages --------------------"
+    print "（深掘りするページの本文も bash .agents/scripts/read-page.sh \"<タイトル>\" で読む。パスを直接 read するとhop情報が得られない）"
     print "## 1 hop link"
     print ""
     for (i = 1; i <= h1_count; i++) {

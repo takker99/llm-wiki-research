@@ -4,10 +4,11 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-search-pages.sh - ページタイトル・本文中の[[wikilink]]・index.mdの1行要約からページを検索する
+search-pages.sh - ページタイトル・本文中の[[wikilink]]・ページの要約からページを検索する
 
 Usage:
   bash .agents/scripts/search-pages.sh [options] <query...>
+  bash .agents/scripts/search-pages.sh --catalog
 
 検索の仕組み:
   既定では以下の対象を検索し、マッチ語数・一致度・被リンク数の降順で出力する。
@@ -15,10 +16,11 @@ Usage:
      - 1〜2文字の語: 編集距離0（完全部分一致）
      - 3〜5文字の語: 編集距離1まで許容
      - 6文字以上の語: 編集距離2まで許容
-  2. wiki/index.md の1行要約に対する部分一致
+  2. ページの要約（各ページfrontmatterの `summary:`）に対する部分一致
   既定検索で0件だった場合、または --fulltext 指定時は、wiki/ 配下の本文全文を検索してマッチ行を抜粋する。
 
 Options:
+  --catalog            全ページのカタログを出力する（query不要）。各エントリ: - [タイトル](パス) — 要約
   --fulltext           本文全文を対象に検索し、マッチした行を抜粋する
   --max-distance <N>   タイトル・[[wikilink]]曖昧検索の最大編集距離を固定値Nで上書きする
   --limit <N>          表示件数の上限（既定: 20）
@@ -41,6 +43,7 @@ EOF
 }
 
 FULLTEXT=0
+CATALOG=0
 MAX_DIST_OVERRIDE=-1
 LIMIT=20
 WIKI_DIR="$(cd "$(dirname "$0")/../.." && pwd)/wiki"
@@ -48,6 +51,10 @@ QUERIES=()
 
 while [ $# -gt 0 ]; do
   case "$1" in
+    --catalog)
+      CATALOG=1
+      shift
+      ;;
     --fulltext)
       FULLTEXT=1
       shift
@@ -87,7 +94,7 @@ while [ $# -gt 0 ]; do
   esac
 done
 
-if [ ${#QUERIES[@]} -eq 0 ]; then
+if [ ${#QUERIES[@]} -eq 0 ] && [ "$CATALOG" -eq 0 ]; then
   usage >&2
   exit 2
 fi
@@ -108,6 +115,7 @@ find "$WIKI_DIR" -name "*.md" -print0 | xargs -0 awk \
   -v wiki_dir="$WIKI_DIR" \
   -v query_str="$QUERY_JOINED" \
   -v fulltext_mode="$FULLTEXT" \
+  -v catalog_mode="$CATALOG" \
   -v max_dist_override="$MAX_DIST_OVERRIDE" \
   -v limit="$LIMIT" \
   -v alias_file="$ALIAS_FILE" '
@@ -127,6 +135,13 @@ function allowed_dist(qlen) {
   if (qlen <= 2) return 0
   if (qlen <= 5) return 1
   return 2
+}
+
+# 要約の解決順: frontmatter summary → index.mdエントリ → なし（タイトルのみ）
+function page_summary(node,    _sv) {
+  _sv = (node in fm_summary) ? fm_summary[node] : ""
+  if (_sv == "" && node in index_summary) _sv = index_summary[node]
+  return _sv
 }
 
 # Sellersの動的計画法でpatとtxtの任意の部分文字列との最小編集距離を求める
@@ -213,6 +228,7 @@ BEGIN {
 
 FNR == 1 {
   inblock = 0
+  infm = 0
   relpath = FILENAME
   if (index(relpath, wiki_dir "/") == 1) {
     relpath = substr(relpath, length(wiki_dir) + 2)
@@ -258,6 +274,17 @@ is_meta_file {
 {
   line = $0
   sub(/\r$/, "", line)
+  if (FNR == 1 && line == "---") {
+    infm = 1
+  } else if (infm && line == "---") {
+    infm = 0
+  } else if (infm && line ~ /^summary:/) {
+    _sv = line
+    sub(/^summary:[ \t]*/, "", _sv)
+    _sv = trim(_sv)
+    gsub(/^"|"$/, "", _sv)
+    fm_summary[base] = _sv
+  }
   if (line ~ /^```/) {
     inblock = !inblock
     next
@@ -304,13 +331,49 @@ END {
   }
 
   hit_count = 0
+  if (catalog_mode == 1) {
+    n_pages = 0
+    for (p in existing_path) {
+      n_pages++
+      cat_list[n_pages] = p
+    }
+    for (i = 1; i <= n_pages; i++) {
+      for (j = i + 1; j <= n_pages; j++) {
+        pa = existing_path[cat_list[i]]
+        pb = existing_path[cat_list[j]]
+        if (pb < pa) { t = cat_list[i]; cat_list[i] = cat_list[j]; cat_list[j] = t }
+      }
+    }
+    printf "# Wiki Catalog (%d pages)\n", n_pages
+    print "各エントリ: - [タイトル](パス) — 要約（各ページfrontmatterの summary:）"
+    print ""
+    cur_dir = "\x01"
+    for (i = 1; i <= n_pages; i++) {
+      p = cat_list[i]
+      rp = existing_path[p]
+      dir = rp
+      sub(/\/[^\/]*$/, "", dir)
+      if (dir == rp) dir = "(root)"
+      if (dir != cur_dir) {
+        cur_dir = dir
+        print ""
+        print "## " dir
+      }
+      _sv = page_summary(p)
+      link_path = rp
+      gsub(/ /, "%20", link_path)
+      sum_part = (_sv != "") ? (" — " _sv) : ""
+      printf "- [%s](%s)%s\n", p, link_path, sum_part
+    }
+    exit 0
+  }
   if (!fulltext_mode) {
     for (node in all_nodes) {
       matched_q = 0
       best_tier = 99
       total_dist = 0
       match_labels = ""
-      sum_txt = (node in index_summary) ? index_summary[node] : ""
+      sum_txt = page_summary(node)
 
       for (qi = 1; qi <= qcount; qi++) {
         qw = qwords[qi]
@@ -383,7 +446,7 @@ END {
       }
     }
 
-    print "# Search Results (title / wikilink fuzzy + index summary)"
+    print "# Search Results (title / wikilink fuzzy + summary)"
     print "Query: " query_str
     print ""
     out_n = (hit_count < limit) ? hit_count : limit
@@ -391,7 +454,8 @@ END {
       node = hits[i]
       in_c = inbound_count[node] + 0
       if (node in existing_path) {
-        sum_part = (node in index_summary && index_summary[node] != "") ? (" — " index_summary[node]) : ""
+        _sv = page_summary(node)
+        sum_part = (_sv != "") ? (" — " _sv) : ""
         printf "- [existing] [[%s]] (path: %s, linked: %d, match: %s)%s\n", node, existing_path[node], in_c, hit_label[node], sum_part
       } else {
         refs = (node in inbound_sources) ? (" — 参照元: " inbound_sources[node]) : ""
@@ -473,7 +537,8 @@ END {
       for (i = 1; i <= _ref_limit; i++) {
         page = _ft_hits[i]
         in_c = inbound_count[page] + 0
-        sum_part = (page in index_summary && index_summary[page] != "") ? (" — " index_summary[page]) : ""
+        _sv = page_summary(page)
+        sum_part = (_sv != "") ? (" — " _sv) : ""
         printf "- [[%s]] (path: %s, linked: %d, matched_words: %d/%d)%s\n", page, existing_path[page], in_c, _ft_mq[page], qcount, sum_part
         if (_ft_snippet_count[page] > 0) {
           printf "    L%s\n", _ft_snippets[page]
@@ -555,7 +620,8 @@ END {
   for (i = 1; i <= out_n; i++) {
     page = ft_hits[i]
     in_c = inbound_count[page] + 0
-    sum_part = (page in index_summary && index_summary[page] != "") ? (" — " index_summary[page]) : ""
+    _sv = page_summary(page)
+    sum_part = (_sv != "") ? (" — " _sv) : ""
     printf "- [[%s]] (path: %s, linked: %d, matched_words: %d/%d)%s\n", page, existing_path[page], in_c, ft_mq[page], qcount, sum_part
     sc = snippet_count[page] + 0
     for (si = 1; si <= sc; si++) {
@@ -567,3 +633,6 @@ END {
   }
 }
 '
+
+echo ""
+echo "→ 候補ページの本文は bash .agents/scripts/read-page.sh \"<タイトル>\" で読むこと（末尾に1 hop・2 hopの関連ページが付く。パスを直接 read するとhop情報が得られない）"

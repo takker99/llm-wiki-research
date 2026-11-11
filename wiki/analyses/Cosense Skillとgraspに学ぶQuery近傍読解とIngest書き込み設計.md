@@ -152,6 +152,18 @@ Query・File-backのusability testでは、3モデルとも`search-pages.sh`の�
 - 自動全文検索フォールバックとの整合: `search-pages.sh`は0件時に自動で全文検索へフォールバックするため、手順書の「0件の時は`--fulltext`」という記述が「1件以上タイトルがヒットしたが本文中の別語を探したい場面」と噛み合っていなかった。「見つからない時は`--fulltext`で本文全文を検索する」に改めた。
 - IngestとFile-backの書き込みSkill一本化: usability testでは、File-back実行時に`llm-wiki-ingest/SKILL.md`が読まれないため、SKILL側のスタイル観察・内部リンク選定基準・`lint.sh`検証がFile-backに効かないこと、および`AGENTS.md`のFile-back節と`SKILL.md`で書き込み手順が重複・乖離することが判明した。[[ingestとfile-backの反映方法の同型性]]とAGENTS.md+SKILL.md二層設計に基づき、`AGENTS.md`にはfile-backの提案トリガーだけを残し、Ingestと承諾後のFile-back実行の双方を担う`llm-wiki-write/SKILL.md`に書き込み・編み込み手順を一本化した。
 
+#### ③ 実運用での逸脱観察と選択時点ナッジ（2026-10-28追記）
+
+usability test合格後の実運用で、別に運用中のwikiのagentが`search-pages.sh`は使いながら本文候補を`read`で直接読む逸脱を複数回起こした。逸脱したagent自身の回顧では「`index.md`に完全パス付きのエントリが並んでいたので、パス直読みのほうが安いと判断して逸脱した」であり、契約違反である自覚はあった。つまり3モデルテストが検証したのは「規則に従えること」であって、バイパスが魅力的になる条件（候補のパスが目の前に並ぶ・単純なlookupで済む見込み）での遵守ではなかった。なお`read-page.sh`は`<title-or-path>`を受け付けるため、パスが既に判明している場面でパス直読みにコスト上の優位は実在しない。
+
+対策は指示の強化だけに寄せず、逸脱が起きる決定時点の文脈に規則を置く方針とした。本wikiとtemplate双方に:
+
+- `search-pages.sh`の出力末尾に「候補ページの本文は`read-page.sh`で読む（パス直readではhop情報が得られない）」の1行ナッジを追加
+- `read-page.sh`のRelated Pages節に「深掘りするページの本文も`read-page.sh`で読む」の1行ナッジを追加
+- AGENTS.mdのQuery節2を「必ず`read-page.sh`で読む」＋「再読・部分読み等で直接`read`した場合は回答末尾に`direct-read`と1行明示」に改稿。例外の列挙はAGENTS.mdの薄さを損なうため書かず、自己申告の1文が例外の許可と観測可能性を兼ねる
+
+これは§1⑤の「手順書を薄く保つため、近傍同梱を出力末尾で強制する」の一段上流（そもそもスクリプトを呼ぶかの選択）を出力で強制する拡張である。テンプレート設計への示唆として「LLM向けの運用規則は、規則が効くべき判断時点の文脈（ツール出力）に置く」を加える。
+
 ## 関連
 
 - [[リポジトリ分析 grasp]] — `grasp read`による近傍同梱の先行実装

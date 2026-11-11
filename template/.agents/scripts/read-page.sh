@@ -15,7 +15,7 @@ Usage:
      - 実在ページの場合: ページの全文
      - 未作成のオープンリンクの場合: 未作成である旨と、他ページで [[タイトル]] に言及している行の抜粋
   3. -------------------- Related Pages --------------------
-     - ## 1 hop link: 正リンク・逆リンク・双方向・未作成オープンリンクの一覧（被リンク数降順、index.mdの1行要約付き）
+     - ## 1 hop link: 正リンク・逆リンク・双方向・未作成オープンリンクの一覧（被リンク数降順、ページの要約付き）
      - ## 2 hop link: 本文中のリンクを媒介にした2 hop先ページの一覧（被リンク数が閾値以上の巨大ハブは展開を省略）
 
 Options:
@@ -150,6 +150,13 @@ function sub_edit_dist(pat, txt, max_d,    m, n, p, t, prev, curr, i, j, cost, d
   return min_d
 }
 
+# 要約の解決順: frontmatter summary → index.mdエントリ → なし（タイトルのみ）
+function page_summary(node,    _sv) {
+  _sv = (node in fm_summary) ? fm_summary[node] : ""
+  if (_sv == "" && node in index_summary) _sv = index_summary[node]
+  return _sv
+}
+
 BEGIN {
   nt = split(targets_str, raw_t, "\t")
   tcount = 0
@@ -220,6 +227,13 @@ is_meta_file {
   if (infm && line == "---") {
     infm = 0
     next
+  }
+  if (infm && line ~ /^summary:/) {
+    _sv = line
+    sub(/^summary:[ \t]*/, "", _sv)
+    _sv = trim(_sv)
+    gsub(/^"|"$/, "", _sv)
+    fm_summary[base] = _sv
   }
 
   if (line ~ /^```/) {
@@ -430,13 +444,15 @@ END {
 
     print ""
     print "-------------------- Related Pages --------------------"
+    print "（深掘りするページの本文も bash .agents/scripts/read-page.sh \"<タイトル>\" で読む。パスを直接 read するとhop情報が得られない）"
     print "## 1 hop link"
     print ""
     for (i = 1; i <= h1_count; i++) {
       nb = hop1_list[i]
       rel = hop1_rel[nb]
       nb_in = in_deg_all[nb] + 0
-      sum_part = (nb in index_summary && index_summary[nb] != "") ? (" — " index_summary[nb]) : ""
+      _sv = page_summary(nb)
+      sum_part = (_sv != "") ? (" — " _sv) : ""
       printf "- [%s] [[%s]] (linked: %d)%s\n", rel, nb, nb_in, sum_part
     }
 
@@ -557,7 +573,8 @@ END {
           q = p_sec_list[k]
           q_in = in_deg_all[q] + 0
           if (q in existing_path) {
-            sum_part = (q in index_summary && index_summary[q] != "") ? (" — " index_summary[q]) : ""
+            _sv = page_summary(q)
+            sum_part = (_sv != "") ? (" — " _sv) : ""
             printf "- [[%s]] (linked: %d)%s\n", q, q_in, sum_part
           } else {
             printf "- [unresolved] [[%s]] (linked: %d)\n", q, q_in

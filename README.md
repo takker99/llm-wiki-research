@@ -29,7 +29,7 @@ KarpathyのLLM WikiパターンとCosense（Scrapbox）コミュニティの知�
 1. 目的を書く（上の手順3）
 2. 最初のソース（読みたい記事・PDF・メモ等）を `raw/` に置く
 3. 「このソースをingestして」とLLMに依頼する
-4. LLMが `wiki/sources/` に要約ページを作り、`index.md`・`log.md` を更新する
+4. LLMが `wiki/sources/` に要約ページを作り、各ページのfrontmatter `summary:`（検索とカタログの正本）と `log.md` を更新する
 
 ### 設計思想（継承してほしいもの）
 
@@ -37,7 +37,7 @@ KarpathyのLLM WikiパターンとCosense（Scrapbox）コミュニティの知�
 - **raw/は不変**: wikiの事実が争われたらrawまで遡る
 - **追記ではなく書き換え**: ページ更新は既存記述と統合して書き直す。既存の記述に手を加えず追記だけするのはwikiではない
 - **conceptsはatomic**: 概念ページは簡潔に保ち、肥大化したら分割を提案する
-- **indexカタログ**: `index.md` を最初に読む。検索基盤なしでスケールする
+- **frontmatter summary正本**: 各ページの`summary:`が検索と`--catalog`カタログに使われる要約の正本。index.mdの静的台帳は廃止（PGE-2026Aでの実装実験を経て採用）。全体像は `bash .agents/scripts/search-pages.sh --catalog` で出力する
 - **file-back習慣**: 回答・議論はデフォルトでwikiに保存する
 
 ### 改変は自由（これはstarter kit）

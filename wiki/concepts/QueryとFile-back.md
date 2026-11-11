@@ -55,7 +55,7 @@ AGENTS.mdのQueryフロー:
 2. 有望なページや複数ページから参照される未作成リンクを`bash .agents/scripts/read-page.sh "<タイトル>"`で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る
 3. `[[wikilink]]`引用付きで回答を総合する
 4. 回答後「これをwikiページとしてfile-backする？」と提案する
-5. 承諾されたら`wiki/analyses/`か`wiki/concepts/`に作成し、関連する既存ページと相互にwikilinkを張る。影響を受ける既存ページの記述を更新し、矛盾があれば明示する。`wiki/index.md`と`wiki/log.md`も更新する
+5. 承諾されたら`.agents/skills/llm-wiki-write/SKILL.md`を読んで従う
 
 ## 2 hop近傍読解とAI向けブラウザUI
 

@@ -558,3 +558,68 @@ user: 「赤リンクや空リンクの定義を確認して修正して。赤�
 
 (touched 3 files: 1 existing analyses [出典の読み優先度（2026-10-27 ingest）] + index/log)
 
+## [2026-10-28] refactor(agents) | Query時のread-page.sh逸脱対策（選択時点ナッジ）
+
+実運用中の別wikiで、agentがQuery時にsearch-pages.shは使いつつ本文候補をreadで直接読む逸脱を複数回起こした。逸脱agentの回顧: index.mdに完全パス付きエントリが並んでいたため「直読みのほうが安い」と判断した逸脱（契約違反は自覚）。AGENTS.mdのQuery規則と2026-10-24の3モデルusability test合格があっても実運用で逸脱が起きること、read-page.shは<title-or-path>を受け付けるためパス判明後のコスト優位は実在しないことを確認。対策は指示強化ではなく、逸脱が起きる決定時点の文脈に規則を置く方針（本wiki+template双方）:
+
+- search-pages.sh ×2: 出力末尾に「候補ページの本文はread-page.shで読む（パス直readではhop情報が得られない）」の1行ナッジ
+- read-page.sh ×2: Related Pages節に「深掘りするページの本文もread-page.shで読む」の1行ナッジ
+- AGENTS.md ×2: Query節2を「必ずread-page.shで読む」+「再読・部分読み等で直接readした場合は回答末尾にdirect-readと1行明示」に改稿。例外列挙は薄さ方針により書かず、自己申告が例外許可と観測可能性を兼ねる
+- [[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]] §4に逸脱観察と対策を追記（status: tentatively-adoptedのまま）。§1⑤「出力で強制」の一段上流（スクリプトを呼ぶ選択）への拡張
+
+(touched 8 files: scripts×4 [search/read × root/template] + AGENTS.md×2 + 分析ページ + log)
+
+## [2026-10-28] file-back | index.md存廃の再検証 — 問いは要約台帳の居場所へ縮退
+
+query: 「そもそもindex.mdっているの？窓口役割はページ数にスケールしない。概要ならfrontmatter summaryを拾って都度一覧を作ればいい。スクリプト前提ではindex.mdは不要なのでは？」をsubagent相談1往復で検証。
+
+- 縮退: 窓口の本体=完全要約カタログ機構は否定回答・語彙浮上・横断併存の根拠から廃止できない。ページから導出できないのは要約の中身だけで、存廃論の実体は「要約の単一情報源の居場所（中央台帳 vs ページ同置）」
+- 前提崩れの確認: 等価物（検索・逆リンク・2hopのスクリプト提供）が実在し、生成型index variantの破棄根拠「等価物不在」は消失。一方スクリプトはindex.mdを要約台帳として消費しており「導出可能なキャッシュ」宣言は部分的に虚偽だった
+- 反転を支えない実測: 73コミット中47(64%)がindex.mdに触れ登録は機能中。「要約だけの陳腐化」実害は未観測（意味チェック割当済み・logに実行記録0件）→測定ファースト。co-location利得は仮説（編集忘れ型のみ構造的に減らす）。AMMEは互換性データ点で規範的反証に非ず・frontmatter要約の観察例ゼロ→デフォルト反転はさらに重い。bypass論点は廃止を支持せず（逸脱対策の未適用箇所=indexヘッダはナッジで補完）
+- 行動方針: Phase 0（文言縮小・indexヘッダナッジ・staleness audit）→ Phase 1（search-pages.sh --catalog）→ Phase 2（実測後に新規小wikiでパイロット。研究wiki自体の移行は検証系汚染で非推奨）
+- 実施: AGENTS.md ×2「（lintが検証）」文言縮小・lint SKILL ×2 同一文言修正（scope拡張）・wiki/index.md ×2 ヘッダナッジ・QueryとFile-back.md step5の1世代陳腐化修正・IndexとLog.md存廃論節更新。auditは別sessionへ（prompt: .dev/index-staleness-audit-prompt-2026-10-28.md）
+- 記録用memo: 本日のsubagent相談が回答末尾にdirect-read申告を行った=朝のdirect-read契約が実効を上げた最初の観測データ点
+
+(touched 11 files: 3 wiki pages updated [index.md存廃の設計判断, IndexとLog, QueryとFile-back] + AGENTS.md×2 + lint SKILL×2 + wiki/index.md×2 [root/template ヘッダナッジ+エントリ更新] + log + .dev/index-staleness-audit-prompt)
+
+## [2026-10-28] file-back | index.md staleness audit（149件）の実施と陳腐化率0%の観測
+
+全149エントリの要約陳腐化監査（staleness audit）を実施し、結果を [[index.md存廃の設計判断]] に反映。3体のsubagent並行で全エントリの現行本文冒頭・定量記述を直接照合（AGENTS.md Query節2のdirect-read契約遵守）。結果: ①一致 149件（100.0%）、②軽微なずれ 0件、③陳腐化 0件、④参照不能 0件。陳腐化率は0.0%。「要約だけの陳腐化」という唯一の実害仮説は反証され、Phase 2（frontmatter summary正本＋生成ビュー＋index.md省略パイロット起動。目安10-15%以上）はトリガー非発火（見送り・index維持支持）と判定。手続的同時性（llm-wiki-write SKILLの同時更新ワークフロー）が要約の品質と鮮度を強力に担保している実態を確認。
+
+(touched 2 files: 1 existing analyses [index.md存廃の設計判断] + index/log)
+
+## [2026-10-28] experiment | PGE-2026Aでindex.md廃止＋frontmatter summary正本の実装実験（baseline/after test完了）
+
+- Phase 0/1/2の刻みを放棄し（ユーザー判断「無駄に慎重」）、実在wiki PGE-2026Aへの1実験に圧縮。移行（スクリプト・SKILL・AGENTS.md改稿＋index.md削除・3コミット）とusability-test（baseline/after・同課題・同model・T1-T3読み系＋T4 ingest probe）を実施
+- 結果: 制御実験内で失敗指標ゼロ。T1のsearch bypass消滅・T2語彙はfm summaryへ置換されて到達維持・T3否定回答維持（ただし--catalogはopt-inで未発動）・T4でsame-edit summary規則2/2遵守・index再生成ゼロ
+- 前提訂正: 「frontmatter要約の観察例ゼロ」は誤りだった（PGE-2026Aが76/76頁・lint完備の反例実在。誰にも消費されないwrite-onlyなdual-copy）。要約の注入案はindex×fm一致0/79のため廃止。PGEコミットe6c479d（本文+18行で要約両方未更新）の観測によりsame-edit規則を明示し遵守率を測る設計に変更
+- 発見: 廃止検知はlog末尾依存／summary「1〜2文」規則と実例の乖離／overview.mdを被験体が誰も読まない／direct-read規則の射程がQuery節限定
+- 採用判断は観測期間（目安≥4週 or ≥10コミット・指標はrecall劣化/summary陳腐化/語彙到達失敗/汚染）後に。template側は変更なし
+- 詳細: [[index.md存廃の設計判断]] のPGE-2026A実験節。生データは `.dev/pge-2026a-experiment/`
+
+## [2026-11-02] checkpoint | PGE-2026A実験の中間点検（移行5日目）
+
+- 実運用17コミット・wiki 80→125頁で点検。index再生成汚染0・recall劣化未観測・lint ORPHAN/MISSING 0・catalog 120頁正常
+- summary陳腐化1件実測。原因はwrite SKILL内の規則矛盾（旧「過去sourcesページは時点の要約を維持」節×same-edit規則）。実運用LLMは選別的適用（同一コミットでanalyses2頁は更新・sources1頁だけ不更新）→ 矛盾解消の改稿＋summary遡及更新を実施（PGE: bd35c25・d62e54f）
+- same-edit規則遵守率: 機械計測27/32（84%）・妥当性判定込み30/32（94%）
+- ≥10コミット基準は到達。ただし同日の採用判断はせず次点検で再評価。templateは未変更
+- 委譲編集の検証工程の実証: beam-free#max subagentのsummary遡及更新が本文に無い数式を混入→検証で捕捉・除去
+- 詳細: [[index.md存廃の設計判断]] 中間点検節。生データ `.dev/pge-2026a-experiment/midterm-checkpoint-2026-11-02.md`
+
+## [2026-11-02] adoption | templateのデフォルトをfrontmatter summary正本＋--catalogへ反転（index.md廃止を採用）
+
+- stress-round（125頁現状態・読み専4課題・同model）が失敗指標ゼロでクリーン → 事前合意の「ストレステスト→採用」経路でtemplate反転を実行。分析ページはtentatively-adoptedへ遷移
+- T6横断統合（6系統・20頁超をカタログ要約＋1hop要約のみで繋ぎT8広域列挙で被験体が自発的に--catalog使用）が読み経路の残余リスクを実測で閉じた
+- template改稿: search/readスクリプトはPGE検証版コピー、lint.sh/SKILL/AGENTS.mdは意味改修の部分適用（PGE分岐後のtemplate別改訂を尊重）。skeletonのindex.md削除・fm summary必須化（ユーザー当初提案どおり）
+- commit: `c3d4fd1`。研究wiki自身はindex.md維持（検証系保護）
+
+
+## [2026-10-28] decision | template骨格からoverview.mdを除外（Option A）
+
+- subagent相談（GLM-5.3-Flash Free max）を経て、template/ の骨格から overview.md を完全に除外する Option A を採用
+- 主根拠は「LLMが読まない」ではなく、claims対象外の骨格継承品・AGENTS.md目的欄＋READMEと機能重複・陳腐化罠の実証・Optionality原則との整合
+- 実装: template/AGENTS.md ディレクトリ構成節からoverview行削除 / template/wiki/overview.md 削除 / template/wiki/index.md の top-level overviewエントリ削除。scripts×5 のoverviewハードコードは無変更（メタファイル判定のため）
+- 下流3 wiki の stub 実使用データ（txa 16 commits / PGE 豊富 / EWA 4 commits）は Option B の材料として [[overviewの役割]] に記録。将来の再検討材料
+- usability testは不要と判断（失敗モードが可視・可逆）
+- 本wiki自身のoverview.mdは残す（研究対象保護・後方適用しない既存規定）。重複解消は禁則checklistで対応
+- 詳細: [[overviewの役割]] の「テンプレート骨格からの除外決定」節

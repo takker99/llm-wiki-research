@@ -1,6 +1,6 @@
 #!/bin/bash
 # Simple lint script for LLM Wiki.
-# Checks for orphan pages, open (unresolved) wikilinks, and index consistency.
+# Checks for orphan pages, open (unresolved) wikilinks, frontmatter completeness, and asset references.
 # Run with: bash .agents/skills/llm-wiki-lint/scripts/lint.sh
 
 set -euo pipefail
@@ -10,7 +10,7 @@ echo "=== LLM Wiki Lint ==="
 echo ""
 
 # Check for orphan pages (no inbound links from other wiki pages)
-# sources/ pages: index.md listing does not count (unlinked source = not digested)
+# sources/ pages: only concepts/entities/analyses/sources links count as digestion (unlinked source = not digested)
 echo "--- Orphan pages (no inbound links) ---"
 for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/analyses/*.md "$WIKI_DIR"/sources/*.md; do
   [ -f "$page" ] || continue
@@ -19,10 +19,28 @@ for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/anal
   if [[ "$page" == "$WIKI_DIR"/sources/* ]]; then
     count=$(grep -rl --include="*.md" --exclude="$(basename "$page")" "\[\[${basename}\]\]" "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources 2>/dev/null | wc -l || true)
   else
-    count=$(grep -rl --include="*.md" --exclude="index.md" --exclude="log.md" --exclude="overview.md" --exclude="$(basename "$page")" "\[\[${basename}\]\]" "$WIKI_DIR" 2>/dev/null | wc -l || true)
+    count=$(grep -rl --include="*.md" --exclude="log.md" --exclude="overview.md" --exclude="$(basename "$page")" "\[\[${basename}\]\]" "$WIKI_DIR" 2>/dev/null | wc -l || true)
   fi
   if [ "$count" -eq 0 ]; then
     echo "  ORPHAN: ${page#"$WIKI_DIR"/}"
+  fi
+done
+echo ""
+
+# Check frontmatter completeness: type/summary on all content pages;
+# raw source pointer on sources pages (raw: or source_url:, at least one)
+echo "--- Missing frontmatter keys ---"
+for page in "$WIKI_DIR"/concepts/*.md "$WIKI_DIR"/entities/*.md "$WIKI_DIR"/analyses/*.md "$WIKI_DIR"/sources/*.md; do
+  [ -f "$page" ] || continue
+  if [ "$(head -1 "$page")" != "---" ]; then
+    echo "  NO FRONTMATTER: $page"
+    continue
+  fi
+  fm="$(awk 'NR==1{next} /^---$/{exit} {print}' "$page")"
+  echo "$fm" | grep -q '^type:' || echo "  MISSING type: $page"
+  echo "$fm" | grep -q '^summary:' || echo "  MISSING summary: $page"
+  if [[ "$page" == "$WIKI_DIR"/sources/* ]]; then
+    echo "$fm" | grep -qE '^(raw|source_url):' || echo "  MISSING raw/source_url: $page"
   fi
 done
 echo ""
@@ -34,7 +52,7 @@ echo ""
 #   2+ pages = OPEN_LINK (n pages) — virtual page / hub seed; candidate for page creation
 # Open links never fail the run.
 echo "--- Open links (unresolved wikilinks, classified by ref count) ---"
-find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xargs -0 awk '
+find "$WIKI_DIR" -name "*.md" ! -name "log.md" -print0 | xargs -0 awk '
   /^```/ { inblock = !inblock; next }
   !inblock {
     line = $0
@@ -68,7 +86,7 @@ echo ""
 # Check duplicate wikilinks within each page body (claim-granularity
 # citations with distinct p.XX pinpointers are exempt)
 echo "--- Duplicate wikilinks within pages ---"
-find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" -print0 | xargs -0 awk '
+find "$WIKI_DIR" -name "*.md" ! -name "log.md" -print0 | xargs -0 awk '
   FNR == 1 {
     infm = 0; inblock = 0
     relpath = FILENAME
@@ -127,29 +145,6 @@ echo ""
 # Known limitation: wikilinks containing https:// or # (URL/anchor targets)
 # cannot be resolved to files by any classification above
 echo "  NOTE: wikilinks containing https:// or # are not resolvable here — manual check at review is fine"
-echo ""
-
-# Check that all pages in wiki/ appear in index.md
-echo "--- Pages missing from index.md ---"
-find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" \
-  | while read -r page; do
-    basename="$(basename "$page" .md)"
-    if ! grep -q "$basename" "$WIKI_DIR/index.md"; then
-      echo "  MISSING: $page is not in index.md"
-    fi
-  done
-echo ""
-
-# Check that index.md entries point to existing files (stale entries)
-# URL-encoded paths (e.g. %20 for spaces) are decoded before checking
-echo "--- Stale index entries (target file missing) ---"
-grep -E '^- \[' "$WIKI_DIR/index.md" \
-  | grep -oE '\]\([^)]+\.md\)' \
-  | sed -e 's/^](//' -e 's/)$//' -e 's/%20/ /g' \
-  | sort -u \
-  | while read -r rel; do
-      [ -f "$WIKI_DIR/$rel" ] || echo "  STALE: $rel"
-    done || true
 echo ""
 
 # Check that raw/ files referenced from wiki/ actually exist

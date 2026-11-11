@@ -1,7 +1,7 @@
 # AGENTS.md
 
 このファイルはこのwikiの運用規則。人間とLLMで共進化する。
-設計思想（3層・raw/不変・追記ではなく書き換える・conceptsはatomic・indexカタログ・file-back習慣）を継承していれば、
+設計思想（3層・raw/不変・追記ではなく書き換える・conceptsはatomic・frontmatter summary正本・file-back習慣）を継承していれば、
 このファイルを含むすべての構成・形式・手順は**自由に改変してよい**。
 
 ## 目的（purpose）
@@ -29,9 +29,7 @@ wiki/
   sources/    — ソース要約ページ（必須）。タイトル `YYYY-MM-DD 短い名前.md`
   analyses/   — 分析・比較・総合ページ。長くなってよい（任意。rename・削除可）
 
-  index.md    — 全ページのカタログ。各エントリ1行。Query時は最初に読む
   log.md      — 追記専用のタイムライン
-  overview.md — エントリーポイント。このwikiの俯瞰図
 ```
 
 `concepts/`と`sources/`は必須。`entities/`・`analyses/`は必要になってから使う。
@@ -48,11 +46,11 @@ wiki/
 
 - sourcesページは必ず `raw/` へのリンクを含める。引用の流れ: raw → sourceページ → concept/entity
 - sourcesページのfrontmatter（`raw:` もしくは `source_url:` の1以上を必須（`accessed:` 任意）等）の形式は `.agents/skills/llm-wiki-write/SKILL.md` に定義
-- frontmatter は任意（sources 以外）。書く場合はページ種別に応じて `tags:` / `dates:` / `status:` / `sources:` 等のメタ情報を付加してよい。書かなくても wiki は機能する
+- frontmatter: 各ページに `type`（concept / entity / analysis / source）と `summary`（1〜2文。検索と`--catalog`カタログに使われる要約の正本。本文を書き換えたら同じ編集で見直す）を付ける。`tags:` / `dates:` / `status:` / `sources:` 等のメタ情報は下記の規則に従って付加してよい。idはファイル名（basename）が兼ねる
 - concepts/entities の出典は本文中に sources ページへの [[wikilink]] を置く (claim粒度)。analyses の frontmatter `sources:` は入力 raw データ・スクリプトの列挙 (reproducibility manifest) という別の意味を持ち、出典では表現しない
 - 外部URLを出典にする場合は frontmatter の `source_url:`（と任意で `accessed:`）を使う。
 - 著者-年表記 (`(Otsu, 1979)` 等の LLM 一般知識に由来する文献表記) は帰属引用 (手法の命名・背景) ならこのままでよい。外部論文の**内容**を主張の根拠に載せる前に、原典に相当する sources ページを作る
-- `index.md` の各エントリは1行: `- [ページタイトル](パス) — 1行要約`。index.mdはページから導出可能なビューのキャッシュ: 陳腐化・欠損時はページ冒頭を読んで再生成してよい（lintが検証）
+- 各ページのfrontmatter `summary:`（1〜2文）が、検索と`--catalog`カタログに使われる要約の正本。本文を書き換えたら同じ編集で`summary:`を見直す。陳腐化はlintの意味チェックで見る
 - `log.md` の各エントリ: 見出し `## [YYYY-MM-DD] action | 短い題名` + 詳細は本文
 - オープンリンク（未作成ページへのリンク）は許容: 1ページのみから参照されるリンクのためにページを作らない。2ページ以上から参照されるようになったらページ作成を検討
 - wiki/のページは追記ではなく**書き換え**で更新する。既存の記述に手を加えず追記だけするのはwikiではない。raw/がsource of truthなので書き換え・削除は自由
@@ -73,8 +71,8 @@ wiki/
 
 ### Query（常時行動）
 
-1. `bash .agents/scripts/search-pages.sh "<検索語>"`と`wiki/index.md`で関連ページや未作成リンクを探す。見つからない時は`--fulltext`で本文全文を検索する
-2. 有望なページや複数ページから参照される未作成リンクを`bash .agents/scripts/read-page.sh "<タイトル>"`で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る。巨大な2 hopは`--no-2hop` / `--2hop-limit <N>` で絞ってよい
+1. `bash .agents/scripts/search-pages.sh "<検索語>"`で関連ページや未作成リンクを探す。見つからない時は`--fulltext`で本文全文を検索する。全体像が必要な時は`bash .agents/scripts/search-pages.sh --catalog`で全ページの要約付きカタログを出力する
+2. 有望なページや複数ページから参照される未作成リンクは、必ず`bash .agents/scripts/read-page.sh "<タイトル>"`で読む。1 hop・2 hopの関連ページ一覧はread-page.shが末尾に付けるもので、`read`で直接読むと得られない。末尾の関連一覧と要約から深掘り先を選んで辿る。巨大な2 hopは`--no-2hop` / `--2hop-limit <N>` で絞ってよい。再読や部分読み（offset/limit）等で直接`read`した場合は、回答末尾に`direct-read`と1行明示する
 3. `[[wikilink]]`引用付きで回答を総合する
 4. 回答後、「これをwikiページとしてfile-backする？」と提案する
 
@@ -92,7 +90,7 @@ wikiページとして保存するか提案する。消えていく知識をデ�
 
 ## よくあるパターン
 
-- 「このPDF/URLをingestして」 → ソースを `raw/` にアーカイブ（人間が依頼した場合のみ）し、ingest手順に従う。要点を議論し、sources/ページを作成、concepts/entities/index/logを更新
-- 「Xについて知ってる？」 → index.mdを読む → 関連ページ → 回答を総合 → file-backを提案
+- 「このPDF/URLをingestして」 → ソースを `raw/` にアーカイブ（人間が依頼した場合のみ）し、ingest手順に従う。要点を議論し、sources/ページを作成、concepts/entities/logを更新
+- 「Xについて知ってる？」 → search-pages.shで探す → read-page.shで読む → 回答を総合 → file-backを提案
 - 「wikiをlintして」 → lint手順に従い、機械+意味チェックを実行し、重大度別に報告
-- 「次に何を読むべき？」 → index.mdで薄いページ、出典のない孤立概念、未回答の疑問を確認
+- 「次に何を読むべき？」 → `--catalog`とlintの結果で薄いページ、出典のない孤立概念、未回答の疑問を確認
