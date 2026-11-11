@@ -5,7 +5,7 @@ description: ソースのingestや、Query回答・対話知見のfile-backに�
 
 # Wiki Write (Ingest / File-back)
 
-外部ソースのingest、またはQuery回答・対話で生まれた知見のfile-backによって、`wiki/`のページを作成・更新し知識ネットワークに編み込む操作。
+外部ソースのingest、Query回答・対話で生まれた知見のfile-back、またはlintで承認されたリファクタの適用によって、`wiki/`のページを作成・更新し知識ネットワークに編み込む操作。
 ディレクトリ構成・命名・機械要件は`AGENTS.md`に従う。
 
 ## 手順
