@@ -194,21 +194,31 @@ echo ""
 # Check that raw/ files referenced from wiki/ actually exist
 # Inline code and fenced code blocks are stripped first (quoted design
 # examples in analyses pages are not raw references).
-# The reference stops at whitespace so "raw/a.md と raw/b.md" stays two refs,
-# and any known attachment extension is accepted, not just .md.
+# Quoted paths may contain spaces (raw: "raw/my paper.pdf"); unquoted paths
+# stop at whitespace so "raw/a.md と raw/b.md" stays two refs. Any known
+# attachment extension is accepted, not just .md.
 RAW_EXTENSIONS='md|pdf|txt|csv|tsv|json|ya?ml|html|epub|png|jpe?g|svg|webp|docx?|pptx?|xlsx?'
 echo "--- Missing raw files referenced from wiki/ ---"
+RAW_SCAN="$(mktemp "${TMPDIR:-/tmp}/llm-wiki-rawscan.XXXXXX")" || exit 1
+trap 'rm -f "$BASENAME_INDEX" "$RAW_SCAN"' EXIT
 find "$WIKI_DIR" -name "*.md" -exec awk '
   /^```/ { inblock = !inblock; next }
   !inblock { gsub(/`[^`]*`/, "", $0); print }
-' {} + \
-  | grep -oiE "raw/[^][()\"'\`<>。、「」（）、→[:space:]]+\.(${RAW_EXTENSIONS})" \
-  | sort -u \
-  | while read -r ref; do
+' {} + > "$RAW_SCAN"
+{
+  # Double-quoted path (may contain spaces)
+  grep -oiE "\"raw/[^\"]+\.(${RAW_EXTENSIONS})\"" "$RAW_SCAN" | sed 's/^"//; s/"$//' || true
+  # Single-quoted path (may contain spaces)
+  grep -oiE "'raw/[^']+\.(${RAW_EXTENSIONS})'" "$RAW_SCAN" | sed "s/^'//; s/'\$//" || true
+  # Unquoted path (no whitespace)
+  grep -oiE "raw/[^][()\"'\`<>。、「」（）、→[:space:]]+\.(${RAW_EXTENSIONS})" "$RAW_SCAN" || true
+} | sort -u \
+  | while IFS= read -r ref; do
+    [ -n "$ref" ] || continue
     if [ ! -f "$(dirname "$WIKI_DIR")/$ref" ]; then
       echo "  MISSING RAW: $ref"
     fi
-  done || true
+  done
 echo ""
 
 # Check image links resolve, and no asset is unused
