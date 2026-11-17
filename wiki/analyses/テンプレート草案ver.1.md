@@ -50,3 +50,4 @@ superseded_by:
 - [[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]] — 20+ Wiki実運用データと運用知見
 - [[2026-08-11 AIを使った知識マネジメント (villagepump)]] — コミュニティ議論
 - [[LLM Wiki実装のingest形式と運用の比較]] — 8実装のingest・運用比較とclaim#6/#9の追加データ点
+- [[template schemaの破綻点検と修正計画]] — 2026-11-17のschema点検。claim#1/#4/#9の実装が初日から誤作動する矛盾と修正計画
