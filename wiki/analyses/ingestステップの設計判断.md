@@ -1,4 +1,5 @@
 ---
+summary: "AGENTS.md ingestステップの3改善提案の検証結果（subagent評価 + 判断）"
 status: tentatively-adopted
 date: 2026-08-11
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[ingestにおける編み込みの実際]]"

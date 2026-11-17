@@ -1,4 +1,5 @@
 ---
+summary: "OSS矯正skill 8種の階層×アーキテクチャ比較。「検出は機械・判断はAI」、無制約推敲は事実を壊す、機械文体lintの過剰規制による研究ノート構造散文化アンチパターン（status: tentatively-adopted, 2026-11-03更新）"
 status: tentatively-adopted
 date: 2026-10-27
 updated: 2026-11-03

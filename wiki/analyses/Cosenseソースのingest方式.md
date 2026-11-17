@@ -1,4 +1,5 @@
 ---
+summary: "Cosense（nishio/villagepump）のingest方式3案と仮採用セット（status: tentatively-adopted）"
 status: tentatively-adopted
 date: 2026-08-11
 tags: [template-design, cosense, ingest]

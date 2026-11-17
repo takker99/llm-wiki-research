@@ -1,4 +1,5 @@
 ---
+summary: "AGENTS.md冒頭に第一目的を明示し迷走を防ぐ。about-nishioで発見"
 date: 2026-08-12
 tags: [template-design, agents-md, pilot-finding]
 sources: "[[リポジトリ分析 llm-wiki-about-nishio]]", "[[パイロット分析 横断所見]]"

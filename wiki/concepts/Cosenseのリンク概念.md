@@ -1,4 +1,5 @@
 ---
+summary: "2 hop link・空リンク（通称 赤リンク）・大きなリンク・関連ページリスト・リンクサジェスト等の用語体系。リンクで思考をジャンプさせる運用思想"
 sources: "[[2026-08-14 Cosenseのリンク概念 (villagepump+nishio)]]", "[[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]"
 tags: [cosense, link-concepts]
 ---

@@ -1,4 +1,5 @@
 ---
+summary: "Vannevar Bushの先駆的知識装置。LLM Wikiの歴史的先駆"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 tags: [template-design, llm-wiki-pattern]
 ---

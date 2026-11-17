@@ -1,4 +1,5 @@
 ---
+summary: "パイロット2: Code+Wikiハイブリッド型。SQLite-authority、マルチエージェント構成(.agents/+.claude/+skills/)、自動ship loop（12.5KB AGENTS.md, 49pages）"
 status: tentatively-adopted
 date: 2026-08-12
 tags: [template-design, repos, pilot-analysis, nishio, code-wiki-hybrid]

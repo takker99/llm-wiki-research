@@ -1,4 +1,5 @@
 ---
+summary: "Hermesのllm-wiki skill（v2.1.0）との機能・設計思想レベルの比較。agent管理の完成システム vs 人間とLLMの共進化という研究仮説の対比（2026-10-03）"
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]"
 tags: [comparison, hermes-agent, llm-wiki-pattern]
 ---

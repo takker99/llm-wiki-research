@@ -1,4 +1,5 @@
 ---
+summary: "Wiki内にコードリポジトリを持ち開発知識を外部化するパターン"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

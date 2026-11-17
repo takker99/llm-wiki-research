@@ -1,4 +1,5 @@
 ---
+summary: "entry file(数十行)+4操作skillの二層。本wikiと同一構造の独立収束（95★）"
 raw:
   - raw/github-jackwener-llm-wiki.md
 source_url: https://github.com/jackwener/llm-wiki

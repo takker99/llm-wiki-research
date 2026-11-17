@@ -1,4 +1,5 @@
 ---
+summary: "templateのAGENTS/SKILL/lintをLLM Wiki・Cosense思想で点検。初回ingestデッドロック、raw必須とsource_url許容の衝突、未実装のlint検査列挙、write-onlyなtype必須、summary単一行前提の未明記など12件の修正計画と、rootの現行schema移行を記録（status: tentatively-adopted, 2026-11-17）"
 status: tentatively-adopted
 date: 2026-11-17
 tags: [template-design, schema, lint, cosense, consultation]
@@ -33,9 +34,17 @@ sources: "[[テンプレート草案ver.1]]", "[[index.md存廃の設計判断]]
 - **初期化セクションの全削除**: 「初回は人間がpurposeを確定し、最初のソースを持ち込む」ゲートは有効。目的節の1文に圧縮して残す。
 - **`summary` の1〜2文**: 文数はlintで検査せず、ソフトな粒度目安として残す。代わりに「1行」を機械検査する。
 
-## templateとrootの分岐（別途判断）
+## templateとrootの分岐（2026-11-17 root移行）
 
-点検中に、研究wiki自身（root）が現在の template を dogfooding していないことが分かった。rootは依然 `index.md` と「frontmatter任意」で、`write/SKILL.md:24` には「過去sourcesを時点要約として維持」という、実運用で要約更新漏れを起こした既知のバグ文言が残る。`AGENTS.md` の「このwiki自身の存続が最小スキーマの実証になる」という主張と現状がずれているため、rootを移行するか、旧schemaのforkとして維持するかを決めて [[log]] に残す必要がある。
+点検中に、研究wiki自身（root）が現在の template を dogfooding していないことが分かった。rootは依然 `index.md` と「frontmatter任意」で、`write/SKILL.md:24` には「過去sourcesを時点要約として維持」という、実運用で要約更新漏れを起こした既知のバグ文言が残る。`AGENTS.md` の「このwiki自身の存続が最小スキーマの実証になる」という主張と現状がずれているため、rootを移行するか、旧schemaのforkとして維持するかを決めて [[log]] に残す必要があった。
+
+**判断: rootを旧schemaのforkとして維持せず、現行template schemaへ移行する。** 研究wiki自身が仮説の実装であり続けることを優先した。2026-11-17の移行内容:
+
+- `.agents/skills/llm-wiki-write`・`.agents/skills/llm-wiki-lint`・`.agents/scripts/read-page.sh`・`.agents/scripts/search-pages.sh` を `template/` の実装に同期した。root専用の研究スクリプト（`diagnose-wiki.sh`・`number-dup-check.sh`）はrootに残す
+- `wiki/index.md` と `wiki/overview.md` を廃止し、全150ページのfrontmatter `summary:` を検索と `--catalog` の正本にした。summaryは旧index.mdの1行要約を移し、既存summaryがあるページは維持した
+- `AGENTS.md` を現行schemaに合わせ、frontmatter summary必須・`raw:`/`source_url:` 統一・`direct-read`削除・Queryの `--catalog` 化を反映した。研究固有の目的・Review・Git規約は残した
+- `index.md`・`overview.md` を参照していた運用上のリンクを更新した。廃止を議論した分析ページ内の歴史的記述は残す
+- 移行後のlintはORPHAN 0・summary欠落0。残る `[[overview]]`/`[[index]]` のオープンリンクは歴史的記述のものだけ
 
 ## 実装順序
 
@@ -43,7 +52,7 @@ sources: "[[テンプレート草案ver.1]]", "[[index.md存廃の設計判断]]
 2. C3 + C5（未実装検査の削除、lintの走査統一・大小文字・`raw/` 正規表現）
 3. C4 + H1 + M2 + M3（未参照script削除、下流固有規則の削除、AGENTS.md圧縮、`direct-read` 削除）
 4. 再検証（lint単体テスト、SKILLとlint出力の照合、空wikiでの初回ingestシミュレーション）
-5. root/template分岐の記録
+5. root/template分岐の記録（2026-11-17にroot移行を実施）
 
 ## 実装（2026-11-17）
 

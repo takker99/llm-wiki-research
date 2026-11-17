@@ -1,4 +1,5 @@
 ---
+summary: "赤リンク=情報の不在表現＝未来へのハンドルのLLM Wikiへの輸入。Open Questionとの同型性、リンクの4仕事、come-from、参照数分割lint"
 sources: "[[2026-08-14 赤リンクとLLM Wiki (nishio+villagepump)]]"
 tags: [template-design, cosense, llm-wiki-pattern, red-links]
 ---

@@ -1,4 +1,5 @@
 ---
+summary: "パターンと実装の分離。すべてオプショナルでモジュラー"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
@@ -16,7 +17,7 @@ Karpathy gistのメタ設計原則。パターン（抽象的なアイデア）�
 | 要素 | Optionalな理由 |
 |---|---|
 | 画像処理 | ソースがテキストのみなら不要 |
-| 検索エンジン（[[qmd]]） | 小規模wikiでは[[IndexとLog\|index.md]]で十分 |
+| 検索エンジン（[[qmd]]） | 小規模wikiでは[[IndexとLog\|frontmatter summaryのカタログ]]で十分 |
 | スライドデッキ（[[Marp]]） | Markdownページだけで十分な場合がある |
 | 出力フォーマット全般 | ユーザーのニーズ次第で完全に異なるセットでもよい |
 | [[Vault分離と人間-AIの境界\|Vault分離]] | 単一Vaultでも運用可能。分離はKarpathyのpatternの一部ではなくコミュニティ発展 |

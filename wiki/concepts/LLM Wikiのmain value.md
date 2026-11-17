@@ -1,4 +1,5 @@
 ---
+summary: "LLM Wiki の価値の中心は knowledge network（補助装置: raw/ SSOT）。「raw が唯一の source」は派生解釈の解消"
 status: hypothesis
 date: 2026-09-03
 tags: [template-design, llm-wiki-pattern, knowledge-graph, main-value]

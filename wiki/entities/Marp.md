@@ -1,4 +1,5 @@
 ---
+summary: "Markdownスライドデッキ形式。Obsidianプラグインあり"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ---
 

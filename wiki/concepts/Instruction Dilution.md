@@ -1,4 +1,5 @@
 ---
+summary: "常駐指示の過密による注意力分散。1,000-2,000語超・15ルール超で発生、Prompt Cachingでは解決しない。3段階開示が対策（2026-10-27）"
 date: 2026-10-27
 sources: "[[2026-10-27 低コストLLMの日本語矯正とスキル設計]]"
 tags: [template-design, context-engineering, agents-md, agent-skills]

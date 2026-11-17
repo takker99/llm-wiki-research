@@ -1,4 +1,5 @@
 ---
+summary: "スペキュラトゥールが内部に持てる退屈な保守仕事をこなすAI。接地の衛生は渡せても境界監督と創発は渡せない"
 sources: ["[[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]"]
 tags: [template-design]
 ---

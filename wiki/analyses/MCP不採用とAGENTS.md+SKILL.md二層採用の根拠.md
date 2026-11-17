@@ -1,4 +1,5 @@
 ---
+summary: "MCPはデフォルト不採用・オプション追加可。実測（14ツール6.3KB≈1.6-2Kトークン常駐）+Agent Skills標準化+推奨構成（status: tentatively-adopted）"
 status: tentatively-adopted
 date: 2026-08-14
 tags: [template-design, operation-layer, agents-md, skill, mcp]

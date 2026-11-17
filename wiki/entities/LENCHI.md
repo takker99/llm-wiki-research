@@ -1,4 +1,5 @@
 ---
+summary: "LLMを使った知的生産に関するWiki。Qバックログ"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 

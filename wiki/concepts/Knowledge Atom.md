@@ -1,4 +1,5 @@
 ---
+summary: "命題の最小単位。本wikiのclaim粒度引用＋sources→conceptの引用流れはAEG二部グラフと同型（2026-10-27）"
 date: 2026-10-27
 sources: "[[2026-10-27 LLM知識ベースの言語ドリフト検証]]"
 tags: [template-design, knowledge-graph, provenance, language-drift]
@@ -17,7 +18,7 @@ tags: [template-design, knowledge-graph, provenance, language-drift]
 本テンプレートの引用規約「claim粒度引用」（`[[ソースページ]] p.XX`形式）とsourcesページの骨格は、AEGの二部グラフと同型である。
 
 - **知識アトム ↔ ソースページ内の主張単位の記述**: 自己完結した命題＋出典ポインタ
-- **正規エンティティ ↔ concept/entityページ**: `index.md`で正規名を運用する
+- **正規エンティティ ↔ concept/entityページ**: `--catalog` とwikilinkで正規名を運用する
 - **二部グラフ ↔ raw → sources → concept/entityの引用の流れ**: アトムが正規ノードへ接続する
 
 sourcesページの役割をclaimの可変配分と捉える議論は[[ingestの意義とsourcesページの役割]]にある。出力変換の際、アトム形式のままなら「定性条件だけ抜けた名詞化」を経由せずに直接レンダリングでき、術語ロンダリング（造語が実在用語として漏出する汚染）と引用・定義の乖離を防げる。

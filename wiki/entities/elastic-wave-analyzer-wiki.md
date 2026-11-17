@@ -1,4 +1,5 @@
 ---
+summary: "弾性波解析アプリの使い込みWiki。template下流wiki 1件目（M2検証対象・frontmatter沈黙フィードバック元・purpose欄未記入）"
 tags: [template-design, 下流wiki, M2]
 ---
 

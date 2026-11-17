@@ -1,4 +1,5 @@
 ---
+summary: "別repoのコードをwiki repoから参照してingestする方式（wiki-driven workflow）"
 raw:
   - raw/nishio-KarpathyのLLM_Wiki勉強会.md
   - raw/cosense/nishio/kouchou-ai-developer-wiki-2026-08-14.md

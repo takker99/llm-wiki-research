@@ -1,4 +1,5 @@
 ---
+summary: "index.mdの有効範囲（〜100ソース）とqmd等によるスケールアップ"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[パイロット分析 横断所見]]"
 tags: [template-design, llm-wiki-pattern]
 ---

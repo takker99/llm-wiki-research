@@ -1,4 +1,5 @@
 ---
+summary: "Memex提唱者。LLM Wikiの歴史的先駆"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ---
 

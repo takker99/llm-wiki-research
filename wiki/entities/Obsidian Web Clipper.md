@@ -1,4 +1,5 @@
 ---
+summary: "Web→Markdown変換のブラウザ拡張"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ---
 

@@ -1,4 +1,5 @@
 ---
+summary: "コピー・分離・片方のみの4パターンと推奨"
 date: 2026-08-12
 tags: [template-design, agents-md, claude-md, pilot-finding]
 sources: "[[パイロット分析 横断所見]]", "[[リポジトリ分析 llm-wiki-about-nishio]]", "[[リポジトリ分析 grasp]]", "[[リポジトリ分析 llm-wiki-about-delite]]"

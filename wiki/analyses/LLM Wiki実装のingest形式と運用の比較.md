@@ -1,4 +1,5 @@
 ---
+summary: "8実装のingest単位・sourceの4類型・出典ポインタの4モード・運用実態を横断比較。sourceの骨格、provenanceモード、re-ingest、規則とlintの不一致を整理（2026-10-23）"
 status: tentatively-adopted
 date: 2026-10-23
 tags: [template-design, repos, ingest, cross-cutting]

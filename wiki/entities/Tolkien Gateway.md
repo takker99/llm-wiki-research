@@ -1,4 +1,5 @@
 ---
+summary: "読書ユースケースの実例として引用されたファンwiki"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ---
 

@@ -1,4 +1,5 @@
 ---
+summary: "中国語思考パターンの概念漏出（Attention転写）と蒸留SFT模倣トラップ。CoT言語固定・量子化回避・モデル選択というパイプライン層防御の根拠（2026-10-27）"
 date: 2026-10-27
 sources: "[[2026-10-27 多言語LLMの擬似漢語生成と過剰圧縮の機構]]"
 tags: [template-design, language-drift, multilingual]

@@ -1,4 +1,5 @@
 ---
+summary: "OpenAIのモバイルコーディングエージェント"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 

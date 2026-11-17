@@ -1,4 +1,5 @@
 ---
+summary: "6段階の進化史。Agent Skillsの一般化としてのLLM Wiki"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

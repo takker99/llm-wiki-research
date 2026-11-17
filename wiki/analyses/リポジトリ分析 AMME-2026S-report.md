@@ -1,4 +1,5 @@
 ---
+summary: "パイロット3: 研究レポート型・最薄AGENTS.md。AGENTS.md+SKILL.md二層設計、wikilink 0/frontmatter不使用で100ページ運用（1.9KB AGENTS.md, 100pages）"
 status: tentatively-adopted
 date: 2026-08-12
 tags: [template-design, repos, pilot-analysis, takker99, thin-agents]

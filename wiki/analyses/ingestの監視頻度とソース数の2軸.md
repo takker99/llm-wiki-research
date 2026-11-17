@@ -1,4 +1,5 @@
 ---
+summary: "バッチIngestとnishio流の共通点は監視頻度軸。ソース数とは直交"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

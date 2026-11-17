@@ -1,4 +1,5 @@
 ---
+summary: "赤リンク延伸・Open Questionとの同型性・リンクの4仕事・come-from理論・実践例（grasp/BDL/SMS）"
 raw: ["raw/cosense/nishio/AIによる赤リンクの延伸-2026-08-14.md", "raw/cosense/nishio/Open Questionと赤リンクの延伸-2026-08-14.md", "raw/cosense/nishio/多すぎるリンク-2026-08-14.md", "raw/cosense/nishio/公開PKMが読者ケアのせいでover-linkを産む-2026-08-14.md", "raw/cosense/villagepump/赤リンクの数の議論のLLM Wiki-2026-08-14.md"]
 source_url: https://scrapbox.io/nishio/AIによる赤リンクの延伸
 accessed: 2026-08-14

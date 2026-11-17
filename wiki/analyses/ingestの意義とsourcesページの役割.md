@@ -1,4 +1,5 @@
 ---
+summary: "Karpathy gist原文のingest節3関節×2surveyの照合。統合は精緻化、kept currentは検出がLint節に先行定義され修復（re-ingest）が未制度化、schema明文化がdrift、編み込みの本質はfile-backに移住。re-ingestを名指す実装はHermesとvanillaflava、nishioは4戦略を名前なしで持つ。ingest=種まきの初期投資、sourcesページ=4仕事の可変配分（2026-10-23）"
 status: hypothesis
 date: 2026-10-23
 tags: [template-design, ingest, llm-wiki-pattern]

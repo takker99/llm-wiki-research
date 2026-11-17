@@ -1,4 +1,5 @@
 ---
+summary: "クラウド側Deep ResearchとローカルLLM Wikiの使い分け"
 sources: "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

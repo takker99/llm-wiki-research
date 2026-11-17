@@ -1,4 +1,5 @@
 ---
+summary: "文脈情報をファイル化しindexで分割、AI自身がメンテナンスする仕組み"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

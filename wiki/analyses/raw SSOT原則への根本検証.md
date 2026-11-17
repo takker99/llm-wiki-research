@@ -1,4 +1,5 @@
 ---
+summary: "LLM Wiki の main value = knowledge network の根拠。Karpathy gist の派生解釈・nishio 3段階態度変遷・raw/ の 6 機能分解・パイロット 7 実装の観察。claim#10 草案（status: hypothesis）"
 status: hypothesis
 date: 2026-09-03
 tags: [template-design, raw, knowledge-graph, main-value, provenance, raw-ssot-revisited]

@@ -1,4 +1,5 @@
 ---
+summary: "LLM Wikiパターンの提唱者"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 tags: [template-design]
 ---

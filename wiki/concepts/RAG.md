@@ -1,4 +1,5 @@
 ---
+summary: "Retrieval-Augmented Generation。LLM Wikiが対比するパラダイム"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 

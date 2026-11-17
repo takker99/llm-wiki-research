@@ -1,4 +1,5 @@
 ---
+summary: "各Wikiが仮想的人格として振る舞い、目的を通して質問を読み替える"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

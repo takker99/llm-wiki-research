@@ -1,4 +1,5 @@
 ---
+summary: "2 hop近傍読解の5つの優位性、search-pages.shとread-page.shの実装、3モデルusability test検証、実運用逸脱観察と選択時点ナッジ（status: tentatively-adopted, 2026-10-28）"
 status: tentatively-adopted
 date: 2026-10-24
 tags: [template-design, cosense, query, ingest, agent-skills, knowledge-graph]

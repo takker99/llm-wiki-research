@@ -1,4 +1,5 @@
 ---
+summary: "LLM Wikiパターンの原典。RAG vs 永続Wiki、3層アーキテクチャ、Obsidian as IDE、Memex接続"
 raw: raw/karpathy-llm-wiki-gist.md
 source_url: https://gist.github.com/karpathy/35b05cd0f028f4acc9d7c9c2be52e5d0
 tags: [template-design, llm-wiki-pattern]

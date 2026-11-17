@@ -1,4 +1,5 @@
 ---
+summary: "nishioの講義資料。20+ Wiki実運用データ、Wikis-as-personas、Coding Agent史"
 raw: raw/nishio-KarpathyのLLM_Wiki勉強会.md
 source_url: https://scrapbox.io/nishio/KarpathyのLLM_Wiki勉強会
 accessed: 2026-08-11

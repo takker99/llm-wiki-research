@@ -1,4 +1,5 @@
 ---
+summary: "AI用Vaultと人間用Vaultの分離。Wikiはsource of truthではない"
 sources: [[2026-08-11 AIを使った知識マネジメント (villagepump)]], [[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]
 tags: [template-design, llm-wiki-pattern]
 ---

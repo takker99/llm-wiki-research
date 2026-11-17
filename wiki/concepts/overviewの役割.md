@@ -1,4 +1,5 @@
 ---
+summary: "人間向けの入口ページ。原型（Karpathy gist）にはない独自発明だが「入門の1枚」はnishio実測・他実装に元ネタあり"
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]", "[[2026-08-14 SKILL併用LLM Wiki vanillaflava (github)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

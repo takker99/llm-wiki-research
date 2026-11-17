@@ -1,4 +1,5 @@
 ---
+summary: "同じ資料を複数Wikiに投入→異なる切り出し方が生まれる現象"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 

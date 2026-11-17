@@ -1,4 +1,5 @@
 ---
+summary: "圧縮せず注意の足場を作る。要約の5つの構造的問題"
 sources: "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

@@ -1,4 +1,5 @@
 ---
+summary: "6スキル構成+crystallize。薄いCLAUDE.md+外部スキーマ分離。プライバシー論（59★）"
 raw:
   - raw/github-vanillaflava-llm-wiki-skills.md
 source_url: https://github.com/vanillaflava/llm-wiki-skills

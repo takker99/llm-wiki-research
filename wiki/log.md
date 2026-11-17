@@ -681,3 +681,16 @@ agy の Gemini 4 Argon (High) との2往復相談とコード再検証で、temp
 - 修正commit: 40ab723 `fix(template): check raw paths that contain spaces`
 - 検証: 実在/不在、クォートあり/なし、1行複数参照、インライン/フェンスドコード除外、既存fixture t1-t9、root lintをすべてPASS
 - 残課題: 1組の引用符内に複数のraw参照を書く場合は1パスとして扱う（現行の単一パス仕様では問題なし）
+
+## [2026-11-17] implementation | rootを現行template schemaへ移行
+
+[[template schemaの破綻点検と修正計画]] の「templateとrootの分岐」の判断に従い、研究wiki自身を `template/` の現行schemaへ移行した。旧schemaのforkとして維持しない。
+
+- `.agents/skills/{llm-wiki-write,llm-wiki-lint}` と `.agents/scripts/{read-page.sh,search-pages.sh}` をtemplate実装に同期。root専用の `diagnose-wiki.sh`・`number-dup-check.sh` は残した
+- `wiki/index.md`・`wiki/overview.md` を削除。全150ページにfrontmatter `summary:` を付与（147ページは既存frontmatterへ挿入、2ページはfrontmatter新設、既存summary 1ページは維持）。要約は旧index.mdの1行要約を移した
+- `AGENTS.md`: summary必須・`raw:`/`source_url:`統一・`direct-read`削除・Queryの`--catalog`化・File-back節を反映。研究固有の目的/Review/Git規約は維持
+- `README.md`: root移行と150ページを反映
+- [[このWikiの目的と研究課題]]・[[LLM Wikiの作文リスク]]・[[template schemaの破綻点検と修正計画]]・[[index.md存廃の設計判断]] のindex/overview参照と現状を更新
+- 検証: lint ORPHAN 0・summary欠落0、`--catalog` 150ページ、read-page動作。残るOPEN_LINKは歴史的記述の `[[overview]]`/`[[index]]` と既存の1参照リンクのみ
+
+(touched 159 files: 149 wiki pages with summary/related edits + 2 deletions + 5 .agents files + AGENTS.md + README + log)

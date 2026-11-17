@@ -1,4 +1,5 @@
 ---
+summary: "デジタル民主主義2030プロジェクトWiki。Agentic Retrievalによる経緯再構成"
 sources:
   - "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
   - "[[2026-08-14 Wikiとコードリポジトリの関係 (nishio)]]"

@@ -1,4 +1,5 @@
 ---
+summary: "index維持⇔廃止の論争史（Cosense批判の分解・audit・PGE-2026A実装実験＋baseline/after・中間点検）を経て、2026-11-02にstress-round（読み系4課題）クリーンでtemplateのデフォルト反転を採用：frontmatter summary正本＋--catalog・index.md廃止（tentatively-adopted）。2026-11-17に研究wiki自身も150ページで移行。silent recall failureはincident-baseで継続観測"
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[IndexとLog]]", "[[LLM Wikiのスケーラビリティ]]", "[[Cosenseのリンク概念]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[パイロット分析 横断所見]]", "[[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]"
 tags: [template-design, llm-wiki-pattern, cosense, navigation]
 status: tentatively-adopted
@@ -153,6 +154,12 @@ stress-round（2026-11-02・125頁現状態・読み専4課題・glm-5.3-flash-f
 採用の根拠合成: control実験（baseline/after＋T4 ingest）＋中間点検（実運用17コミット・same-edit遵守30/32）＋本ラウンド（読み経路の高難度4課題）。残余リスク（通常Queryでのsilent recall failure）はincident-baseで継続観測し、観測されたらrevert可能（PGE・templateともgit履歴で即時復元）。
 
 template改稿実装の注意: PGE分岐後にtemplateへ別改訂が入っていたため、search/readスクリプトはPGE版をコピーし（root.latest=template、root=PGEベースの等価確認済み）、lint.sh（差分66行）・write SKILL・lint SKILL・AGENTS.mdは同じ意味改修をtemplateの現行テキストに部分適用した。`frontmatter は任意`原則はユーザーの当初提案（「各ページfrontmatterにsummaryを書く」）に沿ってtype+summary必須へ。
+
+### root移行（2026-11-17）
+
+template反転後、研究wiki自身も同schemaへ移行した。`index.md`・`overview.md` を削除し、150ページ全件にfrontmatter `summary:` を付与した。summaryは旧index.mdの1行要約を移し、既存summaryが1件あったページはそれを維持した。移行は機械的に完了し、lintはORPHAN 0・summary欠落0。
+
+旧index.mdは全ページへのリンクを持っていたが、削除後の孤立ページは0だった。各ページ間の相互リンクとsources/conceptsの接続が発見経路として機能していたためである。`--catalog` の出力も旧indexと同等の情報量を保っている。残る検証は、通常Queryでのsilent recall failureと、summary更新のsame-edit遵守の実運用観測。
 
 ## 検証メモ
 

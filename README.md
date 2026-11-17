@@ -65,7 +65,8 @@ template v0.1は**個人・研究・読書・プロジェクト（開発）系**
 
 - **M1達成**: `template/` v0.1実装済み（2026-08-14）
 - **M2進行中**: 下流wiki 2件（[elastic-wave-analyzer-wiki](wiki/entities/elastic-wave-analyzer-wiki.md)、[txa-xray-ct-wiki](wiki/entities/txa-xray-ct-wiki.md)）がtemplateから立ち上がり、フィードバックは既に取り込み済み（2026-09-03 / 2026-09-25）。M2は2026-09-25に「この研究wiki以外のwiki」へ再定義
-- 研究wikiは125ページ（ingest/analysisともに多数の知見蓄積済み。index/log除くlint計測）
+- **root schema移行済み（2026-11-17）**: 研究wiki自身も `template/` の現行schemaに移行した。`wiki/index.md` と `wiki/overview.md` を廃止し、全150ページのfrontmatter `summary:` を検索・カタログの正本にした。移行の記録は [template schemaの破綻点検と修正計画](wiki/analyses/template%20schemaの破綻点検と修正計画.md) の「templateとrootの分岐」節
+- 研究wikiは150ページ（ingest/analysisともに多数の知見蓄積済み。log除くlint計測）
 
 ## ライセンス
 

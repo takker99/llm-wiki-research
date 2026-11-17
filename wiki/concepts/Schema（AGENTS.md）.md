@@ -1,4 +1,5 @@
 ---
+summary: "3層目の設定ドキュメント。LLMをwiki保守者に仕立てる鍵"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[2026-10-27 LLM知識ベースの言語ドリフト検証]]"
 tags: [template-design, llm-wiki-pattern]
 ---

@@ -1,4 +1,5 @@
 ---
+summary: "テンプレート仮説ver.1（claims一覧 + 原文へのポインタ `6c821c1:AGENTS.md`、status: hypothesis）"
 status: hypothesis
 version: 1
 date: 2026-08-11

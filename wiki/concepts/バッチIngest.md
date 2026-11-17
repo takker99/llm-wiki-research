@@ -1,4 +1,5 @@
 ---
+summary: "多数のソースを一度にingestし監視を減らす代替スタイル"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[リポジトリ分析 microsoft-llmwiki]]"
 tags: [template-design, llm-wiki-pattern]
 ---

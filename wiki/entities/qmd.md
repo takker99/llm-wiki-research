@@ -1,4 +1,5 @@
 ---
+summary: "Markdownローカル検索エンジン。LLM Wikiスケールアップ時の選択肢"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ---
 

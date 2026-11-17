@@ -1,4 +1,5 @@
 ---
+summary: "wikiの健全性チェック。矛盾検出＋新調査課題の提案"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[2026-10-27 LLM知識ベースの言語ドリフト検証]]"
 tags: [template-design, llm-wiki-pattern]
 ---

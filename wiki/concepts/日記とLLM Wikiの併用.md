@@ -1,4 +1,5 @@
 ---
+summary: "時系列的グラフと概念グラフの両方運用"
 sources: "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

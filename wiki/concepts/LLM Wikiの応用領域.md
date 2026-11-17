@@ -1,4 +1,5 @@
 ---
+summary: "個人・研究・読書・ビジネス等のユースケース一覧"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 tags: [template-design, llm-wiki-pattern]
 ---

@@ -1,4 +1,5 @@
 ---
+summary: "単一SKILL.mdがSchema層を吸収。Design BoundariesでMCP/hooksをskillの範囲外と宣言（1.9k★）"
 raw:
   - raw/github-Astro-Han-karpathy-llm-wiki.md
 source_url: https://github.com/Astro-Han/karpathy-llm-wiki

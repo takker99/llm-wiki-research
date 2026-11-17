@@ -1,4 +1,5 @@
 ---
+summary: "Obsidianプラグイン。frontmatterクエリで動的ビュー生成"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ---
 

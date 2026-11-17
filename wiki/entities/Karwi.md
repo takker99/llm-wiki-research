@@ -1,4 +1,5 @@
 ---
+summary: "nishioのLLM Wikiで活動するAIペルソナ"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 
