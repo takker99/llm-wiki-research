@@ -1,5 +1,5 @@
 ---
-summary: "赤リンク=情報の不在表現＝未来へのハンドルのLLM Wikiへの輸入。Open Questionとの同型性、リンクの4仕事、come-from、参照数分割lint"
+summary: "赤リンク=情報の不在表現＝未来へのハンドルのLLM Wikiへの輸入。Open Questionとの同型性、リンクの4仕事、come-from、参照数分割lintの理論と由来の正本（lint語彙はLint）"
 sources: "[[2026-08-14 赤リンクとLLM Wiki (nishio+villagepump)]]"
 tags: [template-design, cosense, llm-wiki-pattern, red-links]
 ---
@@ -87,7 +87,7 @@ Cosenseの単一`[X]`は宛先の違う2種類のリンクを束ねていた:
 
 ## テンプレート設計への含意
 
-1. **lintの設計**: 未解決リンクをエラー一辺倒にせず、参照数で扱いを分ける（1参照=表記の確認、2+参照=ハブ候補）のが有力。本wikiは2026-10-24に`OPEN_LINK`へ語彙を変更した
+1. **lintの設計**: 未解決リンクをエラー一辺倒にせず、参照数で扱いを分ける（1参照=表記の確認、2+参照=ハブ候補）のが有力。本wikiは2026-10-24に`OPEN_LINK`へ語彙を変更した。現在のlint出力語彙と実装上の扱いは [[Lint]] の「赤リンクと参照数分類lint」節を正本とする
 2. **LLM生成ページのリンク疎問題**: AIが書くページは元々リンク疎（(c)）なので、wikilinkの追加を強制するよりcome-from的gatherや、赤リンク許容で「将来の接続点」として残す運用が向く
 3. **2 hop linkの輸入**: 赤リンク（同一の赤リンクを共有するページ群）を2-hop関連として提示するlint改善は既に研究課題にある（[[このWikiの目的と研究課題]]）
 

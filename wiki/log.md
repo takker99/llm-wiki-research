@@ -707,3 +707,13 @@ root schema移行で形式だけでなく、現行schemaを説明する記述が
 - [[語彙接地（Lexical Grounding）]]・[[同義語増殖]]・[[言語ドリフト（LLM Wiki）]]・[[メンタルレキシコン不在]]・[[日本語矯正Agent Skill群の設計空間]]・[[RAG]]: index照合をカタログ照合へ読み替え
 
 (touched 29 files: 28 wiki pages + log)
+
+## [2026-11-17] refactor | conceptページの重複圧縮とLint/赤リンクの正本化
+
+肥大化したconceptページのうち、分割ではなく重複の圧縮で解決できる2件を整理した。
+
+- [[LLM Wikiのmain value]]: 153行→53行。Karpathyの価値主張・nishioの態度変遷・パイロット表・raw/の6機能は [[raw SSOT原則への根本検証]] に委譲し、concept側は定義・正しい問い・テンプレートへの含意に限定した
+- [[Lint]]: 赤リンク論争と参照数分類の詳細を [[赤リンクとLLM Wiki]] に委譲。lint側は現在の`OPEN_LINK`語彙と、[[fact-wiki-separation]]が最初の概念ページ化事例だったことだけ残した
+- [[赤リンクとLLM Wiki]]: 赤リンクの理論・リンクの4仕事・come-from・参照数分類の由来の正本と明記。lintの出力語彙は [[Lint]] を参照する分担にした
+
+(touched 4 files: 3 wiki pages + log)
