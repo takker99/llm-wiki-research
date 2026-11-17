@@ -11,21 +11,19 @@ wikiの健全性チェック。ユーザーの明示的な依頼で発動する�
 ## 手順
 
 1. 機械チェック: `bash .agents/skills/llm-wiki-lint/scripts/lint.sh` を実行する
-   - 孤立ページ（他のwikiページからの入リンクがない。ただし sources/ の入リンクは concepts/entities/analyses/sources からだけ数える——入リンクゼロ = 未消化ソース）
+   - 孤立ページ（他のwikiページからの入リンクがない。sources/ は入リンクゼロ = 未消化ソースの検出を兼ねる）
    - 未解決の `[[wikilink]]`（オープンリンク。リンク先ページがまだないリンク）— 参照数で扱いを分ける:
      - **1ページのみ参照** — 表記ゆれ・パス形式・未作成ページのいずれかを確認する。意図的な前方参照なら放置し、ページを作らない
      - **2ページ以上で参照** — 仮想ページ／概念ハブの種。欠陥ではない。ページ作成の候補として人間に提案
-   - frontmatter `summary:` の欠落（検索と`--catalog`カタログに使われる要約の正本。機械チェックは `Missing frontmatter keys` 節）
+   - frontmatter `summary:` の欠落・空・複数行（1行必須。検索と`--catalog`カタログに使われる要約の正本。機械チェックは `Missing frontmatter keys` 節）
    - wiki/ が参照している raw/ ファイルが実在しない
    - sources/ ページが frontmatter に `raw:` もしくは `source_url:` を持たない
-   - provenance: concepts/entities のうち sources ページへの引用wikilinkが0件のページ、著者-年表記の棚卸し (load-bearing か帰属引用かの判定はLLM)、analyses frontmatter `sources:` の raw パス存在チェック
    - 同一行内の重複 `[[wikilink]]`（`SAME_LINE_DUPLICATE` — 一括置換等で同じ行に同一ターゲットへのリンクが複数生じた箇所）
 2. 意味チェック（手動）:
    - ページ間の矛盾（同一トピックで衝突する主張）
    - 古い主張（新しいソースに取って代わられたもの）
    - ページに言及されているのに概念ページが存在しない概念
    - 明らかに関連するページ間のクロスリファレンス不足
-   - 著者-年表記の内容引用 (原典の主張・数値が主張の根拠になっている) が sources ページ経由で裏取りされているか。帰属引用 (命名・背景) は問題なし
    - frontmatter `summary:` がページ本文とずれていないか（summaryは検索とカタログの正本。要約内容の陳腐化はここで見る）
 3. 新しい調査課題と探すべきソースを提案する。ingest時の未カバー領域指摘が溜まっている場合はそれも材料にする
 4. 重大度別に報告し、機械的な問題の自動修正を申し出る
