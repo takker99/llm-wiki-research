@@ -673,3 +673,11 @@ agy の Gemini 4 Argon (High) との2往復相談とコード再検証で、temp
 
 - 修正commit: 0112ff4 `fix(template): handle escaped pipes and validate summary strictly`
 - 再検証: 表内エスケープパイプ、summaryの4異常系と正常系、anchor-only、シングルクォートのcatalog/read、既存fixture t1-t9、空wiki、root lintをすべてPASS
+
+## [2026-11-17] revise | N2（空白入りrawパス）の実在検査を追加
+
+`lint.sh` のraw参照検査を、クォートされた `"raw/..."` / `'raw/...'` の抽出に対応させ、空白を含むファイル名（`raw: "raw/my paper.pdf"`）も実在検査できるようにした。クォートなしの本文参照は従来どおり空白で区切る。
+
+- 修正commit: 40ab723 `fix(template): check raw paths that contain spaces`
+- 検証: 実在/不在、クォートあり/なし、1行複数参照、インライン/フェンスドコード除外、既存fixture t1-t9、root lintをすべてPASS
+- 残課題: 1組の引用符内に複数のraw参照を書く場合は1パスとして扱う（現行の単一パス仕様では問題なし）
