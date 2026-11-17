@@ -666,3 +666,10 @@ agy の Gemini 4 Argon (High) との2往復相談とコード再検証で、temp
 - 検証: summary正常/空/複数行、raw PDF参照切れと空白区切り、ディレクトリrename、大小文字・alias・anchor付きリンク、sources孤立、空wiki、最小1ソースingestと--catalogまでPASS。残課題は空白入りrawファイル名、`[`を含むタイトル、macOS実機未検証
 
 (touched 9 files: AGENTS.md + write SKILL + lint SKILL + lint.sh + search-pages.sh + 2 script deletions + analyses page + log)
+
+## [2026-11-17] revise | template schema修正の2回目レビューと追加修正
+
+[[template schemaの破綻点検と修正計画]] の実装後にGemini 4 Argonへ再レビューを依頼し、N1（表内 `[[Page\|Alias]]` のOrphan回帰）、N3（summaryのコメント/空白/継続行の検出漏れとシングルクォート剥がし漏れ）、N4（`[[#見出し]]` のOPEN_LINK誤報）、N5（引用フローのanalyses欠落）を追加修正した。N2（空白入りrawパスの存在検査）は残課題。
+
+- 修正commit: 0112ff4 `fix(template): handle escaped pipes and validate summary strictly`
+- 再検証: 表内エスケープパイプ、summaryの4異常系と正常系、anchor-only、シングルクォートのcatalog/read、既存fixture t1-t9、空wiki、root lintをすべてPASS

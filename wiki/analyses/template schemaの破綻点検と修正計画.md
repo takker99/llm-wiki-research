@@ -55,7 +55,18 @@ sources: "[[テンプレート草案ver.1]]", "[[index.md存廃の設計判断]]
 - `template/.agents/skills/llm-wiki-lint/scripts/lint.sh`: 全サブディレクトリ走査、大小文字非区別、タイトルのメタ文字安全、summaryの空・複数行検出、raw参照の拡張子可変・空白誤認解消、sourcesポインタ検査の一本化、`find -exec` 化による空wikiのstdin待ち回避
 - `template/.agents/scripts/`: 未参照の研究用スクリプト2本を削除
 
-検証は、summary正常/空/複数行、raw PDFの参照切れと空白区切り、ディレクトリrename、大小文字・alias・anchor付きリンク、sources孤立、空wiki、1ソース・1概念の最小wikiと `--catalog` までPASS。残課題は空白入りrawファイル名、`[` を含むタイトル（既存制約）、macOS実機未検証。
+検証は、summary正常/空/複数行、raw PDFの参照切れと空白区切り、ディレクトリrename、大小文字・alias・anchor付きリンク、sources孤立、空wiki、1ソース・1概念の最小wikiと `--catalog` までPASS。
+
+### 2回目レビューと追加修正
+
+実装後にGemini 4 Argonへ再レビューを依頼し、以下を追加修正した。
+
+- N1（回帰）: Markdown表の `[[Page\|Alias]]` がOrphan判定とread/searchのリンクグラフで解決されない。lintの正規表現に `\\` を戻し、read/searchで末尾の `\` を剥がす
+- N3: `summary: # TODO`、空白のみ、インデント継続の複数行を検出できていなかった。awkで値と次行を検証し、search/readのクォート剥がしをシングルクォートにも対応
+- N4: `[[#見出し]]` が `OPEN_LINK` として誤報される。アンカー先が空ならスキップ
+- N5: 引用フローの `concept/entity` に `analysis` が漏れていた
+
+残課題は、空白入りrawファイル名の存在検査（N2）、`[` を含むタイトル（既存制約）、macOS実機未検証。
 
 ## 関連
 
