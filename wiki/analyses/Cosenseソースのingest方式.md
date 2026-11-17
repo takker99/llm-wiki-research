@@ -52,8 +52,8 @@ subagent相談2往復（lint正規表現は実機検証済み）を経て仮採�
 4. **アーカイブ配置・命名**: `raw/cosense/<project>/<title>-<YYYY-MM-DD>.md`。サブディレクトリ必須（同名ページ衝突回避）。タイトル内の`/`は`_`に置換。同一内容の再取得はmanifestのハッシュ照合で省略可
 5. **manifest.md**: `raw/manifest.md` をコミット対象化（.gitignoreに `!raw/manifest.md`）。エントリ: プロジェクト/タイトル/URL/取得日/sha256/パス。**追記のみ**。URL+タイトルはgit logに残るため、非公開にしたい出典は載せない
 6. **ハッシュ**: sha256で開始。pageId/commitIdは「URL改名で壊れた」「ページ同一性が争われた」事例が出たら拡張
-7. **sources frontmatter**: 全ページ任意 `sources:`（`raw/パス` リスト。空白入りはダブルクォート。rawへの参照は必ずパス形式）。sources/ページ必須 `raw:`（リスト・1以上）+ 任意 `source_url:` / `accessed:`（AGENTS.mdに反映済み）
-8. **lint**: (i) raw参照チェックの正規表現をサブディレクトリ・空白入りパス対応に (ii) sources/の `raw:` 必須チェック (iii) sources/を孤立チェックへ追加（index.md除外=未消化ソース判定）（lint.shに反映済み）
+7. **sources frontmatter**: 全ページ任意 `sources:`（`raw/パス` リスト。空白入りはダブルクォート。rawへの参照は必ずパス形式）。sources/ページは `raw:` または `source_url:` の1以上 + 任意 `accessed:`（2026-11-17追記: 当初の`raw:`必須から統一。全ページの`summary:`必須化も同日追加）
+8. **lint**: (i) raw参照チェックの正規表現をサブディレクトリ・空白入りパス対応に (ii) sources/の `raw:`/`source_url:` ポインタ検査 (iii) sources/を孤立チェックへ追加（入リンク0=未消化ソース判定。index.mdは2026-11に廃止）（lint.shに反映済み）
 9. **役割分担**: manifest.md（raw/側）= 取得の事実・損失防止の台帳。sources frontmatter（wiki/側）= ページの根拠宣言。同一パスを共有するため実質的な突合が可能
 10. **検証条件**: 初回Cosense再取得（6ファイル）+ 引用時アーカイブ数回の実運用で (a) lint通過 (b) manifest+アーカイブからの復元成功 を確認。再評価は2026-09-11のReview
 

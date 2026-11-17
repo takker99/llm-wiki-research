@@ -1,5 +1,5 @@
 ---
-summary: "LLM Wiki の main value = knowledge network の根拠。Karpathy gist の派生解釈・nishio 3段階態度変遷・raw/ の 6 機能分解・パイロット 7 実装の観察。claim#10 草案（status: hypothesis）"
+summary: "LLM Wiki の main value = knowledge network の根拠。Karpathy gist の派生解釈・nishio 3段階態度変遷・raw/ の 6 機能分解・パイロット 7 実装の観察。claim#10 草案（status: hypothesis）。2026-11-17追記: summary必須は検索カタログの正本であり、provenance必須化の撤回結論とは別"
 status: hypothesis
 date: 2026-09-03
 tags: [template-design, raw, knowledge-graph, main-value, provenance, raw-ssot-revisited]
@@ -37,6 +37,8 @@ sources:
 # raw/ SSOT原則への根本検証
 
 ユーザー（2026-09-03提起）の根本的疑問 — 「provenance 原則は Karpathy 元設計と整合するか。raw/ の存在理由は何か。LLM Wiki の main value は raw/ SSOT か、knowledge graph か」— に対する subagent 相談の統合報告書。
+
+**2026-11-17追記**: PR #6とroot移行で、全ページのfrontmatter `summary:` が必須になった。これはprovenance（出典・type・confidence等）の必須化ではなく、検索とカタログの正本をページ側に置くための変更である。本ページの「frontmatter任意が正解」「provenance強制は過剰」という結論は、出典メタデータについては維持する。
 
 形式論争（frontmatter の書き方、AGENTS.md の長さ等）には立ち入らず、**本質・価値・位置づけ** レベルの議論に集中する。
 
@@ -176,7 +178,7 @@ raw/ が LLM Wiki に **実際に** 提供している機能を6つに分解す�
 - **内容**: 論文 PDF・private 情報の転載問題を制御する
 - **典拠**: `rawディレクトリの取り扱い` L19「論文 PDF をそのまま入れると転載になる（著作権）」
 - **代替手段**: sources ページの frontmatter `source_url`, `accessed:` だけ
-- **実測**: template の sources ページ frontmatter で `raw:` 必須 + `source_url:` 任意 — **十分機能している**
+- **実測**: template の sources ページ frontmatter で `raw:` 必須 + `source_url:` 任意 — **十分機能している**（2026-11-17追記: `raw:` または `source_url:` の1以上に統一）
 
 ### 機能4: LLM 範囲境界の宣言
 
@@ -348,7 +350,7 @@ raw/ は **原料** であり、**補助装置** である。LLM Wiki の価値�
 - ✅ sources ページの frontmatter `raw:` 必須化（template で実装済み）
 - ✅ AGENTS.md での「wiki/ の事実が争われたら raw/ まで遡る」記述（template に既にある）
 - ✅ `raw/` は変更しない（template AGENTS.md L16）
-- ❌ 「wiki ページにも frontmatter 推奨」は不要（template AGENTS.md「frontmatter は任意」が正解）
+- ❌ 「wiki ページにも provenance frontmatter を推奨」は不要（2026-11-17追記: `summary:` のみ検索カタログの正本として必須。type・confidence等のprovenance項目は引き続き不要）
 
 ### 5.5 過剰な原則を AGENTS.md に書き込もうとした経緯
 
@@ -491,7 +493,7 @@ template v0.1 は **ほぼ妥当** だった:
 - ✅ AGENTS.md+SKILL.md 二層
 - ✅ sources frontmatter `raw:` 必須化（衛生機能の最低ライン）
 - ✅ raw/ 不変記述（弱める余地はあるが妥当）
-- ✅ wiki ページ frontmatter 任意（過剰でない）
+- ✅ wiki ページのprovenance frontmatterは任意（過剰でない）。2026-11-17追記: `summary:` のみ検索カタログの正本として必須
 - ❌ 軽微な過剰: AGENTS.md の「絶対に変更しない」表現
 
 **template v0.1 への大きな変更は不要**。議論を反映するなら v0.2 への minor 反映で足りる。

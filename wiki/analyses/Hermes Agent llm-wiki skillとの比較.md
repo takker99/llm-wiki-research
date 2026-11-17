@@ -1,5 +1,5 @@
 ---
-summary: "Hermesのllm-wiki skill（v2.1.0）との機能・設計思想レベルの比較。agent管理の完成システム vs 人間とLLMの共進化という研究仮説の対比（2026-10-03）"
+summary: "Hermesのllm-wiki skill（v2.1.0）との機能・設計思想レベルの比較。agent管理の完成システム vs 人間とLLMの共進化という研究仮説の対比（2026-10-03。本テンプレート側は2026-11-17のsummary必須化を反映）"
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]"
 tags: [comparison, hermes-agent, llm-wiki-pattern]
 ---
@@ -8,6 +8,8 @@ tags: [comparison, hermes-agent, llm-wiki-pattern]
 
 Hermes Agentに組み込まれている`llm-wiki` skill（v2.1.0）と、本wikiのテンプレート（v0.1）を比較する。
 機能レベルと設計思想レベルの双方で相違点を明らかにし、テンプレートの流儀から見たHermes側の意外な特徴を記録する。
+
+**2026-11-17追記**: Hermes側はv2.1.0時点の比較。本テンプレート側は、PR #6とroot移行で`summary:` 必須・`type` 削除・index.md廃止を反映した。以下の表の本テンプレート列は現行schemaに更新した。
 
 ## 比較の目的
 
@@ -20,13 +22,13 @@ Hermes Agentに組み込まれている`llm-wiki` skill（v2.1.0）と、本wiki
 |---|---|---|
 | **管理ファイル** | 単一 SKILL.md（~400行） | AGENTS.md + 2 skill（ingest/lint）+ lint.sh |
 | **ディレクトリ構成** | `raw/` → `entities/` `concepts/` `comparisons/` `queries/` → `SCHEMA.md` | `raw/` → `wiki/`（`concepts/` `entities/` `sources/` `analyses/`）→ `AGENTS.md` |
-n| **frontmatter** | **必須**（title, created, updated, type, tags, sources, confidence, contested, contradictions） | **sources のみ必須**（raw:, source_url:, accessed:）。concepts/entities は任意 |
+| **frontmatter** | **必須**（title, created, updated, type, tags, sources, confidence, contested, contradictions） | **summary のみ必須**（1行）。sourcesページは`raw:`または`source_url:`、`accessed:`は任意。type・confidence等は持たない |
 | **タグ管理** | SCHEMA.md にタグタクソノミー定義、lint で監査 | タグなし（frontmatter 任意） |
 | **provenance** | `^[raw/articles/source.md]` 段落末マーカー | sources ページへの wikilink（claim 粒度） |
 | **source drift 検出** | `sha256` で raw ファイルの変更を検出 | なし |
 | **矛盾処理** | frontmatter `contested: true` + `contradictions: [page]` | lint の意味チェック（LLM が手動判定） |
 | **品質シグナル** | `confidence: high/medium/low` | なし |
-| **lint** | 12項目（orphan, broken link, index, frontmatter, stale, contradiction, quality, drift, size, tag, log rotation） | 機械チェック（orphan, broken link, index, stale）+ 意味チェック（矛盾, 古い主張, 概念欠落, クロスリファレンス不足, 著者-年表記の棚卸し） |
+| **lint** | 12項目（orphan, broken link, index, frontmatter, stale, contradiction, quality, drift, size, tag, log rotation） | 機械チェック（orphan, open links, summary欠落, raw参照切れ, sourcesポインタ, 同一行重複）+ 意味チェック（矛盾, 古い主張, 概念欠落, クロスリファレンス不足） |
 | **Obsidian 連携** | 充実（wikilinks, graph view, dataview, **obsidian-headless** サーバー同期） | なし（git 管理が前提） |
 | **ファイル命名** | lowercase, hyphens, no spaces（英語強制） | **人間の使用言語**（日本語可、説明的な自然言語名） |
 | **wikilink** | `[[wikilinks]]`（大文字小文字区別） | `[[ページタイトル]]`（**大文字小文字区別しない**） |
@@ -47,7 +49,7 @@ n| **frontmatter** | **必須**（title, created, updated, type, tags, sources, 
 | **主体** | **Agent が全てを管理**（frontmatter 必須、タグタクソノミー、provenance、sha256） | **人間とLLMの共進化**（AGENTS.md が人間向け、frontmatter 最小限） |
 | **信頼の置き所** | **機械的メタデータ**（frontmatter の confidence/contested/contradictions） | **人間の判断**（lint の意味チェック、目的への立ち返り） |
 | **不変性** | `raw/` 不変 + `sha256` で完全検証 | `raw/` 不変（検証は人間の目） |
-| **ナビゲーション** | `index.md` + `SCHEMA.md`（agent が管理） | `index.md` + `overview.md`（人間が読む） |
+| **ナビゲーション** | `index.md` + `SCHEMA.md`（agent が管理） | frontmatter `summary:` の`--catalog`（人間向けoverviewは2026-10に廃止） |
 | **拡張性** | タグタクソノミーに閉じている（新しいタグは SCHEMA.md に追加） | タグなし（frontmatter 自由） |
 | **ツール依存** | Obsidian 生態系（dataview, obsidian-headless） | git + エディタ（ツール非依存） |
 | **言語** | 英語前提（lowercase, hyphens） | **言語非依存**（日本語ファイル名可） |

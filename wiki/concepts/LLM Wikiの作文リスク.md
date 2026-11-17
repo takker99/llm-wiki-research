@@ -30,7 +30,7 @@ LLM Wikiでは `wiki/` は派生物であり、ソース一覧を書いた台帳
 
 [[raw SSOT原則への根本検証]] の議論により、raw/ SSOT は **補助装置** として再評価された:
 
-- **最も重要な防御機能**は **sources ページの `raw:` frontmatter 必須化 + lint チェック** — raw/ SSOT 中心でなくても実用上十分
+- **最も重要な防御機能**は **sources ページの `raw:` または `source_url:` のポインタ必須化 + lint チェック** — raw/ SSOT 中心でなくても実用上十分
 - raw/ の **検証可能性** は knowledge network の信頼性を増す**補助機能**
 - raw/ の **不変性** は LLM 範囲境界の**権限マップ**として機能
 - 過度に raw/ SSOT を厳格化すると（例: 全 wiki/ ページに frontmatter `sources:` 必須）、過剰防衛になり軽量な LLM Wiki 運用と緊張する

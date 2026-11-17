@@ -1,12 +1,14 @@
 ---
-summary: "index.mdの有効範囲（〜100ソース）とqmd等によるスケールアップ"
+summary: "旧index.md方式の有効範囲（〜100ソース）とqmd等によるスケールアップ。2026-11にtemplate/rootはfrontmatter summaryカタログへ移行"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[パイロット分析 横断所見]]"
 tags: [template-design, llm-wiki-pattern]
 ---
 
 # LLM Wikiのスケーラビリティ
 
-LLM Wikiのファイルベースナビゲーション（[[IndexとLog|index.md]]）がどの規模まで有効か、それを超えた場合の対応策。
+LLM Wikiのファイルベースナビゲーション（[[IndexとLog|index.md]]、現在はfrontmatter summaryのカタログ）がどの規模まで有効か、それを超えた場合の対応策。
+
+**2026-11-17追記**: template/rootは`index.md`を廃止し、各ページのfrontmatter `summary:` を正本とする`--catalog`へ移行した。以下のindex実測は旧方式と他実装の観察だが、「ページ数が増えると中央カタログのコストが増える」というスケール特性はカタログ方式にも当てはまる。
 
 ## Karpathyの見立て
 
@@ -43,10 +45,10 @@ Karpathyが言及するツール:
 ## 設計含意
 
 テンプレート設計において:
-- 初期状態ではindexベースのシンプルな構成を提供し、検索は必要になったら追加する方針が合理的
+- 初期状態ではfrontmatter summaryのカタログを提供し、検索は必要になったら追加する方針が合理的（2026-11-02にindex.mdから移行）
 - qmd等のツールとの統合はテンプレートの範囲外（ユーザー任せ）でよいか → [[LLM WikiテンプレートのOptionality]]
-- 50ページを超えたらカテゴリ分割を促すガイダンスをAGENTS.mdに含めるべき
+- ページ数が増えたらカテゴリ分割やsummaryの粒度見直しを促すガイダンスをAGENTS.mdに含めるべき
 
 ## 関連概念
 
-- [[index.md存廃の設計判断]] — index廃止論の検証（2026-08-14）。肥大化は可視・出口あり vs 廃止は不可視・サイレント
+- [[index.md存廃の設計判断]] — index廃止論の検証（2026-08-14〜2026-11-02）。肥大化は可視・出口あり vs 廃止は不可視・サイレント

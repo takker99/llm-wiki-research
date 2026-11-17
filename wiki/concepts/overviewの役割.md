@@ -1,5 +1,5 @@
 ---
-summary: "人間向けの入口ページ。原型（Karpathy gist）にはない独自発明だが「入門の1枚」はnishio実測・他実装に元ネタあり"
+summary: "人間向けの入口ページの役割分析。原型（Karpathy gist）にはない独自発明で「入門の1枚」はnishio実測・他実装に元ネタあり。templateは2026-10-28に骨格から除外し、rootも2026-11-17に削除した"
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]", "[[2026-08-14 SKILL併用LLM Wiki vanillaflava (github)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
@@ -8,19 +8,21 @@ tags: [template-design, llm-wiki-pattern]
 
 wiki最上位に置かれる入口ページ。このwikiが何のためにあるか（目的）・スコープ（研究課題）・現状・次のステップを1ページで俯瞰する。
 
+**2026-11-17追記**: templateは2026-10-28に骨格からoverview.mdを除外し、研究wiki自身（root）も同日のschema移行で削除した。以下は役割の分析と、除外判断の記録として読む。
+
 ## 位置づけ: 人間向けの入口ページ
 
 | ファイル | 主な読者 | 役割 |
 |---|---|---|
-| index.md | LLM | 全ページのカタログ。Query時最初に読む |
+| index.md（廃止前） | LLM | 全ページのカタログ。Query時最初に読む |
 | log.md | LLM | 追記専用の時系列記録 |
-| **overview.md** | **人間** | 目的・スコープ・現状・次のステップの俯瞰。入門の1枚 |
+| **overview.md**（template/rootでは廃止） | **人間** | 目的・スコープ・現状・次のステップの俯瞰。入門の1枚 |
 
-LLMのQueryフローでは必須ではない（index.mdで足りる）。人間が「このwikiは何か・どこに向かっているか」を知るための入り口であり、新しいLLMセッションに初期文脈として渡すこともできる。[[IndexとLog]]の対で「3つ目の特殊ファイル」として位置づけられる。
+LLMのQueryフローでは必須ではない（現在はfrontmatter summaryのカタログで足りる）。人間が「このwikiは何か・どこに向かっているか」を知るための入り口であり、新しいLLMセッションに初期文脈として渡すこともできる。[[IndexとLog]]の対で「3つ目の特殊ファイル」として位置づけられる。
 
 ## 原型には存在しない
 
-Karpathyのgistが定義する特殊ファイルはindex.mdとlog.mdのみ（`raw/karpathy-llm-wiki-gist.md`）。raw/の全ソースを調べてもoverviewというファイルは登場しない。本wikiでは初期コミット（760517a）で人間がスキャフォールドに置いた独自発明であり、`template/`の骨格に引き継がれて配布される。
+Karpathyのgistが定義する特殊ファイルはindex.mdとlog.mdのみ（`raw/karpathy-llm-wiki-gist.md`）。raw/の全ソースを調べてもoverviewというファイルは登場しない。本wikiでは初期コミット（760517a）で人間がスキャフォールドに置いた独自発明であり、初期の`template/`骨格に引き継がれたが、2026-10-28に除外された。
 
 ## 機能の元ネタ
 
@@ -62,9 +64,9 @@ stubの「初回: 目的と最初のingestが終わったら書き換え」導�
 - scripts×5 の overview ハードコードは無変更（メタファイル判定のパターンマッチ。ファイル不在でも無害。独立フォークがoverviewを持ち続けるため残す）
 - 配布側root README.mdはoverviewに言及していないため無変更
 
-### 本wiki自身（研究wiki）は残す
+### 本wiki自身（研究wiki）の扱い（2026-11-17更新）
 
-[[overviewの役割]] の研究対象であること、template修正を研究repoに後方適用しない既存規定により、研究wikiとtemplateの骨格差異は許容範囲内。撤去する根拠は乏しい。
+2026-10-28時点では、本ページの研究対象であることと「template修正を研究repoに後方適用しない」既存規定により、rootのoverview.mdは残した。しかし2026-11-17のroot schema移行で、rootもtemplateに同期して`wiki/overview.md`を削除した。overviewの役割と除外判断の分析は本ページに残す。
 
 重複解消の具体策（禁則checklist）:
 

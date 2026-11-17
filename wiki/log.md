@@ -694,3 +694,16 @@ agy の Gemini 4 Argon (High) との2往復相談とコード再検証で、temp
 - 検証: lint ORPHAN 0・summary欠落0、`--catalog` 150ページ、read-page動作。残るOPEN_LINKは歴史的記述の `[[overview]]`/`[[index]]` と既存の1参照リンクのみ
 
 (touched 159 files: 149 wiki pages with summary/related edits + 2 deletions + 5 .agents files + AGENTS.md + README + log)
+
+## [2026-11-17] revise | root移行に伴う既存記述のcontent同期
+
+root schema移行で形式だけでなく、現行schemaを説明する記述が古くなっていたため、28ページのcontentを同期した。歴史的な設計判断・調査記録は消さず、日付付きの追記で旧→新を残した。
+
+- [[overviewの役割]]: template骨格除外に加え、rootも2026-11-17に削除したことを反映
+- [[LLM Wikiの本質定義]]・[[LLM Wikiのスケーラビリティ]]・[[IndexとLog]]・[[qmd]]・[[3層アーキテクチャ]]・[[Schema（AGENTS.md）]]: index前提の現行記述を、frontmatter summaryカタログへの移行として更新
+- [[ingestステップの設計判断]]・[[Cosenseソースのingest方式]]・[[配布形式の決定とテンプレートの動機]]・[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]・[[LLM Wiki実装のingest形式と運用の比較]]: 当時の設計/調査記録に追記を置き、raw/source_url統一・summary必須・index廃止を反映
+- [[raw SSOT原則への根本検証]]・[[claims対応表]]・[[Hermes Agent llm-wiki skillとの比較]]・[[パイロット分析 横断所見]]・[[elastic-wave-analyzer-wiki]]: frontmatter任意/provenance必須の対立を整理し、summary必須はカタログ正本であってprovenance必須化ではないと記録
+- [[このWikiの目的と研究課題]]: 現状の件数を2026-11-17時点に更新
+- [[語彙接地（Lexical Grounding）]]・[[同義語増殖]]・[[言語ドリフト（LLM Wiki）]]・[[メンタルレキシコン不在]]・[[日本語矯正Agent Skill群の設計空間]]・[[RAG]]: index照合をカタログ照合へ読み替え
+
+(touched 29 files: 28 wiki pages + log)

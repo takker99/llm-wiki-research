@@ -58,9 +58,10 @@ summary: "このWikiの目的・中心となる研究課題（TODO）・現状�
 
 ## 現状
 
-- `raw/` に実在するソースは9件（Karpathy gist + Cosense 8ページ: villagepump 2 + nishio 6）
-- `AGENTS.md` は運用規則のみに縮小済み（2026-08-11）。テンプレート設計の主張はすべて
+- （2026-08-11時点）`raw/` に実在するソースは9件（Karpathy gist + Cosense 8ページ: villagepump 2 + nishio 6）
+- （2026-08-11時点）`AGENTS.md` は運用規則のみに縮小済み。テンプレート設計の主張はすべて
   テンプレート草案ver.1 に仮説として移管
+- （2026-11-17時点）`raw/` は44ファイル、wikiは150ページ、`AGENTS.md` は約10.4KB
 - 2026-08-11: Karpathy gist ingest（27ページ） + Cosense議論 ingest（26ページ）。合計50+ページ
 - 2026-09-25: 目的の再定義（上記）。M2は「この研究wiki以外のwiki」に再定義し、下流wiki 2件（elastic-wave-analyzer-wiki、txa-xray-ct-wiki）が該当。両者からのフィードバックは既にtemplateへ取り込み済み（→ 配布形式の決定とテンプレートの動機）
 - 2026-10-23: LLM Wiki 8実装のingest・運用surveyをfile-back（LLM Wiki実装のingest形式と運用の比較）。templateの出典規約がAGENTS.md・ingest SKILL・lint SKILL・lint.shで一致しないことを確認

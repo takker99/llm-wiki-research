@@ -1,5 +1,5 @@
 ---
-summary: "AGENTS.md ingestステップの3改善提案の検証結果（subagent評価 + 判断）"
+summary: "AGENTS.md ingestステップの3改善提案の検証結果（subagent評価 + 判断）。既存照合の起点は2026-11-17にindex.mdからsummaryカタログへ移行"
 status: tentatively-adopted
 date: 2026-08-11
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[ingestにおける編み込みの実際]]"
@@ -16,9 +16,11 @@ step 1 と step 2 の間に以下を追加:
 
 > 2. `index.md` を読み、このWikiの目的に照らして既存ページとの接続点と未カバー領域を特定する。
 
+**2026-11-17追記**: index.md廃止に伴い、現在は同じ役割を`search-pages.sh --catalog`が担う（AGENTS.mdのQuery/Ingest手順もcatalog起点）。
+
 ### 根拠
 
-- `index.md` 起点で軽量。全wiki走査不要
+- カタログ起点で軽量。全wiki走査不要
 - `接続点と未カバー領域` で編み込みと空白検出を1行で両方指示
 - `このWikiの目的に照らして` が北極星アンカー。目的から外れた空白を無闇に追わない
 - [[Lint]]との関係は重複ではなく補完: Ingestはソース単位の即時検出、Lintは複数ソース横断の合成パターン検出
@@ -55,7 +57,7 @@ step 5 に「期待される内訳の目安」を追記する案。
 step 5 のテンプレートを実際の運用に合わせて:
 
 ```
-## [DATE] ingest | source-name (touched N pages: M new + K existing updated + index/log)
+## [DATE] ingest | source-name (touched N pages: M new + K existing updated + summary/log)
 ```
 
 テンプレート自体が内訳を示すので、LLMは暗黙に「新規作成と既存更新の両方が期待されている」と学習する。明示的な指示より薄く効果的。
