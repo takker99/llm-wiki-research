@@ -643,3 +643,41 @@ query: 「そもそもindex.mdっているの？窓口役割はページ数に�
 - 全analysisをこの型にした結果、計画の進捗や候補の採否など、型に収まらない情報が欠落した（OpenCodeがgit logを遡って回答した事例）
 - 維持候補は、図・スクリプトの同居（テーマ別フォルダ）と `docs/` 分離。型の統一は仮説として扱う
 - 再改修の方針は相談中。決まり次第、[[このWikiの目的と研究課題]]に反映する
+
+## [2026-11-17] file-back | template schemaの破綻点検と修正計画
+
+agy の Gemini 4 Argon (High) との2往復相談とコード再検証で、template/ のAGENTS.md・SKILL・lintに初日から誤作動する矛盾（初回ingestの概念ページ作成ロック、sourcesのraw必須とsource_url許容の衝突、未実装のlint検査列挙、write-onlyなtype必須、summary単一行前提の未明記）を確認し、[[template schemaの破綻点検と修正計画]]（status: tentatively-adopted）としてfile-backした。
+
+- 下流wiki固有規則（系譜・判別パターン、p.XX基本化、表セル1リンク、年度別表、reproducibility manifest）のtemplateへの逆流を特定し、一般原則1文を残して層移動する方針を記録
+- 未参照の研究用スクリプト2本（diagnose-wiki.sh / number-dup-check.sh）のtemplate混入を確認
+- rootがtemplateをdogfoodingしていない分岐（index.md・frontmatter任意・過去sources維持の旧文言）を記録。移行かfork維持かは別途判断
+- 実装順序: ①C1+H2+C2+H3 → ②C3+C5 → ③C4+H1+M2+M3 → ④lint単体テストと初回ingestシミュレーション → ⑤root/template分岐の記録
+
+(touched 3 files: 1 new analyses + index + log)
+
+## [2026-11-17] implementation | template schema修正を実装
+
+[[template schemaの破綻点検と修正計画]] のC1/C2/C3/C4/C5/H1/H2/H3/M1/M2/M3/M4をsubagent分担で実装し、fixtureで検証した。
+
+- `template/AGENTS.md`: `type`削除・summary「1行・1〜2文」・`raw:`/`source_url:`統一・`direct-read`削除・初期化/よくあるパターン圧縮・fulltext説明同期
+- `template/.agents/skills/llm-wiki-write/SKILL.md`: 初回ingest例外、系譜1文、下流固有規則・p.XX基本化・表セル1リンク・transcript・年度別表・reproducibility manifest削除
+- `template/.agents/skills/llm-wiki-lint/{SKILL.md,scripts/lint.sh}`: 未実装検査削除、summary空/複数行検出、全サブディレクトリ走査・大小文字非区別・メタ文字安全、raw拡張子可変、ポインタ検査一本化、空wikiのstdin待ち回避
+- `template/.agents/scripts/`: diagnose-wiki.sh / number-dup-check.sh を削除
+- 検証: summary正常/空/複数行、raw PDF参照切れと空白区切り、ディレクトリrename、大小文字・alias・anchor付きリンク、sources孤立、空wiki、最小1ソースingestと--catalogまでPASS。残課題は空白入りrawファイル名、`[`を含むタイトル、macOS実機未検証
+
+(touched 9 files: AGENTS.md + write SKILL + lint SKILL + lint.sh + search-pages.sh + 2 script deletions + analyses page + log)
+
+## [2026-11-17] revise | template schema修正の2回目レビューと追加修正
+
+[[template schemaの破綻点検と修正計画]] の実装後にGemini 4 Argonへ再レビューを依頼し、N1（表内 `[[Page\|Alias]]` のOrphan回帰）、N3（summaryのコメント/空白/継続行の検出漏れとシングルクォート剥がし漏れ）、N4（`[[#見出し]]` のOPEN_LINK誤報）、N5（引用フローのanalyses欠落）を追加修正した。N2（空白入りrawパスの存在検査）は残課題。
+
+- 修正commit: 0112ff4 `fix(template): handle escaped pipes and validate summary strictly`
+- 再検証: 表内エスケープパイプ、summaryの4異常系と正常系、anchor-only、シングルクォートのcatalog/read、既存fixture t1-t9、空wiki、root lintをすべてPASS
+
+## [2026-11-17] revise | N2（空白入りrawパス）の実在検査を追加
+
+`lint.sh` のraw参照検査を、クォートされた `"raw/..."` / `'raw/...'` の抽出に対応させ、空白を含むファイル名（`raw: "raw/my paper.pdf"`）も実在検査できるようにした。クォートなしの本文参照は従来どおり空白で区切る。
+
+- 修正commit: 40ab723 `fix(template): check raw paths that contain spaces`
+- 検証: 実在/不在、クォートあり/なし、1行複数参照、インライン/フェンスドコード除外、既存fixture t1-t9、root lintをすべてPASS
+- 残課題: 1組の引用符内に複数のraw参照を書く場合は1パスとして扱う（現行の単一パス仕様では問題なし）

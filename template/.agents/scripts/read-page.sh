@@ -232,7 +232,7 @@ is_meta_file {
     _sv = line
     sub(/^summary:[ \t]*/, "", _sv)
     _sv = trim(_sv)
-    gsub(/^"|"$/, "", _sv)
+    gsub(/^["\047]|["\047]$/, "", _sv)
     fm_summary[base] = _sv
   }
 
@@ -248,6 +248,7 @@ is_meta_file {
     while (match(work, /\[\[[^]]+\]\]/)) {
       raw_link = substr(work, RSTART + 2, RLENGTH - 4)
       split(raw_link, parts, "|")
+      sub(/\\$/, "", parts[1])
       target = trim(parts[1])
       if (target != "" && target !~ /^http/) {
         all_nodes[target] = 1

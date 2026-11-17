@@ -17,7 +17,8 @@ Usage:
      - 3〜5文字の語: 編集距離1まで許容
      - 6文字以上の語: 編集距離2まで許容
   2. ページの要約（各ページfrontmatterの `summary:`）に対する部分一致
-  既定検索で0件だった場合、または --fulltext 指定時は、wiki/ 配下の本文全文を検索してマッチ行を抜粋する。
+  既定検索はタイトル・要約に加えて本文全文の抜粋も reference として返し、0件時は全文検索へ自動で切り替わる。
+  --fulltext は本文全文を主対象にして検索し、マッチした行を抜粋する。
 
 Options:
   --catalog            全ページのカタログを出力する（query不要）。各エントリ: - [タイトル](パス) — 要約
@@ -282,7 +283,7 @@ is_meta_file {
     _sv = line
     sub(/^summary:[ \t]*/, "", _sv)
     _sv = trim(_sv)
-    gsub(/^"|"$/, "", _sv)
+    gsub(/^["\047]|["\047]$/, "", _sv)
     fm_summary[base] = _sv
   }
   if (line ~ /^```/) {
@@ -296,6 +297,7 @@ is_meta_file {
     while (match(work, /\[\[[^]]+\]\]/)) {
       raw_link = substr(work, RSTART + 2, RLENGTH - 4)
       split(raw_link, parts, "|")
+      sub(/\\$/, "", parts[1])
       target = trim(parts[1])
       if (target != "" && target !~ /^http/) {
         all_nodes[target] = 1

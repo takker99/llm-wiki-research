@@ -6,28 +6,38 @@
 set -euo pipefail
 WIKI_DIR="$(cd "$(dirname "$0")/../../../.." && pwd)/wiki"
 
+# All content pages, in every wiki/ subdirectory. log/index/overview are wiki-level
+# bookkeeping files, not content pages.
+content_pages() {
+  find "$WIKI_DIR" -name "*.md" ! -name "log.md" ! -name "index.md" ! -name "overview.md" 2>/dev/null | sort
+}
+
 echo "=== LLM Wiki Lint ==="
 echo ""
 
 # Check for orphan pages (no inbound links from other wiki pages)
-# sources/ pages: only concepts/entities/analyses/sources links count as digestion (unlinked source = not digested)
+# All content pages in every subdirectory are scanned, so renamed/added
+# directories (e.g. analyses -> decisions) keep working. On sources/ pages,
+# zero inbound links also means an undigested source.
 echo "--- Orphan pages (no inbound links) ---"
 while read -r page; do
   [ -f "$page" ] || continue
   basename="$(basename "$page" .md)"
-  # Count how many other wiki pages link to this page
-  if [[ "$page" == "$WIKI_DIR"/sources/* ]]; then
-    count=$(grep -rl --include="*.md" --exclude="$(basename "$page")" "\[\[${basename}\([\\|].*\)\?\]\]" "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources 2>/dev/null | wc -l || true)
-  else
-    count=$(grep -rl --include="*.md" --exclude="log.md" --exclude="overview.md" --exclude="$(basename "$page")" "\[\[${basename}\([\\|].*\)\?\]\]" "$WIKI_DIR" 2>/dev/null | wc -l || true)
-  fi
+  # Escape BRE metacharacters so titles like "v1.2" or "C*" are matched literally
+  escaped="$(printf '%s' "$basename" | sed 's/[][\\.*^$~]/\\&/g')"
+  # Links resolve by basename regardless of directory and case, so accept an
+  # optional "dir/" prefix and match case-insensitively.
+  count=$(grep -rli --include="*.md" \
+    --exclude="log.md" --exclude="index.md" --exclude="overview.md" \
+    -e "\[\[\([^]|#]*/\)\?${escaped}\([\\|#].*\)\?\]\]" "$WIKI_DIR" 2>/dev/null \
+    | grep -vxF -- "$page" | wc -l || true)
   if [ "$count" -eq 0 ]; then
     echo "  ORPHAN: ${page#"$WIKI_DIR"/}"
   fi
-done < <(find "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources -name "*.md" 2>/dev/null | sort)
+done < <(content_pages)
 echo ""
 
-# Check frontmatter completeness: type/summary on all content pages;
+# Check frontmatter completeness: summary on all content pages (one line),
 # raw source pointer on sources pages (raw: or source_url:, at least one)
 echo "--- Missing frontmatter keys ---"
 while read -r page; do
@@ -37,12 +47,40 @@ while read -r page; do
     continue
   fi
   fm="$(awk 'NR==1{next} /^---$/{exit} {print}' "$page")"
-  echo "$fm" | grep -q '^type:' || echo "  MISSING type: $page"
-  echo "$fm" | grep -q '^summary:' || echo "  MISSING summary: $page"
+  # summary must be a single non-empty line: comments, empty strings, block
+  # scalars (| or >) and indented continuation lines all fail here.
+  summary_ok="$(printf '%s\n' "$fm" | awk '
+    BEGIN { q = sprintf("%c", 39) }
+    /^summary:/ {
+      found = 1
+      val = $0
+      sub(/^summary:[ \t]*/, "", val)
+      sub(/[ \t]+$/, "", val)
+      if (val ~ /^[|>][-+]?([ \t]+#.*)?$/) bad = 1
+      first = substr(val, 1, 1)
+      last = substr(val, length(val), 1)
+      if ((first == "\"" && last == "\"") || (first == q && last == q)) {
+        val = substr(val, 2, length(val) - 2)
+      } else {
+        sub(/[ \t]+#.*$/, "", val)
+        if (val ~ /^#/) bad = 1
+      }
+      gsub(/[ \t]/, "", val)
+      if (val == "") bad = 1
+      check_next = 1
+      next
+    }
+    check_next {
+      if ($0 ~ /^[ \t]+[^ \t#]/) bad = 1
+      check_next = 0
+    }
+    END { print (found && !bad) ? "ok" : "bad" }
+  ')"
+  [ "$summary_ok" = "ok" ] || echo "  MISSING/MULTILINE summary: $page"
   if [[ "$page" == "$WIKI_DIR"/sources/* ]]; then
     echo "$fm" | grep -qE '^(raw|source_url):' || echo "  MISSING raw/source_url: $page"
   fi
-done < <(find "$WIKI_DIR"/concepts "$WIKI_DIR"/entities "$WIKI_DIR"/analyses "$WIKI_DIR"/sources -name "*.md" 2>/dev/null | sort)
+done < <(content_pages)
 echo ""
 
 # Check for open links (wikilinks whose target page does not exist yet) in wiki/.
@@ -52,7 +90,17 @@ echo ""
 #   2+ pages = OPEN_LINK (n pages) — virtual page / hub seed; candidate for page creation
 # Open links never fail the run.
 echo "--- Open links (unresolved wikilinks, classified by ref count) ---"
-find "$WIKI_DIR" -name "*.md" ! -name "log.md" -print0 | xargs -0 awk '
+# Basename index for resolution: links resolve by basename, case-insensitively,
+# so titles containing glob metacharacters (. * [ ] ?) are not a problem.
+# A temp file of lowercased basenames keeps this working on bash 3.2 (no
+# associative arrays) and on macOS find (no -printf).
+BASENAME_INDEX="$(mktemp "${TMPDIR:-/tmp}/llm-wiki-basenames.XXXXXX")" || exit 1
+trap 'rm -f "$BASENAME_INDEX"' EXIT
+find "$WIKI_DIR" -name "*.md" 2>/dev/null | sort | while IFS= read -r path; do
+  basename "$path" .md
+done | tr '[:upper:]' '[:lower:]' | sort -u > "$BASENAME_INDEX"
+
+find "$WIKI_DIR" -name "*.md" ! -name "log.md" -exec awk '
   /^```/ { inblock = !inblock; next }
   !inblock {
     line = $0
@@ -62,7 +110,7 @@ find "$WIKI_DIR" -name "*.md" ! -name "log.md" -print0 | xargs -0 awk '
       line = substr(line, RSTART + RLENGTH)
     }
   }
-' \
+' {} + \
   | sed 's/\[\[//;s/\]\]//' \
   | awk -F'\t' '{ split($2, a, "|"); sub(/\\$/, "", a[1]); print $1 "\t" a[1] }' \
   | sort -u \
@@ -72,8 +120,13 @@ find "$WIKI_DIR" -name "*.md" ! -name "log.md" -print0 | xargs -0 awk '
     # Skip non-file targets (URLs, external refs, empty)
     [[ "$target" == http* ]] && continue
     [ -z "$target" ] && continue
-    found=$(find "$WIKI_DIR" -name "${target}.md" 2>/dev/null | head -1)
-    if [ -z "$found" ]; then
+    # Resolve like ORPHAN does: ignore any "dir/" prefix and "#anchor"
+    lookup="${target##*/}"
+    lookup="${lookup%%#*}"
+    # Anchor-only links ([[#heading]]) point inside the same page, not to a file
+    [ -z "$lookup" ] && continue
+    lookup="$(printf '%s' "$lookup" | tr '[:upper:]' '[:lower:]')"
+    if ! grep -Fxq -- "$lookup" "$BASENAME_INDEX"; then
       if [ "$count" -ge 2 ]; then
         echo "  OPEN_LINK ($count pages): [[${target}]] — virtual page / hub seed; candidate for page creation"
       else
@@ -86,7 +139,7 @@ echo ""
 # Check same-line duplicate wikilinks within pages
 # (detects accidental duplicates caused by batch replacement, e.g. [[PageA]]...[[PageA]] on the same line)
 echo "--- Same-line duplicate wikilinks ---"
-find "$WIKI_DIR" -name "*.md" ! -name "log.md" -print0 | xargs -0 awk -v wiki_dir="$WIKI_DIR" '
+find "$WIKI_DIR" -name "*.md" ! -name "log.md" -exec awk -v wiki_dir="$WIKI_DIR" '
   FNR == 1 {
     infm = 0; inblock = 0
     relpath = FILENAME
@@ -131,7 +184,7 @@ find "$WIKI_DIR" -name "*.md" ! -name "log.md" -print0 | xargs -0 awk -v wiki_di
       }
     }
   }
-'
+' {} +
 echo ""
 # Known limitation: wikilinks containing https:// or # (URL/anchor targets)
 # cannot be resolved to files by any classification above
@@ -140,35 +193,37 @@ echo ""
 
 # Check that raw/ files referenced from wiki/ actually exist
 # Inline code and fenced code blocks are stripped first (quoted design
-# examples in analyses pages are not raw references)
+# examples in analyses pages are not raw references).
+# Quoted paths may contain spaces (raw: "raw/my paper.pdf"); unquoted paths
+# stop at whitespace so "raw/a.md と raw/b.md" stays two refs. Any known
+# attachment extension is accepted, not just .md.
+RAW_EXTENSIONS='md|pdf|txt|csv|tsv|json|ya?ml|html|epub|png|jpe?g|svg|webp|docx?|pptx?|xlsx?'
 echo "--- Missing raw files referenced from wiki/ ---"
-find "$WIKI_DIR" -name "*.md" -print0 | xargs -0 awk '
+RAW_SCAN="$(mktemp "${TMPDIR:-/tmp}/llm-wiki-rawscan.XXXXXX")" || exit 1
+trap 'rm -f "$BASENAME_INDEX" "$RAW_SCAN"' EXIT
+find "$WIKI_DIR" -name "*.md" -exec awk '
   /^```/ { inblock = !inblock; next }
   !inblock { gsub(/`[^`]*`/, "", $0); print }
-' \
-  | grep -oE 'raw/[^])"'"'"'`\[,<>。、「」（）、→]+\.md' \
-  | sort -u \
-  | while read -r ref; do
+' {} + > "$RAW_SCAN"
+{
+  # Double-quoted path (may contain spaces)
+  grep -oiE "\"raw/[^\"]+\.(${RAW_EXTENSIONS})\"" "$RAW_SCAN" | sed 's/^"//; s/"$//' || true
+  # Single-quoted path (may contain spaces)
+  grep -oiE "'raw/[^']+\.(${RAW_EXTENSIONS})'" "$RAW_SCAN" | sed "s/^'//; s/'\$//" || true
+  # Unquoted path (no whitespace)
+  grep -oiE "raw/[^][()\"'\`<>。、「」（）、→[:space:]]+\.(${RAW_EXTENSIONS})" "$RAW_SCAN" || true
+} | sort -u \
+  | while IFS= read -r ref; do
+    [ -n "$ref" ] || continue
     if [ ! -f "$(dirname "$WIKI_DIR")/$ref" ]; then
       echo "  MISSING RAW: $ref"
     fi
-  done || true
-echo ""
-
-# Check that sources/ pages declare a pointer to the source in frontmatter
-# (raw: path or source_url: — at least one is required)
-echo "--- Sources pages without raw: or source_url: ---"
-for page in "$WIKI_DIR"/sources/*.md; do
-  [ -f "$page" ] || continue
-  if ! grep -qE '^(raw|source_url):' "$page"; then
-    echo "  NO POINTER: $page"
-  fi
-done
+  done
 echo ""
 
 # Check image links resolve, and no asset is unused
 echo "--- Image links / unused assets ---"
-find "$WIKI_DIR" -name "*.md" ! -name "log.md" -print0 | xargs -0 awk '
+find "$WIKI_DIR" -name "*.md" ! -name "log.md" -exec awk '
   /^```/ { inblock = !inblock; next }
   !inblock {
     line = $0
@@ -185,7 +240,7 @@ find "$WIKI_DIR" -name "*.md" ! -name "log.md" -print0 | xargs -0 awk '
       line = substr(line, RSTART + RLENGTH)
     }
   }
-' | while IFS=$'\t' read -r md img; do
+' {} + | while IFS=$'\t' read -r md img; do
   [ -n "$img" ] || continue
   [[ "$img" =~ ^https?:// ]] && continue
   [[ "$img" =~ ^data: ]] && continue
@@ -205,6 +260,6 @@ fi
 echo ""
 
 # Count wiki pages
-total=$(find "$WIKI_DIR" -name "*.md" ! -name "index.md" ! -name "log.md" | wc -l)
+total=$(find "$WIKI_DIR" -name "*.md" ! -name "log.md" | wc -l)
 echo "Total wiki pages: $total"
 echo "=== Done ==="

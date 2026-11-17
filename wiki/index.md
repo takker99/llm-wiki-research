@@ -169,3 +169,4 @@ Each entry: `- [Page Title](path/to/page.md) — One-line summary.`
 - [日本語矯正Agent Skill群の設計空間](analyses/日本語矯正Agent Skill群の設計空間.md) — OSS矯正skill 8種の階層×アーキテクチャ比較。「検出は機械・判断はAI」、無制約推敲は事実を壊す、機械文体lintの過剰規制による研究ノート構造散文化アンチパターン（status: tentatively-adopted, 2026-11-03更新）
 - [出典の読み優先度（2026-10-27 ingest）](analyses/出典の読み優先度（2026-10-27 ingest）.md) — 3つのDeepResearchレポート出典172件の評価。Tier1=定量主張の原典検証17作、Tier2=テンプレート課題に効く実装系、出典結合の疑義3件、読まない系の判別基準（2026-10-27）
 - [下流wikiの大規模リストラクチャリングと文体・リンク規約の検証](analyses/下流wikiの大規模リストラクチャリングと文体・リンク規約の検証.md) — txa-xray-ct-wikiの大規模改修と5クラスタ監査の実証知見。analyses/テーマ別フォルダコロケーションとdocs/分離、2回目以降[[wikilink]]維持とSAME_LINE_DUPLICATE、機械文体lintによる箇条書き・Callout散文化のアンチパターン（status: tentatively-adopted, 2026-11-03）
+- [template schemaの破綻点検と修正計画](analyses/template%20schemaの破綻点検と修正計画.md) — templateのAGENTS/SKILL/lintをLLM Wiki・Cosense思想で点検。初回ingestデッドロック、raw必須とsource_url許容の衝突、未実装のlint検査列挙、write-onlyなtype必須、summary単一行前提の未明記など12件の修正計画（status: tentatively-adopted, 2026-11-17）
