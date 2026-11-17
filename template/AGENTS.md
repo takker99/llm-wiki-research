@@ -45,7 +45,7 @@ wiki/
 
 ## 執筆の機械要件
 
-- sourcesページは情報源へのポインタ（frontmatter の `raw:` または `source_url:` の1つ以上。形式は `.agents/skills/llm-wiki-write/SKILL.md`）を必ず含める。引用の流れ: 情報源 → sourceページ → concept/entity
+- sourcesページは情報源へのポインタ（frontmatter の `raw:` または `source_url:` の1つ以上。形式は `.agents/skills/llm-wiki-write/SKILL.md`）を必ず含める。引用の流れ: 情報源 → sourceページ → concept/entity/analysis
 - frontmatter: 各ページに `summary`（1行・1〜2文。検索と`--catalog`カタログに使われる要約の正本。本文を書き換えたら同じ編集で見直す）を付ける。`tags:` / `dates:` / `status:` / `sources:` 等のメタ情報は必要に応じて付加してよい。idはファイル名（basename）が兼ねる
 - concepts/entities/analyses の出典は本文中に sources ページへの [[wikilink]] を置く (claim粒度)
 - 外部URLを出典にする場合は frontmatter の `source_url:`（と任意で `accessed:`）を使う。

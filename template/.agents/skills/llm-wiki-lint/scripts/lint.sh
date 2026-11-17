@@ -29,7 +29,7 @@ while read -r page; do
   # optional "dir/" prefix and match case-insensitively.
   count=$(grep -rli --include="*.md" \
     --exclude="log.md" --exclude="index.md" --exclude="overview.md" \
-    -e "\[\[\([^]|#]*/\)\?${escaped}\([|#].*\)\?\]\]" "$WIKI_DIR" 2>/dev/null \
+    -e "\[\[\([^]|#]*/\)\?${escaped}\([\\|#].*\)\?\]\]" "$WIKI_DIR" 2>/dev/null \
     | grep -vxF -- "$page" | wc -l || true)
   if [ "$count" -eq 0 ]; then
     echo "  ORPHAN: ${page#"$WIKI_DIR"/}"
@@ -47,9 +47,36 @@ while read -r page; do
     continue
   fi
   fm="$(awk 'NR==1{next} /^---$/{exit} {print}' "$page")"
-  # summary must be a single non-empty line: empty (including ""), "|" and ">"
-  # block forms all fail here
-  echo "$fm" | grep -qE "^summary:[[:space:]]*(\"[^\"]+\"|'[^']+'|[^[:space:]|>\"'][^[:space:]|>]*)" || echo "  MISSING/MULTILINE summary: $page"
+  # summary must be a single non-empty line: comments, empty strings, block
+  # scalars (| or >) and indented continuation lines all fail here.
+  summary_ok="$(printf '%s\n' "$fm" | awk '
+    BEGIN { q = sprintf("%c", 39) }
+    /^summary:/ {
+      found = 1
+      val = $0
+      sub(/^summary:[ \t]*/, "", val)
+      sub(/[ \t]+$/, "", val)
+      if (val ~ /^[|>][-+]?([ \t]+#.*)?$/) bad = 1
+      first = substr(val, 1, 1)
+      last = substr(val, length(val), 1)
+      if ((first == "\"" && last == "\"") || (first == q && last == q)) {
+        val = substr(val, 2, length(val) - 2)
+      } else {
+        sub(/[ \t]+#.*$/, "", val)
+        if (val ~ /^#/) bad = 1
+      }
+      gsub(/[ \t]/, "", val)
+      if (val == "") bad = 1
+      check_next = 1
+      next
+    }
+    check_next {
+      if ($0 ~ /^[ \t]+[^ \t#]/) bad = 1
+      check_next = 0
+    }
+    END { print (found && !bad) ? "ok" : "bad" }
+  ')"
+  [ "$summary_ok" = "ok" ] || echo "  MISSING/MULTILINE summary: $page"
   if [[ "$page" == "$WIKI_DIR"/sources/* ]]; then
     echo "$fm" | grep -qE '^(raw|source_url):' || echo "  MISSING raw/source_url: $page"
   fi
@@ -96,6 +123,8 @@ find "$WIKI_DIR" -name "*.md" ! -name "log.md" -exec awk '
     # Resolve like ORPHAN does: ignore any "dir/" prefix and "#anchor"
     lookup="${target##*/}"
     lookup="${lookup%%#*}"
+    # Anchor-only links ([[#heading]]) point inside the same page, not to a file
+    [ -z "$lookup" ] && continue
     lookup="$(printf '%s' "$lookup" | tr '[:upper:]' '[:lower:]')"
     if ! grep -Fxq -- "$lookup" "$BASENAME_INDEX"; then
       if [ "$count" -ge 2 ]; then
