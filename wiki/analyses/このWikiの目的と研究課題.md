@@ -27,6 +27,7 @@
 - [ ] `AGENTS.md`には何を書くべきか？ 何を書かないべきか？（→ テンプレート草案ver.1）
 - [ ] ディレクトリ構成のベストプラクティスは？
   - 2026-08-11時点の考察: concepts/entitiesの境界はrawソース群（Karpathy gist・nishio・villagepump）のどこにも定義がない。villagepumpの表（`villagepump-AIを使った知識マネジメント.md` L253-259）は「簡潔さの強さ」のポリシーであって分類定義ではない。入リンク実測でもentityがハブ化する（Obsidian 9, qmd 7, Marp 6）が、最上位ハブは概念が独占。4分類は実質「sources / analyses / それ以外」の3分類＋ナビゲーション用タクソノミと言える。→ テンプレート草案ver.1 claim#2のevidenceに追記
+  - 2026-11-03追記: 下流wiki（[[txa-xray-ct-wiki]]）の大規模リストラクチャリングで、①非ドメインの運用手順書・環境設定・発表準備（ポスター等）は `docs/` 等へ分離して `wiki/` を純粋なドメイン知識に保つこと、②実験・検証ページが肥大化するコード一体型wikiでは日付別断片ページを廃して `wiki/analyses/<テーマ名>/` に `<テーマ名>.md`・固有スクリプト・生成図表・データをコロケーション（同居）させる構造が有効であることを実証（[[下流wikiの大規模リストラクチャリングと文体・リンク規約の検証]]）
 - [ ] ingestの形式と運用をどこまで標準化するか？ — 2026-10-23に8実装を比較（[[LLM Wiki実装のingest形式と運用の比較]]）。出典ポインタはアーカイブ・URL・commit・セッションの4モード、sourceは要約・台帳・目録・決定の4類型に分かれた。provenanceモード、re-ingest、規則とlintの一致が主な論点
 - [ ] 配布形式はどうするか？（別リポジトリ / `template/` ディレクトリ / GitHub Template Repository / `npx create-llm-wiki` / その他）
   - 2026-08-14: 要件候補を追加 — テンプレートrepoは同一repo型の見本（dogfooding）でありながら、**wiki/部分が単独で取り出せる**ことを保証すべき（研究目的wikiはコード不要）。別repo参照型を選ぶユーザー向けにwork/の運用規定（[[Wikiとコードリポジトリの関係]]）も配布物に含めるか要検討
@@ -59,6 +60,7 @@
 - 2026-08-11: Karpathy gist ingest（27ページ） + Cosense議論 ingest（26ページ）。合計50+ページ
 - 2026-09-25: 目的の再定義（上記）。M2は「この研究wiki以外のwiki」に再定義し、下流wiki 2件（elastic-wave-analyzer-wiki、txa-xray-ct-wiki）が該当。両者からのフィードバックは既にtemplateへ取り込み済み（→ 配布形式の決定とテンプレートの動機）
 - 2026-10-23: LLM Wiki 8実装のingest・運用surveyをfile-back（LLM Wiki実装のingest形式と運用の比較）。templateの出典規約がAGENTS.md・ingest SKILL・lint SKILL・lint.shで一致しないことを確認
+- 2026-11-03: txa-xray-ct-wikiの大規模リストラクチャリングと5クラスタ監査をfile-back（下流wikiの大規模リストラクチャリングと文体・リンク規約の検証）。テーマ別フォルダコロケーション、ページ内2回目以降の `[[wikilink]]` 維持（`SAME_LINE_DUPLICATE` のみ検出）、機械的文体リンターの過剰規制による研究ノート構造（リスト・表・Callout）破壊アンチパターンを実証しtemplateへ反映
 
 ## 関連
 

@@ -351,9 +351,12 @@ END {
     for (i = 1; i <= n_pages; i++) {
       p = cat_list[i]
       rp = existing_path[p]
-      dir = rp
-      sub(/\/[^\/]*$/, "", dir)
-      if (dir == rp) dir = "(root)"
+      if (index(rp, "/") > 0) {
+        dir = rp
+        sub(/\/.*/, "", dir)
+      } else {
+        dir = "(root)"
+      }
       if (dir != cur_dir) {
         cur_dir = dir
         print ""

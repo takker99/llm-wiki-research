@@ -19,7 +19,7 @@ wikiの健全性チェック。ユーザーの明示的な依頼で発動する�
    - wiki/ が参照している raw/ ファイルが実在しない
    - sources/ ページが frontmatter に `raw:` もしくは `source_url:` を持たない
    - provenance: concepts/entities のうち sources ページへの引用wikilinkが0件のページ、著者-年表記の棚卸し (load-bearing か帰属引用かの判定はLLM)、analyses frontmatter `sources:` の raw パス存在チェック
-   - 同一ページ内の重複 `[[wikilink]]` — claim粒度引用（`p.XX` の引用箇所違いの反復）は免除。ページ番号なしの裸反復・同一箇所の反復・関連節での再掲は除去対象
+   - 同一行内の重複 `[[wikilink]]`（`SAME_LINE_DUPLICATE` — 一括置換等で同じ行に同一ターゲットへのリンクが複数生じた箇所）
 2. 意味チェック（手動）:
    - ページ間の矛盾（同一トピックで衝突する主張）
    - 古い主張（新しいソースに取って代わられたもの）
