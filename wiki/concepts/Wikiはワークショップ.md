@@ -1,4 +1,5 @@
 ---
+summary: "LLM Wikiは「主宅地」ではなく「処理場」。動的合成層として機能"
 sources: [[2026-08-11 AIを使った知識マネジメント (villagepump)]], [[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]
 tags: [template-design, llm-wiki-pattern]
 ---

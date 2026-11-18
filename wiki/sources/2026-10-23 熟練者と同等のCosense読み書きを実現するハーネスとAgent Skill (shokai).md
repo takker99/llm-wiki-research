@@ -1,4 +1,5 @@
 ---
+summary: "人間向けUIのAI版翻訳、browsePageによるメタデータ・1 hop関連ページ強制同梱、edit-page.mdの周囲スタイル観察とリンク選定基準、CLIとSkillの責任境界"
 raw:
   - "raw/cosense/shokai/熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill-2026-10-23.md"
 source_url: "https://scrapbox.io/shokai/%E7%86%9F%E7%B7%B4%E8%80%85%E3%81%A8%E5%90%8C%E7%AD%89%E3%81%AECosense%E8%AA%AD%E3%81%BF%E6%9B%B8%E3%81%8D%E3%82%92%E5%AE%9F%E7%8F%BE%E3%81%99%E3%82%8B%E3%83%8F%E3%83%BC%E3%83%8D%E3%82%B9%E3%81%A8Agent_Skill"

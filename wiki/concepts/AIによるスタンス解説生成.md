@@ -1,4 +1,5 @@
 ---
+summary: "複数人議論からAIが参加者ごとのスタンスページを自動生成"
 sources: "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

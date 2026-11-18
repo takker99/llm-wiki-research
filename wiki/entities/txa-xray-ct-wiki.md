@@ -1,4 +1,5 @@
 ---
+summary: "三軸弾性波+X線CT同時計測実験の記録Wiki。template下流wiki 2件目（出典運用・テーマフォルダコロケーション・2回目以降wikilink維持・文体lint過剰規制のフィードバック元、コードrepo一体型）"
 tags: [template-design, 下流wiki, M2]
 ---
 

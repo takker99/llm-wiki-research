@@ -1,4 +1,5 @@
 ---
+summary: "GoogleのOpen Knowledge Format。markdown+frontmatterのオープン仕様。データカタログ由来でformat層のみ標準化"
 sources: ["[[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]"]
 source_url: https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing
 accessed: 2026-08-11

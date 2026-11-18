@@ -1,4 +1,5 @@
 ---
+summary: "AIが自ら外部サーベイの停止を判断した事例"
 sources: "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]", "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

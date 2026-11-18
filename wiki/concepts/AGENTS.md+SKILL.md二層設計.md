@@ -1,4 +1,5 @@
 ---
+summary: "操作手順をskillに委譲しAGENTS.mdを薄く保つ。AMMEで実証。分担基準（常時行動vsトリガー操作）・保険不要化・skillロード仕様を明確化"
 date: 2026-08-12
 updated: 2026-10-27
 tags: [template-design, agents-md, skill, pilot-finding]
@@ -79,7 +80,7 @@ Quick Operations Summaryを保険として残すことで、skillがない環境
 ### 基準
 
 1. **常時行動（ユーザーが明示しなくても発動すべき行動）→ AGENTS.md**
-   - 例: queryの作法（`search-pages.sh`と`index.md`から探し`read-page.sh`で近傍ごと読む・wikilink引用で総合）、file-backの提案習慣、lintの発動ポリシー（自律提案するか・言われた時だけか）
+   - 例: queryの作法（`search-pages.sh`と`--catalog`から探し`read-page.sh`で近傍ごと読む・wikilink引用で総合）、file-backの提案習慣、lintの発動ポリシー（自律提案するか・言われた時だけか）
    - 理由: **決定論性**。AGENTS.mdは毎ターン必ずコンテキストに入る
 2. **トリガー操作（ユーザーの明示または提案への承諾で発動する操作）→ SKILL.md**
    - 例: 書き込み・編み込み操作（ingestおよび承諾後のfile-back実行を統合した`llm-wiki-write`）、lintの実行手順（`llm-wiki-lint`）

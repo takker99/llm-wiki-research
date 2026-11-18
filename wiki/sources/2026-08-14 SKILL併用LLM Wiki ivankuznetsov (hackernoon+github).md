@@ -1,4 +1,5 @@
 ---
+summary: "6プロジェクト実運用。CLAUDE.md 1行トリガー+wiki-researcher skill+QMD MCP併用"
 raw:
   - raw/hackernoon-ivankuznetsov-6プロジェクトの知識ベース構築.md
   - raw/github-ivankuznetsov-llm-wiki.md

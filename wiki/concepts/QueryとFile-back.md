@@ -1,4 +1,5 @@
 ---
+summary: "質問応答＋回答のwiki化。探索の蓄積が複利効果を生む"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[リポジトリ分析 microsoft-llmwiki]]", "[[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
@@ -51,7 +52,7 @@ file-backはコマンド化・ページ種別化されている: `@wiki /save` �
 ## 当wikiでの実装
 
 AGENTS.mdのQueryフロー:
-1. `bash .agents/scripts/search-pages.sh "<検索語>"`と`wiki/index.md`で関連ページや未作成リンクを探す。見つからない時は`--fulltext`で本文全文を検索する
+1. `bash .agents/scripts/search-pages.sh "<検索語>"`で関連ページや未作成リンクを探す。既定検索はタイトル・要約・本文全文の抜粋を返す。全体像が必要な時は`--catalog`で全ページの要約付きカタログを出力する
 2. 有望なページや複数ページから参照される未作成リンクを`bash .agents/scripts/read-page.sh "<タイトル>"`で読み、末尾に出力される1 hop・2 hopの関連ページと要約から深掘り先を選んで辿る
 3. `[[wikilink]]`引用付きで回答を総合する
 4. 回答後「これをwikiページとしてfile-backする？」と提案する

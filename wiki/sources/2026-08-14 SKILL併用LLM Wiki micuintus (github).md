@@ -1,4 +1,5 @@
 ---
+summary: "最小純skill ~6KB+lazy-loaded references。エコシステム比較表9repo収録（22★）"
 raw:
   - raw/github-micuintus-llm-wiki.md
 source_url: https://github.com/micuintus/llm-wiki

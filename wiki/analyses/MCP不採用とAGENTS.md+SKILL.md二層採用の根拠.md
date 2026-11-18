@@ -1,4 +1,5 @@
 ---
+summary: "MCPはデフォルト不採用・オプション追加可。実測（14ツール6.3KB≈1.6-2Kトークン常駐）+Agent Skills標準化+推奨構成（status: tentatively-adopted）"
 status: tentatively-adopted
 date: 2026-08-14
 tags: [template-design, operation-layer, agents-md, skill, mcp]
@@ -57,7 +58,7 @@ microsoft/llmwikiはMCPサーバ14ツール + VS Code拡張 + npmパッケージ
 2. **セットアップ障壁** — MCPサーバ設定・依存・保守コスト。テンプレート目標の「手軽に始められる」に反する
 3. **環境非依存の維持** — モデル/IDEを縛らない（MicrosoftはCopilot必須・VS Code固定）。「ゼロインフラ・Markdown普遍性」の価値観に整合
 4. **透明性・可読性** — AGENTS.mdは読めば全部見える。ツールは実行時にブラックボックス
-5. **文書+skill+scriptsで代替可能** — 決定的検証（lint機械チェック）はscripts/で、手順の一貫性はSKILL.mdで。決定的書込（index upsert等）だけは再現不能だが、単一ローカルユーザーでは脅威モデルが弱く、lint+gitで検出・修復可能（「予防するMCP vs 検出+修復する文書」のどちらでも運用は成立）
+5. **文書+skill+scriptsで代替可能** — 決定的検証（lint機械チェック）はscripts/で、手順の一貫性はSKILL.mdで。決定的書込（index upsert等）だけは再現不能だが、単一ローカルユーザーでは脅威モデルが弱く、lint+gitで検出・修復可能（「予防するMCP vs 検出+修復する文書」のどちらでも運用は成立）。2026-11-17追記: index.md廃止により、この例はsummaryのsame-edit更新に置き換わった
 
 ## 推奨構成（ファイルツリー案）
 
@@ -69,7 +70,7 @@ llm-wiki-template/                # GitHub Template Repository
 │   ├── SKILL.md
 │   └── references/
 ├── .agents/skills/llm-wiki-lint/scripts/lint.sh  # 決定的実行（skill同梱・自己相対パス方式）
-├── wiki/                         # 空カテゴリスケルトン + index/log/overview
+├── wiki/                         # 空カテゴリスケルトン + log（index/overviewは2026-11に廃止）
 ├── raw/.gitkeep
 ├── examples/demo-vault/          # 完成サンプル（10-15ページ）
 └── docs/DESIGN.md                # 設計判断の記録 + MCP拡張指針（一節数行）
@@ -77,6 +78,8 @@ llm-wiki-template/                # GitHub Template Repository
 
 3層ともrepoに同梱・コミット済み（配布物の単一性）。AGENTS.md単体でも完全運用可能（フォールバック）。
 lint.shは明示パス参照によりskillロードの有無と無関係に実行可能。
+
+**2026-11-17追記**: このツリーは2026-08-14時点の推奨案。配布形式は`template/`コピペに決定し（[[配布形式の決定とテンプレートの動機]]）、index.md/overview.mdは2026-11に廃止された。
 
 ※2026-08-14見直し: 「AGENTS.md単体でも完全運用可能」の保険（Quick Operationsサマリ）は不要と判断（Agent Skillsのオープン標準化でskill非対応環境が消滅。[[2026-08-14 opencode Agent Skills仕様]]）。AGENTS.mdの役割は「常時行動 + スキーマ + 明示パス参照1行」に純化。分担基準は AGENTS.md+SKILL.md二層設計 参照。
 

@@ -1,4 +1,5 @@
 ---
+summary: "中日漢字トークンの統合・モノリシック化・SFT高ノルム化。漢語トークンがデコードで常時浮上する機構、LCGの死角、漢字長キャップでしか対抗できない理論根拠（2026-10-27）"
 date: 2026-10-27
 sources: "[[2026-10-27 多言語LLMの擬似漢語生成と過剰圧縮の機構]]"
 tags: [template-design, language-drift, tokenizer]

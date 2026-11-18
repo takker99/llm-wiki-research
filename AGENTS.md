@@ -24,11 +24,12 @@ ingest時とfile-back時は、これらの問いに資する知見を優先し�
 - テンプレートの設計主張はすべて `wiki/analyses/テンプレート草案*.md` の仮説ページにある。本ファイルは仮説を含まない。
 - **バイアスは除去ではなく顕在化を狙う。** 運用と仮説の乖離に気づいたら `wiki/log.md` に記録し、該当する仮説ページのfrontmatter（status, evidence）を更新する。
 - 疑問があれば常に `raw/` に戻って検証する。`wiki/`は派生物であり、`raw/`がソース・オブ・トゥルース。
+- 2026-11-17にrootを現行template schema（frontmatter `summary:` 正本・`index.md`廃止）へ移行した。rootと`template/`の差分が生じたら、どちらが仮説に沿うかを `wiki/log.md` に記録する。
 
 ## アーキテクチャ（運用規則）
 
 ```
-raw/      — 不変。原文ドキュメント。LLMは読むだけで、絶対に変更しない。唯一の例外: 引用時アーカイブの新規追加と raw/manifest.md への追記。
+raw/      — 不変。原文ドキュメント。LLMは読むだけで、絶対に変更しない。唯一の例外: ingest時または人間の依頼による新規ソース追加と raw/manifest.md への追記。
 wiki/     — LLMが管理する構造化Markdownページ（wikilink付き）。
 AGENTS.md — 本ファイル。このwikiの運用規則。人間とLLMで共進化する。
 ```
@@ -44,10 +45,10 @@ wiki/
   sources/    — ソース要約ページ。タイトル `YYYY-MM-DD 短い名前.md`。
   analyses/   — 分析・比較・総合ページ。長くなってよい。
 
-  index.md    — 全ページのカタログ。各エントリ1行。Query時は最初に読む。
   log.md      — 追記専用のタイムライン。各エントリ: 見出し `## [DATE] action | 短い題名` + 詳細は本文。
-  overview.md — エントリーポイント。このwikiの俯瞰図。
 ```
+
+`index.md` は廃止した。全体像は `bash .agents/scripts/search-pages.sh --catalog` で全ページの要約付きカタログとして出力する。
 
 ## オペレーション
 
@@ -55,19 +56,26 @@ wiki/
 
 「ingestして」と言われたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う。
 
-### Query
+### Query（常時行動）
 
-1. `bash .agents/scripts/search-pages.sh "<検索語>"` と `wiki/index.md` で関連ページや未作成リンクを探す。見つからない時は `--fulltext` で本文全文を検索する。
-2. 有望なページや複数ページから参照される未作成リンクは、必ず `bash .agents/scripts/read-page.sh "<タイトル>"` で読む。1 hop・2 hopの関連ページ一覧は read-page.sh が末尾に付けるもので、`read` で直接読むと得られない。末尾の関連一覧と要約から深掘り先を選んで辿る。巨大な2 hopは `--no-2hop` / `--2hop-limit <N>` で絞ってよい。再読や部分読み（offset/limit）等で直接 `read` した場合は、回答末尾に `direct-read` と1行明示する。
-3. `[[wikilink]]`引用付きで回答を総合する。
+1. `bash .agents/scripts/search-pages.sh "<検索語>"` で関連ページや未作成リンクを探す。既定検索はタイトル・要約に加えて本文全文の抜粋も返し、0件時は全文検索へ自動で切り替わる。本文を広く見たい時は `--fulltext` を使う。全体像が必要な時は `bash .agents/scripts/search-pages.sh --catalog` で全ページの要約付きカタログを出力する。
+2. 有望なページや複数ページから参照される未作成リンクは、必ず `bash .agents/scripts/read-page.sh "<タイトル>"` で読む。1 hop・2 hopの関連ページ一覧は read-page.sh が末尾に付けるもので、`read` で直接読むと得られない。末尾の関連一覧と要約から深掘り先を選んで辿る。巨大な2 hopは `--no-2hop` / `--2hop-limit <N>` で絞ってよい。再読や長大ページの部分読みでは直接 `read` してよい。
+3. `[[wikilink]]` 引用付きで回答を総合する。
 4. 回答後、「これをwikiページとしてfile-backする？」と提案する。
-5. 承諾されたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う。
+5. 「次に何を読むべき？」と聞かれたら、`--catalog` とlintの結果で薄いページ、出典のない孤立概念、未回答の疑問を確認する。
 
 ### Lint
 
 「lintして」と言われたら `.agents/skills/llm-wiki-lint/SKILL.md` を読んで従う。
 機械チェックは `bash .agents/skills/llm-wiki-lint/scripts/lint.sh`（決定的実行）。
 疑問があれば自律的にlintを提案してよい。
+
+### File-back（常時行動）
+
+実質的なQuery回答の後や、作業（実装・議論・調査）中に生まれた知見の後は、
+wikiページとして保存するか提案する。消えていく知識をデフォルトで保存する方向にする。
+
+承諾されたら `.agents/skills/llm-wiki-write/SKILL.md` を読んで従う。
 
 ### Review（研究の進行管理）
 
@@ -79,12 +87,16 @@ wiki/
 
 ## 執筆の機械要件
 
-- sourcesページは必ず raw/ へのリンクを含める。引用の流れ: raw → sourceページ → concept/entity
-- 出典はfrontmatterに書く: 全ページ任意 `sources:`（`raw/パス` または `[[wikilink]]`、空白を含むパスはダブルクォート）。sourcesページは `raw:` もしくは `source_url:` の1以上を必須（`accessed:` 任意）。`raw/`への参照は必ずパス形式で
-- 外部URLを出典にする場合は frontmatter の `source_url:`（と任意で `accessed:`）を使う。
-- `index.md` の各エントリは1行。欠損・参照切れはlintが検証し、要約内容の陳腐化はlint SKILLの意味チェックで見る。陳腐化・欠損時はページ冒頭を読んで再生成してよい
-- frontmatterは任意だが、あれば有用（tags, dates, status等）
-- **オープンリンク（空リンク）は許容**: リンク先ページがまだないリンクは未来の接続点として残してよい。1ページのみから参照されるリンクのためにページを作らない。2+ページから参照されるようになったら（lintの`OPEN_LINK`表示）ページ作成を検討する
+- sourcesページは情報源へのポインタ（frontmatter の `raw:` または `source_url:` の1つ以上。形式は `.agents/skills/llm-wiki-write/SKILL.md`）を必ず含める。引用の流れ: 情報源 → sourceページ → concept/entity/analysis
+- frontmatter: 各ページに `summary`（1行・1〜2文。検索と `--catalog` カタログに使われる要約の正本。本文を書き換えたら同じ編集で見直す）を付ける。`tags:` / `dates:` / `status:` / `sources:` 等のメタ情報は必要に応じて付加してよい。idはファイル名（basename）が兼ねる
+- concepts/entities/analyses の出典は本文中に sources ページへの `[[wikilink]]` を置く（claim粒度）
+- 外部URLを出典にする場合は frontmatter の `source_url:`（と任意で `accessed:`）を使う
+- 外部文献の内容を主張の根拠にする前に、原典に相当する sources ページを作る
+- `log.md` の各エントリ: 見出し `## [YYYY-MM-DD] action | 短い題名` + 詳細は本文
+- **オープンリンク（空リンク）は許容**: リンク先ページがまだないリンクは未来の接続点として残してよい。1ページのみから参照されるリンクのためにページを作らない。2ページ以上から参照されるようになったら（lintの `OPEN_LINK` 表示）ページ作成を検討する
+- wiki/のページは追記ではなく**書き換え**で更新する。既存の記述に手を加えず追記だけするのはwikiではない。raw/がsource of truthなので書き換え・削除は自由
+- concepts/はatomicに保つ: 1ページ1概念・簡潔に。育って肥大化したら分割（株分け）を人間に提案する
+- ページタイプ別の簡潔さの目安: concepts/ 強く簡潔（atomic）・entities/ 簡潔・sources/ 中程度・analyses/ 長め可
 
 ## ファイル命名（このwikiの規則）
 
@@ -109,8 +121,8 @@ wiki/
 
 ## よくあるパターン
 
-- **「ingest this PDF」** → PDFを読み、要点を議論し、sources/ページを作成、concepts/entities/index/logを更新
-- **「what do we know about X?」** → index.mdを読む → 関連ページ → 回答を総合 → file-backを提案
+- **「ingest this PDF」** → PDFを読み、要点を議論し、sources/ページを作成、concepts/entities/analyses/logを更新
+- **「what do we know about X?」** → `search-pages.sh`で関連ページを探す → 回答を総合 → file-backを提案
 - **「lint the wiki」** → 機械 + 意味チェックを実行し、結果を報告
-- **「what should I read next?」** → index.mdで薄いページ、ソースリンクのない孤立概念、未回答の疑問を確認
-- **「ingest this URL」** → web検索/取得でコンテンツを得て、クリーンなMarkdown版を raw/ に保存し、通常のingestとして進める
+- **「what should I read next?」** → `--catalog`とlintで薄いページ、ソースリンクのない孤立概念、未回答の疑問を確認
+- **「ingest this URL」** → web検索/取得でコンテンツを得て、人間の指示があればクリーンなMarkdown版を raw/ に保存し、通常のingestとして進める（指示がなければ `source_url:` で参照）

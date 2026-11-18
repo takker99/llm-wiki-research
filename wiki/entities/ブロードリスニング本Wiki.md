@@ -1,4 +1,5 @@
 ---
+summary: "書籍1冊から62ページのWikiを生成"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 ---
 

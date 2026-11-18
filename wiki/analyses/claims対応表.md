@@ -1,7 +1,8 @@
 ---
+summary: "草案ver.1の9 claims × 2軸（記述的検証×規範的决定）の追跡器。v0.1スコープ決定（二層構成・対象範囲・規範のみ原則）。claim#4のindexカタログ方式は2026-11-02に反転し、frontmatter summary正本＋--catalogへ移行"
 status: hypothesis
 date: 2026-08-14
-updated: 2026-09-03
+updated: 2026-11-17
 tags: [template-design, claims, v0.1, v0.2, main-value, knowledge-graph]
 sources: "[[テンプレート草案ver.1]]", "[[配布形式の決定とテンプレートの動機]]", "[[パイロット分析 横断所見]]", "[[raw SSOT原則への根本検証]]", "[[LLM Wikiのmain value]]"
 ---
@@ -35,17 +36,17 @@ template/ v0.1執筆時の確信度タグ（この記述はエビデンスで裏
 | 1 | AGENTS.mdが3層アーキテクチャ（`raw/`・`wiki/`・AGENTS.md）を定義 | 検証済み — Microsoft独立収束・SKILL併用6事例・パイロット6件全てで3層構造 | ①「この3層にする」と書く。実証性は書かない。**注**: 3層構造は**補助装置**であり、main value は knowledge network（claim#10） |
 | 2 | ディレクトリはconcepts/entities/sources/analysesの4分類 | 部分検証 — 実質3分類+ナビゲーション用タクソノミ（入リンク実測）。Microsoftも4分類で独立収束。設計空間は「初期固定vs伸びてから剪定」の分岐。2026-11-03にtxa-xray-ct-wikiで運用文書の`docs/`分離と`analyses/<テーマ名>/`コロケーションを実証（[[下流wikiの大規模リストラクチャリングと文体・リンク規約の検証]]） | ③ **必須=concepts/ + sources/、entities/・analyses/は任意デフォルト**（rename・削除自由。analyses相当は名前がwikiで異なる: synthesis・decisions等）。`analyses/`が育ったらテーマ別サブフォルダ`analyses/<テーマ名>/`（md+固有スクリプト+図表+データ同居）への分割を許容する |
 | 3 | ファイル名は自然言語（日本語等） | 多数派（3/5） | ③ |
-| 4 | index.mdを先頭で読むカタログ方式 | 検証済み — 自己適用 + Microsoftが独立にソフトウェア実装 | ① |
+| 4 | index.mdを先頭で読むカタログ方式 | 記述的には検証済み（自己適用 + Microsoftが独立にソフトウェア実装）。ただし2026-11-02のstress-round後にtemplateのデフォルトを反転し、2026-11-17にrootも移行した（[[index.md存廃の設計判断]]） | ④ **不採用** — frontmatter `summary:` を正本とし、`index.md` は廃止。全体像は `search-pages.sh --catalog` で出力する |
 | 5 | Cosenseの6原理がデフォルト設計の土台 | 部分的 — オープンリンク許容・参照数分割lint（1参照=表記確認 / 2+参照=ハブ候補）が具体化。他の原理は未落とし込み | ③ オープンリンク許容+参照数分類lintを焼き込む。残りはvariant guide（[[赤リンクとLLM Wiki]]） |
 | 6 | 1ソースで10-15ページに触れる | 本wikiで実測（[[ingestにおける編み込みの実際]]）。2026-10-23 surveyではentityを作らないwikiが3.4 concepts/source、成果物型が1-5ページとなり、entityの有無で再現しないことを確認（[[LLM Wiki実装のingest形式と運用の比較]]） | ② 期待値として軽く記述。knowledge network 中心モデルでは「network の種まき」として再解釈。entityを作る場合の条件付き期待値にするか削除を検討 |
 | 7 | 人間はwiki/を読まなくてよい（read-optional） | 反証（5/5 read-involved。tsurubeeとnishioの対立）。2026-11-03に機械的文体リンター（体言止め・括弧・太字・記号禁止）が箇条書き・表・Calloutを1段落散文へ平坦化し人間の可読性を破壊することを実証（下流wikiの大規模リストラクチャリングと文体・リンク規約の検証） | ③ read-involved前提の可読性最小保証をデフォルトに。論文調の散文強制ではなく、箇条書き・番号付きリスト・表・Calloutを用いた「視覚的に構造化された研究ノート」とし、機械文体検査は簡体字/繁体字混入と和欧間スペースのみに限定 |
 | 8 | wikilinkを本文中に書くべき（first-class） | 多数派（5/6）+ 反例AMME（wikilink 0で100ページ運用）。2026-11-03に「2回目以降の`[[ ]]`取り外し」が誤字検出と改名追従を壊すことを実証 | ③ 推奨するが強制しない。赤リンク許容と整合。**ページ内2回目以降の言及も`[[wikilink]]`を維持し、lintは同一行内重複（`SAME_LINE_DUPLICATE`）のみを検出する** |
 | 9 | 操作層はAGENTS.md+SKILL.md+scripts/の文書構成（MCPはデフォルト不採用・オプション追加可） | 検証済み — 本wiki採用・AMME実証・jackwener独立収束・SKILL併用6事例全件。2026-10-23 surveyでは文書構成の収束を再確認した一方、AGENTS.md・ingest SKILL・lint SKILL・lint.shの間で出典規約が一致しない実装を観測（LLM Wiki実装のingest形式と運用の比較） | ① **v0.1から二層構成・skill同梱**（2026-08-14決定。単層自己完結案は撤回。配布形式の決定とテンプレートの動機）。**skillは操作別分割**（llm-wiki-ingest / llm-wiki-lint。6事例の操作別分割が多数派。不要なskillはユーザーが削除可）。規約とscriptの一致を検証する仕組みを追加する |
-| **10** | **LLM Wiki の main value は knowledge network である（raw/ SSOT は補助装置）** | **検証済み — Karpathy gist（価値主張3回のうち raw への言及0）・nishio 勉強会 L189「知識のネットワークを人間の外側で作っている」・全パイロット実装（AMME/grasp/BDL/delite/SMS/Microsoft）の観察・ユーザー直感。[[raw SSOT原則への根本検証]] を参照** | ② **草案 ver.2 で新規 claim として登録**。template v0.1 には直接焼き込まないが、AGENTS.md の設計思想リスト（3層・raw/不変・…）の**重み付け**を v0.2 で調整（wikilink の重要性が上がり、raw/ 不変性の絶対性が下がる）。「wiki ページにも frontmatter 必須」原則（過剰防衛）は撤回、sources ページの `raw:` 必須化 + lint チェックで実用上対処 |
+| **10** | **LLM Wiki の main value は knowledge network である（raw/ SSOT は補助装置）** | **検証済み — Karpathy gist（価値主張3回のうち raw への言及0）・nishio 勉強会 L189「知識のネットワークを人間の外側で作っている」・全パイロット実装（AMME/grasp/BDL/delite/SMS/Microsoft）の観察・ユーザー直感。[[raw SSOT原則への根本検証]] を参照** | ② **草案 ver.2 で新規 claim として登録**。template v0.1 には直接焼き込まないが、AGENTS.md の設計思想リスト（3層・raw/不変・…）の**重み付け**を v0.2 で調整（wikilink の重要性が上がり、raw/ 不変性の絶対性が下がる）。「wiki ページにも provenance frontmatter 必須」原則（過剰防衛）は撤回。2026-11-17追記: `summary:` のみ検索カタログの正本として全ページ必須、sourcesページは `raw:` または `source_url:` の1以上をlintで検査する |
 
 ## v0.1スコープ（対象範囲）
 
-- **templateはstarter kit**（2026-08-14決定）: 継承すべきは設計思想（3層・raw/不変・追記ではなく書き換える・conceptsはatomic・indexカタログ・file-back習慣）だけ。ディレクトリ構成・形式・手順・文言はプロジェクトに応じて**自由に改変すべきもの**。改変はdriftではなく適応。templateにversion番号等の自己言及メタ文言は置かない。この宣言は配布側root README + template/AGENTS.mdの冒頭で明示
+- **templateはstarter kit**（2026-08-14決定）: 継承すべきは設計思想（3層・raw/不変・追記ではなく書き換える・conceptsはatomic・frontmatter summary正本・file-back習慣）だけ。ディレクトリ構成・形式・手順・文言はプロジェクトに応じて**自由に改変すべきもの**。改変はdriftではなく適応。templateにversion番号等の自己言及メタ文言は置かない。この宣言は配布側root README + template/AGENTS.mdの冒頭で明示
 - **実証経路: 個人・研究・読書・プロジェクト（開発）系** — パイロット6件中5件が研究・講義・個人系、graspがプロジェクト系（code+wikiハイブリッド）の実証。プロジェクト系固有要素（コードrepo接続・attribution・Qバックログ）はtemplateに含めずユーザー側 or variant guide（wiki駆動開発の留保は不要: 追加要素は構造の外にあり3層を壊さない）
 - **ビジネス/チーム系はvariant guide** — 複数人・承認フロー・レビューループの実証なし。構造的差異が大きい
 - ドメイン非依存性（＝「自分の複数wiki×複数LLMに足りる汎用性」。2026-09-25語定義 [[このWikiの目的と研究課題]]。「誰にでも使える」は主張しない）は構造側で担保（Optionality・purpose-hoist・禁止事項の不在）。**スコープ限定は配布側root READMEに明示**（暗黙の限定はサイレント離脱を生む）

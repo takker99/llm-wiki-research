@@ -1,4 +1,5 @@
 ---
+summary: "3基本操作の1つ。raw/ソースを読みwikiに統合するプロセス"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-10-23 熟練者と同等のCosense読み書きを実現するハーネスとAgent Skill (shokai)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
@@ -34,7 +35,7 @@ Karpathy自身の好み:
 1. `raw/` の新ファイルを読む
 2. 人間と3-5つの要点を議論、何を重視するか聞く
 3. sources/ページ作成、concepts/・entities/更新、矛盾の明示、新規概念ページ作成
-4. index.md更新
+4. 各ページのfrontmatter `summary:` を同期（検索とカタログの正本）
 5. log.md追記
 
 ⚠ Contradiction: 当wikiのAGENTS.mdにはPost-ingestレビューループ（作成後の人間チェック＋再調整）が明示されていない。Karpathyの記述にはある。

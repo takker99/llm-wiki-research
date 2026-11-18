@@ -1,4 +1,5 @@
 ---
+summary: "25 Wiki/1647ページの定量データ。個人系が最も育つ"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

@@ -1,4 +1,5 @@
 ---
+summary: "skillロードの2段構え。available_skills常駐+skillツール呼び出しはagent自律判断。トリガーはLLMの想起"
 raw:
   - raw/opencode-docs-agent-skills.md
 source_url: https://opencode.ai/docs/skills/

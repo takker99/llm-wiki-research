@@ -1,4 +1,5 @@
 ---
+summary: "概念辞書の上のメタ層。素人向け入口。deliteが発明"
 date: 2026-08-12
 tags: [template-design, wiki-structure, synthesis, pilot-finding]
 sources: "[[リポジトリ分析 llm-wiki-about-delite]]", "[[リポジトリ分析 BDL-2026S]]"

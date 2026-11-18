@@ -1,4 +1,5 @@
 ---
+summary: "ingest後に人間が要約を確認しLLMをガイドするステップ（Karpathyの運用スタイル）"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 tags: [template-design, llm-wiki-pattern]
 ---

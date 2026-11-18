@@ -1,4 +1,5 @@
 ---
+summary: "弾性波解析アプリの使い込みWiki。template下流wiki 1件目（M2検証対象・frontmatter沈黙フィードバック元・purpose欄未記入）"
 tags: [template-design, 下流wiki, M2]
 ---
 
@@ -12,12 +13,12 @@ M2（templateでこの研究wiki以外のwikiを立ち上げ育て、このrepo�
 - 場所: `~/git/elastic-wave-analyzer-wiki`
 - 目的: 三軸試験中に計測した弾性波（特にせん断波）の理解・解析を通じて、elastic-wave-analyzer を使いこなせるようになる（`wiki/overview.md` に記載）
 - **⚠ purpose-hoist未運用のデータ点**: 2026-09-25時点で AGENTS.md の目的欄はテンプレートのプレースホルダ（「【ここにこのwikiの目的を1文で書く。唯一の記入事項。】」）のまま。目的は overview 側にのみ存在する。「空欄のまま運用しない」指示が守られていない実例
-- 構成: 3層（`raw/`・`wiki/`・`AGENTS.md`）+ concepts/entities/sources/analyses。template準拠（frontmatter は sources のみ、など）
+- 構成: 3層（`raw/`・`wiki/`・`AGENTS.md`）+ concepts/entities/sources/analyses。当時のtemplate準拠（frontmatter は sources のみ、など）
 - ドメイン: 技術・解析系。この研究wikiとは purpose が独立（= 検証オラクルとして成立）
 
 ## このwikiへの貢献（フィードバック）
 
-- **2026-09-03**: instantiate直後の確認で frontmatter が sources のみ（concepts 17・entities 2・analyses 1・index/overview/log 全て無し）と判明 →「書いても書かなくてもよい」を1行で宣言する教訓に落地し、template AGENTS.md に frontmatter 任意の宣言を追加
+- **2026-09-03**: instantiate直後の確認で frontmatter が sources のみ（concepts 17・entities 2・analyses 1・index/overview/log 全て無し）と判明 →「書いても書かなくてもよい」を1行で宣言する教訓に落地し、template AGENTS.md に frontmatter 任意の宣言を追加（2026-11-17追記: 後に`summary:`必須へ転換）
   - 記録: `wiki/log.md` 2026-09-03 エントリ「observation | template instantiateのfrontmatter沈黙」
 
 ## 関連

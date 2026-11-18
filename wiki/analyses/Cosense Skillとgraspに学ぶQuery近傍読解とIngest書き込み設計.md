@@ -1,4 +1,5 @@
 ---
+summary: "2 hop近傍読解の5つの優位性、search-pages.shとread-page.shの実装、3モデルusability test検証、実運用逸脱観察と選択時点ナッジ（status: tentatively-adopted, 2026-10-28）"
 status: tentatively-adopted
 date: 2026-10-24
 tags: [template-design, cosense, query, ingest, agent-skills, knowledge-graph]
@@ -160,7 +161,7 @@ usability test合格後の実運用で、別に運用中のwikiのagentが`searc
 
 - `search-pages.sh`の出力末尾に「候補ページの本文は`read-page.sh`で読む（パス直readではhop情報が得られない）」の1行ナッジを追加
 - `read-page.sh`のRelated Pages節に「深掘りするページの本文も`read-page.sh`で読む」の1行ナッジを追加
-- AGENTS.mdのQuery節2を「必ず`read-page.sh`で読む」＋「再読・部分読み等で直接`read`した場合は回答末尾に`direct-read`と1行明示」に改稿。例外の列挙はAGENTS.mdの薄さを損なうため書かず、自己申告の1文が例外の許可と観測可能性を兼ねる
+- AGENTS.mdのQuery節2を「必ず`read-page.sh`で読む」＋「再読・部分読み等で直接`read`した場合は回答末尾に`direct-read`と1行明示」に改稿。例外の列挙はAGENTS.mdの薄さを損なうため書かず、自己申告の1文が例外の許可と観測可能性を兼ねる（2026-11-17追記: `direct-read`自己申告はPR #6で削除。現在は再読・長大ページの部分読みで直接`read`してよい）
 
 これは§1⑤の「手順書を薄く保つため、近傍同梱を出力末尾で強制する」の一段上流（そもそもスクリプトを呼ぶかの選択）を出力で強制する拡張である。テンプレート設計への示唆として「LLM向けの運用規則は、規則が効くべき判断時点の文脈（ツール出力）に置く」を加える。
 

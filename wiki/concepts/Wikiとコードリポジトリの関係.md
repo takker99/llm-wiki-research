@@ -1,4 +1,5 @@
 ---
+summary: "同一repo型vs別repo参照型。SSOTの所在と「AIが読む想定」のwiki"
 sources: "[[2026-08-14 Wikiとコードリポジトリの関係 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

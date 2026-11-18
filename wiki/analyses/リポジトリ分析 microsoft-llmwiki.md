@@ -1,4 +1,5 @@
 ---
+summary: "実装repo（ツール型）: VS Code拡張+MCP。3層の独立収束、7セクションAGENTS.mdテンプレート、lint 6分類、操作層のソフトウェア実装（status: tentatively-adopted）"
 status: tentatively-adopted
 date: 2026-08-14
 tags: [template-design, repos, implementation, tool, microsoft]

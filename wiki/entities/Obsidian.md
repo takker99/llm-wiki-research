@@ -1,4 +1,5 @@
 ---
+summary: "Markdownベースのナレッジベースアプリ。LLM WikiのIDE"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ---
 

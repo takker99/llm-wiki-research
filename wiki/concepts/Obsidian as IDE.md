@@ -1,4 +1,5 @@
 ---
+summary: "ObsidianをIDE、LLMをプログラマ、wikiをコードベースとするツールチェーン像"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

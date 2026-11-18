@@ -1,4 +1,5 @@
 ---
+summary: "villagepumpでのLLM Wiki集合的議論。Vault分離、種→カオス→株分け、事前にやろうとしない哲学"
 raw: raw/villagepump-AIを使った知識マネジメント.md
 source_url: https://scrapbox.io/villagepump/AIを使った知識マネジメント
 accessed: 2026-08-11

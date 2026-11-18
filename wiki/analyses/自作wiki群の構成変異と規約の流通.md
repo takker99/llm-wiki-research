@@ -1,4 +1,5 @@
 ---
+summary: "上記対象外の講義wiki群等12実装のsurvey。構成原理5軸・authority 5型・template家族の規約流通・失敗3段階・re-ingest実運用・purpose非空手順の訂正（2026-10-23）"
 status: tentatively-adopted
 date: 2026-10-23
 tags: [template-design, repos, ingest, cross-cutting]

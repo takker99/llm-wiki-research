@@ -1,4 +1,5 @@
 ---
+summary: "SKILL併用実装6件の横断比較。AGENTS.md/SKILL分担を5パターンに類型化、二層設計の独立収束、MCP併用の実証（status: tentatively-adopted）"
 status: tentatively-adopted
 date: 2026-08-14
 tags: [template-design, skill, repos, implementation, skill-comparison]

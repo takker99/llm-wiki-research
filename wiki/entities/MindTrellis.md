@@ -1,4 +1,5 @@
 ---
+summary: "AI構造を仮説化する知識システム。3エージェント構成"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 

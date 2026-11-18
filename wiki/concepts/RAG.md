@@ -1,4 +1,5 @@
 ---
+summary: "Retrieval-Augmented Generation。LLM Wikiが対比するパラダイム"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 
@@ -19,7 +20,7 @@ Karpathy: "Nothing is built up."
 
 ## LLM Wikiとの併用
 
-Karpathy gistでは両者は排他的ではない。LLM Wikiのindexベースナビゲーションが限界を迎えた後は、[[qmd]]のような検索（BM25+ベクトル+LLMリランキング）を追加することでRAG的アプローチを補完的に導入できる。ただし基本戦略は「事前コンパイル」であり、RAGはあくまで検索補助。
+Karpathy gistでは両者は排他的ではない。LLM Wikiのカタログベースナビゲーション（旧index.md）が限界を迎えた後は、[[qmd]]のような検索（BM25+ベクトル+LLMリランキング）を追加することでRAG的アプローチを補完的に導入できる。ただし基本戦略は「事前コンパイル」であり、RAGはあくまで検索補助。
 
 nishioの[[ChatGPT ProとLLM Wikiの併用]]は別の併用パターン: ChatGPT ProのDeep Research（クラウド側RAG的処理）→ そのレポートをingest→参照先論文をClaude Codeが取得し再ingest。
 

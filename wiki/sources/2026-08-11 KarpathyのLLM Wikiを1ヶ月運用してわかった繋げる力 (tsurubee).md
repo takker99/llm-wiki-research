@@ -1,4 +1,5 @@
 ---
+summary: "1ヶ月運用報告。要約どまりだが「理解のボトルネック」でnishioと対立、ミニマム構成サンプルあり"
 raw: raw/zenn-tsurubee-KarpathyのLLM_Wikiを1ヶ月運用してわかった繋げる力.md
 source_url: https://zenn.dev/tsurubee/articles/llm-wiki-connecting-knowledge
 accessed: 2026-08-11

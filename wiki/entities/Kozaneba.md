@@ -1,4 +1,5 @@
 ---
+summary: "KJ法支援ツール。前言語的構造化に強い"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 

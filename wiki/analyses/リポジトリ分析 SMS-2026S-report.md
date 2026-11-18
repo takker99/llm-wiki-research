@@ -1,4 +1,5 @@
 ---
+summary: "パイロット6: 研究レポート型・grasp-backed。参照数分割lint（1頁=low-frequency / 2+頁=2-hop hubの種）、SQLite投影（182行 AGENTS.md, 128pages）"
 status: tentatively-adopted
 date: 2026-08-14
 tags: [template-design, repos, pilot-analysis, research-report, grasp, red-links]

@@ -1,4 +1,5 @@
 ---
+summary: "GoogleのAIノートブック。RAG型の典型例"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ---
 

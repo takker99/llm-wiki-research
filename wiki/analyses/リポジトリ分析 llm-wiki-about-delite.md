@@ -1,4 +1,5 @@
 ---
+summary: "パイロット5: 逸脱・停止型。CLAUDE.mdのみ、43時間で完了、Quartz公開、init.txt+先行概念マッピング（7.5KB CLAUDE.md, 100+pages）"
 status: tentatively-adopted
 date: 2026-08-12
 tags: [template-design, repos, pilot-analysis, nishio, abandoned, quartz]

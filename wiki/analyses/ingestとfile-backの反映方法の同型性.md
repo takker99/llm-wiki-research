@@ -1,4 +1,5 @@
 ---
+summary: "両者は同じ編み込み操作。提案習慣だけをAGENTS.mdに残し、Ingestと承諾後File-backの書き込み手順をllm-wiki-write/SKILL.mdに一本化（status: tentatively-adopted）"
 status: tentatively-adopted
 date: 2026-08-14
 sources: "raw/karpathy-llm-wiki-gist.md", "raw/nishio-KarpathyのLLM_Wiki勉強会.md", "raw/nishio-KarpathyのLLM_Wiki.md"
@@ -58,7 +59,7 @@ microsoft `@wiki /save`（単一queryページ+index自動upsert）やtsurubee `
 2026-08-14時点では、`template/AGENTS.md`のFile-back節に簡易な実行契約を置き、Ingestの手順は`llm-wiki-ingest/SKILL.md`に置いていた。しかし[[Cosense Skillとgraspに学ぶQuery近傍読解とIngest書き込み設計]]の3モデルusability testで、以下の2つの問題が顕在化した。
 
 1. File-back実行時に`llm-wiki-ingest/SKILL.md`は読まれないため、SKILL側に書かれた周囲ページのスタイル観察、内部リンクの選定基準、`lint.sh`による機械検証がFile-back時に適用されず、孤立ページの発生や手順の手探り状態を招いた。
-2. 入口が`raw/`の外部ソースかQuery回答・対話知見かと、`sources/`ページを作るか否かを除けば、既存ページの近傍読解・スタイル観察・書き換え統合・双方向リンク・`index.md`と`log.md`の更新・`lint.sh`検証はIngestとFile-backで同一である。これを`AGENTS.md`と`SKILL.md`の2箇所に分散して持つとSchema driftの温床になる。
+2. 入口が`raw/`の外部ソースかQuery回答・対話知見かと、`sources/`ページを作るか否かを除けば、既存ページの近傍読解・スタイル観察・書き換え統合・双方向リンク・`summary:`と`log.md`の更新・`lint.sh`検証はIngestとFile-backで同一である。これを`AGENTS.md`と`SKILL.md`の2箇所に分散して持つとSchema driftの温床になる。
 
 [[AGENTS.md+SKILL.md二層設計]]の基準に照らすと、File-backのうち毎ターンの常時行動なのは「Query回答や議論の後にfile-backを提案すること」だけであり、人間が承諾した後の書き込み実行はIngestと同じトリガー操作である。そこで`llm-wiki-ingest`を`llm-wiki-write/SKILL.md`へ統合し、`AGENTS.md`の`### Ingest`と`### File-back`の両方から`llm-wiki-write/SKILL.md`を参照する構成に改めた。
 

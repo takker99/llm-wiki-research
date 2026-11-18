@@ -1,4 +1,5 @@
 ---
+summary: "wikiナビゲーションを支えるindexとlogの設計史。2026-11にtemplate/rootはindex.mdを廃止し、frontmatter summary正本＋--catalogへ移行"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 microsoft-llmwiki]]"
 tags: [template-design, llm-wiki-pattern]
 ---
@@ -7,12 +8,12 @@ tags: [template-design, llm-wiki-pattern]
 
 LLM Wikiのナビゲーションを支える2つの特殊ファイル。
 
-## index.md
+## index.md（廃止前の設計）
 
 コンテンツ指向。wiki内の全ページのカタログ。各エントリはリンク＋1行要約（＋任意で日付やソース数などのメタデータ）。カテゴリ別に整理される。
 
 使い方:
-- Query時、LLMは最初にindex.mdを読んで関連ページを探す
+- Query時、LLMは最初にindex.mdを読んで関連ページを探す（廃止前の運用）
 - Ingest時、LLMは新ページの追加と要約変更を反映する
 - 中規模（〜100ソース、〜数百ページ）まではembeddingベースのRAGインフラなしで機能する
 
@@ -49,10 +50,12 @@ nishioの実測（[[LLM Wikiの実運用データ]]）:
 「Cosenseの思想から見てindex.mdは筋悪では？」という論点をsubagent相談2往復で検証済み（[[index.md存廃の設計判断]]）:
 
 - 「大きなリンク」論は適用範囲外（index.mdはplainリンクでwikilinkグラフの外）。真の批判の核心は「明示的登録作業」への違和感
-- 結論: index必須維持。肥大化は可視・出口あり（カテゴリ分割/1/8圧縮/株分け）、廃止は不可視・サイレントなrecall低下
+- 当時の結論: index必須維持。肥大化は可視・出口あり（カテゴリ分割/1/8圧縮/株分け）、廃止は不可視・サイレントなrecall低下（後にstress-roundを経て2026-11-02に反転）
 - 対応策3段階: stale-entries lint（✅実装）、「indexはキャッシュ」宣言（✅実装。2026-10-28に宣言文言を機械検査の実態に縮小）、生成型index variant（❌撤回・改変事例集は不要）
 
 2026-10-28再検証（Query用スクリプト実装後）: 等価物（検索・逆リンク・2hopのスクリプト提供）が実在し、問いは「index.mdというファイルの存廃」から「**要約台帳の居場所**（中央 vs ページ同置）」へ縮退。生成型index variantの破棄根拠（等価物不在）は消失したが、反転の根拠となる要約陳腐化の実害は未測定で、登録作業は実測上機能している（73コミット中47がindexに触れる）。測定（staleness audit）→可逆な能力追加（`--catalog`）→新規wikiパイロットの順で評価する。
+
+**2026-11-02**: stress-round（読み系4課題）クリーンを受け、templateのデフォルトを反転。frontmatter `summary:` を正本とし、`index.md` を廃止した（[[index.md存廃の設計判断]]）。**2026-11-17**: 研究wiki自身も150ページで移行した。以下の `index.md` に関する記述は、廃止前の設計と他実装の観察として読む。
 
 ## log.md
 
@@ -96,7 +99,7 @@ KarpathyのTip: 各エントリの先頭を一貫したプレフィックスに�
 
 ## 当wikiでの実装
 
-両方とも当wikiに採用されている。`index.md`の各エントリは1行ルール。`log.md`は見出し `## [DATE] action | 短い題名` + 詳細は本文（2026-08-14変更）。
+`index.md` は2026-11-17に廃止した。現在は各ページのfrontmatter `summary:` がカタログの正本で、`bash .agents/scripts/search-pages.sh --catalog` が全ページの要約付き一覧を出力する。`log.md` は見出し `## [DATE] action | 短い題名` + 詳細は本文（2026-08-14変更）。
 
 ## 関連概念
 

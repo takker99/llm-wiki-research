@@ -1,4 +1,5 @@
 ---
+summary: "gitignoreの動機と二面性・発見層とrawの分離・manifest.md・不変性の3機能と入場時の誓約・コーパスモード（status: tentatively-adopted、一部open question）"
 status: tentatively-adopted
 date: 2026-08-11
 updated: 2026-09-03

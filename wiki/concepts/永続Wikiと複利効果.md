@@ -1,4 +1,5 @@
 ---
+summary: "RAGとの対比。知識が蓄積し複利で効く「compounding artifact」"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]], "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]", "[[2026-10-27 LLM知識ベースの言語ドリフト検証]]"
 tags: [template-design, llm-wiki-pattern]
 ---

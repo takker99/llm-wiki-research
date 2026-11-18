@@ -1,4 +1,5 @@
 ---
+summary: "「1ソースが10〜15ページに触れる」の内実。新規作成と既存更新の両方が編み込みの構成要素"
 status: tentatively-adopted
 date: 2026-08-11
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"

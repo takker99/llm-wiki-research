@@ -1,4 +1,5 @@
 ---
+summary: "複数人議論からAIが整理したLLM Wiki"
 sources: ["[[2026-08-11 AIを使った知識マネジメント (villagepump)]]", "[[2026-08-14 赤リンクとLLM Wiki (nishio+villagepump)]]"]
 ---
 

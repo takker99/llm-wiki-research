@@ -1,4 +1,5 @@
 ---
+summary: "外部LLM Wiki repoの収集・分析方法論。発見層＋選択的アーカイブ、Template Analysis、設計空間マップ（status: tentatively-adopted）"
 status: tentatively-adopted
 date: 2026-08-12
 tags: [template-design, ingest, methodology, research-design, repos]

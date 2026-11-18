@@ -1,4 +1,5 @@
 ---
+summary: "2 hop link・赤リンク・大きなリンク・関連ページリスト・リンクサジェスト・come-fromの基本概念"
 raw: ["raw/cosense/villagepump/2 hop link-2026-08-14.md", "raw/cosense/villagepump/大きなリンク-2026-08-14.md", "raw/cosense/villagepump/2 hop linkを使っていますか？-2026-08-14.md", "raw/cosense/villagepump/光る言葉リンク問題（赤リンクの利点）-2026-08-14.md", "raw/cosense/villagepump/関連ページリスト-2026-08-14.md", "raw/cosense/nishio/予測のリンクと不測のリンク不足-2026-08-14.md", "raw/cosense/nishio/リンクは弱い情報-2026-08-14.md", "raw/cosense/nishio/赤リンク-2026-08-14.md", "raw/cosense/nishio/howmのcome-fromリンク-2026-08-14.md"]
 source_url: https://scrapbox.io/villagepump/2_hop_link
 accessed: 2026-08-14

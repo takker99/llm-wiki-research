@@ -1,4 +1,5 @@
 ---
+summary: "抽象化ネットワーク目的 vs 具体実装目的。構造的差異"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---

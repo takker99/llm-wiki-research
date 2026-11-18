@@ -1,4 +1,5 @@
 ---
+summary: "Microsoft製のLLM Wiki製品。VS Code拡張+MCPサーバ。操作層のツール型実装の先鋭例"
 tags: [entity, product, microsoft, tool]
 sources: "[[リポジトリ分析 microsoft-llmwiki]]"
 repo_url: https://github.com/microsoft/llmwiki

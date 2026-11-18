@@ -1,4 +1,5 @@
 ---
+summary: "「git管理下ならlog.md不要」論の検証。操作時刻vsコミット時刻、粒度のトリレンマ、CHANGELOG論争（status: hypothesis）"
 sources: "[[2026-08-11 Karpathy LLM Wiki Gist]]", "[[パイロット分析 横断所見]]", "[[リポジトリ分析 grasp]]"
 tags: [template-design, log, git]
 status: hypothesis

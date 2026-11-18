@@ -1,4 +1,5 @@
 ---
+summary: "8実装のingest単位・sourceの4類型・出典ポインタの4モード・運用実態を横断比較。sourceの骨格、provenanceモード、re-ingest、規則とlintの不一致を整理（2026-10-23）。templateの不一致はPR #6で解消"
 status: tentatively-adopted
 date: 2026-10-23
 tags: [template-design, repos, ingest, cross-cutting]
@@ -169,6 +170,8 @@ wingsは成果物型に振り切った結果、conceptがスライドの節に�
 この状態では、lintが通ったのに規約違反、という最も検出しにくい失敗が起きる。
 information-seekingはAGENTS.mdだけを緩めてskillを同期せず、22/23をURLのみで運用している。
 txaには`raw:`にURLを入れた違反が残り、lintは検出しない。
+
+**2026-11-17追記**: template/rootはPR #6でこの不一致を解消した。sourcesページのポインタを`raw:`または`source_url:`の1以上に統一し、lint.shで検査する。上記は2026-10-23時点の調査記録として残す。
 
 ### 規則と実装がずれる
 

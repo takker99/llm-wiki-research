@@ -1,4 +1,5 @@
 ---
+summary: "Markdownローカル検索エンジン。LLM Wikiスケールアップ時の選択肢"
 sources: [[2026-08-11 Karpathy LLM Wiki Gist]]
 ---
 
@@ -16,7 +17,7 @@ Markdownファイル用のローカル検索エンジン。KarpathyがLLM Wiki�
 
 ## LLM Wikiでの位置
 
-[[LLM Wikiのスケーラビリティ|index.mdが限界を迎えた]]後の検索ソリューション。中規模（〜100ソース）まではindexベースで十分だが、それを超えたらqmdのような専用ツールが必要になる。
+[[LLM Wikiのスケーラビリティ|indexベースのナビゲーションが限界を迎えた]]後の検索ソリューション。中規模（〜100ソース）まではカタログベースで十分だが、それを超えたらqmdのような専用ツールが必要になる。現在のtemplate/rootはindex.mdではなくfrontmatter summaryのカタログを使う。
 
 ## 関連概念
 

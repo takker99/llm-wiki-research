@@ -1,4 +1,5 @@
 ---
+summary: "OKFの正体・format層vs操作層・赤リンク論争・一貫・網羅・頂点"
 raw: ["raw/cosense/nishio/OKFとLLM Wiki-2026-08-11.md", "raw/cosense/nishio/一貫・網羅・頂点-2026-08-11.md", "raw/cosense/villagepump/2026-06-13-2026-08-11.md", "raw/cosense/villagepump/stakiran-OKFとMetadata_as_Code-2026-08-11.md"]
 source_url: https://scrapbox.io/nishio/OKFとLLM_Wiki
 accessed: 2026-08-11

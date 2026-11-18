@@ -1,4 +1,5 @@
 ---
+summary: "Cosense記法に近いMarkdown方言"
 sources: "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 ---
 

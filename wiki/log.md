@@ -681,3 +681,39 @@ agy の Gemini 4 Argon (High) との2往復相談とコード再検証で、temp
 - 修正commit: 40ab723 `fix(template): check raw paths that contain spaces`
 - 検証: 実在/不在、クォートあり/なし、1行複数参照、インライン/フェンスドコード除外、既存fixture t1-t9、root lintをすべてPASS
 - 残課題: 1組の引用符内に複数のraw参照を書く場合は1パスとして扱う（現行の単一パス仕様では問題なし）
+
+## [2026-11-17] implementation | rootを現行template schemaへ移行
+
+[[template schemaの破綻点検と修正計画]] の「templateとrootの分岐」の判断に従い、研究wiki自身を `template/` の現行schemaへ移行した。旧schemaのforkとして維持しない。
+
+- `.agents/skills/{llm-wiki-write,llm-wiki-lint}` と `.agents/scripts/{read-page.sh,search-pages.sh}` をtemplate実装に同期。root専用の `diagnose-wiki.sh`・`number-dup-check.sh` は残した
+- `wiki/index.md`・`wiki/overview.md` を削除。全150ページにfrontmatter `summary:` を付与（147ページは既存frontmatterへ挿入、2ページはfrontmatter新設、既存summary 1ページは維持）。要約は旧index.mdの1行要約を移した
+- `AGENTS.md`: summary必須・`raw:`/`source_url:`統一・`direct-read`削除・Queryの`--catalog`化・File-back節を反映。研究固有の目的/Review/Git規約は維持
+- `README.md`: root移行と150ページを反映
+- [[このWikiの目的と研究課題]]・[[LLM Wikiの作文リスク]]・[[template schemaの破綻点検と修正計画]]・[[index.md存廃の設計判断]] のindex/overview参照と現状を更新
+- 検証: lint ORPHAN 0・summary欠落0、`--catalog` 150ページ、read-page動作。残るOPEN_LINKは歴史的記述の `[[overview]]`/`[[index]]` と既存の1参照リンクのみ
+
+(touched 159 files: 149 wiki pages with summary/related edits + 2 deletions + 5 .agents files + AGENTS.md + README + log)
+
+## [2026-11-17] revise | root移行に伴う既存記述のcontent同期
+
+root schema移行で形式だけでなく、現行schemaを説明する記述が古くなっていたため、28ページのcontentを同期した。歴史的な設計判断・調査記録は消さず、日付付きの追記で旧→新を残した。
+
+- [[overviewの役割]]: template骨格除外に加え、rootも2026-11-17に削除したことを反映
+- [[LLM Wikiの本質定義]]・[[LLM Wikiのスケーラビリティ]]・[[IndexとLog]]・[[qmd]]・[[3層アーキテクチャ]]・[[Schema（AGENTS.md）]]: index前提の現行記述を、frontmatter summaryカタログへの移行として更新
+- [[ingestステップの設計判断]]・[[Cosenseソースのingest方式]]・[[配布形式の決定とテンプレートの動機]]・[[MCP不採用とAGENTS.md+SKILL.md二層採用の根拠]]・[[LLM Wiki実装のingest形式と運用の比較]]: 当時の設計/調査記録に追記を置き、raw/source_url統一・summary必須・index廃止を反映
+- [[raw SSOT原則への根本検証]]・[[claims対応表]]・[[Hermes Agent llm-wiki skillとの比較]]・[[パイロット分析 横断所見]]・[[elastic-wave-analyzer-wiki]]: frontmatter任意/provenance必須の対立を整理し、summary必須はカタログ正本であってprovenance必須化ではないと記録
+- [[このWikiの目的と研究課題]]: 現状の件数を2026-11-17時点に更新
+- [[語彙接地（Lexical Grounding）]]・[[同義語増殖]]・[[言語ドリフト（LLM Wiki）]]・[[メンタルレキシコン不在]]・[[日本語矯正Agent Skill群の設計空間]]・[[RAG]]: index照合をカタログ照合へ読み替え
+
+(touched 29 files: 28 wiki pages + log)
+
+## [2026-11-17] refactor | conceptページの重複圧縮とLint/赤リンクの正本化
+
+肥大化したconceptページのうち、分割ではなく重複の圧縮で解決できる2件を整理した。
+
+- [[LLM Wikiのmain value]]: 153行→53行。Karpathyの価値主張・nishioの態度変遷・パイロット表・raw/の6機能は [[raw SSOT原則への根本検証]] に委譲し、concept側は定義・正しい問い・テンプレートへの含意に限定した
+- [[Lint]]: 赤リンク論争と参照数分類の詳細を [[赤リンクとLLM Wiki]] に委譲。lint側は現在の`OPEN_LINK`語彙と、[[fact-wiki-separation]]が最初の概念ページ化事例だったことだけ残した
+- [[赤リンクとLLM Wiki]]: 赤リンクの理論・リンクの4仕事・come-from・参照数分類の由来の正本と明記。lintの出力語彙は [[Lint]] を参照する分担にした
+
+(touched 4 files: 3 wiki pages + log)

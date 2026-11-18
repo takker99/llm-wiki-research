@@ -1,4 +1,5 @@
 ---
+summary: "事実と解釈を分離する知識管理システム"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 

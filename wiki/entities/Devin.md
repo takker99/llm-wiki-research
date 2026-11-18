@@ -1,4 +1,5 @@
 ---
+summary: "初のAIソフトウェアエンジニア。Knowledge機能の先駆"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 ---
 

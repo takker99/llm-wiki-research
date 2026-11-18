@@ -1,4 +1,5 @@
 ---
+summary: "OKFはformat層のみ標準化・cross-run stabilityは創発を殺す・本質はドメイン違い"
 sources: ["[[2026-08-11 OKFとLLM Wiki (nishio+villagepump)]]"]
 tags: [template-design, okf]
 ---

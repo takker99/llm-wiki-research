@@ -1,4 +1,5 @@
 ---
+summary: "パイロット1: 個人成熟型。目的駆動+purpose-hoist、徒歩レビュー、キーワード駆動ingest（6.4KB AGENTS.md, 48pages）"
 status: tentatively-adopted
 date: 2026-08-12
 tags: [template-design, repos, pilot-analysis, nishio]

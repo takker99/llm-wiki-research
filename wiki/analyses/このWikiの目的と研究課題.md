@@ -1,3 +1,7 @@
+---
+summary: "このWikiの目的・中心となる研究課題（TODO）・現状のまとめ＋2026-09-25の目的の再定義（設計対象=作者本人のwiki群、差別化の削除、汎用=ドメイン非依存の語定義）。2026-11-17にrootを現行template schemaへ移行"
+---
+
 # このWikiの目的と研究課題
 
 このWikiは、**LLM Wikiテンプレート**を研究・開発するための実験台である。
@@ -17,7 +21,7 @@
 
 ## 目的
 
-1. **知識基盤を作る** — KarpathyのLLM Wikiパターン、nishioの実践知（20+ Wiki）、villagepumpコミュニティの議論をingestし、[[overview]]に記した通り知識ネットワークを育てる。
+1. **知識基盤を作る** — KarpathyのLLM Wikiパターン、nishioの実践知（20+ Wiki）、villagepumpコミュニティの議論をingestし、知識ネットワークを育てる（全体像は `bash .agents/scripts/search-pages.sh --catalog` で出力する）。
 2. **テンプレート設計を検討する** — 以下の問いに答えを出す。
 3. **最終成果物としてテンプレートを出力する** — 配布形式はこのWikiでの検討を通じて決定する。
 
@@ -54,18 +58,20 @@
 
 ## 現状
 
-- `raw/` に実在するソースは9件（Karpathy gist + Cosense 8ページ: villagepump 2 + nishio 6）
-- `AGENTS.md` は運用規則のみに縮小済み（2026-08-11）。テンプレート設計の主張はすべて
+- （2026-08-11時点）`raw/` に実在するソースは9件（Karpathy gist + Cosense 8ページ: villagepump 2 + nishio 6）
+- （2026-08-11時点）`AGENTS.md` は運用規則のみに縮小済み。テンプレート設計の主張はすべて
   テンプレート草案ver.1 に仮説として移管
+- （2026-11-17時点）`raw/` は44ファイル、wikiは150ページ、`AGENTS.md` は約10.4KB
 - 2026-08-11: Karpathy gist ingest（27ページ） + Cosense議論 ingest（26ページ）。合計50+ページ
 - 2026-09-25: 目的の再定義（上記）。M2は「この研究wiki以外のwiki」に再定義し、下流wiki 2件（elastic-wave-analyzer-wiki、txa-xray-ct-wiki）が該当。両者からのフィードバックは既にtemplateへ取り込み済み（→ 配布形式の決定とテンプレートの動機）
 - 2026-10-23: LLM Wiki 8実装のingest・運用surveyをfile-back（LLM Wiki実装のingest形式と運用の比較）。templateの出典規約がAGENTS.md・ingest SKILL・lint SKILL・lint.shで一致しないことを確認
 - 2026-11-03: txa-xray-ct-wikiの大規模リストラクチャリングと5クラスタ監査をfile-back（下流wikiの大規模リストラクチャリングと文体・リンク規約の検証）。テーマ別フォルダコロケーション、ページ内2回目以降の `[[wikilink]]` 維持（`SAME_LINE_DUPLICATE` のみ検出）、機械的文体リンターの過剰規制による研究ノート構造（リスト・表・Callout）破壊アンチパターンを実証しtemplateへ反映
+- 2026-11-17: rootを現行template schemaへ移行（[[template schemaの破綻点検と修正計画]] の「templateとrootの分岐」）。`index.md`・`overview.md` を廃止し、全150ページのfrontmatter `summary:` を検索・カタログの正本にした
 
 ## 関連
 
-- overview — エントリーポイント（[[overviewの役割]] — その位置づけ・原型との関係の分析）
-- [[index]] — ページカタログ
+- [[overviewの役割]] — overview廃止前のエントリーポイントの位置づけ・原型との関係の分析（歴史）
+- 全体像は `bash .agents/scripts/search-pages.sh --catalog` で出力する（`index.md` は廃止）
 - [[Cosenseソースのingest方式]] — Cosenseソースの取り込み方式の提案（研究課題「情報信頼性」「配布形式」へのインプット）
 - [[rawディレクトリの取り扱い]] — raw/のgitignore・プライバシー・ライセンス・発見層の区別（open question）
 - [[Hermes Agent llm-wiki skillとの比較]] — Hermesのllm-wiki skill（v2.1.0）との機能・設計思想レベルの比較（2026-10-03）

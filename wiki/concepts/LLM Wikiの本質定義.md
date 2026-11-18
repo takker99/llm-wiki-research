@@ -1,4 +1,5 @@
 ---
+summary: "文脈情報をファイル化しカタログで分割、AI自身がメンテナンスする仕組み。原型のindex.mdは2026-11にtemplate/rootでfrontmatter summaryカタログへ置換"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]"
 tags: [template-design, llm-wiki-pattern]
 ---
@@ -10,6 +11,8 @@ nishioによるLLM Wikiの最も簡潔な本質定義。
 ## 定義
 
 > 文脈情報をファイル化しindexで分割、AI自身がメンテナンスする仕組み。これがLLM Wiki。
+
+**2026-11-17追記**: これはnishioによる原型の定義。現在のtemplate/rootは`index.md`を廃止し、各ページのfrontmatter `summary:` を正本とするカタログ（`--catalog`）で同じ機能を実現している。中央のindexファイルへの依存は本質ではなく、「必要なファイルだけ読める検索可能なカタログがあること」が本質だと再解釈できる（[[index.md存廃の設計判断]]）。
 
 ## 背景（段階的説明）
 
@@ -24,7 +27,7 @@ nishioによるLLM Wikiの最も簡潔な本質定義。
 ## 含意
 
 - LLM Wikiは単なる要約やRAGではない。**人間の文脈管理負荷をAIにオフロードする仕組み**
-- index.mdとファイル分割が中核的メカニズム
+- ファイル分割と検索可能なカタログ（原型はindex.md、現在はfrontmatter summary）が中核的メカニズム
 - AI自身がメンテナンスするからこそ、accumulation（蓄積）とcompounding（複利）が可能になる
 
 ## 関連概念

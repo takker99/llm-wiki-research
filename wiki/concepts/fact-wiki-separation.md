@@ -1,4 +1,5 @@
 ---
+summary: "Wikiをsource of truthにしない。書き換え自由の担保と簡潔さの維持。書き換え原則の適用外（時系列・履歴・人間の記録は追記）"
 sources: [[2026-08-11 AIを使った知識マネジメント (villagepump)]]
 tags: [template-design, llm-wiki-pattern]
 ---

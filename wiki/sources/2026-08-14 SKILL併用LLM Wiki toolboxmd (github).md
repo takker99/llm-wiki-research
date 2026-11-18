@@ -1,4 +1,5 @@
 ---
+summary: "4スキル+loader+SessionStart hook+デタッチドバックグラウンドingest（98★）"
 raw:
   - raw/github-toolboxmd-karpathy-wiki.md
 source_url: https://github.com/toolboxmd/karpathy-wiki

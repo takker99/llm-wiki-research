@@ -1,4 +1,5 @@
 ---
+summary: "個人資産管理のLLM Wiki。個人系の価値を実証"
 sources: "[[2026-08-11 KarpathyのLLM Wiki勉強会 (nishio)]]", "[[2026-08-11 AIを使った知識マネジメント (villagepump)]]"
 ---
 
